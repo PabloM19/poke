@@ -8,6 +8,7 @@ import { PokemonReferenceGrid } from '../components/PokemonReferenceCard'
 import { LessonCallout, LessonSteps, PhysicalReference } from '../components/LessonBlocks'
 import { ReadingProgressControls } from '../progress/ReadingProgressControls'
 import { pearlGuide } from './gameGuideData'
+import { PearlDataExplorer } from './PearlDataExplorer'
 
 function StarterSection() {
   const [enrich, setEnrich] = useState(false)
@@ -112,6 +113,8 @@ export function MainGameGuidePage() {
         <LessonSteps title="Tu primera hora" items={guide.firstHour} />
         <LessonCallout kind="tip">{guide.firstHourTip}</LessonCallout>
       </section>
+
+      <PearlDataExplorer />
 
       <section className="scroll-mt-20" id="recursos-perla">
         <div className="mb-4 flex items-center gap-3"><Map className="size-5 text-primary" aria-hidden /><h2 className="text-2xl font-semibold">Antes de continuar</h2></div>

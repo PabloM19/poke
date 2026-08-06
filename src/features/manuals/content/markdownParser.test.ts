@@ -32,17 +32,13 @@ describe('parseManualPage', () => {
     expect(JSON.stringify(blocks)).toContain('personas y los Pokémon viven')
   })
 
-  it('publica los 18 artículos de 21–86 con contenido real', () => {
-    expect(publishedManualArticles).toHaveLength(18)
+  it('publica los 19 artículos de 21–94 con contenido real', () => {
+    expect(publishedManualArticles).toHaveLength(19)
     expect(publishedManualArticles.every((article) => article.blocks.length > 0)).toBe(true)
     expect(publishedManualArticles[0].printReference.pages[0]).toBe(21)
-    expect(publishedManualArticles.at(-1)?.printReference.pages.at(-1)).toBe(86)
+    expect(publishedManualArticles.at(-1)?.printReference.pages.at(-1)).toBe(94)
     expect(manualSourcePages.find((source) => source.page === 86)?.markdown)
       .not.toContain('Páginas 87–128')
-    expect(publishedManualArticles.at(-1)?.blocks).toContainEqual({
-      type: 'heading',
-      text: 'Pokémon sobre un tablero táctico',
-      level: 2,
-    })
+    expect(JSON.stringify(publishedManualArticles.at(-1)?.blocks)).toContain('Columna Lanza')
   })
 })
