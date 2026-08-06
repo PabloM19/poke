@@ -8,8 +8,8 @@ const routes = [
   {
     path: '/manuales/juegos/equipo-rescate-azul',
     title: 'Equipo de Rescate Azul',
-    description: 'Protagonistas, compañero, equipos, rangos y primera misión.',
-    pages: '129–136',
+    description: 'Rescate Azul y Exploradores: equipos, rangos y primeras expediciones.',
+    pages: '129–144',
     icon: ShieldCheck,
   },
   {

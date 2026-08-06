@@ -7,6 +7,7 @@ import { ManualNotFoundPage } from './ManualNotFoundPage'
 import { ManualsLayout } from './ManualsLayout'
 import { MainGameGuidePage } from './mainGames/MainGameGuidePage'
 import { PmdGuidePage } from './pmd/PmdGuidePage'
+import { ExplorersGuidePage } from './pmd/ExplorersGuidePage'
 
 function renderManualRoute(path: string) {
   return render(
@@ -20,6 +21,7 @@ function renderManualRoute(path: string) {
           <Route path="otros" element={<ManualEntryPage />} />
           <Route path="juegos/:juego" element={<MainGameGuidePage />} />
           <Route path="juegos/equipo-rescate-azul" element={<PmdGuidePage />} />
+          <Route path="juegos/exploradores-oscuridad" element={<ExplorersGuidePage />} />
           <Route path="*" element={<ManualNotFoundPage />} />
         </Route>
       </Routes>
@@ -137,5 +139,17 @@ describe('rutas de Manuales', () => {
     expect(screen.getByText('En el manual físico: páginas 129–136')).toBeInTheDocument()
     expect(fetchMock).not.toHaveBeenCalled()
     vi.unstubAllGlobals()
+  })
+
+  it('publica Exploradores con Equipo Calavera, gremio y expedición', () => {
+    renderManualRoute('/manuales/juegos/exploradores-oscuridad')
+
+    expect(screen.getByRole('heading', { name: 'Exploradores de la Oscuridad' })).toBeInTheDocument()
+    expect(screen.getByText('Equipo Calavera')).toBeInTheDocument()
+    expect(screen.getByText('Wigglytuff y Chatot')).toBeInTheDocument()
+    expect(screen.getByText('Maestro')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Tu primera expedición' })).toBeInTheDocument()
+    expect(screen.getByText(/Engranajes del Tiempo/)).toBeInTheDocument()
+    expect(screen.getByText('En el manual físico: páginas 137–144')).toBeInTheDocument()
   })
 })

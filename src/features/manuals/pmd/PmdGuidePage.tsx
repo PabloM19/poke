@@ -30,7 +30,7 @@ const protagonists: readonly (PokemonReference & { type: string })[] = [
 const companionIds = new Set([1, 4, 7, 25, 152, 155, 158, 252, 255, 258])
 const companions = protagonists.filter((pokemon) => companionIds.has(pokemon.speciesId))
 
-function SpeciesChoiceGrid({
+export function SpeciesChoiceGrid({
   title,
   entries,
 }: {

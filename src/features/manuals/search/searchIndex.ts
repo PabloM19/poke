@@ -31,9 +31,7 @@ function blockText(block: ManualBlock): string {
 
 function gameDestination(family: 'main' | 'pmd' | 'spin-off', slug: string): string {
   if (family === 'spin-off') return '/manuales/otros'
-  if (family === 'pmd') return slug === 'equipo-rescate-azul'
-    ? '/manuales/juegos/equipo-rescate-azul'
-    : '/manuales/mundo-misterioso/misiones-y-fracaso'
+  if (family === 'pmd') return `/manuales/juegos/${slug}`
   return `/manuales/juegos/${slug}`
 }
 

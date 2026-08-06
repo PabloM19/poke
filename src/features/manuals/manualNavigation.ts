@@ -33,6 +33,7 @@ export const manualNavigationEntries: readonly ManualNavigationEntry[] = [
   { path: '/manuales/juegos/negro', title: 'Pokémon Edición Negra', shortTitle: 'Pokémon Negro', family: 'main-games', pages: [113, 120] },
   { path: '/manuales/juegos/negro-2', title: 'Pokémon Edición Negra 2', shortTitle: 'Pokémon Negro 2', family: 'main-games', pages: [121, 128] },
   { path: '/manuales/juegos/equipo-rescate-azul', title: 'Equipo de Rescate Azul', shortTitle: 'Rescate Azul', family: 'pmd-games', pages: [129, 136] },
+  { path: '/manuales/juegos/exploradores-oscuridad', title: 'Exploradores de la Oscuridad', shortTitle: 'Exploradores Oscuridad', family: 'pmd-games', pages: [137, 144] },
   { path: '/manuales/recursos/r-01', title: 'R-01 · Tabla de tipos', shortTitle: 'R-01 · Tipos', family: 'resources', pages: [153, 154] },
   { path: '/manuales/recursos/r-02', title: 'R-02 · Estados y efectos', shortTitle: 'R-02 · Estados', family: 'resources', pages: [153, 154] },
 ] as const

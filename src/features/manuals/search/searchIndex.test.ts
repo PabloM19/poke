@@ -34,6 +34,10 @@ describe('searchManuals', () => {
       kind: 'game',
       path: '/manuales/juegos/equipo-rescate-azul',
     })
+    expect(searchManuals('Exploradores de la Oscuridad')[0]).toMatchObject({
+      kind: 'game',
+      path: '/manuales/juegos/exploradores-oscuridad',
+    })
     expect(searchManuals('Conquest')[0]).toMatchObject({
       kind: 'game',
       path: '/manuales/otros',
