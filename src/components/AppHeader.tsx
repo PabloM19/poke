@@ -11,7 +11,7 @@ export function AppHeader() {
           PokéApp
         </h1>
         <div className="hidden md:block">
-          <AppNav />
+          <AppNav variant="desktop" />
         </div>
       </div>
     </header>

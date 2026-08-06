@@ -15,7 +15,7 @@ export function Layout() {
         aria-label="Navegación inferior"
       >
         <div className="mx-auto max-w-lg px-2">
-          <AppNav />
+          <AppNav variant="mobile" />
         </div>
       </div>
     </div>
