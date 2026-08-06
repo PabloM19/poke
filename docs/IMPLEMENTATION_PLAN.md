@@ -228,7 +228,7 @@ PMD y los cuatro spin-offs no tienen un contexto de juego equivalente en PokeAPI
 | 3 | Completada | Favoritos y Comparar completos. |
 | 4 | Completada | Filtros sobre todo Gen I–V sin ráfagas de red. |
 | 5 | Completada | Motor histórico y recursos `R-01/R-02`. |
-| 6 | Pendiente | Cinco fichas de saga principal. |
+| 6 | En curso (Perla completada) | Cinco fichas de saga principal. |
 | 7 | Pendiente | Dos fichas PMD, cuatro minifichas y `R-03…R-06`. |
 | 8 | Pendiente | QR y vínculo bidireccional con el manual físico. |
 | 9 | Pendiente | Accesibilidad, offline, E2E, despliegue y cierre. |
@@ -524,6 +524,8 @@ Las pruebas unitarias usan fixtures locales. Un smoke test real de PokeAPI puede
 - **Verificación de cierre de Fase 4:** snapshot de 649 entradas con SHA-256 `7a6348b0c922e8d640ecee0f877235d28e79860eab991b71e3f2691551db144c`; 124 pruebas automatizadas y `npm run check` correcto; URL directa de Dialga recargada a 390×844 con cinco filtros, sin desbordamiento ni errores de consola.
 - **Fase 5 cerrada:** selectores históricos separados para tipos, estadísticas y relaciones; matriz defensiva pura; contexto persistente de los cinco juegos; terminología técnica en español; detalle y Comparar sensibles al juego; tabla generacional `R-01` y referencia editorial `R-02` totalmente locales.
 - **Verificación de cierre de Fase 5:** snapshot v1 de 18 relaciones de tipo con SHA-256 `0b90be9dc4650fd159f0b496d5c957c0d2d103771a3765e3c1fe5cd39d396529`; 150 pruebas automatizadas y `npm run check` correcto; Clefairy se muestra Normal y vulnerable a Lucha en Negro 2, Comparar recupera estadísticas históricas y ambos recursos abren a 390×844 sin red, desbordamiento ni errores de consola.
+- **Fase 6, punto 1 cerrado — Perla:** ficha editorial completa de las páginas 87–94; iniciales enriquecibles; rival, guías, ocho Medallas, sistemas, primera hora, recordatorios y aviso previo a recursos; Pokédex regional buscable y paginada; evolución por `diamond-pearl`, encuentros por `pearl`, learnset español por `diamond-pearl` y defensa de Generación IV bajo demanda, todos con caché y fallback independiente.
+- **Verificación de Perla:** 160 pruebas automatizadas y `npm run check` correcto; lectura inicial sin peticiones; Pokédex real con 151 entradas; Turtwig muestra evolución a nivel 18/32, regalo de nivel 5 en Lago Veraz, 12 movimientos por nivel en español y debilidades históricas; ruta profunda verificada a 390×844 con ancho 390/390 y cero errores de consola.
 - **Restricción de entrega:** por instrucción del usuario no se hará ningún despliegue remoto. Los puntos de las fases 8–9 que exijan un dominio HTTPS o publicar hosting quedarán sin ejecutar salvo autorización posterior; el resto se implementará y verificará en local.
 
-La próxima acción autorizada es exclusivamente el primer punto de la **Fase 6**: publicar y verificar la ficha completa de Pokémon Perla antes de empezar Platino.
+La próxima acción autorizada es exclusivamente el segundo punto de la **Fase 6**: publicar y verificar la ficha completa de Pokémon Platino antes de empezar Oro HeartGold.

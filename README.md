@@ -23,6 +23,7 @@ Disponible:
 - Tipos, estadísticas y relaciones defensivas históricas en ficha y Comparar.
 - Manuales 21–86 con rutas profundas, búsqueda, progreso y referencias físicas.
 - Recursos locales R-01 (tabla de tipos) y R-02 (estados y efectos).
+- Guía completa de Pokémon Perla (87–94) con explorador regional por versión.
 - Favoritos persistentes con carga, error, retry y eliminación.
 - Comparación compartible de 2–4 Pokémon, adaptada a móvil.
 - Navegación móvil de cinco destinos y hub Más.
