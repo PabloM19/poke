@@ -69,3 +69,9 @@ export interface ResourceDefinition {
   spoilerLevel: SpoilerLevel
   relatedGames: readonly string[]
 }
+
+export interface PokemonReference {
+  speciesId: number
+  name: string
+  description?: string
+}
