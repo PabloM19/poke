@@ -30,7 +30,7 @@ vi.mock('@/lib/pokeapi', async () => ({
   getPokemon: mocks.getPokemon,
 }))
 
-function renderExplorer(gameSlug: 'perla' | 'oro-heartgold' | 'negro' = 'perla', region = 'Sinnoh') {
+function renderExplorer(gameSlug: 'perla' | 'oro-heartgold' | 'negro' | 'negro-2' = 'perla', region = 'Sinnoh') {
   return render(<MemoryRouter><GameDataExplorer gameSlug={gameSlug} region={region} /></MemoryRouter>)
 }
 
@@ -129,5 +129,23 @@ describe('explorador de Perla', () => {
       { signal: expect.any(AbortSignal) }
     )
     expect(screen.getByText('Defensa en Generación V')).toBeInTheDocument()
+  })
+
+  it('no mezcla la versión ni el learnset de Negro 2 con el primer juego', async () => {
+    mocks.getRegionalPokedex.mockResolvedValueOnce({
+      id: 9,
+      name: 'updated-unova',
+      entries: [{ entryNumber: 1, species: { name: 'victini', url: 'https://pokeapi.co/api/v2/pokemon-species/494/' } }],
+    })
+    renderExplorer('negro-2', 'Teselia')
+
+    await userEvent.click(screen.getByRole('button', { name: 'Cargar Pokédex de Teselia' }))
+
+    expect(await screen.findAllByText('Victini')).toHaveLength(2)
+    expect(mocks.getRegionalPokedex).toHaveBeenCalledWith(
+      expect.objectContaining({ generation: 5, version: 'black-2', versionGroup: 'black-2-white-2', pokedex: 'updated-unova' }),
+      { signal: expect.any(AbortSignal) }
+    )
+    expect(screen.getByText('Movimientos y métodos del grupo Negro 2 y Blanco 2.')).toBeInTheDocument()
   })
 })

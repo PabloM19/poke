@@ -32,13 +32,13 @@ describe('parseManualPage', () => {
     expect(JSON.stringify(blocks)).toContain('personas y los Pokémon viven')
   })
 
-  it('publica los 22 artículos de 21–120 con contenido real', () => {
-    expect(publishedManualArticles).toHaveLength(22)
+  it('publica los 23 artículos de 21–128 con contenido real', () => {
+    expect(publishedManualArticles).toHaveLength(23)
     expect(publishedManualArticles.every((article) => article.blocks.length > 0)).toBe(true)
     expect(publishedManualArticles[0].printReference.pages[0]).toBe(21)
-    expect(publishedManualArticles.at(-1)?.printReference.pages.at(-1)).toBe(120)
+    expect(publishedManualArticles.at(-1)?.printReference.pages.at(-1)).toBe(128)
     expect(manualSourcePages.find((source) => source.page === 86)?.markdown)
       .not.toContain('Páginas 87–128')
-    expect(JSON.stringify(publishedManualArticles.at(-1)?.blocks)).toContain('historia de N')
+    expect(JSON.stringify(publishedManualArticles.at(-1)?.blocks)).toContain('Lista de Hábitats')
   })
 })

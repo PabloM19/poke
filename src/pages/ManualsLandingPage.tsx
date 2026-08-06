@@ -8,8 +8,8 @@ const routes = [
   {
     path: '/manuales/juegos/perla',
     title: 'Guías por juego',
-    description: 'Recorre Sinnoh, Johto y Teselia con cuatro guías completas.',
-    pages: '87–120',
+    description: 'Las cinco aventuras principales, de Perla a Negro 2.',
+    pages: '87–128',
     icon: Gamepad2,
   },
   {

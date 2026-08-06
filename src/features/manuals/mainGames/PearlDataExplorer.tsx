@@ -85,6 +85,7 @@ function formatArea(value: string): string {
     'sinnoh-route-201-area': 'Ruta 201 (Sinnoh)',
     'new-bark-town-area': 'Pueblo Primavera',
     'nuvema-town-area': 'Pueblo Arcilla',
+    'aspertia-city-area': 'Ciudad Engobe',
   }
   if (known[value]) return known[value]
   return humanizePokeApiName(value.replace(/^sinnoh-/, '').replace(/-area$/, ''))

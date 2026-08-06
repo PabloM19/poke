@@ -109,4 +109,16 @@ describe('rutas de Manuales', () => {
     expect(screen.getByText(/historia de N y la Liga/)).toBeInTheDocument()
     expect(screen.getByText('En el manual físico: páginas 113–120')).toBeInTheDocument()
   })
+
+  it('publica Negro 2 con Matís y su nueva ruta de Gimnasios', () => {
+    renderManualRoute('/manuales/juegos/negro-2')
+
+    expect(screen.getByRole('heading', { name: 'Pokémon Edición Negra 2' })).toBeInTheDocument()
+    expect(screen.getByText('Matís, una búsqueda personal')).toBeInTheDocument()
+    expect(screen.getByText('Medalla Ponzoña')).toBeInTheDocument()
+    expect(screen.getByText('Medalla Ola')).toBeInTheDocument()
+    expect(screen.getByText(/Lista de Hábitats permite explorar/)).toBeInTheDocument()
+    expect(screen.getByText(/Equipo Plasma pueden revelar conexiones/)).toBeInTheDocument()
+    expect(screen.getByText('En el manual físico: páginas 121–128')).toBeInTheDocument()
+  })
 })

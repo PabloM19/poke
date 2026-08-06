@@ -31,6 +31,7 @@ export const manualNavigationEntries: readonly ManualNavigationEntry[] = [
   { path: '/manuales/juegos/platino', title: 'Pokémon Edición Platino', shortTitle: 'Pokémon Platino', family: 'main-games', pages: [95, 102] },
   { path: '/manuales/juegos/oro-heartgold', title: 'Pokémon Edición Oro HeartGold', shortTitle: 'Oro HeartGold', family: 'main-games', pages: [103, 112] },
   { path: '/manuales/juegos/negro', title: 'Pokémon Edición Negra', shortTitle: 'Pokémon Negro', family: 'main-games', pages: [113, 120] },
+  { path: '/manuales/juegos/negro-2', title: 'Pokémon Edición Negra 2', shortTitle: 'Pokémon Negro 2', family: 'main-games', pages: [121, 128] },
   { path: '/manuales/recursos/r-01', title: 'R-01 · Tabla de tipos', shortTitle: 'R-01 · Tipos', family: 'resources', pages: [153, 154] },
   { path: '/manuales/recursos/r-02', title: 'R-02 · Estados y efectos', shortTitle: 'R-02 · Estados', family: 'resources', pages: [153, 154] },
 ] as const

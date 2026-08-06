@@ -296,9 +296,72 @@ export const blackGuide: MainGameGuide = {
   spoilerWarning: 'La historia de N y la Liga merece descubrirse sin walkthrough.',
 }
 
+export const blackTwoGuide: MainGameGuide = {
+  slug: 'negro-2',
+  region: 'Teselia',
+  eyebrow: 'Generación V · Teselia',
+  title: 'Pokémon Edición Negra 2',
+  summary: 'Una continuación más abierta, variada y llena de actividades.',
+  lead: 'Han pasado dos años desde los acontecimientos de Pokémon Negro. Teselia ha cambiado: aparecen nuevas ciudades, rutas transformadas y Pokémon de otras regiones desde el comienzo. Un nuevo Entrenador parte desde Ciudad Engobe para descubrir qué está ocurriendo.',
+  pages: [121, 128],
+  starters: [
+    { speciesId: 495, name: 'Snivy', type: 'Planta', description: 'Rápido y técnico. Destaca cuando se aprovechan sus movimientos de apoyo y control.' },
+    { speciesId: 498, name: 'Tepig', type: 'Fuego', description: 'Potente y resistente. Su evolución añade el tipo Lucha y refuerza su ofensiva física.' },
+    { speciesId: 501, name: 'Oshawott', type: 'Agua', description: 'Equilibrado y versátil. Aprende movimientos variados y funciona bien en equipos muy distintos.' },
+  ],
+  starterTitle: 'Un nuevo comienzo en Teselia',
+  starterTip: 'Bel te entrega el Pokémon en nombre de la Profesora Encina. Desde las primeras rutas encontrarás especies de otras generaciones para acompañarlo.',
+  rival: {
+    title: 'Matís, una búsqueda personal',
+    description: 'Matís es tu vecino y amigo de la infancia. Ya posee el inicial con ventaja frente al tuyo y combate con gran intensidad. Años atrás el Equipo Plasma robó el Purrloin de su hermana; esa búsqueda explica su impaciencia y lo convierte en algo más que un rival competitivo.',
+    supporters: [
+      { title: 'Bel', description: 'Actúa como ayudante de la Profesora Encina y te entrega el inicial y la Pokédex.' },
+      { title: 'Cheren', description: 'Ha encontrado un nuevo papel en Teselia y será parte de tu recorrido desde el primer Gimnasio.' },
+    ],
+  },
+  gyms: [
+    { badge: 'Medalla Base', leader: 'Cheren', type: 'Normal', city: 'Ciudad Engobe', lesson: 'Un primer combate sin grandes ventajas: céntrate en nivel, estado y decisiones sencillas.' },
+    { badge: 'Medalla Ponzoña', leader: 'Hiedra', type: 'Veneno', city: 'Ciudad Hormigón', lesson: 'Tierra y Psíquico ayudan; lleva curación para el envenenamiento.' },
+    { badge: 'Medalla Élitro', leader: 'Camus', type: 'Bicho', city: 'Ciudad Porcelana', lesson: 'Fuego, Volador y Roca son útiles, aunque los dobles tipos cambian algunas relaciones.' },
+    { badge: 'Medalla Voltio', leader: 'Camila', type: 'Eléctrico', city: 'Ciudad Mayólica', lesson: 'Los cambios y la Velocidad obligan a preparar algo más que un único Pokémon de Tierra.' },
+    { badge: 'Medalla Temblor', leader: 'Yakón', type: 'Tierra', city: 'Ciudad Fayenza', lesson: 'Agua, Planta y Hielo son eficaces; los ataques Eléctricos no causan daño.' },
+    { badge: 'Medalla Jet', leader: 'Gerania', type: 'Volador', city: 'Ciudad Loza', lesson: 'Eléctrico, Hielo y Roca permiten responder a un equipo rápido y móvil.' },
+    { badge: 'Medalla Leyenda', leader: 'Lirio', type: 'Dragón', city: 'Ciudad Caolín', lesson: 'Hielo y Dragón son las respuestas principales, pero la resistencia será igual de importante.' },
+    { badge: 'Medalla Ola', leader: 'Ciprián', type: 'Agua', city: 'Ciudad Marga', lesson: 'El último Gimnasio exige una respuesta sólida a Agua y a sus posibles tipos secundarios.' },
+  ],
+  systems: [
+    { title: 'Pokédex multigeneracional', description: 'Incluye especies de varias generaciones desde el comienzo.' },
+    { title: 'Lista de Hábitats', description: 'Permite comprobar capturas por zona.' },
+    { title: 'Pokémon World Tournament', description: 'Una instalación de combates con reglas propias.' },
+    { title: 'Pokéwood', description: 'Rodajes cinematográficos y objetivos especiales.' },
+    { title: 'Galería Unión', description: 'Un espacio que crece con tiendas y visitantes.' },
+    { title: 'Nueva Teselia', description: 'Ciudades, rutas y Gimnasios diferentes.' },
+  ],
+  systemsTitle: 'Mucho que hacer fuera de la ruta principal',
+  systemsNote: 'La Lista de Hábitats permite explorar con menos ayuda externa y comprobar qué especies quedan por encontrar.',
+  firstHour: [
+    'Elige a Snivy, Tepig u Oshawott.',
+    'Aprende a utilizar la Lista de Hábitats.',
+    'Captura un equipo variado: hay más tipos disponibles desde el principio.',
+    'Visita cada nueva instalación al menos una vez.',
+    'Revisa los cambios de rutas respecto a Pokémon Negro.',
+    'Mantén varios integrantes a un nivel semejante.',
+  ],
+  firstHourTip: 'La gran variedad puede distraer; cambia el equipo con intención, no después de cada captura.',
+  reminders: [
+    'La secuela recompensa la curiosidad y el regreso a zonas antiguas.',
+    'La Lista de Hábitats evita depender tanto de una Pokédex externa.',
+    'Algunas actividades opcionales tienen reglas propias; lee sus tutoriales.',
+    'El contenido posterior a la Liga es especialmente amplio.',
+  ],
+  resources: ['Pokédex regional', 'Lista de Hábitats', 'Mapa de cambios', 'Introducción al PWT'],
+  spoilerWarning: 'Las guías sobre el Equipo Plasma pueden revelar conexiones con el primer juego.',
+}
+
 export const publishedMainGameGuides: ReadonlyMap<MainGameSlug, MainGameGuide> = new Map([
   [pearlGuide.slug, pearlGuide],
   [platinumGuide.slug, platinumGuide],
   [heartGoldGuide.slug, heartGoldGuide],
   [blackGuide.slug, blackGuide],
+  [blackTwoGuide.slug, blackTwoGuide],
 ])
