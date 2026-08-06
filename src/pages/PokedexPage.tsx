@@ -13,6 +13,10 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { PokedexCard } from '@/components/PokedexCard'
+import {
+  filterSpeciesByGeneration,
+  type GenerationFilter,
+} from '@/features/pokedex/filters/generationFilter'
 
 const CHUNK_SIZE = 24
 
@@ -24,17 +28,26 @@ export function PokedexPage() {
     getSetting('defaultView', 'grid')
   )
   const [visibleCount, setVisibleCount] = useState(CHUNK_SIZE)
+  const [generation, setGeneration] = useState<GenerationFilter>(null)
 
   useEffect(() => {
     refresh()
   }, [refresh])
 
-  const visibleItems = status === 'ready' ? index.slice(0, visibleCount) : []
-  const hasMore = status === 'ready' && visibleCount < index.length
+  const filteredItems = status === 'ready'
+    ? filterSpeciesByGeneration(index, generation)
+    : []
+  const visibleItems = filteredItems.slice(0, visibleCount)
+  const hasMore = status === 'ready' && visibleCount < filteredItems.length
 
-  const loadMore = useCallback(() => {
-    setVisibleCount((n) => Math.min(n + CHUNK_SIZE, index.length))
-  }, [index.length])
+  const loadMore = () => {
+    setVisibleCount((n) => Math.min(n + CHUNK_SIZE, filteredItems.length))
+  }
+
+  const selectGeneration = useCallback((next: GenerationFilter) => {
+    setGeneration(next)
+    setVisibleCount(CHUNK_SIZE)
+  }, [])
 
   const toggleView = useCallback(() => {
     const next: ViewMode = viewMode === 'grid' ? 'list' : 'grid'
@@ -78,9 +91,34 @@ export function PokedexPage() {
               <SheetHeader>
                 <SheetTitle>Filtros</SheetTitle>
                 <SheetDescription>
-                  Filtros por tipo y estadísticas (próximamente).
+                  Limita la Pokédex a una generación concreta.
                 </SheetDescription>
               </SheetHeader>
+              <section className="mt-6 px-4" aria-labelledby="generation-filter-title">
+                <h2 id="generation-filter-title" className="mb-3 text-sm font-semibold">Generación</h2>
+                <div className="grid grid-cols-2 gap-2">
+                  {([1, 2, 3, 4, 5] as const).map((value) => (
+                    <Button
+                      key={value}
+                      type="button"
+                      variant={generation === value ? 'default' : 'outline'}
+                      aria-pressed={generation === value}
+                      onClick={() => selectGeneration(value)}
+                    >
+                      Gen {['I', 'II', 'III', 'IV', 'V'][value - 1]}
+                    </Button>
+                  ))}
+                </div>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  className="mt-3 w-full"
+                  disabled={generation == null}
+                  onClick={() => selectGeneration(null)}
+                >
+                  Limpiar generación
+                </Button>
+              </section>
             </SheetContent>
           </Sheet>
           <Button
@@ -99,17 +137,25 @@ export function PokedexPage() {
       </div>
 
       <p className="mb-4 text-muted-foreground">
-        Aquí verás la lista de Pokémon que has ido descubriendo. Toca uno para
-        ver su ficha completa.
+        {filteredItems.length} especies{generation != null
+          ? ` de la Generación ${['I', 'II', 'III', 'IV', 'V'][generation - 1]}`
+          : ' de las Generaciones I–V'}. Toca una para ver su ficha completa.
       </p>
 
-      {viewMode === 'grid' ? (
+      {filteredItems.length === 0 && (
+        <div className="rounded-xl border border-dashed border-border p-8 text-center" role="status">
+          <p className="font-medium">No hay especies con este filtro.</p>
+          <Button type="button" variant="outline" size="sm" className="mt-3" onClick={() => selectGeneration(null)}>Limpiar filtro</Button>
+        </div>
+      )}
+
+      {filteredItems.length > 0 && viewMode === 'grid' ? (
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
           {visibleItems.map((item) => (
             <PokedexCard key={item.speciesId} item={item} layout="grid" />
           ))}
         </div>
-      ) : (
+      ) : filteredItems.length > 0 ? (
         <ul className="flex flex-col gap-2">
           {visibleItems.map((item) => (
             <li key={item.speciesId}>
@@ -117,7 +163,7 @@ export function PokedexPage() {
             </li>
           ))}
         </ul>
-      )}
+      ) : null}
 
       {hasMore && (
         <div className="mt-6 flex justify-center">
