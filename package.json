@@ -12,7 +12,9 @@
     "test:watch": "vitest",
     "manual:generate": "node scripts/generate-manual-content.mjs",
     "manual:check": "node scripts/generate-manual-content.mjs --check",
-    "check": "npm run manual:check && npm run lint && npm run typecheck && npm test && npm run build",
+    "pokedex:summary:generate": "node scripts/generate-pokemon-summary.mjs",
+    "pokedex:summary:check": "node scripts/generate-pokemon-summary.mjs --check",
+    "check": "npm run manual:check && npm run pokedex:summary:check && npm run lint && npm run typecheck && npm test && npm run build",
     "preview": "vite preview"
   },
   "dependencies": {

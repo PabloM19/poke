@@ -1,7 +1,5 @@
-import { useCallback, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useCallback, useState } from 'react'
 import { LayoutGrid, List, Filter } from 'lucide-react'
-import { useSpeciesIndex } from '@/hooks/useSpeciesIndex'
 import { getSetting, setSetting } from '@/lib/storage'
 import { Button } from '@/components/ui/button'
 import {
@@ -17,28 +15,25 @@ import {
   filterSpeciesByGeneration,
   type GenerationFilter,
 } from '@/features/pokedex/filters/generationFilter'
+import { pokemonSummarySnapshot } from '@/features/pokedex/summary'
 
 const CHUNK_SIZE = 24
 
 type ViewMode = 'grid' | 'list'
 
 export function PokedexPage() {
-  const { index, status, refresh } = useSpeciesIndex()
   const [viewMode, setViewMode] = useState<ViewMode>(() =>
     getSetting('defaultView', 'grid')
   )
   const [visibleCount, setVisibleCount] = useState(CHUNK_SIZE)
   const [generation, setGeneration] = useState<GenerationFilter>(null)
 
-  useEffect(() => {
-    refresh()
-  }, [refresh])
-
-  const filteredItems = status === 'ready'
-    ? filterSpeciesByGeneration(index, generation)
-    : []
+  const filteredItems = filterSpeciesByGeneration(
+    pokemonSummarySnapshot.items,
+    generation
+  )
   const visibleItems = filteredItems.slice(0, visibleCount)
-  const hasMore = status === 'ready' && visibleCount < filteredItems.length
+  const hasMore = visibleCount < filteredItems.length
 
   const loadMore = () => {
     setVisibleCount((n) => Math.min(n + CHUNK_SIZE, filteredItems.length))
@@ -54,26 +49,6 @@ export function PokedexPage() {
     setViewMode(next)
     setSetting('defaultView', next)
   }, [viewMode])
-
-  if (status === 'missing') {
-    return (
-      <>
-        <h1 className="mb-2 text-2xl font-semibold text-foreground">Pokédex</h1>
-        <div
-          className="rounded-lg border border-border bg-muted/50 p-4 text-sm text-foreground"
-          role="status"
-        >
-          <p className="mb-3">
-            Aún no has descargado los datos. Ve a Ajustes → Datos de Pokédex
-            para construir el índice.
-          </p>
-          <Button asChild variant="outline" size="sm">
-            <Link to="/settings">Ir a Ajustes</Link>
-          </Button>
-        </div>
-      </>
-    )
-  }
 
   return (
     <>
@@ -152,13 +127,13 @@ export function PokedexPage() {
       {filteredItems.length > 0 && viewMode === 'grid' ? (
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
           {visibleItems.map((item) => (
-            <PokedexCard key={item.speciesId} item={item} layout="grid" />
+            <PokedexCard key={item.id} item={item} layout="grid" />
           ))}
         </div>
       ) : filteredItems.length > 0 ? (
         <ul className="flex flex-col gap-2">
           {visibleItems.map((item) => (
-            <li key={item.speciesId}>
+            <li key={item.id}>
               <PokedexCard item={item} layout="list" />
             </li>
           ))}

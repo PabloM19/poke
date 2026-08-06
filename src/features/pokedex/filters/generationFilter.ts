@@ -1,11 +1,9 @@
-import type { SpeciesIndexItem } from '@/lib/pokedex'
-
 export type GenerationFilter = 1 | 2 | 3 | 4 | 5 | null
 
-export function filterSpeciesByGeneration(
-  items: readonly SpeciesIndexItem[],
+export function filterSpeciesByGeneration<T extends { generationId: number }>(
+  items: readonly T[],
   generation: GenerationFilter
-): readonly SpeciesIndexItem[] {
+): readonly T[] {
   return generation == null
     ? items
     : items.filter((item) => item.generationId === generation)
