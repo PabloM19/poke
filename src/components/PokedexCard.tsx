@@ -4,6 +4,7 @@ import { usePokemonSummary } from '@/hooks/usePokemonSummary'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
+import { FavoriteButton } from '@/features/favorites/FavoriteButton'
 
 function formatSpeciesId(id: number): string {
   return `#${String(id).padStart(3, '0')}`
@@ -71,7 +72,7 @@ export function PokedexCard({ item, layout = 'grid', className }: PokedexCardPro
   return (
     <Card
       className={cn(
-        'transition-colors hover:bg-accent/50',
+        'relative transition-colors hover:bg-accent/50',
         layout === 'list' && 'flex flex-row items-center gap-3',
         className
       )}
@@ -93,6 +94,11 @@ export function PokedexCard({ item, layout = 'grid', className }: PokedexCardPro
         >
           {content}
         </Link>
+        <FavoriteButton
+          speciesId={item.speciesId}
+          speciesName={item.nameEs}
+          className={layout === 'grid' ? 'absolute right-2 top-2' : 'ml-auto'}
+        />
       </CardContent>
     </Card>
   )

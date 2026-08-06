@@ -15,6 +15,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
+import { FavoriteButton } from '@/features/favorites/FavoriteButton'
 
 const NAMES_ACCORDION_LIMIT = 10
 
@@ -232,9 +233,11 @@ export function PokemonDetailPage() {
       )}
 
       <div className="flex flex-wrap gap-2">
-        <Button variant="outline" size="sm" disabled>
-          Añadir a favoritos (próximamente)
-        </Button>
+        <FavoriteButton
+          speciesId={speciesId}
+          speciesName={detail.nameEs}
+          showLabel
+        />
         <Button asChild variant="outline" size="sm">
           <Link to="/compare">Comparar</Link>
         </Button>
