@@ -1,73 +1,97 @@
-# React + TypeScript + Vite
+# PokéApp
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación local, mobile-first y en español para consultar Pokémon de las
+generaciones I–V y acompañar un manual personal de juegos Pokémon para Nintendo
+DS.
 
-Currently, two official plugins are available:
+La app usa React, TypeScript, Vite, Tailwind CSS y PokeAPI REST v2. El contenido
+editorial del manual se mantiene local; PokeAPI se utiliza únicamente para
+enriquecer datos verificables como especies, tipos, estadísticas, evoluciones o
+encuentros.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Estado actual
 
-## React Compiler
+Disponible:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Construcción de un índice local de especies Gen I–V.
+- Búsqueda por nombre español o número.
+- Pokédex en cuadrícula o lista.
+- Ficha básica de Pokémon.
+- Tema claro/oscuro.
+- Diagnóstico local de PokeAPI.
 
-## Expanding the ESLint configuration
+En ejecución según el plan maestro:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Fiabilidad de caché, red e índice.
+- Manuales generales y por juego.
+- Favoritos, comparación y filtros.
+- Tipos históricos y recursos digitales.
+- Integración con el manual físico mediante rutas QR estables.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Consulta [docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) para el orden,
+las decisiones y las puertas de calidad.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Requisitos
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Node.js 22 recomendado.
+- npm 10 o compatible.
+
+## Desarrollo local
+
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Vite muestra la URL local en la terminal, normalmente
+`http://localhost:5173`.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+No existe despliegue remoto configurado. El proyecto se ejecuta y verifica en
+local.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Comandos
+
+```bash
+npm run dev          # servidor local
+npm run lint         # ESLint
+npm run typecheck    # TypeScript estricto
+npm test             # Vitest + Testing Library
+npm run test:watch   # tests en modo watch
+npm run build        # build local de producción
+npm run preview      # previsualizar el build local
+npm run check        # lint + typecheck + tests + build
 ```
+
+## Arquitectura
+
+```text
+src/
+  app/          router, layout y providers
+  components/   componentes compartidos y UI
+  hooks/        integración de datos con React
+  lib/
+    pokeapi/    HTTP, modelos y servicios PokeAPI
+    pokedex/    índice de especies
+    storage/    preferencias y caché local
+  pages/        pantallas por ruta
+  test/         setup y fixtures
+docs/
+  sources/      fuente editorial versionada del manual
+```
+
+Reglas principales:
+
+- La UI no llama directamente a la red.
+- Las respuestas externas se normalizan antes de persistirse.
+- El manual debe funcionar sin haber construido el índice.
+- Los textos se escriben para usuarios principiantes y en español.
+- Cada fase debe terminar con `npm run check` correctamente.
+
+## Fuente del manual
+
+La copia canónica se encuentra en
+`docs/sources/manual-pokemon-ds-contenido-revisado.md`. Declara una edición de
+156 páginas y sustituye al handoff anterior de 112 páginas.
+
+Los números de página se tratan como referencias de impresión, nunca como IDs
+de ruta permanentes.

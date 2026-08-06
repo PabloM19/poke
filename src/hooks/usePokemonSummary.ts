@@ -34,23 +34,22 @@ export function usePokemonSummary(
   defaultPokemonName: string | null,
   speciesId?: number
 ): UsePokemonSummaryResult {
-  const [status, setStatus] = useState<PokemonSummaryStatus>('loading')
-  const [data, setData] = useState<PokemonSummaryData | null>(null)
+  const pokemonName = defaultPokemonName?.trim() ?? ''
+  const requestKey = pokemonName ? `${pokemonName}:${speciesId ?? ''}` : null
+  const [result, setResult] = useState<{
+    key: string
+    status: PokemonSummaryStatus
+    data: PokemonSummaryData | null
+  } | null>(null)
 
   useEffect(() => {
-    if (!defaultPokemonName?.trim()) {
-      setStatus('error')
-      setData(null)
-      return
-    }
+    if (!requestKey) return
 
     let cancelled = false
-    setStatus('loading')
-    setData(null)
 
     const cachedTotal = speciesId != null ? getCachedTotalStats(speciesId) : null
 
-    getPokemon(defaultPokemonName)
+    getPokemon(pokemonName)
       .then((pokemon) => {
         if (cancelled) return
         const spriteUrl = pokemon.sprites?.front_default ?? null
@@ -62,20 +61,24 @@ export function usePokemonSummary(
         if (speciesId != null && cachedTotal == null) {
           setCachedTotalStats(speciesId, totalBaseStats)
         }
-        setData({ spriteUrl, types, totalBaseStats })
-        setStatus('success')
+        setResult({
+          key: requestKey,
+          status: 'success',
+          data: { spriteUrl, types, totalBaseStats },
+        })
       })
       .catch(() => {
         if (!cancelled) {
-          setStatus('error')
-          setData(null)
+          setResult({ key: requestKey, status: 'error', data: null })
         }
       })
 
     return () => {
       cancelled = true
     }
-  }, [defaultPokemonName, speciesId])
+  }, [pokemonName, requestKey, speciesId])
 
-  return { status, data }
+  if (!requestKey) return { status: 'error', data: null }
+  if (result?.key !== requestKey) return { status: 'loading', data: null }
+  return { status: result.status, data: result.data }
 }

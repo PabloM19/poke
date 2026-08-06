@@ -1,4 +1,4 @@
-import { useTheme } from '@/app/ThemeProvider'
+import { useTheme } from '@/app/theme'
 import { getSetting, setSetting } from '@/lib/storage'
 import {
   getGeneration,

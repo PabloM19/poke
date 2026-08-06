@@ -17,6 +17,19 @@ import {
 
 const NAMES_ACCORDION_LIMIT = 10
 
+interface PokemonDetailData {
+  nameEs: string
+  spriteUrl: string | null
+  types: string[]
+  stats: Array<{ name: string; value: number }>
+  totalBaseStats: number
+  otherNames: Array<{ lang: string; name: string }>
+}
+
+type DetailRequestResult =
+  | { key: string; status: 'success'; data: PokemonDetailData }
+  | { key: string; status: 'error'; message: string }
+
 function formatSpeciesId(id: number): string {
   return `#${String(id).padStart(3, '0')}`
 }
@@ -36,43 +49,33 @@ function statLabel(name: string): string {
 export function PokemonDetailPage() {
   const { speciesId: speciesIdParam } = useParams<{ speciesId: string }>()
   const { index, status: indexStatus, refresh } = useSpeciesIndex()
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [detail, setDetail] = useState<{
-    nameEs: string
-    spriteUrl: string | null
-    types: string[]
-    stats: Array<{ name: string; value: number }>
-    totalBaseStats: number
-    otherNames: Array<{ lang: string; name: string }>
-  } | null>(null)
+  const [requestResult, setRequestResult] =
+    useState<DetailRequestResult | null>(null)
 
   const speciesId = speciesIdParam != null ? parseInt(speciesIdParam, 10) : NaN
   const invalidId = !Number.isInteger(speciesId) || speciesId < 1
+  const item = invalidId
+    ? null
+    : index.find((candidate) => candidate.speciesId === speciesId) ?? null
+  const requestKey =
+    indexStatus === 'ready' && item
+      ? `${speciesId}:${item.defaultPokemonName}`
+      : null
 
   useEffect(() => {
     refresh()
   }, [refresh])
 
   useEffect(() => {
-    if (indexStatus === 'missing' || invalidId) {
-      setLoading(false)
-      return
-    }
-    const item = index.find((i) => i.speciesId === speciesId) ?? null
-    if (!item) {
-      setLoading(false)
-      setError('Especie no encontrada en el índice.')
-      return
-    }
+    if (!requestKey || !item) return
 
-    setError(null)
-    setLoading(true)
+    let cancelled = false
     Promise.all([
       getPokemonSpecies(speciesId),
       getPokemon(item.defaultPokemonName),
     ])
       .then(([species, pokemon]) => {
+        if (cancelled) return
         const nameEs = getSpanishName(species) ?? species.name
         const spriteUrl = pokemon.sprites?.front_default ?? null
         const types = pokemon.types?.map((t) => t.type.name) ?? []
@@ -86,18 +89,33 @@ export function PokemonDetailPage() {
           .filter((n) => n.language.name !== 'es')
           .slice(0, NAMES_ACCORDION_LIMIT)
           .map((n) => ({ lang: n.language.name, name: n.name }))
-        setDetail({
-          nameEs,
-          spriteUrl,
-          types,
-          stats,
-          totalBaseStats,
-          otherNames,
+        setRequestResult({
+          key: requestKey,
+          status: 'success',
+          data: {
+            nameEs,
+            spriteUrl,
+            types,
+            stats,
+            totalBaseStats,
+            otherNames,
+          },
         })
       })
-      .catch(() => setError('Error al cargar los datos.'))
-      .finally(() => setLoading(false))
-  }, [speciesId, index, indexStatus, invalidId])
+      .catch(() => {
+        if (!cancelled) {
+          setRequestResult({
+            key: requestKey,
+            status: 'error',
+            message: 'Error al cargar los datos.',
+          })
+        }
+      })
+
+    return () => {
+      cancelled = true
+    }
+  }, [item, requestKey, speciesId])
 
   if (indexStatus === 'missing' || invalidId) {
     return (
@@ -117,13 +135,15 @@ export function PokemonDetailPage() {
     )
   }
 
-  if (error && !loading) {
+  if (indexStatus === 'ready' && !item) {
     return (
       <>
         <h1 className="mb-2 text-2xl font-semibold text-foreground">
           Pokémon no disponible
         </h1>
-        <p className="mb-4 text-muted-foreground">{error}</p>
+        <p className="mb-4 text-muted-foreground">
+          Especie no encontrada en el índice.
+        </p>
         <Button asChild variant="outline" size="sm">
           <Link to="/pokedex">Ir a Pokédex</Link>
         </Button>
@@ -131,7 +151,25 @@ export function PokemonDetailPage() {
     )
   }
 
-  if (loading || !detail) {
+  if (requestKey && requestResult?.key === requestKey && requestResult.status === 'error') {
+    return (
+      <>
+        <h1 className="mb-2 text-2xl font-semibold text-foreground">
+          Pokémon no disponible
+        </h1>
+        <p className="mb-4 text-muted-foreground">{requestResult.message}</p>
+        <Button asChild variant="outline" size="sm">
+          <Link to="/pokedex">Ir a Pokédex</Link>
+        </Button>
+      </>
+    )
+  }
+
+  if (
+    !requestKey ||
+    requestResult?.key !== requestKey ||
+    requestResult.status !== 'success'
+  ) {
     return (
       <>
         <h1 className="mb-2 text-2xl font-semibold text-foreground">
@@ -141,6 +179,8 @@ export function PokemonDetailPage() {
       </>
     )
   }
+
+  const detail = requestResult.data
 
   return (
     <>
