@@ -1,16 +1,25 @@
 import type { GameDefinition, ResourceDefinition } from './types'
+import { MAIN_GAME_CONTEXTS, type MainGameSlug } from '@/features/games/gameCatalog'
 
 const ref = (start: number, end: number) => ({
   edition: 'ds-156-v1' as const,
   pages: Array.from({ length: end - start + 1 }, (_, index) => start + index),
 })
 
+const mainGamePageRanges: Record<MainGameSlug, readonly [number, number]> = {
+  perla: [87, 94],
+  platino: [95, 102],
+  'oro-heartgold': [103, 112],
+  negro: [113, 120],
+  'negro-2': [121, 128],
+}
+
 export const gameDefinitions: readonly GameDefinition[] = [
-  { slug: 'perla', title: 'Pokémon Perla', family: 'main', generation: 4, version: 'pearl', versionGroup: 'diamond-pearl', pokedex: 'original-sinnoh', printReference: ref(87, 94) },
-  { slug: 'platino', title: 'Pokémon Platino', family: 'main', generation: 4, version: 'platinum', versionGroup: 'platinum', pokedex: 'extended-sinnoh', printReference: ref(95, 102) },
-  { slug: 'oro-heartgold', title: 'Pokémon Oro HeartGold', family: 'main', generation: 4, version: 'heartgold', versionGroup: 'heartgold-soulsilver', pokedex: 'updated-johto', printReference: ref(103, 112) },
-  { slug: 'negro', title: 'Pokémon Negro', family: 'main', generation: 5, version: 'black', versionGroup: 'black-white', pokedex: 'original-unova', printReference: ref(113, 120) },
-  { slug: 'negro-2', title: 'Pokémon Negro 2', family: 'main', generation: 5, version: 'black-2', versionGroup: 'black-2-white-2', pokedex: 'updated-unova', printReference: ref(121, 128) },
+  ...MAIN_GAME_CONTEXTS.map((game) => ({
+    ...game,
+    family: 'main' as const,
+    printReference: ref(...mainGamePageRanges[game.slug]),
+  })),
   { slug: 'equipo-rescate-azul', title: 'Equipo de Rescate Azul', family: 'pmd', generation: null, version: null, versionGroup: null, pokedex: null, printReference: ref(129, 136) },
   { slug: 'exploradores-oscuridad', title: 'Exploradores de la Oscuridad', family: 'pmd', generation: null, version: null, versionGroup: null, pokedex: null, printReference: ref(137, 144) },
   { slug: 'ranger', title: 'Pokémon Ranger', family: 'spin-off', generation: null, version: null, versionGroup: null, pokedex: null, printReference: ref(145, 146) },

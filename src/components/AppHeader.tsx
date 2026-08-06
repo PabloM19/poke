@@ -1,4 +1,5 @@
 import { AppNav } from './AppNav'
+import { GameSelector } from '@/features/games'
 
 export function AppHeader() {
   return (
@@ -10,8 +11,11 @@ export function AppHeader() {
         <h1 className="text-lg font-semibold tracking-tight text-foreground">
           PokéApp
         </h1>
-        <div className="hidden md:block">
-          <AppNav variant="desktop" />
+        <div className="flex min-w-0 items-center gap-3">
+          <GameSelector />
+          <div className="hidden md:block">
+            <AppNav variant="desktop" />
+          </div>
         </div>
       </div>
     </header>

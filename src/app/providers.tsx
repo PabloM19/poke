@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react'
 import { ThemeProvider } from './ThemeProvider'
+import { GameProvider } from '@/features/games'
 
 interface ProvidersProps {
   children: ReactNode
@@ -8,7 +9,9 @@ interface ProvidersProps {
 export function Providers({ children }: ProvidersProps) {
   return (
     <ThemeProvider>
-      {children}
+      <GameProvider>
+        {children}
+      </GameProvider>
     </ThemeProvider>
   )
 }
