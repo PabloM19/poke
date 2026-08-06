@@ -4,6 +4,7 @@ import { getAdjacentManualEntries, getManualEntry } from './manualNavigation'
 import { ManualNotFoundPage } from './ManualNotFoundPage'
 import { getPublishedManualArticle } from './content/articles'
 import { ManualArticleContent } from './components/ManualArticleContent'
+import { ReadingProgressControls } from './progress/ReadingProgressControls'
 
 export function ManualEntryPage() {
   const location = useLocation()
@@ -15,6 +16,7 @@ export function ManualEntryPage() {
   return (
     <>
       <ManualArticleContent article={article} />
+      <ReadingProgressControls key={article.path} articlePath={article.path} />
       <nav aria-label="Lección anterior y siguiente" className="mt-10 grid gap-3 sm:grid-cols-2">
         {adjacent.previous ? (
           <Link to={adjacent.previous.path} className="rounded-xl border border-border p-4 outline-none transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring">
