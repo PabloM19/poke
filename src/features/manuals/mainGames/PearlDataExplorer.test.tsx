@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { pikachuPokemonFixture } from '@/test/fixtures/pokeapi'
-import { PearlDataExplorer } from './PearlDataExplorer'
+import { GameDataExplorer } from './PearlDataExplorer'
 
 const mocks = vi.hoisted(() => ({
   getRegionalPokedex: vi.fn(),
@@ -31,7 +31,7 @@ vi.mock('@/lib/pokeapi', async () => ({
 }))
 
 function renderExplorer() {
-  return render(<MemoryRouter><PearlDataExplorer /></MemoryRouter>)
+  return render(<MemoryRouter><GameDataExplorer gameSlug="perla" region="Sinnoh" /></MemoryRouter>)
 }
 
 describe('explorador de Perla', () => {

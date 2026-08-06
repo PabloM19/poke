@@ -8,8 +8,8 @@ const routes = [
   {
     path: '/manuales/juegos/perla',
     title: 'Guías por juego',
-    description: 'Empieza en Sinnoh con la guía completa de Pokémon Perla.',
-    pages: '87–94',
+    description: 'Recorre Sinnoh con las guías completas de Perla y Platino.',
+    pages: '87–102',
     icon: Gamepad2,
   },
   {

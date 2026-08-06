@@ -62,6 +62,7 @@ describe('datos dinámicos por juego', () => {
     }, '/evolution-chain/206')
 
     expect(selectEvolutionForGame(chain, pearl).chain.evolvesTo.map((node) => node.species.name)).toEqual(['staravia'])
+    expect(selectEvolutionForGame(chain, getMainGameContext('platino')).chain.evolvesTo.map((node) => node.species.name)).toEqual(['staravia'])
   })
 
   it('rechaza contratos incompletos en vez de mostrar datos dudosos', () => {

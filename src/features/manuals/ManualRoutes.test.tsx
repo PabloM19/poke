@@ -17,7 +17,7 @@ function renderManualRoute(path: string) {
           <Route path="entrenador/:tema" element={<ManualEntryPage />} />
           <Route path="mundo-misterioso/:tema" element={<ManualEntryPage />} />
           <Route path="otros" element={<ManualEntryPage />} />
-          <Route path="juegos/perla" element={<MainGameGuidePage />} />
+          <Route path="juegos/:juego" element={<MainGameGuidePage />} />
           <Route path="*" element={<ManualNotFoundPage />} />
         </Route>
       </Routes>
@@ -71,5 +71,18 @@ describe('rutas de Manuales', () => {
     expect(screen.getByText('En el manual físico: páginas 87–94')).toBeInTheDocument()
     expect(fetchMock).not.toHaveBeenCalled()
     vi.unstubAllGlobals()
+  })
+
+  it('publica Platino con su orden propio de Gimnasios y aviso', () => {
+    renderManualRoute('/manuales/juegos/platino')
+
+    expect(screen.getByRole('heading', { name: 'Pokémon Edición Platino' })).toBeInTheDocument()
+    expect(screen.getByText('Handsome')).toBeInTheDocument()
+    const badges = screen.getAllByText(/Medalla (Lignito|Bosque|Reliquia|Adoquín)/)
+    expect(badges.map((badge) => badge.textContent)).toEqual([
+      'Medalla Lignito', 'Medalla Bosque', 'Medalla Reliquia', 'Medalla Adoquín',
+    ])
+    expect(screen.getByText(/Evita consultar el Mundo Distorsión/)).toBeInTheDocument()
+    expect(screen.getByText('En el manual físico: páginas 95–102')).toBeInTheDocument()
   })
 })

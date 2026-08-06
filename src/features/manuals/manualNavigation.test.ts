@@ -39,5 +39,7 @@ describe('manualNavigation', () => {
       family: 'main-games',
       pages: [87, 94],
     })
+    expect(getAdjacentManualEntries('/manuales/juegos/perla').next?.path)
+      .toBe('/manuales/juegos/platino')
   })
 })

@@ -54,9 +54,28 @@ export function selectEncountersForGame(areas: readonly EncounterArea[], game: M
 }
 
 export function selectEvolutionForGame(chain: EvolutionChain, game: MainGameContext): EvolutionChain {
+  const versionOrder: Record<string, number> = {
+    'diamond-pearl': 8,
+    platinum: 9,
+    'heartgold-soulsilver': 10,
+    'black-white': 11,
+    'black-2-white-2': 14,
+  }
+  const targetOrder = versionOrder[game.versionGroup]
   const visit = (node: EvolutionChain['chain']): EvolutionChain['chain'] => ({
     ...node,
-    details: node.details.filter((detail) => detail.versionGroup == null || detail.versionGroup.name === game.versionGroup),
+    details: (() => {
+      const applicable = node.details.filter((detail) => (
+        detail.versionGroup == null
+        || (versionOrder[detail.versionGroup.name] ?? Number.POSITIVE_INFINITY) <= targetOrder
+      ))
+      const latestOrder = Math.max(...applicable.map((detail) => (
+        detail.versionGroup == null ? 0 : versionOrder[detail.versionGroup.name] ?? 0
+      )), 0)
+      return applicable.filter((detail) => (
+        (detail.versionGroup == null ? 0 : versionOrder[detail.versionGroup.name] ?? 0) === latestOrder
+      ))
+    })(),
     evolvesTo: node.evolvesTo.map(visit).filter((child) => child.details.length > 0),
   })
   return { ...chain, chain: visit(chain.chain) }

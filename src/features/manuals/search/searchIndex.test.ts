@@ -14,6 +14,10 @@ describe('searchManuals', () => {
       kind: 'game',
       path: '/manuales/juegos/perla',
     })
+    expect(searchManuals('Pokémon Platino')[0]).toMatchObject({
+      kind: 'game',
+      path: '/manuales/juegos/platino',
+    })
     expect(searchManuals('Conquest')[0]).toMatchObject({
       kind: 'game',
       path: '/manuales/otros',

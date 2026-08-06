@@ -19,7 +19,7 @@ export function buildManualArticle(definition: ManualArticleDefinition): ManualA
 }
 
 export const publishedManualArticles: readonly ManualArticle[] = manualArticleDefinitions
-  .filter((definition) => definition.pageRange[1] <= 94)
+  .filter((definition) => definition.pageRange[1] <= 102)
   .map(buildManualArticle)
 
 export function getPublishedManualArticle(pathname: string): ManualArticle | null {

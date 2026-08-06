@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { BookOpen, ChevronRight, Gamepad2, Map, Sparkles } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -7,10 +7,12 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { PokemonReferenceGrid } from '../components/PokemonReferenceCard'
 import { LessonCallout, LessonSteps, PhysicalReference } from '../components/LessonBlocks'
 import { ReadingProgressControls } from '../progress/ReadingProgressControls'
-import { pearlGuide } from './gameGuideData'
-import { PearlDataExplorer } from './PearlDataExplorer'
+import { ManualNotFoundPage } from '../ManualNotFoundPage'
+import { isMainGameSlug } from '@/features/games/gameCatalog'
+import { publishedMainGameGuides, type MainGameGuide } from './gameGuideData'
+import { GameDataExplorer } from './PearlDataExplorer'
 
-function StarterSection() {
+function StarterSection({ guide }: { guide: MainGameGuide }) {
   const [enrich, setEnrich] = useState(false)
 
   return (
@@ -18,15 +20,15 @@ function StarterSection() {
       <div className="mb-3 flex flex-wrap items-end justify-between gap-3">
         <div>
           <p className="text-sm font-medium text-primary">Tu primera elección</p>
-          <h2 className="text-2xl font-semibold">Tres compañeros para comenzar</h2>
+          <h2 className="text-2xl font-semibold">{guide.starterTitle}</h2>
         </div>
         {!enrich && <Button type="button" variant="outline" onClick={() => setEnrich(true)}>Cargar imágenes y tipos</Button>}
       </div>
       {enrich ? (
-        <PokemonReferenceGrid references={pearlGuide.starters} />
+        <PokemonReferenceGrid references={guide.starters} />
       ) : (
         <div className="grid gap-3 sm:grid-cols-3">
-          {pearlGuide.starters.map((starter) => (
+          {guide.starters.map((starter) => (
             <Card key={starter.speciesId} className="gap-3 py-5">
               <CardHeader className="gap-2 px-5">
                 <Badge className="w-fit" variant="secondary">{starter.type}</Badge>
@@ -37,13 +39,15 @@ function StarterSection() {
           ))}
         </div>
       )}
-      <LessonCallout kind="tip">Elige por afinidad. Los tres pueden completar la aventura y tendrás oportunidades de cubrir los tipos restantes.</LessonCallout>
+      <LessonCallout kind="tip">{guide.starterTip}</LessonCallout>
     </section>
   )
 }
 
 export function MainGameGuidePage() {
-  const guide = pearlGuide
+  const { juego } = useParams()
+  const guide = isMainGameSlug(juego) ? publishedMainGameGuides.get(juego) : null
+  if (!guide) return <ManualNotFoundPage />
   return (
     <article className="space-y-10">
       <header className="overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-primary/15 via-card to-secondary p-5 sm:p-8">
@@ -55,13 +59,13 @@ export function MainGameGuidePage() {
         <div className="mt-5 flex flex-wrap gap-2">
           <Badge variant="secondary">Sin spoilers de historia</Badge>
           <Badge variant="secondary">Páginas {guide.pages[0]}–{guide.pages[1]}</Badge>
-          <Badge variant="secondary">Contexto: Perla</Badge>
+          <Badge variant="secondary">Contexto: {guide.title.replace('Pokémon ', '').replace('Edición ', '')}</Badge>
         </div>
       </header>
 
       <nav aria-label="En esta guía" className="grid grid-cols-2 gap-2 sm:grid-cols-4">
         {[
-          ['#iniciales', 'Iniciales'], ['#rival', 'Rival'], ['#medallas', 'Medallas'], ['#recursos-perla', 'Recursos'],
+          ['#iniciales', 'Iniciales'], ['#rival', 'Rival'], ['#medallas', 'Medallas'], [`#recursos-${guide.slug}`, 'Recursos'],
         ].map(([href, label]) => (
           <a key={href} href={href} className="flex min-h-11 items-center justify-between rounded-lg border border-border bg-card px-3 text-sm font-medium outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring">
             {label}<ChevronRight className="size-4 text-muted-foreground" aria-hidden />
@@ -69,7 +73,7 @@ export function MainGameGuidePage() {
         ))}
       </nav>
 
-      <StarterSection />
+      <StarterSection guide={guide} />
 
       <section className="scroll-mt-20" id="rival">
         <p className="text-sm font-medium text-primary">Tu rival y tus guías</p>
@@ -79,13 +83,12 @@ export function MainGameGuidePage() {
             <CardHeader><CardTitle>{guide.rival.title}</CardTitle></CardHeader>
             <CardContent className="leading-7 text-foreground/85">{guide.rival.description}</CardContent>
           </Card>
-          <Card className="gap-3 py-5"><CardHeader className="px-5"><CardTitle>Profesor Serbal</CardTitle></CardHeader><CardContent className="px-5 text-sm leading-6 text-muted-foreground">{guide.rival.professor}</CardContent></Card>
-          <Card className="gap-3 py-5"><CardHeader className="px-5"><CardTitle>Ayudante del profesor</CardTitle></CardHeader><CardContent className="px-5 text-sm leading-6 text-muted-foreground">{guide.rival.assistant}</CardContent></Card>
+          {guide.rival.supporters.map((supporter) => <Card key={supporter.title} className="gap-3 py-5"><CardHeader className="px-5"><CardTitle>{supporter.title}</CardTitle></CardHeader><CardContent className="px-5 text-sm leading-6 text-muted-foreground">{supporter.description}</CardContent></Card>)}
         </div>
       </section>
 
       <section className="scroll-mt-20" id="medallas">
-        <p className="text-sm font-medium text-primary">El recorrido de Sinnoh</p>
+        <p className="text-sm font-medium text-primary">El recorrido de {guide.region}</p>
         <h2 className="mb-4 text-2xl font-semibold">Las ocho Medallas</h2>
         <div className="grid gap-3 sm:grid-cols-2">
           {guide.gyms.map((gym, index) => (
@@ -102,11 +105,11 @@ export function MainGameGuidePage() {
       </section>
 
       <section>
-        <div className="mb-4 flex items-center gap-3"><Sparkles className="size-5 text-primary" aria-hidden /><h2 className="text-2xl font-semibold">Una región para explorar con calma</h2></div>
+        <div className="mb-4 flex items-center gap-3"><Sparkles className="size-5 text-primary" aria-hidden /><h2 className="text-2xl font-semibold">{guide.systemsTitle}</h2></div>
         <div className="grid gap-3 sm:grid-cols-2">
           {guide.systems.map((system) => <Card key={system.title} className="gap-2 py-4"><CardHeader className="px-5"><CardTitle className="text-base">{system.title}</CardTitle></CardHeader><CardContent className="px-5 text-sm text-muted-foreground">{system.description}</CardContent></Card>)}
         </div>
-        <LessonCallout kind="note">Utiliza las Máquinas Ocultas para superar obstáculos y revisa el equipo antes de una cueva o ruta larga.</LessonCallout>
+        <LessonCallout kind="note">{guide.systemsNote}</LessonCallout>
       </section>
 
       <section>
@@ -114,14 +117,14 @@ export function MainGameGuidePage() {
         <LessonCallout kind="tip">{guide.firstHourTip}</LessonCallout>
       </section>
 
-      <PearlDataExplorer />
+      <GameDataExplorer gameSlug={guide.slug} region={guide.region} />
 
-      <section className="scroll-mt-20" id="recursos-perla">
+      <section className="scroll-mt-20" id={`recursos-${guide.slug}`}>
         <div className="mb-4 flex items-center gap-3"><Map className="size-5 text-primary" aria-hidden /><h2 className="text-2xl font-semibold">Antes de continuar</h2></div>
         <ul className="ml-5 list-disc space-y-2 leading-7">{guide.reminders.map((item) => <li key={item}>{item}</li>)}</ul>
         <LessonCallout kind="warning" title="Aviso de spoilers">{guide.spoilerWarning}</LessonCallout>
         <div className="rounded-xl border border-border bg-card p-4">
-          <h3 className="font-semibold">Recursos de Perla</h3>
+          <h3 className="font-semibold">Recursos de {guide.title.replace('Pokémon Edición ', '')}</h3>
           <p className="mt-1 text-sm text-muted-foreground">{guide.resources.join(' · ')}</p>
           <div className="mt-4 flex flex-col gap-2 sm:flex-row">
             <Button asChild><Link to="/pokedex?gen=4"><BookOpen aria-hidden />Abrir Pokédex Gen IV</Link></Button>
@@ -130,8 +133,8 @@ export function MainGameGuidePage() {
         </div>
       </section>
 
-      <PhysicalReference reference={{ edition: 'ds-156-v1', pages: Array.from({ length: 8 }, (_, index) => 87 + index) }} />
-      <ReadingProgressControls articlePath="/manuales/juegos/perla" />
+      <PhysicalReference reference={{ edition: 'ds-156-v1', pages: Array.from({ length: guide.pages[1] - guide.pages[0] + 1 }, (_, index) => guide.pages[0] + index) }} />
+      <ReadingProgressControls articlePath={`/manuales/juegos/${guide.slug}`} />
     </article>
   )
 }

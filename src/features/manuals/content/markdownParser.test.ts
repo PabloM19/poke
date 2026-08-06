@@ -32,13 +32,13 @@ describe('parseManualPage', () => {
     expect(JSON.stringify(blocks)).toContain('personas y los Pokémon viven')
   })
 
-  it('publica los 19 artículos de 21–94 con contenido real', () => {
-    expect(publishedManualArticles).toHaveLength(19)
+  it('publica los 20 artículos de 21–102 con contenido real', () => {
+    expect(publishedManualArticles).toHaveLength(20)
     expect(publishedManualArticles.every((article) => article.blocks.length > 0)).toBe(true)
     expect(publishedManualArticles[0].printReference.pages[0]).toBe(21)
-    expect(publishedManualArticles.at(-1)?.printReference.pages.at(-1)).toBe(94)
+    expect(publishedManualArticles.at(-1)?.printReference.pages.at(-1)).toBe(102)
     expect(manualSourcePages.find((source) => source.page === 86)?.markdown)
       .not.toContain('Páginas 87–128')
-    expect(JSON.stringify(publishedManualArticles.at(-1)?.blocks)).toContain('Columna Lanza')
+    expect(JSON.stringify(publishedManualArticles.at(-1)?.blocks)).toContain('Mundo Distorsión')
   })
 })
