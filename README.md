@@ -25,6 +25,7 @@ Disponible:
 - Recursos locales R-01 (tabla de tipos) y R-02 (estados y efectos).
 - Cinco guías completas de la saga principal (87–128) con exploradores regionales por versión.
 - Guías completas de Equipo de Rescate Azul y Exploradores de la Oscuridad (129–144), con especies enriquecibles bajo demanda.
+- Minificha local de Pokémon Ranger (145–146).
 - Favoritos persistentes con carga, error, retry y eliminación.
 - Comparación compartible de 2–4 Pokémon, adaptada a móvil.
 - Navegación móvil de cinco destinos y hub Más.

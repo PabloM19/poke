@@ -229,7 +229,7 @@ PMD y los cuatro spin-offs no tienen un contexto de juego equivalente en PokeAPI
 | 4 | Completada | Filtros sobre todo Gen I–V sin ráfagas de red. |
 | 5 | Completada | Motor histórico y recursos `R-01/R-02`. |
 | 6 | Completada | Cinco fichas de saga principal. |
-| 7 | En curso (dos fichas PMD completadas) | Dos fichas PMD, cuatro minifichas y `R-03…R-06`. |
+| 7 | En curso (dos fichas PMD y Ranger completados) | Dos fichas PMD, cuatro minifichas y `R-03…R-06`. |
 | 8 | Pendiente | QR y vínculo bidireccional con el manual físico. |
 | 9 | Pendiente | Accesibilidad, offline, E2E, despliegue y cierre. |
 
@@ -538,6 +538,8 @@ Las pruebas unitarias usan fixtures locales. Un smoke test real de PokeAPI puede
 - **Verificación de Rescate Azul:** 169 pruebas automatizadas y `npm run check` correcto; lectura íntegra sin peticiones y carga real opcional de las 16 especies desde Bulbasaur hasta Skitty; ruta profunda a 390×844 con ancho 390/390 y cero errores de consola.
 - **Fase 7, punto 2 cerrado — Exploradores de la Oscuridad:** ficha editorial completa de las páginas 137–144 con 16 protagonistas, 13 compañeros posibles, Equipo Calavera, Pokégremio, nueve rangos, ciclo de misiones y primera expedición; las especies se enriquecen solo bajo demanda.
 - **Verificación de Exploradores:** 170 pruebas automatizadas y `npm run check` correcto; contenido local completo y carga real opcional desde Bulbasaur hasta Munchlax; ruta profunda a 390×844 con ancho 390/390 y cero errores de consola.
+- **Fase 7, punto 3 cerrado — Pokémon Ranger:** minificha local de las páginas 145–146 con propósito, Capturador, Poké-Ayudas, movimientos de campo, cinco primeros pasos, precisión específica del Ranger original y aviso previo al recurso R-05.
+- **Verificación de Ranger:** 171 pruebas automatizadas y `npm run check` correcto; chunk diferido propio de 3,79 kB; ruta profunda sin red a 390×844 con ancho 390/390 y cero errores de consola.
 - **Restricción de entrega:** por instrucción del usuario no se hará ningún despliegue remoto. Los puntos de las fases 8–9 que exijan un dominio HTTPS o publicar hosting quedarán sin ejecutar salvo autorización posterior; el resto se implementará y verificará en local.
 
-La próxima acción autorizada es exclusivamente el tercer punto de la **Fase 7**: publicar y verificar la minificha de Pokémon Ranger antes de empezar Pokémon Dash.
+La próxima acción autorizada es exclusivamente el cuarto punto de la **Fase 7**: publicar y verificar la minificha de Pokémon Dash antes de empezar Pokémon Link!.
