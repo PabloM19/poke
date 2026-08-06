@@ -1,0 +1,822 @@
+{
+  "edition": "ds-156-v1",
+  "sourceSha256": "b0f171fc829902ca182f0ca1cca224ea857d1cf6e568e549470d416533ad6d00",
+  "pages": [
+    {
+      "page": 21,
+      "heading": "Portadilla de sección",
+      "title": "Bienvenido al mundo Pokémon",
+      "markdown": "**Antetítulo:** PRIMEROS PASOS  \n**Título:** Bienvenido al mundo Pokémon  \n**Texto:**\n\nEn este mundo, las personas y los Pokémon viven, trabajan y emprenden aventuras juntos. Algunos viajan como Entrenadores; otros forman equipos de rescate o exploración. Antes de elegir un juego, descubre las ideas que todos comparten.\n\n**Visual sugerido:** una gran ruta que se divide en dos caminos: «Entrenador» y «Pokémon explorador»."
+    },
+    {
+      "page": 22,
+      "heading": "¿Qué es un Pokémon?",
+      "title": "Criaturas llenas de posibilidades",
+      "markdown": "**Título:** Criaturas llenas de posibilidades\n\nLos Pokémon son criaturas de formas, tamaños y capacidades muy diferentes. Viven en campos, cuevas, mares, ciudades y muchos otros lugares. Cada especie posee uno o dos tipos, aprende movimientos y puede crecer al ganar experiencia.\n\n**Bloque destacado — No son solo combatientes**\n\nUn Pokémon también puede ser compañero, ayudante, rival o habitante de una comunidad. En la saga principal los entrenas; en Mundo Misterioso, tú mismo te conviertes en uno."
+    },
+    {
+      "page": 23,
+      "heading": "Dos formas de vivir la aventura",
+      "title": "¿Quién vas a ser?",
+      "markdown": "**Título:** ¿Quién vas a ser?\n\n**Bloque A — Entrenador Pokémon**\n\nViaja por una región, captura Pokémon, forma un equipo y supera Gimnasios. Esta es la experiencia de Perla, Platino, HeartGold, Negro y Negro 2.\n\n**Bloque B — Pokémon explorador**\n\nDespierta convertido en Pokémon, forma un equipo con tu compañero y acepta misiones en territorios misteriosos. Esta es la experiencia de Equipo de Rescate Azul y Exploradores de la Oscuridad.\n\n**Pie:** Los demás juegos de la colección aparecen reunidos en «Otras formas de jugar»."
+    },
+    {
+      "page": 24,
+      "heading": "Cómo crecen los Pokémon",
+      "title": "Experiencia, movimientos y evolución",
+      "markdown": "**Título:** Experiencia, movimientos y evolución\n\n- Al participar en combates, un Pokémon obtiene **Puntos de Experiencia**.\n- Al subir de nivel, mejoran sus características y puede aprender nuevos **movimientos**.\n- Algunas especies cambian de forma mediante la **evolución**.\n\n**Nota:** evolucionar no significa sustituir a tu compañero. Es otra etapa de su crecimiento y, según el juego, puede requerir un nivel, un objeto o una condición especial."
+    },
+    {
+      "page": 25,
+      "heading": "Los tipos",
+      "title": "Cada tipo tiene sus ventajas",
+      "markdown": "**Título:** Cada tipo tiene sus ventajas\n\nLos Pokémon y sus movimientos pertenecen a tipos como Agua, Fuego, Planta, Eléctrico o Tierra. La relación entre ellos modifica el daño: un ataque puede ser supereficaz, poco eficaz o no tener efecto.\n\n**Ejemplo visual:**\n\nAgua vence a Fuego · Fuego vence a Planta · Planta vence a Agua.\n\n**Consejo:** no memorices toda la tabla al empezar. Consulta **R-01 · Tabla de tipos** cuando aparezca una duda y aprenderás con la práctica."
+    },
+    {
+      "page": 26,
+      "heading": "Los movimientos",
+      "title": "Elegir la acción adecuada",
+      "markdown": "**Título:** Elegir la acción adecuada\n\nCada Pokémon dispone de un conjunto limitado de movimientos. Algunos causan daño; otros modifican características, recuperan salud o provocan problemas de estado.\n\n**Tres preguntas antes de actuar**\n\n1. ¿El tipo del movimiento es eficaz?\n2. ¿Le quedan PP suficientes?\n3. ¿Conviene atacar, cambiar de Pokémon o usar un objeto?\n\n**Nota:** en Mundo Misterioso, la posición y la distancia también determinan si un movimiento alcanzará al objetivo."
+    },
+    {
+      "page": 27,
+      "heading": "Los Puntos de Salud y los PP",
+      "title": "Dos medidores que debes vigilar",
+      "markdown": "**Título:** Dos medidores que debes vigilar\n\n**PS — Puntos de Salud**  \nIndican cuánto daño puede soportar un Pokémon. Cuando llegan a cero, queda debilitado.\n\n**PP — Puntos de Poder**  \nIndican cuántas veces puede utilizarse cada movimiento. Se recuperan descansando o con determinados objetos.\n\n**Atención:** quedarse sin PP dentro de una mazmorra puede ser tan peligroso como perder PS."
+    },
+    {
+      "page": 28,
+      "heading": "Objetos y dinero",
+      "title": "Prepararse también forma parte de la aventura",
+      "markdown": "**Título:** Prepararse también forma parte de la aventura\n\nDurante el viaje encontrarás objetos de curación, Poké Balls, alimentos, semillas, máquinas técnicas y herramientas importantes para la historia. Algunos se compran; otros aparecen en el suelo o se reciben como recompensa.\n\n**Consejo:** antes de salir, comprueba siempre tres cosas: curación, espacio libre y objetos necesarios para el objetivo actual."
+    },
+    {
+      "page": 29,
+      "heading": "Hablar, observar y explorar",
+      "title": "El mundo también da instrucciones",
+      "markdown": "**Título:** El mundo también da instrucciones\n\nLos personajes suelen explicar el siguiente objetivo, ofrecer objetos o revelar cómo funciona un lugar. Habla con quienes encuentres, examina elementos llamativos y lee los mensajes del juego.\n\n**Caja «Si te pierdes»**\n\n- Revisa el mapa o el menú de misiones.\n- Regresa al último pueblo, base o gremio.\n- Habla de nuevo con los personajes principales.\n- Busca caminos que antes estaban bloqueados."
+    },
+    {
+      "page": 30,
+      "heading": "Guardar la partida",
+      "title": "Protege tu aventura",
+      "markdown": "**Título:** Protege tu aventura\n\nGuardar conserva el progreso realizado. Hazlo después de una sesión importante, antes de apagar la consola y siempre que el juego lo recomiende.\n\n**Atención:** nunca apagues la consola, retires la tarjeta ni cierres el programa mientras se estén guardando datos.\n\n**Mundo Misterioso:** una interrupción dentro de una mazmorra puede funcionar de forma distinta a un guardado normal. Lee siempre el mensaje de confirmación."
+    },
+    {
+      "page": 31,
+      "heading": "Si algo sale mal",
+      "title": "Perder también enseña",
+      "markdown": "**Título:** Perder también enseña\n\nUn combate difícil o una misión fallida no significan que hayas jugado mal. Revisa el equipo, los niveles, los tipos y los objetos. A veces basta con cambiar el orden de los Pokémon o preparar mejor la siguiente salida.\n\n**En Mundo Misterioso:** caer en una mazmorra puede hacerte perder dinero u objetos. Deposita lo que no necesites antes de partir."
+    },
+    {
+      "page": 32,
+      "heading": "Tu primera decisión",
+      "title": "Elige el camino que más te apetezca",
+      "markdown": "**Título:** Elige el camino que más te apetezca\n\n**Quiero viajar, capturar y crear un equipo**  \nEmpieza por el módulo **Ser Entrenador Pokémon**, página 41.\n\n**Quiero convertirme en Pokémon y explorar mazmorras**  \nEmpieza por el módulo **Mundo Misterioso**, página 63.\n\n**Quiero una experiencia más corta o diferente**  \nConsulta **Otras formas de jugar**, página 79."
+    },
+    {
+      "page": 33,
+      "heading": "Índice de aprendizaje",
+      "title": "Encuentra lo que necesitas",
+      "markdown": "**Título:** Encuentra lo que necesitas\n\n- Primera partida en Pokémon: páginas 21–32.\n- Controles de Nintendo DS: páginas 34–35.\n- Pantallas, menús y guardado: páginas 36–37.\n- Comunicación y compatibilidad: página 38.\n- Recursos y mapa de la colección: páginas 39–40.\n- Saga principal: páginas 41–62.\n- Mundo Misterioso: páginas 63–78.\n- Otros juegos: páginas 79–86."
+    },
+    {
+      "page": 34,
+      "heading": "Controles de Nintendo DS",
+      "title": "Conoce la consola",
+      "markdown": "**Título:** Conoce la consola\n\n**Texto para llamadas del diagrama**\n\n- **Cruceta:** mover al personaje o el cursor.\n- **Botón A:** confirmar, hablar o examinar.\n- **Botón B:** cancelar, volver o correr, según el juego.\n- **Botones X/Y:** abrir menús o ejecutar funciones especiales.\n- **L/R:** cambiar pestañas, atajos o funciones contextuales.\n- **START/SELECT:** pausa, ayuda o funciones secundarias.\n\n**Nota:** la ficha de cada juego indica cualquier uso especial."
+    },
+    {
+      "page": 35,
+      "heading": "Pantalla táctil y lápiz",
+      "title": "Tocar, deslizar y trazar",
+      "markdown": "**Título:** Tocar, deslizar y trazar\n\n- **Tocar:** seleccionar una opción.\n- **Arrastrar:** mover un elemento o recorrer una lista.\n- **Mantener:** mostrar información o prolongar una acción.\n- **Trazar:** dibujar un recorrido sobre la pantalla.\n\nMuchos juegos permiten combinar botones y lápiz táctil. Utiliza el método que resulte más cómodo y preciso.\n\n**Consejo:** si la pantalla no responde correctamente, límpiala con cuidado y calibra el panel táctil desde la configuración de la consola."
+    },
+    {
+      "page": 36,
+      "heading": "Las dos pantallas",
+      "title": "Una aventura, dos puntos de vista",
+      "markdown": "**Título:** Una aventura, dos puntos de vista\n\nLa pantalla superior suele mostrar la escena, el combate o información detallada. La inferior puede contener menús táctiles, mapas, accesos rápidos o datos del equipo.\n\n**Llamadas visuales**\n\n1. Zona principal de juego.\n2. Estado del personaje o del equipo.\n3. Mapa o herramienta del juego.\n4. Botones y acciones disponibles.\n5. Mensajes, ayuda y confirmaciones."
+    },
+    {
+      "page": 37,
+      "heading": "Menús y guardado",
+      "title": "Lee el menú como un mapa",
+      "markdown": "**Título:** Lee el menú como un mapa\n\nAunque cada título cambia su aspecto, casi todos los menús responden a las mismas preguntas:\n\n- ¿Quién forma parte del equipo?\n- ¿Qué objetos llevas?\n- ¿Cuál es el objetivo actual?\n- ¿Dónde puedes guardar o cambiar opciones?\n\n**Atajo:** si no sabes qué hacer, abre el menú y revisa primero el equipo, la mochila y el mapa o registro de misiones."
+    },
+    {
+      "page": 38,
+      "heading": "Comunicación y compatibilidad",
+      "title": "Jugar con otras personas",
+      "markdown": "**Título:** Jugar con otras personas\n\nAlgunos títulos permiten combatir, intercambiar, rescatar o compartir datos mediante comunicación local. Las funciones disponibles dependen de cada juego y pueden requerir dos consolas y dos tarjetas compatibles.\n\n**Nota histórica:** las antiguas funciones de Nintendo Wi-Fi ya no forman parte del recorrido principal de este manual. Las opciones locales se indican en cada ficha cuando son relevantes."
+    },
+    {
+      "page": 39,
+      "heading": "Recursos del manual",
+      "title": "Papel para consultar; QR para profundizar",
+      "markdown": "**Título:** Papel para consultar; QR para profundizar\n\n- **R-01 · Tabla de tipos:** referencia esencial para combates.\n- **R-02 · Estados y efectos:** recordatorio rápido.\n- **R-03 · Iconos y símbolos:** lectura de menús y avisos.\n- **R-04 · Kit de exploración PMD:** objetos, hambre y preparación.\n\nLos recursos de Ranger y Conquest se conservan como material complementario dentro de sus minifichas.\n\n**Etiquetas:** sin spoilers · aviso de mecánicas · guía con spoilers."
+    },
+    {
+      "page": 40,
+      "heading": "Mapa de la colección",
+      "title": "¿Dónde está cada juego?",
+      "markdown": "**Título:** ¿Dónde está cada juego?\n\n**Saga principal**  \nPerla 87 · Platino 95 · HeartGold 103 · Negro 113 · Negro 2 121\n\n**Mundo Misterioso**  \nEquipo de Rescate Azul 129 · Exploradores de la Oscuridad 137\n\n**Otras formas de jugar**  \nRanger 145 · Dash 147 · Link! 149 · Conquest 151\n\n---\n\n## Páginas 41–62 · Módulo principal: Ser Entrenador Pokémon"
+    },
+    {
+      "page": 41,
+      "heading": "Portadilla",
+      "title": "Tu aventura como Entrenador Pokémon",
+      "markdown": "**Antetítulo:** SAGA PRINCIPAL  \n**Título:** Tu aventura como Entrenador Pokémon\n\nRecorre una región desconocida, conoce a sus habitantes y forma un equipo propio. El objetivo no es capturarlos a todos de inmediato: es aprender a cuidar a tus Pokémon, superar desafíos y encontrar tu manera de avanzar.\n\n**Ciclo visual:** Explorar → Combatir → Capturar → Entrenar → Progresar."
+    },
+    {
+      "page": 42,
+      "heading": "El papel del Entrenador",
+      "title": "Viajar juntos",
+      "markdown": "**Título:** Viajar juntos\n\nUn Entrenador dirige a sus Pokémon durante los combates, decide qué movimientos aprenderán y prepara el equipo para cada etapa del viaje. Cada integrante puede aportar algo distinto: fuerza, velocidad, resistencia, apoyo o una ventaja de tipo.\n\n**Idea clave:** no existe un único equipo correcto. El mejor equipo es el que comprendes y sabes utilizar."
+    },
+    {
+      "page": 43,
+      "heading": "Tu primer compañero",
+      "title": "Elegir un Pokémon inicial",
+      "markdown": "**Título:** Elegir un Pokémon inicial\n\nAl comienzo recibirás uno de tres Pokémon. Normalmente representan los tipos Planta, Fuego y Agua. Esta elección cambia tus primeros combates, pero ninguno es una opción equivocada.\n\n**Elige por:**\n\n- el Pokémon que más te guste;\n- el tipo que quieras aprender primero;\n- o la dificultad inicial que prefieras.\n\n**Nota:** los otros tipos necesarios podrán encontrarse durante la aventura."
+    },
+    {
+      "page": 44,
+      "heading": "Los primeros minutos",
+      "title": "Del laboratorio a la primera ruta",
+      "markdown": "**Título:** Del laboratorio a la primera ruta\n\n1. Conoce a tu Pokémon inicial.\n2. Aprende a moverte y a abrir el menú.\n3. Habla con los personajes cercanos.\n4. Cruza la primera ruta y observa los encuentros salvajes.\n5. Visita el primer Centro Pokémon y la primera tienda.\n\n**Consejo:** durante esta parte, lee los mensajes con calma. El juego está enseñando sus reglas básicas."
+    },
+    {
+      "page": 45,
+      "heading": "Rutas, pueblos y ciudades",
+      "title": "Explorar una región",
+      "markdown": "**Título:** Explorar una región\n\nLas rutas conectan pueblos, ciudades y lugares especiales. En ellas aparecen Pokémon salvajes, Entrenadores, objetos y caminos opcionales. Las ciudades ofrecen descanso, tiendas, edificios importantes y pistas sobre el siguiente objetivo.\n\n**Ritmo recomendado:** explora → descansa → organiza el equipo → continúa."
+    },
+    {
+      "page": 46,
+      "heading": "Hablar y examinar",
+      "title": "Todo lugar cuenta una historia",
+      "markdown": "**Título:** Todo lugar cuenta una historia\n\nHabla con las personas y examina objetos llamativos. Algunos habitantes ofrecen consejos; otros entregan objetos, proponen intercambios o desbloquean funciones.\n\n**Busca especialmente:**\n\n- entradas y salidas alternativas;\n- objetos con forma de Poké Ball;\n- casas o mostradores distintos;\n- personajes que miran hacia un camino bloqueado."
+    },
+    {
+      "page": 47,
+      "heading": "La Pokédex",
+      "title": "Tu registro de descubrimientos",
+      "markdown": "**Título:** Tu registro de descubrimientos\n\nLa Pokédex guarda información sobre las especies encontradas. Ver un Pokémon añade un registro básico; capturarlo incorpora datos más completos, como su tipo y descripción.\n\n**No es solo una lista:** también sirve para recordar qué Pokémon conoces, comparar especies y orientar futuras capturas."
+    },
+    {
+      "page": 48,
+      "heading": "Visto, capturado y localizado",
+      "title": "Cómo completar información",
+      "markdown": "**Título:** Cómo completar información\n\n**Visto**  \nHas encontrado a esa especie en combate o durante la aventura.\n\n**Capturado**  \nLa has obtenido y su ficha contiene más información.\n\n**Hábitat o localización**  \nAlgunos juegos permiten consultar dónde puede aparecer.\n\n**Consejo:** utiliza una Pokédex online solo para ampliar datos; deja que el propio juego guíe el descubrimiento inicial."
+    },
+    {
+      "page": 49,
+      "heading": "Comienza el combate",
+      "title": "Leer la pantalla de batalla",
+      "markdown": "**Título:** Leer la pantalla de batalla\n\nCuando empieza un combate, el primer Pokémon del equipo entra en acción.\n\n**Llamadas visuales**\n\n1. Nombre y nivel.\n2. Barra de PS.\n3. Problema de estado.\n4. Pokémon rival.\n5. Luchar.\n6. Pokémon: cambiar integrante.\n7. Bolsa: usar un objeto.\n8. Huir: intentar escapar de un encuentro salvaje."
+    },
+    {
+      "page": 50,
+      "heading": "Un turno completo",
+      "title": "Elegir antes de actuar",
+      "markdown": "**Título:** Elegir antes de actuar\n\nEn cada turno escoges una acción. Después, los Pokémon actúan según la prioridad de sus movimientos y su Velocidad.\n\n**Secuencia básica**\n\n1. Observa al rival.\n2. Elige movimiento, cambio u objeto.\n3. Comprueba el resultado.\n4. Ajusta el plan para el siguiente turno.\n\n**Nota:** contra otro Entrenador no puedes huir ni capturar a sus Pokémon."
+    },
+    {
+      "page": 51,
+      "heading": "Movimientos que causan daño",
+      "title": "Potencia, precisión y tipo",
+      "markdown": "**Título:** Potencia, precisión y tipo\n\nUn movimiento ofensivo se valora por tres datos principales:\n\n- **Potencia:** cuánto daño puede causar.\n- **Precisión:** probabilidad de acertar.\n- **Tipo:** relación con el Pokémon objetivo.\n\nLos movimientos físicos y especiales utilizan características diferentes. Consulta la ficha del movimiento y compara Ataque o Ataque Especial con las defensas del rival."
+    },
+    {
+      "page": 52,
+      "heading": "Movimientos de estado",
+      "title": "Ganar sin atacar directamente",
+      "markdown": "**Título:** Ganar sin atacar directamente\n\nAlgunos movimientos no causan daño, pero cambian el combate: aumentan una característica, reducen la del rival, recuperan PS o provocan un estado.\n\n**Ejemplos de utilidad**\n\n- aumentar la defensa antes de un combate largo;\n- reducir la precisión de un rival peligroso;\n- dormir a un Pokémon salvaje antes de capturarlo;\n- proteger o curar a un integrante importante."
+    },
+    {
+      "page": 53,
+      "heading": "Tipos y afinidad",
+      "title": "Atacar con ventaja",
+      "markdown": "**Título:** Atacar con ventaja\n\nLa eficacia depende del tipo del movimiento, no solo del tipo del Pokémon que lo usa. Además, un Pokémon suele causar más daño cuando utiliza movimientos de su propio tipo.\n\n**Mensajes del combate**\n\n- «¡Es supereficaz!» indica una ventaja.\n- «No es muy eficaz…» indica resistencia.\n- «No afecta…» indica inmunidad.\n\n**Referencia:** R-01 · Tabla de tipos."
+    },
+    {
+      "page": 54,
+      "heading": "Estados y cambios de características",
+      "title": "Efectos que permanecen",
+      "markdown": "**Título:** Efectos que permanecen\n\nQuemadura, veneno, parálisis, sueño y congelación pueden limitar a un Pokémon durante varios turnos. Otros movimientos suben o bajan Ataque, Defensa, Velocidad u otras características.\n\n**Consejo:** lleva objetos de curación y aprende a distinguir un problema de estado de un cambio temporal de características.\n\n**Referencia:** R-02 · Estados y efectos."
+    },
+    {
+      "page": 55,
+      "heading": "Capturar Pokémon",
+      "title": "De encuentro salvaje a nuevo compañero",
+      "markdown": "**Título:** De encuentro salvaje a nuevo compañero\n\nSolo puedes lanzar Poké Balls contra Pokémon salvajes.\n\n1. Reduce sus PS sin debilitarlos.\n2. Si puedes, provoca sueño o parálisis.\n3. Abre la Bolsa y elige una Poké Ball.\n4. Si escapa, vuelve a intentarlo o cambia de estrategia.\n\n**Idea clave:** cuanto más difícil sea la captura, más importante será prepararla."
+    },
+    {
+      "page": 56,
+      "heading": "Elegir la Poké Ball",
+      "title": "Una herramienta para cada situación",
+      "markdown": "**Título:** Una herramienta para cada situación\n\nLa Poké Ball básica funciona en muchos encuentros. Otras ofrecen mejores resultados por potencia general, momento del combate, lugar o especie.\n\n**No malgastes recursos raros:** guarda las Balls especiales para situaciones en las que su ventaja sea clara.\n\n**Atención:** si el Pokémon queda debilitado, el combate termina y no podrás capturarlo en ese encuentro."
+    },
+    {
+      "page": 57,
+      "heading": "Ganar experiencia",
+      "title": "Aprender combatiendo",
+      "markdown": "**Título:** Aprender combatiendo\n\nLos Pokémon que participan en un combate reciben experiencia. Al reunir suficiente, suben de nivel y mejoran sus características.\n\n**Para entrenar con seguridad**\n\n- combate cerca de un Centro Pokémon;\n- alterna integrantes para repartir experiencia;\n- evita rivales muy superiores;\n- cura al equipo antes de continuar una ruta larga."
+    },
+    {
+      "page": 58,
+      "heading": "Aprender y olvidar movimientos",
+      "title": "Cuatro espacios, muchas decisiones",
+      "markdown": "**Título:** Cuatro espacios, muchas decisiones\n\nUn Pokémon puede conocer hasta cuatro movimientos a la vez. Cuando intente aprender uno nuevo, tendrás que decidir si sustituye a otro.\n\n**Busca equilibrio:**\n\n- uno o dos movimientos fiables de daño;\n- cobertura frente a otros tipos;\n- una opción de apoyo o estado;\n- PP suficientes para explorar sin regresar constantemente."
+    },
+    {
+      "page": 59,
+      "heading": "Evolución",
+      "title": "Una nueva etapa",
+      "markdown": "**Título:** Una nueva etapa\n\nMuchos Pokémon evolucionan al alcanzar cierto nivel. Otros requieren una piedra, un intercambio, amistad o una condición concreta.\n\nAl evolucionar suelen mejorar sus características y, en ocasiones, cambian de tipo o aprenden movimientos distintos.\n\n**Nota:** cancelar una evolución no daña al Pokémon. Podrás permitirla más adelante si se repiten sus condiciones."
+    },
+    {
+      "page": 60,
+      "heading": "Formar un equipo",
+      "title": "Seis compañeros, funciones diferentes",
+      "markdown": "**Título:** Seis compañeros, funciones diferentes\n\nPuedes llevar hasta seis Pokémon. Un equipo variado responde mejor a rutas, Gimnasios y rivales distintos.\n\n**Comprueba:**\n\n- variedad de tipos y movimientos;\n- al menos una respuesta contra debilidades frecuentes;\n- niveles relativamente equilibrados;\n- un integrante capaz de apoyar o resistir golpes.\n\n**Idea clave:** no hace falta cubrir todos los tipos; evita depender siempre de uno solo."
+    },
+    {
+      "page": 61,
+      "heading": "Cajas, Bolsa y objetos clave",
+      "title": "Organizar para viajar mejor",
+      "markdown": "**Título:** Organizar para viajar mejor\n\nLos Pokémon que no caben en el equipo se envían al sistema de Cajas del PC. Puedes recuperarlos y ordenar las cajas desde los terminales disponibles.\n\nLa Bolsa separa los objetos por categorías. Los objetos clave no suelen consumirse y permiten avanzar o utilizar funciones especiales.\n\n**Rutina útil:** cura, ordena, compra y guarda antes de iniciar una nueva ruta."
+    },
+    {
+      "page": 62,
+      "heading": "Medallas y gran objetivo",
+      "title": "Del primer Gimnasio a la Liga Pokémon",
+      "markdown": "**Título:** Del primer Gimnasio a la Liga Pokémon\n\nLos Gimnasios ponen a prueba lo aprendido y suelen especializarse en un tipo. Al vencer a su Líder obtendrás una Medalla y avanzarás hacia la Liga Pokémon.\n\nLa historia continúa entre desafío y desafío: aparecerán rivales, personajes importantes y conflictos propios de cada región.\n\n**Después de la Liga:** quedan zonas, combates, capturas y actividades opcionales. Los créditos no tienen por qué ser el final de tu aventura.\n\n---\n\n## Páginas 63–78 · Módulo Pokémon Mundo Misterioso"
+    },
+    {
+      "page": 63,
+      "heading": "Portadilla",
+      "title": "Esta vez, tú eres el Pokémon",
+      "markdown": "**Antetítulo:** MUNDO MISTERIOSO  \n**Título:** Esta vez, tú eres el Pokémon\n\nDespiertas en un mundo habitado únicamente por Pokémon. No recuerdas cómo llegaste ni por qué has cambiado de forma. Junto a un compañero formarás un equipo, aceptarás misiones y buscarás respuestas en territorios que cambian cada vez que entras."
+    },
+    {
+      "page": 64,
+      "heading": "Protagonista y compañero",
+      "title": "Una aventura compartida",
+      "markdown": "**Título:** Una aventura compartida\n\nEl protagonista representa al jugador dentro del mundo Pokémon. El compañero será tu primer amigo, te acompañará en la historia y ayudará a dar forma al equipo.\n\n**Al elegirlos, piensa en:**\n\n- los tipos de ambos;\n- los movimientos que aprenderán;\n- si sus fortalezas cubren las debilidades del otro;\n- y, sobre todo, qué pareja te apetece acompañar durante toda la aventura."
+    },
+    {
+      "page": 65,
+      "heading": "El ciclo de cada día",
+      "title": "Preparar, explorar y regresar",
+      "markdown": "**Título:** Preparar, explorar y regresar\n\n1. Revisa las misiones disponibles.\n2. Elige uno o varios encargos compatibles.\n3. Prepara objetos, dinero y compañeros.\n4. Explora el territorio y cumple el objetivo.\n5. Regresa para recibir recompensas y avanzar la historia.\n\n**Idea clave:** la preparación fuera de la mazmorra es tan importante como el combate dentro de ella."
+    },
+    {
+      "page": 66,
+      "heading": "Territorios misteriosos",
+      "title": "Ninguna visita es exactamente igual",
+      "markdown": "**Título:** Ninguna visita es exactamente igual\n\nLas mazmorras se organizan en plantas con habitaciones y pasillos. La distribución, los objetos y la posición de los enemigos pueden cambiar en cada entrada.\n\nPara avanzar, busca las escaleras. Antes de utilizarlas, decide si conviene explorar el resto de la planta o conservar recursos."
+    },
+    {
+      "page": 67,
+      "heading": "Un mundo por turnos",
+      "title": "Cada acción mueve la mazmorra",
+      "markdown": "**Título:** Cada acción mueve la mazmorra\n\nDentro de un territorio, el tiempo avanza cuando actúas. Dar un paso, usar un movimiento, lanzar un objeto o cambiar de dirección puede consumir un turno. Después actúan aliados y enemigos.\n\n**Ventaja:** puedes detenerte a pensar. La rapidez de tus dedos importa menos que la decisión que tomes."
+    },
+    {
+      "page": 68,
+      "heading": "Habitaciones y pasillos",
+      "title": "La posición cambia el combate",
+      "markdown": "**Título:** La posición cambia el combate\n\nEn una habitación hay espacio para rodear enemigos, pero también pueden atacarte desde varias direcciones. En un pasillo estrecho, normalmente solo combate el Pokémon situado delante.\n\n**Consejo:** utiliza los pasillos para evitar que varios enemigos te alcancen a la vez. Cambia de posición si un compañero tiene un movimiento a distancia."
+    },
+    {
+      "page": 69,
+      "heading": "Leer la pantalla de la mazmorra",
+      "title": "Información para sobrevivir",
+      "markdown": "**Título:** Información para sobrevivir\n\n**Llamadas visuales**\n\n1. PS actuales y máximos.\n2. Nivel y experiencia.\n3. Tripa o hambre.\n4. Estado y efectos activos.\n5. Minimap: habitaciones, pasillos, objetos y enemigos visibles.\n6. Planta actual.\n7. Integrantes del equipo.\n8. Registro de acciones y mensajes."
+    },
+    {
+      "page": 70,
+      "heading": "Hambre y Tripa",
+      "title": "El reloj invisible de la exploración",
+      "markdown": "**Título:** El reloj invisible de la exploración\n\nLa Tripa disminuye mientras caminas. Cuando llega a cero, el protagonista empieza a perder PS. Alimentos como manzanas restauran su capacidad.\n\n**Antes de partir:** lleva al menos una fuente de alimento. En territorios largos, reserva una segunda para emergencias.\n\n**Consejo:** no recorras cada rincón si la Tripa o los recursos empiezan a escasear."
+    },
+    {
+      "page": 71,
+      "heading": "Movimientos y PP",
+      "title": "Tu recurso ofensivo principal",
+      "markdown": "**Título:** Tu recurso ofensivo principal\n\nLos movimientos causan más daño y ofrecen más alcance o efectos que el ataque convencional, pero consumen PP. Cuando un movimiento se queda sin PP, no puede utilizarse hasta recuperarlo.\n\n**Gestiona los PP:** usa ataques sencillos contra amenazas menores y reserva los movimientos más valiosos para enemigos peligrosos o jefes."
+    },
+    {
+      "page": 72,
+      "heading": "Alcance y dirección",
+      "title": "No todos los ataques llegan igual",
+      "markdown": "**Título:** No todos los ataques llegan igual\n\nAlgunos movimientos golpean solo al Pokémon situado delante. Otros alcanzan a distancia, atraviesan un pasillo, afectan alrededor del usuario o cubren toda una habitación.\n\n**Antes de confirmar:** comprueba la dirección del protagonista, la posición del compañero y si existe un obstáculo entre ambos y el objetivo."
+    },
+    {
+      "page": 73,
+      "heading": "Objetos de supervivencia",
+      "title": "Lo que conviene llevar",
+      "markdown": "**Título:** Lo que conviene llevar\n\n- **Manzanas:** recuperan Tripa.\n- **Bayas:** restauran PS o curan estados.\n- **Semillas:** producen efectos variados al comerlas o lanzarlas.\n- **Elixires:** recuperan PP.\n- **Orbes o esferas:** alteran la situación de una planta.\n- **Objetos arrojadizos:** atacan a distancia.\n- **Equipamiento:** concede ventajas mientras se lleva puesto.\n\n**Referencia:** R-04 · Kit de exploración PMD."
+    },
+    {
+      "page": 74,
+      "heading": "Usar y lanzar objetos",
+      "title": "Una mochila también puede ganar combates",
+      "markdown": "**Título:** Una mochila también puede ganar combates\n\nUn objeto puede utilizarse sobre el protagonista, entregarse a un compañero o lanzarse hacia un enemigo. Una semilla de estado, por ejemplo, puede neutralizar temporalmente a una amenaza sin gastar PP.\n\n**Consejo:** asigna un objeto arrojadizo para responder con rapidez en los pasillos y conserva los orbes para situaciones con varios enemigos."
+    },
+    {
+      "page": 75,
+      "heading": "Compañeros y tácticas",
+      "title": "No exploras en solitario",
+      "markdown": "**Título:** No exploras en solitario\n\nLos integrantes del equipo se mueven según las tácticas configuradas. Puedes pedirles que permanezcan cerca, ataquen, eviten enemigos o prioricen otros comportamientos, según el juego.\n\nRevisa sus movimientos y desactiva los que no quieras que utilicen automáticamente. Así evitarás que malgasten PP o activen ataques poco apropiados."
+    },
+    {
+      "page": 76,
+      "heading": "Reclutamiento y crecimiento",
+      "title": "Construir un verdadero equipo",
+      "markdown": "**Título:** Construir un verdadero equipo\n\nAlgunos Pokémon derrotados pueden solicitar unirse al grupo. Las condiciones cambian según el título, la especie y el progreso de la aventura.\n\nLos compañeros ganan experiencia, aprenden movimientos y desarrollan habilidades propias del sistema de cada juego.\n\n**Idea clave:** un nuevo integrante aporta tanto su tipo como su alcance, movimientos y comportamiento en la mazmorra."
+    },
+    {
+      "page": 77,
+      "heading": "Misiones, rango y comunidad",
+      "title": "Ayudar para avanzar",
+      "markdown": "**Título:** Ayudar para avanzar\n\nLas misiones pueden pedirte rescatar a un Pokémon, entregar un objeto, acompañar a alguien o explorar una planta concreta. Al completarlas obtendrás recompensas y puntos para el rango del equipo.\n\nEntre expediciones, utiliza los servicios de la plaza, la base o el gremio para guardar dinero, almacenar objetos, preparar compañeros y aceptar nuevos encargos."
+    },
+    {
+      "page": 78,
+      "heading": "Fracasar y volver a intentarlo",
+      "title": "Toda expedición deja una lección",
+      "markdown": "**Título:** Toda expedición deja una lección\n\nSi el protagonista pierde todos sus PS, la misión termina. Dependiendo del juego, puedes perder parte del dinero y algunos objetos que llevabas.\n\n**Antes de regresar:**\n\n- deposita dinero y objetos valiosos;\n- lleva curación, alimento y recuperación de PP;\n- revisa el nivel y los movimientos;\n- acepta varias misiones del mismo territorio cuando sea posible.\n\n**Diferencia esencial:** Equipo de Rescate Azul gira alrededor de un equipo de rescate y la Plaza Pokémon; Exploradores de la Oscuridad se organiza en torno al Pokégremio de Wigglytuff y los equipos de exploración.\n\n---\n\n## Páginas 79–86 · Otras formas de jugar\n\nEstas experiencias forman un apéndice breve: cuatro maneras distintas de jugar cuando apetezca salir de las rutas y las mazmorras principales."
+    },
+    {
+      "page": 79,
+      "heading": "Portadilla",
+      "title": "El mundo Pokémon también cambia de reglas",
+      "markdown": "**Antetítulo:** OTROS JUEGOS DE LA COLECCIÓN  \n**Título:** El mundo Pokémon también cambia de reglas\n\nAdemás de entrenar y explorar mazmorras, la colección incluye carreras táctiles, puzles, capturas con el lápiz y estrategia por turnos. Estas experiencias son más específicas: lee su resumen y ve directamente a la minificha correspondiente."
+    },
+    {
+      "page": 80,
+      "heading": "Comparador rápido",
+      "title": null,
+      "markdown": "| Juego | Qué haces | Control principal | Sesión |\n|---|---|---|---|\n| Ranger | Capturar y resolver misiones | Lápiz táctil | Aventura |\n| Dash | Competir en carreras | Lápiz táctil | Breve |\n| Link! | Encadenar Pokémon iguales | Botones o táctil | Breve |\n| Conquest | Mover unidades y conquistar territorios | Botones | Estratégica |"
+    },
+    {
+      "page": 81,
+      "heading": "Pokémon Ranger",
+      "title": "Capturar mediante trazos",
+      "markdown": "**Título:** Capturar mediante trazos\n\nEn Pokémon Ranger no se utilizan Poké Balls. El Capturador registra la amistad de un Pokémon al rodearlo con el lápiz táctil. Mantén un trazo continuo, evita los ataques y levanta el lápiz si necesitas esperar una apertura.\n\nLos Pokémon ayudan mediante Poké-Ayudas y movimientos de campo. Consulta la minificha en la página 145."
+    },
+    {
+      "page": 82,
+      "heading": "Pokémon Dash",
+      "title": "Una carrera bajo el lápiz",
+      "markdown": "**Título:** Una carrera bajo el lápiz\n\nDesliza el lápiz por la pantalla para dirigir a Pikachu a través de tierra, agua y aire. Los trazos cortos y controlados suelen ser más precisos que mover la mano con fuerza.\n\nEl objetivo es alcanzar los puntos de control y cruzar la meta antes que los rivales. Consulta la página 147."
+    },
+    {
+      "page": 83,
+      "heading": "Pokémon Link!",
+      "title": "Pensar en cadenas",
+      "markdown": "**Título:** Pensar en cadenas\n\nPrimero enlaza cuatro Pokémon iguales para activar **Link Chance**. Durante ese breve estado podrás crear enlaces de tres y, después, de dos para mantener la cadena. Las nuevas fichas caen y pueden provocar reacciones consecutivas.\n\nObserva todo el tablero antes de mover: una combinación pequeña puede preparar una cadena mayor. Consulta la página 149."
+    },
+    {
+      "page": 84,
+      "heading": "Pokémon Conquest",
+      "title": "Pokémon sobre un tablero táctico",
+      "markdown": "**Título:** Pokémon sobre un tablero táctico\n\nLos Guerreros y sus Pokémon combaten en mapas divididos en casillas. Cada turno permite moverse, atacar o utilizar una acción. La posición, el alcance y el terreno son tan importantes como la potencia.\n\nEl objetivo general es conquistar reinos y fortalecer vínculos. Consulta la página 151."
+    },
+    {
+      "page": 85,
+      "heading": "Controles esenciales",
+      "title": null,
+      "markdown": "**Ranger:** trazar, retirar el lápiz, elegir Poké-Ayuda.  \n**Dash:** deslizar, cambiar de superficie, seguir puntos de control.  \n**Link!:** mover filas o columnas, confirmar, pausar.  \n**Conquest:** seleccionar unidad, comprobar alcance, mover y confirmar acción.\n\n**Nota:** estas funciones se explican solo hasta el punto necesario para empezar; el resto se aprende en los tutoriales de cada juego."
+    },
+    {
+      "page": 86,
+      "heading": "Recursos complementarios",
+      "title": null,
+      "markdown": "- Ranger · R-05 Técnica de captura.\n- Conquest · R-06 Recordatorio táctico.\n- Dash · guía breve de controles y circuitos.\n- Link! · explicación de combos y cadenas.\n\nEstos recursos aparecen también al final de sus minifichas para no interrumpir el recorrido principal del manual.\n\n---\n\n## Páginas 87–128 · Fichas de la saga principal\n\nCada juego recibe una presentación inspirada en los manuales oficiales: aventura, Pokémon iniciales, rival, Medallas, funciones propias y primeros pasos. Perla, Platino, Negro y Negro 2 ocupan ocho páginas cada uno. HeartGold ocupa diez para presentar por separado las Medallas de Johto y Kanto.\n\n### Plantilla visual obligatoria\n\n- **Iniciales:** tres tarjetas con una zona de imagen grande, nombre, tipo y una explicación de dos líneas.\n- **Rival:** retrato vertical o recorte de cuerpo completo, descripción breve y una caja sobre cómo cambia su Pokémon según la elección del jugador.\n- **Medallas:** cuatro tarjetas por página. Cada tarjeta reserva aproximadamente un tercio para la imagen de la Medalla y muestra Líder, tipo, ciudad y aprendizaje principal.\n- Las imágenes no deben incrustarse en el texto: se dejan marcadores explícitos para colocarlas durante la maquetación.\n\n## Pokémon Perla · Páginas 87–94"
+    },
+    {
+      "page": 87,
+      "heading": "Portadilla",
+      "title": "Pokémon Edición Perla",
+      "markdown": "**Antetítulo:** GENERACIÓN IV · SINNOH  \n**Título:** Pokémon Edición Perla\n\nLa región de Sinnoh está llena de antiguas leyendas, grandes lagos y montañas que dividen el territorio. Tu viaje comienza en Pueblo Hojaverde y pronto te llevará a conocer al Profesor Serbal, completar la Pokédex y desafiar a los Gimnasios.\n\n**Frase de entrada:** Un viaje clásico de descubrimiento, entrenamiento y mitología."
+    },
+    {
+      "page": 88,
+      "heading": "Elige a tu primer Pokémon",
+      "title": "Tres compañeros para comenzar",
+      "markdown": "**Título:** Tres compañeros para comenzar\n\n**[FOTO GRANDE: TURTWIG]**  \n**Turtwig · Tipo Planta**  \nResistente y paciente. Su evolución desarrolla una gran capacidad defensiva y termina incorporando el tipo Tierra.\n\n**[FOTO GRANDE: CHIMCHAR]**  \n**Chimchar · Tipo Fuego**  \nRápido y ofensivo. Más adelante combina Fuego y Lucha, una pareja muy útil durante gran parte de Sinnoh.\n\n**[FOTO GRANDE: PIPLUP]**  \n**Piplup · Tipo Agua**  \nEquilibrado y fiable. Su evolución final añade el tipo Acero y obtiene numerosas resistencias.\n\n**Consejo:** elige por afinidad. Los tres pueden completar la aventura y tendrás oportunidades de cubrir los tipos restantes."
+    },
+    {
+      "page": 89,
+      "heading": "Tu rival y tus guías",
+      "title": "Crecer al mismo tiempo",
+      "markdown": "**Título:** Crecer al mismo tiempo\n\n**[FOTO VERTICAL: RIVAL / BARRY]**  \n**Tu amigo y rival**  \nEs enérgico, impaciente y siempre parece ir un paso por delante. Su nombre se elige al comenzar la partida. Escogerá el inicial con ventaja de tipo frente al tuyo, por lo que sus combates enseñan a preparar respuestas y no depender de un solo Pokémon.\n\n**[FOTO PEQUEÑA: PROFESOR SERBAL]**  \n**Profesor Serbal**  \nInvestiga la evolución Pokémon y te confía la Pokédex de Sinnoh.\n\n**[FOTO PEQUEÑA: MAYA O LEÓN]**  \n**Ayudante del profesor**  \nTe orienta en los primeros pasos y muestra varias funciones del viaje."
+    },
+    {
+      "page": 90,
+      "heading": "Medallas de Sinnoh I",
+      "title": "Los cuatro primeros Gimnasios",
+      "markdown": "**Título:** Los cuatro primeros Gimnasios\n\n**[FOTO MEDALLA] Medalla Lignito**  \nRoco · Roca · Ciudad Pirita. Primer examen de tipos, curación y preparación antes de un combate importante.\n\n**[FOTO MEDALLA] Medalla Bosque**  \nGardenia · Planta · Ciudad Vetusta. Enseña a aprovechar Fuego, Volador, Bicho o Hielo y a responder a movimientos de estado.\n\n**[FOTO MEDALLA] Medalla Adoquín**  \nBrega · Lucha · Ciudad Rocavelo. Sus ataques físicos castigan equipos frágiles; Volador y Psíquico ofrecen ventaja.\n\n**[FOTO MEDALLA] Medalla Ciénaga**  \nMananti · Agua · Ciudad Pradera. Obliga a combinar Planta o Eléctrico con una respuesta para sus coberturas."
+    },
+    {
+      "page": 91,
+      "heading": "Medallas de Sinnoh II",
+      "title": "El camino hacia la Liga",
+      "markdown": "**Título:** El camino hacia la Liga\n\n**[FOTO MEDALLA] Medalla Reliquia**  \nFantina · Fantasma · Ciudad Corazón. Introduce inmunidades y exige utilizar Siniestro, Fantasma u opciones que sí puedan alcanzar al rival.\n\n**[FOTO MEDALLA] Medalla Mina**  \nAcerón · Acero · Ciudad Canal. El tipo Acero resiste muchos ataques; Fuego, Lucha y Tierra son las respuestas más directas.\n\n**[FOTO MEDALLA] Medalla Carámbano**  \nInverna · Hielo · Ciudad Puntaneva. Premia un equipo capaz de golpear con Fuego, Lucha, Roca o Acero.\n\n**[FOTO MEDALLA] Medalla Faro**  \nLectro · Eléctrico · Ciudad Marina. Tierra es esencial, pero sus movimientos de cobertura impiden confiarse."
+    },
+    {
+      "page": 92,
+      "heading": "Lo propio de Pokémon Perla",
+      "title": "Una región para explorar con calma",
+      "markdown": "**Título:** Una región para explorar con calma\n\n- **Poké-reloj:** aplicaciones útiles en la pantalla táctil.\n- **Subsuelo:** excavación, tesoros y bases secretas.\n- **Superconcursos:** pruebas de apariencia, danza y actuación.\n- **Día y noche:** algunos encuentros cambian con la hora.\n- **Palkia:** Pokémon legendario estrechamente ligado a esta edición.\n\n**[ESPACIO PARA CAPTURA: POKÉ-RELOJ O SUBSUELO]**\n\nUtiliza las Máquinas Ocultas para superar obstáculos y revisa el equipo antes de una cueva o ruta larga."
+    },
+    {
+      "page": 93,
+      "heading": "Tu primera hora",
+      "title": "Primeros pasos en Sinnoh",
+      "markdown": "**Título:** Primeros pasos en Sinnoh\n\n1. Elige a Turtwig, Chimchar o Piplup.\n2. Visita al Profesor Serbal y recibe la Pokédex.\n3. Compra o recibe Poké Balls antes de buscar nuevos compañeros.\n4. Captura dos o tres tipos diferentes.\n5. Aprende a utilizar el Poké-reloj.\n6. Prepara el equipo para el primer Gimnasio.\n\n**Consejo:** Chimchar facilita algunos enfrentamientos tempranos, pero cualquiera de los tres iniciales puede completar la aventura."
+    },
+    {
+      "page": 94,
+      "heading": "Antes de continuar",
+      "title": "Qué conviene recordar",
+      "markdown": "**Título:** Qué conviene recordar\n\n- Habla con los habitantes: muchas funciones se obtienen mediante personajes secundarios.\n- Revisa los movimientos necesarios para atravesar rutas y cuevas.\n- Lleva Repelentes y Cuerdas Huida en exploraciones largas.\n- Consulta R-01 cuando un Líder utilice un tipo que no conozcas.\n\n**Recursos:** Pokédex de Sinnoh · tabla de tipos · mapa de rutas · guía del Subsuelo.  \n**Aviso:** cualquier guía de la Columna Lanza puede revelar momentos centrales de la historia.\n\n## Pokémon Platino · Páginas 95–102"
+    },
+    {
+      "page": 95,
+      "heading": "Portadilla",
+      "title": "Pokémon Edición Platino",
+      "markdown": "**Antetítulo:** GENERACIÓN IV · SINNOH  \n**Título:** Pokémon Edición Platino\n\nSinnoh vuelve con cambios en sus rutas, su clima y su historia. El Equipo Galaxia continúa buscando un poder capaz de transformar el mundo, mientras la presencia de Giratina conduce la aventura hacia un lugar donde las reglas habituales dejan de funcionar.\n\n**Frase de entrada:** La versión más amplia y misteriosa del viaje por Sinnoh."
+    },
+    {
+      "page": 96,
+      "heading": "Elige a tu primer Pokémon",
+      "title": "El compañero que recorrerá Sinnoh contigo",
+      "markdown": "**Título:** El compañero que recorrerá Sinnoh contigo\n\n**[FOTO GRANDE: TURTWIG]**  \n**Turtwig · Tipo Planta**  \nUna opción resistente que crece hacia funciones defensivas. Su evolución final combina Planta y Tierra.\n\n**[FOTO GRANDE: CHIMCHAR]**  \n**Chimchar · Tipo Fuego**  \nVeloz y ofensivo. Al evolucionar añade el tipo Lucha y ofrece una cobertura muy útil en Sinnoh.\n\n**[FOTO GRANDE: PIPLUP]**  \n**Piplup · Tipo Agua**  \nEquilibrado durante el comienzo. Su evolución final combina Agua y Acero, con numerosas resistencias.\n\n**Caja visual:** no existe una elección «canónica». El mejor inicial es el que quieras conservar en tu equipo."
+    },
+    {
+      "page": 97,
+      "heading": "Tu rival y los nuevos personajes",
+      "title": "Una carrera por toda Sinnoh",
+      "markdown": "**Título:** Una carrera por toda Sinnoh\n\n**[FOTO VERTICAL: RIVAL / BARRY]**  \n**Tu vecino y rival**  \nImpulsivo, competitivo y siempre con prisa. Escoge el inicial con ventaja frente al tuyo. Sus equipos cambian a medida que avanza la aventura y sirven para comprobar si el tuyo está realmente equilibrado.\n\n**[FOTO PEQUEÑA: PROFESOR SERBAL]**  \nTe entrega la Pokédex y estudia la evolución Pokémon.\n\n**[FOTO PEQUEÑA: HANDSOME]**  \n**Handsome** investiga las actividades del Equipo Galaxia y aparece en distintos puntos del viaje."
+    },
+    {
+      "page": 98,
+      "heading": "Medallas de Sinnoh I",
+      "title": "De Pirita a Rocavelo",
+      "markdown": "**Título:** De Pirita a Rocavelo\n\n**[FOTO MEDALLA] Medalla Lignito**  \nRoco · Roca · Ciudad Pirita. Enseña a preparar una ventaja de tipo antes de entrar en un Gimnasio.\n\n**[FOTO MEDALLA] Medalla Bosque**  \nGardenia · Planta · Ciudad Vetusta. Premia Fuego, Volador, Bicho o Hielo y el control de los estados.\n\n**[FOTO MEDALLA] Medalla Reliquia**  \nFantina · Fantasma · Ciudad Corazón. En Platino es el tercer desafío y presenta inmunidades que pueden desconcertar a un principiante.\n\n**[FOTO MEDALLA] Medalla Adoquín**  \nBrega · Lucha · Ciudad Rocavelo. Sus atacantes físicos exigen resistencia y una buena respuesta Volador o Psíquico."
+    },
+    {
+      "page": 99,
+      "heading": "Medallas de Sinnoh II",
+      "title": "Cuatro pruebas antes de la Liga",
+      "markdown": "**Título:** Cuatro pruebas antes de la Liga\n\n**[FOTO MEDALLA] Medalla Ciénaga**  \nMananti · Agua · Ciudad Pradera. Combina resistencia con movimientos variados; no dependas de una única respuesta.\n\n**[FOTO MEDALLA] Medalla Mina**  \nAcerón · Acero · Ciudad Canal. Sus numerosas resistencias convierten Fuego, Lucha y Tierra en aliados esenciales.\n\n**[FOTO MEDALLA] Medalla Carámbano**  \nInverna · Hielo · Ciudad Puntaneva. Fuego, Lucha, Roca y Acero permiten romper su ofensiva helada.\n\n**[FOTO MEDALLA] Medalla Faro**  \nLectro · Eléctrico · Ciudad Marina. Tierra ofrece inmunidad, pero conviene vigilar los movimientos de cobertura."
+    },
+    {
+      "page": 100,
+      "heading": "Lo propio de Pokémon Platino",
+      "title": "Una historia alterada",
+      "markdown": "**Título:** Una historia alterada\n\n- Pokédex regional ampliada y mayor variedad de equipos.\n- Giratina y el Mundo Distorsión como centro de la historia.\n- Nuevas formas para determinados Pokémon.\n- Cambios visuales y climatológicos en varias zonas.\n- Frente Batalla como gran desafío posterior a la Liga.\n\n**[ESPACIO PARA CAPTURA: MUNDO DISTORSIÓN]**\n\n**Sin spoilers:** explora esta zona despacio. La perspectiva y el recorrido forman parte de la experiencia."
+    },
+    {
+      "page": 101,
+      "heading": "Tu primera hora",
+      "title": "Primeros pasos en Platino",
+      "markdown": "**Título:** Primeros pasos en Platino\n\n1. Elige a Turtwig, Chimchar o Piplup.\n2. Recibe la Pokédex y aprende el recorrido entre pueblos.\n3. Captura compañeros con funciones distintas.\n4. Revisa los nuevos encuentros disponibles frente a Perla.\n5. Familiarízate con el Poké-reloj.\n6. Guarda antes de entrar en zonas largas o desconocidas.\n\n**Consejo:** permite que varios miembros combatan desde el principio; la variedad de Sinnoh recompensa un equipo flexible."
+    },
+    {
+      "page": 102,
+      "heading": "Antes de continuar",
+      "title": "Qué conviene recordar",
+      "markdown": "**Título:** Qué conviene recordar\n\n- Lleva curación y movimientos variados antes de enfrentarte al Equipo Galaxia.\n- No necesitas comprender el Frente Batalla para terminar la historia.\n- Algunas formas y apariciones dependen del lugar o de condiciones concretas.\n- Guarda antes de encuentros únicos.\n\n**Recursos:** Pokédex ampliada · mapa de Sinnoh · guía de formas · introducción al Frente Batalla.  \n**Aviso:** evita consultar el Mundo Distorsión antes de llegar si quieres conservar la sorpresa.\n\n## Pokémon Oro HeartGold · Páginas 103–112"
+    },
+    {
+      "page": 103,
+      "heading": "Portadilla",
+      "title": "Pokémon Edición Oro HeartGold",
+      "markdown": "**Antetítulo:** GENERACIÓN IV · JOHTO  \n**Título:** Pokémon Edición Oro HeartGold\n\nTu aventura comienza en Pueblo Primavera, en la región de Johto. Recibirás un Pokémon del Profesor Elm, investigarás un hallazgo inesperado y emprenderás un viaje por Gimnasios, bosques, torres y ciudades unidas por antiguas tradiciones.\n\n**Frase de entrada:** Dos regiones y un compañero que camina a tu lado."
+    },
+    {
+      "page": 104,
+      "heading": "Elige a tu primer Pokémon",
+      "title": "Tu compañero de Johto",
+      "markdown": "**Título:** Tu compañero de Johto\n\n**[FOTO GRANDE: CHIKORITA]**  \n**Chikorita · Tipo Planta**  \nResistente y orientada al apoyo. Sus primeros Gimnasios pueden ser exigentes, pero aprende herramientas defensivas muy valiosas.\n\n**[FOTO GRANDE: CYNDAQUIL]**  \n**Cyndaquil · Tipo Fuego**  \nRápido y ofensivo. Resulta sencillo de comprender y obtiene buenas ventajas durante la primera parte de Johto.\n\n**[FOTO GRANDE: TOTODILE]**  \n**Totodile · Tipo Agua**  \nFuerte físicamente y muy fiable. Aprende ataques variados y encaja con facilidad en equipos diferentes.\n\n**Consejo:** en HeartGold tu primer Pokémon caminará detrás de ti. Habla con él para ver cómo reacciona a cada lugar."
+    },
+    {
+      "page": 105,
+      "heading": "Tu rival",
+      "title": "El misterioso chico pelirrojo",
+      "markdown": "**Título:** El misterioso chico pelirrojo\n\n**[FOTO VERTICAL: SILVER / RIVAL]**  \nObserva desde fuera el laboratorio del Profesor Elm y pronto se cruza en tu camino. Su nombre se elige durante la partida; habitualmente se le conoce como Silver.\n\nEscoge —o, más exactamente, se apropia de— el Pokémon inicial con ventaja frente al tuyo. Al principio considera a los Pokémon simples herramientas, pero su relación con el equipo evoluciona a lo largo de la historia.\n\n**[FOTO PEQUEÑA: PROFESOR ELM]**  \n**Profesor Elm:** investiga la crianza y los Huevos Pokémon y te entrega tu primer compañero."
+    },
+    {
+      "page": 106,
+      "heading": "Medallas de Johto I",
+      "title": "Los primeros pasos por Johto",
+      "markdown": "**Título:** Los primeros pasos por Johto\n\n**[FOTO MEDALLA] Medalla Céfiro**  \nPegaso · Volador · Ciudad Malva. Enseña a responder a Pokémon veloces y ataques desde el aire.\n\n**[FOTO MEDALLA] Medalla Colmena**  \nAntón · Bicho · Pueblo Azalea. Fuego, Volador y Roca ayudan a detener un equipo rápido y ofensivo.\n\n**[FOTO MEDALLA] Medalla Planicie**  \nBlanca · Normal · Ciudad Trigal. Su aparente sencillez es engañosa: exige resistencia, estados y una respuesta al tipo Normal.\n\n**[FOTO MEDALLA] Medalla Niebla**  \nMorti · Fantasma · Ciudad Iris. Introduce inmunidades y movimientos que alteran el estado o dificultan el cambio."
+    },
+    {
+      "page": 107,
+      "heading": "Medallas de Johto II",
+      "title": "Del mar a la guarida del dragón",
+      "markdown": "**Título:** Del mar a la guarida del dragón\n\n**[FOTO MEDALLA] Medalla Tormenta**  \nAníbal · Lucha · Ciudad Orquídea. Volador y Psíquico ofrecen ventaja frente a sus potentes ataques físicos.\n\n**[FOTO MEDALLA] Medalla Mineral**  \nYasmina · Acero · Ciudad Olivo. Fuego, Lucha y Tierra son claves contra las numerosas resistencias del Acero.\n\n**[FOTO MEDALLA] Medalla Glaciar**  \nFredo · Hielo · Pueblo Caoba. Premia el uso de Fuego, Lucha, Roca y Acero, además de una buena preparación contra estados.\n\n**[FOTO MEDALLA] Medalla Dragón**  \nDébora · Dragón · Ciudad Endrino. Es la prueba final de Johto y exige un equipo equilibrado, resistente y bien entrenado."
+    },
+    {
+      "page": 108,
+      "heading": "Medallas de Kanto I",
+      "title": "La aventura continúa tras la Liga",
+      "markdown": "**Título:** La aventura continúa tras la Liga\n\n**[FOTO MEDALLA] Medalla Roca**  \nBrock · Roca · Ciudad Plateada. Agua, Planta, Lucha, Tierra y Acero permiten superar sus defensas.\n\n**[FOTO MEDALLA] Medalla Cascada**  \nMisty · Agua · Ciudad Celeste. Planta y Eléctrico son buenas respuestas, pero conviene prever coberturas.\n\n**[FOTO MEDALLA] Medalla Trueno**  \nTeniente Surge · Eléctrico · Ciudad Carmín. El tipo Tierra ayuda tanto por su ventaja como por su inmunidad.\n\n**[FOTO MEDALLA] Medalla Arcoíris**  \nErika · Planta · Ciudad Azulona. Fuego, Hielo, Veneno, Volador y Bicho ofrecen múltiples caminos."
+    },
+    {
+      "page": 109,
+      "heading": "Medallas de Kanto II",
+      "title": "Los últimos cuatro símbolos",
+      "markdown": "**Título:** Los últimos cuatro símbolos\n\n**[FOTO MEDALLA] Medalla Alma**  \nSachiko · Veneno · Ciudad Fucsia. Tierra y Psíquico ayudan, pero sus estados y tácticas evasivas pueden alargar el combate.\n\n**[FOTO MEDALLA] Medalla Pantano**  \nSabrina · Psíquico · Ciudad Azafrán. Bicho, Fantasma y Siniestro deben emplearse con cuidado frente a su gran poder especial.\n\n**[FOTO MEDALLA] Medalla Volcán**  \nBlaine · Fuego · Islas Espuma. Agua, Tierra y Roca apagan su ofensiva, aunque sus ataques pueden causar quemaduras.\n\n**[FOTO MEDALLA] Medalla Tierra**  \nAzul · Varios tipos · Ciudad Verde. No se especializa en un único tipo: funciona como examen general del equipo construido durante todo el viaje.\n\n**Nota:** en Kanto varios Gimnasios pueden abordarse con mayor libertad que en Johto."
+    },
+    {
+      "page": 110,
+      "heading": "Lo propio de HeartGold",
+      "title": "Un mundo que acompaña al reloj",
+      "markdown": "**Título:** Un mundo que acompaña al reloj\n\n- El primer Pokémon del equipo camina detrás de ti.\n- El Pokégear reúne mapa, teléfono y radio.\n- Día y noche modifican encuentros y acontecimientos.\n- Los Bonguri se convierten en Poké Balls especiales.\n- Kanto amplía el viaje después de la Liga.\n- El Pokéwalker añade actividades si dispones del accesorio y de un cartucho original compatible con su conexión por infrarrojos; no funciona mediante una R4 convencional.\n\n**[ESPACIO PARA CAPTURA: POKÉGEAR O POKÉMON ACOMPAÑANTE]**"
+    },
+    {
+      "page": 111,
+      "heading": "Tu primera hora",
+      "title": "Primeros pasos en Johto",
+      "markdown": "**Título:** Primeros pasos en Johto\n\n1. Elige a Chikorita, Cyndaquil o Totodile.\n2. Completa el primer encargo del Profesor Elm.\n3. Recibe la Pokédex y regresa cuando la historia lo indique.\n4. Captura compañeros para cubrir los tipos que te falten.\n5. Aprende a utilizar mapa y teléfono.\n6. Visita las casas y rutas opcionales antes del primer Gimnasio.\n\n**Consejo:** el nivel de los rivales puede variar mucho entre zonas; reparte experiencia con regularidad."
+    },
+    {
+      "page": 112,
+      "heading": "Antes de continuar",
+      "title": "Qué conviene recordar",
+      "markdown": "**Título:** Qué conviene recordar\n\n- Algunos Pokémon aparecen solo a determinadas horas.\n- Guarda Bonguri y prueba diferentes Poké Balls.\n- Las llamadas pueden abrir revanchas y pequeños acontecimientos.\n- La Liga no es el final: reserva ganas de explorar Kanto.\n\n**Recursos:** Pokédex de Johto · encuentros por horario · mapa de ambas regiones · Bonguri y Balls.  \n**Aviso:** las guías de Kanto suelen revelar el contenido posterior a la Liga.\n\n## Pokémon Negro · Páginas 113–120"
+    },
+    {
+      "page": 113,
+      "heading": "Portadilla",
+      "title": "Pokémon Edición Negra",
+      "markdown": "**Antetítulo:** GENERACIÓN V · TESELIA  \n**Título:** Pokémon Edición Negra\n\nTeselia es una región extensa y urbana, habitada inicialmente por Pokémon diferentes a los conocidos en regiones anteriores. Tu viaje comienza junto a Cheren y Bel, dos amigos que crecerán contigo y se plantearán qué significa ser Entrenador.\n\n**Frase de entrada:** Una nueva generación con una historia especialmente presente."
+    },
+    {
+      "page": 114,
+      "heading": "Elige a tu primer Pokémon",
+      "title": "Tres nuevas especies de Teselia",
+      "markdown": "**Título:** Tres nuevas especies de Teselia\n\n**[FOTO GRANDE: SNIVY]**  \n**Snivy · Tipo Planta**  \nVeloz y técnico. Sus movimientos permiten controlar el combate y su línea evolutiva mantiene el tipo Planta.\n\n**[FOTO GRANDE: TEPIG]**  \n**Tepig · Tipo Fuego**  \nOfensivo y resistente. Al evolucionar incorpora el tipo Lucha y destaca por su fuerza física.\n\n**[FOTO GRANDE: OSHAWOTT]**  \n**Oshawott · Tipo Agua**  \nEquilibrado y flexible. Aprende opciones físicas y especiales y resulta fácil de integrar en distintos equipos.\n\n**Consejo:** la Pokédex de Teselia presenta especies nuevas durante la historia. Elegir sin conocer sus evoluciones forma parte del descubrimiento."
+    },
+    {
+      "page": 115,
+      "heading": "Tus amigos y rivales",
+      "title": "Tres formas de entender a los Pokémon",
+      "markdown": "**Título:** Tres formas de entender a los Pokémon\n\n**[FOTO VERTICAL: CHEREN]**  \n**Cheren** busca hacerse más fuerte y elige el inicial con ventaja frente al tuyo. Sus combates ponen a prueba la construcción del equipo.\n\n**[FOTO VERTICAL: BEL]**  \n**Bel** elige el inicial débil frente al tuyo. Su viaje trata de descubrir qué quiere hacer y cómo relacionarse con sus Pokémon.\n\n**[FOTO VERTICAL: N]**  \n**N** es un rival ideológico vinculado al Equipo Plasma. Utiliza Pokémon distintos según el lugar y cuestiona la relación entre humanos y Pokémon."
+    },
+    {
+      "page": 116,
+      "heading": "Medallas de Teselia I",
+      "title": "Los primeros cuatro desafíos",
+      "markdown": "**Título:** Los primeros cuatro desafíos\n\n**[FOTO MEDALLA] Medalla Trío**  \nMillo, Zeo o Maíz · Planta, Fuego o Agua · Ciudad Gres. Te enfrentarás al tipo con ventaja frente a tu inicial: es una lección directa sobre afinidades.\n\n**[FOTO MEDALLA] Medalla Base**  \nAloe · Normal · Ciudad Esmalte. Sus Pokémon golpean con fuerza y demuestran que un tipo sin muchas ventajas también puede ser peligroso.\n\n**[FOTO MEDALLA] Medalla Élitro**  \nCamus · Bicho · Ciudad Porcelana. Fuego, Volador y Roca ayudan, pero algunos dobles tipos cubren las debilidades habituales.\n\n**[FOTO MEDALLA] Medalla Voltio**  \nCamila · Eléctrico · Ciudad Mayólica. La Velocidad y los cambios frecuentes exigen algo más que llevar un Pokémon de tipo Tierra."
+    },
+    {
+      "page": 117,
+      "heading": "Medallas de Teselia II",
+      "title": "De Fayenza a Ciudad Caolín",
+      "markdown": "**Título:** De Fayenza a Ciudad Caolín\n\n**[FOTO MEDALLA] Medalla Temblor**  \nYakón · Tierra · Ciudad Fayenza. Agua, Planta y Hielo ofrecen ventaja; evita depender de ataques Eléctricos.\n\n**[FOTO MEDALLA] Medalla Jet**  \nGerania · Volador · Ciudad Loza. Eléctrico, Hielo y Roca son buenas respuestas frente a rivales rápidos.\n\n**[FOTO MEDALLA] Medalla Candelizo**  \nJunco · Hielo · Ciudad Teja. Fuego, Lucha, Roca y Acero permiten presionar a su equipo antes de que controle el combate.\n\n**[FOTO MEDALLA] Medalla Leyenda**  \nLirio · Dragón · Ciudad Caolín. Hielo y Dragón son las respuestas principales de esta generación, pero necesitarás resistencia y buena cobertura."
+    },
+    {
+      "page": 118,
+      "heading": "Lo propio de Pokémon Negro",
+      "title": "Teselia cambia con el tiempo",
+      "markdown": "**Título:** Teselia cambia con el tiempo\n\n- Pokédex regional formada por especies nuevas durante la historia.\n- Estaciones que cambian cada mes dentro del juego.\n- Combates Triples y Rotatorios.\n- C-Gear para funciones de comunicación.\n- Grandes ciudades, puentes y escenarios de mayor escala.\n- Ciudad Negra como ubicación de esta edición.\n\n**[ESPACIO PARA CAPTURA: C-GEAR O ESTACIÓN]**\n\nEn Combates Triples importa la posición; en Rotatorios, qué Pokémon se encuentra al frente."
+    },
+    {
+      "page": 119,
+      "heading": "Tu primera hora",
+      "title": "Primeros pasos en Teselia",
+      "markdown": "**Título:** Primeros pasos en Teselia\n\n1. Elige a Snivy, Tepig u Oshawott.\n2. Combate con Cheren y Bel para aprender lo básico.\n3. Recibe la Pokédex y visita el primer Centro Pokémon.\n4. Captura especies de tipos diferentes.\n5. Ajusta velocidad del texto y estilo de combate en Opciones.\n6. Escucha las explicaciones sobre el Equipo Plasma sin consultar guías externas.\n\n**Consejo:** al ser especies nuevas, utiliza la Pokédex y los mensajes de eficacia para aprender sus tipos."
+    },
+    {
+      "page": 120,
+      "heading": "Antes de continuar",
+      "title": "Qué conviene recordar",
+      "markdown": "**Título:** Qué conviene recordar\n\n- Experimenta: no necesitas conocer previamente a los Pokémon de Teselia.\n- Revisa la estación cuando explores zonas opcionales.\n- Aprende la colocación antes de un Combate Triple.\n- Guarda antes de acontecimientos importantes o encuentros únicos.\n\n**Recursos:** Pokédex de Teselia · tipos y evoluciones · calendario de estaciones · guía de combates múltiples.  \n**Aviso:** la historia de N y la Liga merece descubrirse sin walkthrough.\n\n## Pokémon Negro 2 · Páginas 121–128"
+    },
+    {
+      "page": 121,
+      "heading": "Portadilla",
+      "title": "Pokémon Edición Negra 2",
+      "markdown": "**Antetítulo:** GENERACIÓN V · TESELIA  \n**Título:** Pokémon Edición Negra 2\n\nHan pasado dos años desde los acontecimientos de Pokémon Negro. Teselia ha cambiado: aparecen nuevas ciudades, rutas transformadas y Pokémon de otras regiones desde el comienzo. Un nuevo Entrenador parte desde Ciudad Engobe para descubrir qué está ocurriendo.\n\n**Frase de entrada:** Una continuación más abierta, variada y llena de actividades."
+    },
+    {
+      "page": 122,
+      "heading": "Elige a tu primer Pokémon",
+      "title": "Un nuevo comienzo en Teselia",
+      "markdown": "**Título:** Un nuevo comienzo en Teselia\n\n**[FOTO GRANDE: SNIVY]**  \n**Snivy · Tipo Planta**  \nRápido y técnico. Destaca cuando se aprovechan sus movimientos de apoyo y control.\n\n**[FOTO GRANDE: TEPIG]**  \n**Tepig · Tipo Fuego**  \nPotente y resistente. Su evolución añade el tipo Lucha y refuerza su ofensiva física.\n\n**[FOTO GRANDE: OSHAWOTT]**  \n**Oshawott · Tipo Agua**  \nEquilibrado y versátil. Aprende movimientos variados y funciona bien en equipos muy distintos.\n\n**Nota:** Bel te entrega el Pokémon en nombre de la Profesora Encina. Desde las primeras rutas encontrarás especies de otras generaciones para acompañarlo."
+    },
+    {
+      "page": 123,
+      "heading": "Tu rival",
+      "title": "Matís, una búsqueda personal",
+      "markdown": "**Título:** Matís, una búsqueda personal\n\n**[FOTO VERTICAL: MATÍS]**  \nMatís es tu vecino y amigo de la infancia. Ya posee el inicial con ventaja frente al tuyo y combate con gran intensidad.\n\nSu enfrentamiento con el Equipo Plasma tiene una razón personal: años atrás robaron el Purrloin de su hermana. Esa búsqueda explica su impaciencia y lo convierte en algo más que un rival competitivo.\n\n**[FOTO PEQUEÑA: BEL]**  \nBel actúa como ayudante de la Profesora Encina y te entrega el inicial y la Pokédex.\n\n**[FOTO PEQUEÑA: CHEREN]**  \nCheren ha encontrado un nuevo papel en Teselia y será parte de tu recorrido desde el primer Gimnasio."
+    },
+    {
+      "page": 124,
+      "heading": "Medallas de Teselia I",
+      "title": "Una nueva ruta de Gimnasios",
+      "markdown": "**Título:** Una nueva ruta de Gimnasios\n\n**[FOTO MEDALLA] Medalla Base**  \nCheren · Normal · Ciudad Engobe. Un primer combate sin grandes ventajas de tipo: céntrate en nivel, estado y decisiones sencillas.\n\n**[FOTO MEDALLA] Medalla Ponzoña**  \nHiedra · Veneno · Ciudad Hormigón. Tierra y Psíquico ayudan; lleva curación para el envenenamiento.\n\n**[FOTO MEDALLA] Medalla Élitro**  \nCamus · Bicho · Ciudad Porcelana. Fuego, Volador y Roca son útiles, aunque los dobles tipos cambian algunas relaciones.\n\n**[FOTO MEDALLA] Medalla Voltio**  \nCamila · Eléctrico · Ciudad Mayólica. Los cambios y la Velocidad obligan a preparar algo más que un único Pokémon de Tierra."
+    },
+    {
+      "page": 125,
+      "heading": "Medallas de Teselia II",
+      "title": "Los cuatro desafíos finales",
+      "markdown": "**Título:** Los cuatro desafíos finales\n\n**[FOTO MEDALLA] Medalla Temblor**  \nYakón · Tierra · Ciudad Fayenza. Agua, Planta y Hielo son eficaces; los ataques Eléctricos no causan daño.\n\n**[FOTO MEDALLA] Medalla Jet**  \nGerania · Volador · Ciudad Loza. Eléctrico, Hielo y Roca permiten responder a un equipo rápido y móvil.\n\n**[FOTO MEDALLA] Medalla Leyenda**  \nLirio · Dragón · Ciudad Caolín. Hielo y Dragón son las respuestas principales, pero la resistencia será igual de importante.\n\n**[FOTO MEDALLA] Medalla Ola**  \nCiprián · Agua · Ciudad Marga. El último Gimnasio exige una respuesta sólida a Agua y a sus posibles tipos secundarios."
+    },
+    {
+      "page": 126,
+      "heading": "Lo propio de Pokémon Negro 2",
+      "title": "Mucho que hacer fuera de la ruta principal",
+      "markdown": "**Título:** Mucho que hacer fuera de la ruta principal\n\n- Pokédex regional con especies de varias generaciones.\n- Lista de Hábitats para comprobar capturas por zona.\n- Pokémon World Tournament.\n- Pokéwood y sus rodajes cinematográficos.\n- Galería Unión y sus tiendas.\n- Nuevas ciudades, rutas y Gimnasios.\n\n**[ESPACIO PARA CAPTURA: LISTA DE HÁBITATS O PWT]**\n\nLa Lista de Hábitats permite explorar con menos ayuda externa y comprobar qué especies quedan por encontrar."
+    },
+    {
+      "page": 127,
+      "heading": "Tu primera hora",
+      "title": "Primeros pasos en la nueva Teselia",
+      "markdown": "**Título:** Primeros pasos en la nueva Teselia\n\n1. Elige a Snivy, Tepig u Oshawott.\n2. Aprende a utilizar la Lista de Hábitats.\n3. Captura un equipo variado: hay más tipos disponibles desde el principio.\n4. Visita cada nueva instalación al menos una vez.\n5. Revisa los cambios de rutas respecto a Pokémon Negro.\n6. Mantén varios integrantes a un nivel semejante.\n\n**Consejo:** la gran variedad puede distraer; cambia el equipo con intención, no después de cada captura."
+    },
+    {
+      "page": 128,
+      "heading": "Antes de continuar",
+      "title": "Qué conviene recordar",
+      "markdown": "**Título:** Qué conviene recordar\n\n- La secuela recompensa la curiosidad y el regreso a zonas antiguas.\n- La Lista de Hábitats evita depender tanto de una Pokédex externa.\n- Algunas actividades opcionales tienen reglas propias; lee sus tutoriales.\n- El contenido posterior a la Liga es especialmente amplio.\n\n**Recursos:** Pokédex regional · Lista de Hábitats · mapa de cambios · introducción al PWT.  \n**Aviso:** las guías sobre el Equipo Plasma pueden revelar conexiones con el primer juego.\n\n---\n\n## Páginas 129–144 · Fichas de Mundo Misterioso\n\n## Pokémon Mundo Misterioso: Equipo de Rescate Azul · Páginas 129–136"
+    },
+    {
+      "page": 129,
+      "heading": "Portadilla",
+      "title": "Equipo de Rescate Azul",
+      "markdown": "**Antetítulo:** MUNDO MISTERIOSO · EQUIPO DE RESCATE  \n**Título:** Equipo de Rescate Azul\n\nAbres los ojos y descubres que te has convertido en Pokémon. No recuerdas tu pasado, pero un nuevo compañero confía en ti. Juntos formaréis un equipo de rescate para ayudar a quienes quedan atrapados en territorios peligrosos.\n\n**Frase de entrada:** Encontrar tu identidad mientras haces del mundo un lugar más seguro."
+    },
+    {
+      "page": 130,
+      "heading": "¿En qué Pokémon te convertirás? I",
+      "title": "El test de personalidad",
+      "markdown": "**Título:** El test de personalidad\n\nAl comenzar responderás varias preguntas. El juego relaciona tus respuestas y tu sexo con uno de dieciséis posibles protagonistas. El resultado cambia tu especie y tu manera de afrontar las primeras mazmorras, pero cualquiera de ellos puede completar la historia.\n\n**[FOTO: BULBASAUR]** Bulbasaur · Planta/Veneno  \n**[FOTO: CHARMANDER]** Charmander · Fuego  \n**[FOTO: SQUIRTLE]** Squirtle · Agua  \n**[FOTO: PIKACHU]** Pikachu · Eléctrico  \n**[FOTO: MEOWTH]** Meowth · Normal  \n**[FOTO: PSYDUCK]** Psyduck · Agua  \n**[FOTO: MACHOP]** Machop · Lucha  \n**[FOTO: CUBONE]** Cubone · Tierra"
+    },
+    {
+      "page": 131,
+      "heading": "¿En qué Pokémon te convertirás? II",
+      "title": "Ocho posibilidades más",
+      "markdown": "**Título:** Ocho posibilidades más\n\n**[FOTO: EEVEE]** Eevee · Normal  \n**[FOTO: CHIKORITA]** Chikorita · Planta  \n**[FOTO: CYNDAQUIL]** Cyndaquil · Fuego  \n**[FOTO: TOTODILE]** Totodile · Agua  \n**[FOTO: TREECKO]** Treecko · Planta  \n**[FOTO: TORCHIC]** Torchic · Fuego  \n**[FOTO: MUDKIP]** Mudkip · Agua  \n**[FOTO: SKITTY]** Skitty · Normal\n\n**Nota:** el resultado no determina si jugarás mejor o peor. Cada protagonista puede completar la historia; sus tipos y movimientos solo cambian la forma de afrontar las primeras mazmorras."
+    },
+    {
+      "page": 132,
+      "heading": "Elige a tu acompañante",
+      "title": "El primer miembro del equipo",
+      "markdown": "**Título:** El primer miembro del equipo\n\nDespués del test escogerás a tu compañero entre los iniciales de las tres primeras generaciones y Pikachu. No puede compartir tipo con el protagonista.\n\n**[FOTO: BULBASAUR]** Bulbasaur  \n**[FOTO: CHARMANDER]** Charmander  \n**[FOTO: SQUIRTLE]** Squirtle  \n**[FOTO: PIKACHU]** Pikachu  \n**[FOTO: CHIKORITA]** Chikorita  \n**[FOTO: CYNDAQUIL]** Cyndaquil  \n**[FOTO: TOTODILE]** Totodile  \n**[FOTO: TREECKO]** Treecko  \n**[FOTO: TORCHIC]** Torchic  \n**[FOTO: MUDKIP]** Mudkip\n\n**Consejo:** combina tipos diferentes y piensa qué Pokémon quieres ver como interlocutor principal durante toda la historia."
+    },
+    {
+      "page": 133,
+      "heading": "Equipos rivales y referentes",
+      "title": "No todos rescatan por las mismas razones",
+      "markdown": "**Título:** No todos rescatan por las mismas razones\n\n**Equipo Bellaco**\n\n**[FOTO GRANDE: GENGAR]** Gengar · líder  \n**[FOTO: MEDICHAM]** Medicham  \n**[FOTO: EKANS]** Ekans\n\nEl Equipo Bellaco compite por las misiones y sus recompensas. Gengar utiliza rumores y engaños para poner a otros Pokémon en contra del protagonista.\n\n**Equipo de Alakazam**\n\n**[FOTO: ALAKAZAM] [FOTO: CHARIZARD] [FOTO: TYRANITAR]**  \nEs un equipo experimentado y respetado. Más que un rival, representa el nivel al que aspiran los rescatadores principiantes."
+    },
+    {
+      "page": 134,
+      "heading": "Rangos de rescate",
+      "title": "Tu experiencia queda registrada",
+      "markdown": "**Título:** Tu experiencia queda registrada\n\nLas misiones conceden puntos de rescate. Al acumularlos aumenta el rango del equipo.\n\n**[FOTO EMBLEMA] Normal** · rango inicial  \n**[FOTO EMBLEMA] Bronce** · 50 puntos  \n**[FOTO EMBLEMA] Plata** · 500 puntos  \n**[FOTO EMBLEMA] Oro** · 1.500 puntos  \n**[FOTO EMBLEMA] Platino** · 3.000 puntos  \n**[FOTO EMBLEMA] Diamante** · 7.500 puntos  \n**[FOTO EMBLEMA] Lucario** · 15.000 puntos\n\n**Explicación:** el rango muestra la reputación del equipo y recompensa la constancia. Al alcanzar el rango Lucario recibirás una estatua para la base."
+    },
+    {
+      "page": 135,
+      "heading": "La vida del equipo",
+      "title": "De la carta a la recompensa",
+      "markdown": "**Título:** De la carta a la recompensa\n\n1. Lee y acepta peticiones de rescate.\n2. Agrupa misiones del mismo territorio.\n3. Prepara Bolsa, dinero y compañeros.\n4. Explora y cumple los objetivos.\n5. Regresa para recibir recompensas y puntos.\n\nLa Plaza Pokémon es el centro de operaciones. Allí podrás guardar objetos y dinero, enlazar movimientos y preparar a los Pokémon reclutados en sus Zonas de Recreo. Las Gomis desarrollan habilidades CI que modifican su comportamiento.\n\n**[ESPACIO PARA CAPTURA: PLAZA POKÉMON O BASE]**"
+    },
+    {
+      "page": 136,
+      "heading": "Tu primera misión",
+      "title": "Salir preparado",
+      "markdown": "**Título:** Salir preparado\n\n- Lleva una Manzana, una Baya Aranja y un Elixir Máx.\n- Deposita dinero y objetos valiosos.\n- Comprueba movimientos y tácticas.\n- Usa los pasillos para combatir de uno en uno.\n- Conserva recursos si ya has encontrado las escaleras.\n- Regresa a la Plaza después de cada salida.\n\n**Recursos:** R-04 · objetos PMD · Gomis y CI · Zonas de Recreo · reclutamiento.  \n**Aviso:** no consultes la causa de los desastres naturales si quieres descubrir la historia sin spoilers.\n\n## Pokémon Mundo Misterioso: Exploradores de la Oscuridad · Páginas 137–144"
+    },
+    {
+      "page": 137,
+      "heading": "Portadilla",
+      "title": "Exploradores de la Oscuridad",
+      "markdown": "**Antetítulo:** MUNDO MISTERIOSO · EQUIPO DE EXPLORACIÓN  \n**Título:** Exploradores de la Oscuridad\n\nDespiertas convertido en Pokémon y sin recuerdos junto a una playa. Allí conoces a un Pokémon que sueña con ser explorador, pero aún no se atreve a dar el primer paso. Una piedra con un extraño dibujo será el comienzo de vuestra aventura.\n\n**Frase de entrada:** Misterio, amistad y exploración a través del tiempo."
+    },
+    {
+      "page": 138,
+      "heading": "¿En qué Pokémon te convertirás? I",
+      "title": "El test de personalidad",
+      "markdown": "**Título:** El test de personalidad\n\nEl juego propone al protagonista según las respuestas del test inicial. En Exploradores de la Oscuridad hay dieciséis posibilidades, cada una con un tipo y unos movimientos iniciales distintos.\n\n**[FOTO: BULBASAUR]** Bulbasaur · Planta/Veneno  \n**[FOTO: CHARMANDER]** Charmander · Fuego  \n**[FOTO: SQUIRTLE]** Squirtle · Agua  \n**[FOTO: PIKACHU]** Pikachu · Eléctrico  \n**[FOTO: MEOWTH]** Meowth · Normal  \n**[FOTO: CHIKORITA]** Chikorita · Planta  \n**[FOTO: CYNDAQUIL]** Cyndaquil · Fuego  \n**[FOTO: TOTODILE]** Totodile · Agua"
+    },
+    {
+      "page": 139,
+      "heading": "¿En qué Pokémon te convertirás? II",
+      "title": "Completa el equipo protagonista",
+      "markdown": "**Título:** Completa el equipo protagonista\n\n**[FOTO: TREECKO]** Treecko · Planta  \n**[FOTO: TORCHIC]** Torchic · Fuego  \n**[FOTO: MUDKIP]** Mudkip · Agua  \n**[FOTO: SKITTY]** Skitty · Normal  \n**[FOTO: TURTWIG]** Turtwig · Planta  \n**[FOTO: CHIMCHAR]** Chimchar · Fuego  \n**[FOTO: PIPLUP]** Piplup · Agua  \n**[FOTO: MUNCHLAX]** Munchlax · Normal\n\n**Nota:** todos pueden completar la historia. El tipo, los movimientos disponibles y la combinación con el compañero cambian la dificultad de algunas mazmorras."
+    },
+    {
+      "page": 140,
+      "heading": "Elige a tu acompañante",
+      "title": "El Pokémon que creerá en ti",
+      "markdown": "**Título:** El Pokémon que creerá en ti\n\nEl juego muestra siete candidatos elegidos entre trece posibles especies. El compañero no puede compartir tipo con el protagonista y las especies de tipo Normal no forman parte de esta selección. Su aspecto, tipo y movimientos cambian; su carácter esencial dentro de la historia se mantiene.\n\n**[CUADRÍCULA DE 13 FOTOS PEQUEÑAS]**  \nBulbasaur · Charmander · Squirtle · Pikachu · Chikorita · Cyndaquil · Totodile · Treecko · Torchic · Mudkip · Turtwig · Chimchar · Piplup.\n\n**Consejo:** combina dos tipos capaces de cubrirse. También debes elegir una pareja que te guste visualmente: permanecerán juntos durante toda la historia principal."
+    },
+    {
+      "page": 141,
+      "heading": "Rivales y miembros del gremio",
+      "title": "El Equipo Calavera",
+      "markdown": "**Título:** El Equipo Calavera\n\n**[FOTO GRANDE: SKUNTANK]** Skuntank · líder  \n**[FOTO: KOFFING]** Koffing  \n**[FOTO: ZUBAT]** Zubat\n\nEl Equipo Calavera roba tesoros, intimida a equipos principiantes y trata de aprovecharse del trabajo ajeno. Es el rival más directo de las primeras etapas.\n\n**[FOTO PEQUEÑA: WIGGLYTUFF] [FOTO PEQUEÑA: CHATOT]**  \n**Wigglytuff y Chatot** dirigen el Pokégremio. Uno representa el entusiasmo imprevisible del maestro; el otro organiza la disciplina y las tareas diarias."
+    },
+    {
+      "page": 142,
+      "heading": "Rangos de exploración",
+      "title": "De principiantes a maestros",
+      "markdown": "**Título:** De principiantes a maestros\n\nLas misiones conceden puntos y elevan el rango del equipo. Cada ascenso representa mayor experiencia y aumenta la capacidad de la consigna.\n\n**[FOTO EMBLEMA] Normal** · punto de partida  \n**[FOTO EMBLEMA] Bronce** · primeras misiones  \n**[FOTO EMBLEMA] Plata** · equipo en crecimiento  \n**[FOTO EMBLEMA] Oro** · exploradores experimentados  \n**[FOTO EMBLEMA] Diamante** · gran reputación  \n**[FOTO EMBLEMA] Super** · retos avanzados  \n**[FOTO EMBLEMA] Ultra** · expediciones difíciles  \n**[FOTO EMBLEMA] Híper** · dominio experto  \n**[FOTO EMBLEMA] Maestro** · máximo rango de esta edición"
+    },
+    {
+      "page": 143,
+      "heading": "La vida en el Pokégremio",
+      "title": "Misiones, entrenamiento y descubrimientos",
+      "markdown": "**Título:** Misiones, entrenamiento y descubrimientos\n\n1. Consulta los tablones del gremio.\n2. Elige encargos por territorio y dificultad.\n3. Organiza equipo, Bolsa y movimientos.\n4. Explora y cumple los objetivos.\n5. Informa del resultado y recibe puntos.\n\nLas tácticas y habilidades CI controlan el comportamiento de los compañeros. Los objetos exclusivos mejoran especies concretas y los movimientos enlazados ejecutan varias acciones seguidas a cambio de consumir más PP.\n\n**[ESPACIO PARA CAPTURA: POKÉGREMIO O TABLÓN]**"
+    },
+    {
+      "page": 144,
+      "heading": "Tu primera expedición",
+      "title": "Salir del gremio bien preparado",
+      "markdown": "**Título:** Salir del gremio bien preparado\n\n- Acepta las misiones antes de partir.\n- Lleva alimento, curación y recuperación de PP.\n- Comprueba la posición desde la que atacará tu compañero.\n- Guarda objetos raros y dinero.\n- Usa el registro para comprender cada turno.\n- Interrumpe la partida solo mediante la opción indicada.\n\n**Recursos:** R-04 · objetos PMD · tácticas y CI · objetos exclusivos · misiones.  \n**Aviso:** evita buscar información sobre los Engranajes del Tiempo o el origen del protagonista.\n\n---\n\n## Páginas 145–152 · Minifichas de otros juegos\n\n## Pokémon Ranger · Páginas 145–146"
+    },
+    {
+      "page": 145,
+      "heading": "De qué va",
+      "title": "Pokémon Ranger",
+      "markdown": "**Título:** Pokémon Ranger\n\nUn Ranger protege la naturaleza y ayuda a personas y Pokémon. En lugar de capturarlos con Poké Balls, utiliza el Capturador para establecer un vínculo temporal.\n\n**Mecánica principal:** dibuja círculos continuos alrededor del objetivo. Si un ataque toca la línea, el trazo se rompe. Observa el patrón, espera una apertura y prioriza la precisión.\n\n**Sistemas clave:** Poké-Ayudas · movimientos de campo · misiones · compañero Minun o Plusle según el personaje elegido."
+    },
+    {
+      "page": 146,
+      "heading": "Cómo empezar",
+      "title": null,
+      "markdown": "1. Practica con Pokémon tranquilos.\n2. No dibujes más rápido de lo que puedes controlar.\n3. Retira el lápiz para esquivar antes de perder energía, sabiendo que en el Ranger original también se reinicia el progreso de los círculos actuales.\n4. Comprueba el tipo de Poké-Ayuda disponible.\n5. Busca Pokémon con el movimiento de campo necesario.\n\n**Error típico:** intentar encerrar al objetivo sin observar sus ataques.  \n**Recurso:** R-05 · Técnica de captura.  \n**Aviso:** las guías de misiones pueden revelar la identidad de personajes y jefes.\n\n## Pokémon Dash · Páginas 147–148"
+    },
+    {
+      "page": 147,
+      "heading": "De qué va",
+      "title": "Pokémon Dash",
+      "markdown": "**Título:** Pokémon Dash\n\nPikachu compite en carreras divididas en puntos de control. Para avanzar, desliza repetidamente el lápiz táctil en la dirección deseada. El terreno modifica la velocidad y algunos tramos requieren utilizar globos u otros medios.\n\n**Mecánica principal:** mantener ritmo y dirección. Los movimientos pequeños y regulares ofrecen más control que los trazos largos y bruscos."
+    },
+    {
+      "page": 148,
+      "heading": "Cómo empezar",
+      "title": null,
+      "markdown": "1. Sigue el orden de los puntos de control.\n2. Anticipa el siguiente giro antes de llegar.\n3. Adapta la dirección al cambiar de superficie.\n4. Prioriza una trayectoria limpia sobre la velocidad máxima.\n5. Repite un circuito para aprender sus rutas.\n\n**Error típico:** frotar la pantalla con demasiada fuerza.  \n**Recurso:** guía visual de superficies y técnicas.  \n**Nota:** es un juego pensado para sesiones cortas y mejora mediante repetición.\n\n## Pokémon Link! · Páginas 149–150"
+    },
+    {
+      "page": 149,
+      "heading": "De qué va",
+      "title": "Pokémon Link!",
+      "markdown": "**Título:** Pokémon Link!\n\nEl tablero está lleno de fichas Pokémon. Desplaza filas y columnas para enlazar primero cuatro iguales. Eso activa **Link Chance** durante unos instantes: entonces podrás enlazar tres y, después, dos para prolongar la cadena. Al desaparecer, las piezas restantes caen y pueden iniciar nuevas combinaciones.\n\n**Mecánica principal:** preparar cadenas. No observes solo el movimiento inmediato; piensa qué fichas ocuparán el espacio después."
+    },
+    {
+      "page": 150,
+      "heading": "Cómo empezar",
+      "title": null,
+      "markdown": "1. Localiza grupos casi completos.\n2. Comprueba filas y columnas antes de mover.\n3. Crea huecos que acerquen fichas iguales.\n4. Mantén un ritmo estable cuando aumente la velocidad.\n5. Aprende cuándo conviene una combinación pequeña para preparar otra mayor.\n\n**Error típico:** mover por impulso sin mirar el tablero completo.  \n**Recurso:** guía de enlaces, cadenas y puntuación.\n\n## Pokémon Conquest · Páginas 151–152"
+    },
+    {
+      "page": 151,
+      "heading": "De qué va",
+      "title": "Pokémon Conquest",
+      "markdown": "**Título:** Pokémon Conquest\n\nEn la región de Ransei, Guerreros y Pokémon combaten por el control de distintos reinos. Cada batalla tiene un objetivo, un límite de turnos y un mapa con elementos de terreno.\n\n**Mecánica principal:** seleccionar una unidad, moverla dentro de su alcance y elegir una acción. La dirección, la distancia y el orden de activación pueden decidir el resultado."
+    },
+    {
+      "page": 152,
+      "heading": "Cómo empezar",
+      "title": null,
+      "markdown": "1. Lee el objetivo antes de mover.\n2. Comprueba alcance y forma de cada ataque.\n3. Ocupa posiciones seguras o ventajosas.\n4. Concentra varios ataques cuando necesites asegurar una baja.\n5. Fortalece el vínculo entre Guerrero y Pokémon.\n\n**Error típico:** perseguir daño e ignorar el objetivo del mapa.  \n**Recurso:** R-06 · Recordatorio táctico.  \n**Nota:** la gestión de reinos se amplía gradualmente; no intentes dominar todos sus sistemas en la primera batalla.\n\n---\n\n## Páginas 153–156 · Recursos y cierre"
+    },
+    {
+      "page": 153,
+      "heading": "Recursos esenciales",
+      "title": "Consulta rápida",
+      "markdown": "**Título:** Consulta rápida\n\n**R-01 · Tabla de tipos**  \nVentajas, resistencias e inmunidades para la saga principal y Mundo Misterioso.\n\n**R-02 · Estados y efectos**  \nQué provoca cada estado y cómo puede curarse.\n\n**R-03 · Iconos y símbolos**  \nMenús, guardado, avisos, botones y etiquetas del manual.\n\n**R-04 · Kit de exploración PMD**  \nAlimento, PP, semillas, orbes, equipamiento y preparación.\n\n**R-05 · Técnica de captura Ranger**  \nTrazos, pausas, ataques enemigos, Poké-Ayudas y movimientos de campo.\n\n**R-06 · Recordatorio táctico Conquest**  \nTurnos, alcance, terreno, vínculos y objetivos del mapa."
+    },
+    {
+      "page": 154,
+      "heading": "Recursos por juego",
+      "title": "Para profundizar sin perderte",
+      "markdown": "**Título:** Para profundizar sin perderte\n\nCada ficha puede incluir hasta tres accesos:\n\n- **Referencia sin spoilers:** Pokédex, tipos, objetos o controles.\n- **Mecánicas:** explicación detallada de un sistema.\n- **Guía:** recorrido completo, marcado con aviso de spoilers.\n\n**Regla:** prioriza una página índice o QR maestro que puedas actualizar sin reimprimir todo el manual."
+    },
+    {
+      "page": 155,
+      "heading": "Si no sabes qué hacer",
+      "title": "Vuelve a estas cinco preguntas",
+      "markdown": "**Título:** Vuelve a estas cinco preguntas\n\n1. ¿He leído el último diálogo o la última misión?\n2. ¿Mi equipo está curado y preparado?\n3. ¿Conozco el tipo o el alcance del rival?\n4. ¿Llevo los objetos necesarios?\n5. ¿Puedo volver al último pueblo, base o gremio?\n\n**Cierre:** no existe una forma perfecta de jugar. Explorar, probar y equivocarse también forman parte de la aventura."
+    },
+    {
+      "page": 156,
+      "heading": "Contraportada",
+      "title": null,
+      "markdown": "**Título breve:** Once juegos. Dos grandes formas de vivir Pokémon.\n\n**Texto:**\n\nViaja como Entrenador por Sinnoh, Johto y Teselia. Conviértete en Pokémon para rescatar y explorar. Y descubre, en el apéndice, otras maneras de competir, capturar y pensar.\n\n**Línea final:** Manual personal · Nintendo DS · Edición 1.0\n\n---\n\n# 4. Reglas de redacción para la maquetación\n\n1. **Una página debe responder a una sola pregunta.** Si el título es «Capturar Pokémon», no mezclar evolución o crianza.\n2. **Ejemplo antes que definición larga.** Mostrar Agua → Fuego explica más rápido que un párrafo abstracto.\n3. **Máximo tres niveles visuales:** título, bloque principal y caja de consejo/nota.\n4. **Los spin-offs no deben aparecer en la navegación principal.** Se agrupan bajo «Otras formas de jugar».\n5. **Evitar el tono enciclopédico.** El manual enseña a jugar; los QR contienen listas completas.\n6. **No anticipar la historia.** Los avisos de spoilers deben aparecer antes del QR o recurso, no después.\n7. **Repetir símbolos con intención:** Poké Ball para saga principal, emblema de exploración para PMD y un único símbolo común para el apéndice.\n\n# 5. Tratamiento visual recomendado\n\n- **Saga principal:** rutas curvas, carteles de ciudad, módulos de Pokédex, marcos inspirados en interfaces de combate y pequeños recortes de mapas.\n- **Mundo Misterioso:** nubes, manchas redondeadas, baldosas, pasillos, huellas y flechas de recorrido. Las páginas deben sentirse más orgánicas y narrativas.\n- **Otros juegos:** fondo común y tarjetas compactas. No crear una identidad completa para cada uno; así se mantiene su condición de apéndice.\n- En cada doble página, combinar un bloque explicativo, una secuencia visual o diagrama y una caja pequeña de consejo. Evitar cuatro cajas de texto del mismo tamaño.\n- Dejar huecos para personajes o Pokémon en vertical, especialmente en portadillas y fichas. El texto debe rodear visualmente la ilustración, no competir con ella."
+    }
+  ]
+}

@@ -10,7 +10,9 @@
     "typecheck": "tsc -b --pretty false",
     "test": "vitest run",
     "test:watch": "vitest",
-    "check": "npm run lint && npm run typecheck && npm test && npm run build",
+    "manual:generate": "node scripts/generate-manual-content.mjs",
+    "manual:check": "node scripts/generate-manual-content.mjs --check",
+    "check": "npm run manual:check && npm run lint && npm run typecheck && npm test && npm run build",
     "preview": "vite preview"
   },
   "dependencies": {
