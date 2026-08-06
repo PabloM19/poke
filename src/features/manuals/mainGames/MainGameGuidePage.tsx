@@ -8,7 +8,7 @@ import { PokemonReferenceGrid } from '../components/PokemonReferenceCard'
 import { LessonCallout, LessonSteps, PhysicalReference } from '../components/LessonBlocks'
 import { ReadingProgressControls } from '../progress/ReadingProgressControls'
 import { ManualNotFoundPage } from '../ManualNotFoundPage'
-import { isMainGameSlug } from '@/features/games/gameCatalog'
+import { getMainGameContext, isMainGameSlug } from '@/features/games/gameCatalog'
 import { publishedMainGameGuides, type MainGameGuide } from './gameGuideData'
 import { GameDataExplorer } from './PearlDataExplorer'
 
@@ -48,6 +48,7 @@ export function MainGameGuidePage() {
   const { juego } = useParams()
   const guide = isMainGameSlug(juego) ? publishedMainGameGuides.get(juego) : null
   if (!guide) return <ManualNotFoundPage />
+  const game = getMainGameContext(guide.slug)
   const gymGroups = guide.gymGroups ?? [{ title: 'Las ocho Medallas', start: 0, end: guide.gyms.length }]
   return (
     <article className="space-y-10">
@@ -60,7 +61,7 @@ export function MainGameGuidePage() {
         <div className="mt-5 flex flex-wrap gap-2">
           <Badge variant="secondary">Sin spoilers de historia</Badge>
           <Badge variant="secondary">Páginas {guide.pages[0]}–{guide.pages[1]}</Badge>
-          <Badge variant="secondary">Contexto: {guide.title.replace('Pokémon ', '').replace('Edición ', '')}</Badge>
+          <Badge variant="secondary">Contexto: {game.shortTitle}</Badge>
         </div>
       </header>
 
@@ -130,7 +131,7 @@ export function MainGameGuidePage() {
         <ul className="ml-5 list-disc space-y-2 leading-7">{guide.reminders.map((item) => <li key={item}>{item}</li>)}</ul>
         <LessonCallout kind="warning" title="Aviso de spoilers">{guide.spoilerWarning}</LessonCallout>
         <div className="rounded-xl border border-border bg-card p-4">
-          <h3 className="font-semibold">Recursos de {guide.title.replace('Pokémon Edición ', '')}</h3>
+          <h3 className="font-semibold">Recursos de {game.shortTitle}</h3>
           <p className="mt-1 text-sm text-muted-foreground">{guide.resources.join(' · ')}</p>
           <div className="mt-4 flex flex-col gap-2 sm:flex-row">
             <Button asChild><Link to="/pokedex?gen=4"><BookOpen aria-hidden />Abrir Pokédex Gen IV</Link></Button>

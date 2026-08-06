@@ -97,4 +97,16 @@ describe('rutas de Manuales', () => {
     expect(screen.getByText(/R4 convencional/)).toBeInTheDocument()
     expect(screen.getByText('En el manual físico: páginas 103–112')).toBeInTheDocument()
   })
+
+  it('publica Negro con sus tres rivales y contexto de Generación V', () => {
+    renderManualRoute('/manuales/juegos/negro')
+
+    expect(screen.getByRole('heading', { name: 'Pokémon Edición Negra' })).toBeInTheDocument()
+    expect(screen.getByText('Cheren')).toBeInTheDocument()
+    expect(screen.getByText('Bel')).toBeInTheDocument()
+    expect(screen.getByText('N')).toBeInTheDocument()
+    expect(screen.getByText('Medalla Leyenda')).toBeInTheDocument()
+    expect(screen.getByText(/historia de N y la Liga/)).toBeInTheDocument()
+    expect(screen.getByText('En el manual físico: páginas 113–120')).toBeInTheDocument()
+  })
 })

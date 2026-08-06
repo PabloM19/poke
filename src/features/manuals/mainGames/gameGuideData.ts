@@ -234,8 +234,71 @@ export const heartGoldGuide: MainGameGuide = {
   spoilerWarning: 'Las guías de Kanto suelen revelar el contenido posterior a la Liga.',
 }
 
+export const blackGuide: MainGameGuide = {
+  slug: 'negro',
+  region: 'Teselia',
+  eyebrow: 'Generación V · Teselia',
+  title: 'Pokémon Edición Negra',
+  summary: 'Una nueva generación con una historia especialmente presente.',
+  lead: 'Teselia es una región extensa y urbana, habitada inicialmente por Pokémon diferentes a los conocidos en regiones anteriores. Tu viaje comienza junto a Cheren y Bel, dos amigos que crecerán contigo y se plantearán qué significa ser Entrenador.',
+  pages: [113, 120],
+  starters: [
+    { speciesId: 495, name: 'Snivy', type: 'Planta', description: 'Veloz y técnico. Sus movimientos permiten controlar el combate y su línea evolutiva mantiene el tipo Planta.' },
+    { speciesId: 498, name: 'Tepig', type: 'Fuego', description: 'Ofensivo y resistente. Al evolucionar incorpora el tipo Lucha y destaca por su fuerza física.' },
+    { speciesId: 501, name: 'Oshawott', type: 'Agua', description: 'Equilibrado y flexible. Aprende opciones físicas y especiales y resulta fácil de integrar en distintos equipos.' },
+  ],
+  starterTitle: 'Tres nuevas especies de Teselia',
+  starterTip: 'La Pokédex de Teselia presenta especies nuevas durante la historia. Elegir sin conocer sus evoluciones forma parte del descubrimiento.',
+  rival: {
+    title: 'Cheren',
+    description: 'Busca hacerse más fuerte y elige el inicial con ventaja frente al tuyo. Sus combates ponen a prueba la construcción del equipo.',
+    supporters: [
+      { title: 'Bel', description: 'Elige el inicial débil frente al tuyo. Su viaje trata de descubrir qué quiere hacer y cómo relacionarse con sus Pokémon.' },
+      { title: 'N', description: 'Es un rival ideológico vinculado al Equipo Plasma. Utiliza Pokémon distintos según el lugar y cuestiona la relación entre humanos y Pokémon.' },
+    ],
+  },
+  gyms: [
+    { badge: 'Medalla Trío', leader: 'Millo, Zeo o Maíz', type: 'Planta, Fuego o Agua', city: 'Ciudad Gres', lesson: 'Te enfrentarás al tipo con ventaja frente a tu inicial: una lección directa sobre afinidades.' },
+    { badge: 'Medalla Base', leader: 'Aloe', type: 'Normal', city: 'Ciudad Esmalte', lesson: 'Sus Pokémon golpean con fuerza y demuestran que un tipo sin muchas ventajas también puede ser peligroso.' },
+    { badge: 'Medalla Élitro', leader: 'Camus', type: 'Bicho', city: 'Ciudad Porcelana', lesson: 'Fuego, Volador y Roca ayudan, pero algunos dobles tipos cubren las debilidades habituales.' },
+    { badge: 'Medalla Voltio', leader: 'Camila', type: 'Eléctrico', city: 'Ciudad Mayólica', lesson: 'La Velocidad y los cambios frecuentes exigen algo más que llevar un Pokémon de tipo Tierra.' },
+    { badge: 'Medalla Temblor', leader: 'Yakón', type: 'Tierra', city: 'Ciudad Fayenza', lesson: 'Agua, Planta y Hielo ofrecen ventaja; evita depender de ataques Eléctricos.' },
+    { badge: 'Medalla Jet', leader: 'Gerania', type: 'Volador', city: 'Ciudad Loza', lesson: 'Eléctrico, Hielo y Roca son buenas respuestas frente a rivales rápidos.' },
+    { badge: 'Medalla Candelizo', leader: 'Junco', type: 'Hielo', city: 'Ciudad Teja', lesson: 'Fuego, Lucha, Roca y Acero permiten presionar a su equipo antes de que controle el combate.' },
+    { badge: 'Medalla Leyenda', leader: 'Lirio', type: 'Dragón', city: 'Ciudad Caolín', lesson: 'Hielo y Dragón son las respuestas principales de esta generación; necesitarás resistencia y buena cobertura.' },
+  ],
+  systems: [
+    { title: 'Pokédex de especies nuevas', description: 'Durante la historia regional conocerás un reparto completamente nuevo.' },
+    { title: 'Estaciones', description: 'Cambian cada mes dentro del juego.' },
+    { title: 'Combates múltiples', description: 'Introduce Combates Triples y Rotatorios.' },
+    { title: 'C-Gear', description: 'Reúne funciones de comunicación.' },
+    { title: 'Mayor escala', description: 'Grandes ciudades, puentes y escenarios.' },
+    { title: 'Ciudad Negra', description: 'Una ubicación propia de esta edición.' },
+  ],
+  systemsTitle: 'Teselia cambia con el tiempo',
+  systemsNote: 'En Combates Triples importa la posición; en Rotatorios, qué Pokémon se encuentra al frente.',
+  firstHour: [
+    'Elige a Snivy, Tepig u Oshawott.',
+    'Combate con Cheren y Bel para aprender lo básico.',
+    'Recibe la Pokédex y visita el primer Centro Pokémon.',
+    'Captura especies de tipos diferentes.',
+    'Ajusta velocidad del texto y estilo de combate en Opciones.',
+    'Escucha las explicaciones sobre el Equipo Plasma sin consultar guías externas.',
+  ],
+  firstHourTip: 'Al ser especies nuevas, utiliza la Pokédex y los mensajes de eficacia para aprender sus tipos.',
+  reminders: [
+    'Experimenta: no necesitas conocer previamente a los Pokémon de Teselia.',
+    'Revisa la estación cuando explores zonas opcionales.',
+    'Aprende la colocación antes de un Combate Triple.',
+    'Guarda antes de acontecimientos importantes o encuentros únicos.',
+  ],
+  resources: ['Pokédex de Teselia', 'Tipos y evoluciones', 'Calendario de estaciones', 'Guía de combates múltiples'],
+  spoilerWarning: 'La historia de N y la Liga merece descubrirse sin walkthrough.',
+}
+
 export const publishedMainGameGuides: ReadonlyMap<MainGameSlug, MainGameGuide> = new Map([
   [pearlGuide.slug, pearlGuide],
   [platinumGuide.slug, platinumGuide],
   [heartGoldGuide.slug, heartGoldGuide],
+  [blackGuide.slug, blackGuide],
 ])

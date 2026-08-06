@@ -8,8 +8,8 @@ const routes = [
   {
     path: '/manuales/juegos/perla',
     title: 'Guías por juego',
-    description: 'Recorre Sinnoh y Johto con Perla, Platino y HeartGold.',
-    pages: '87–112',
+    description: 'Recorre Sinnoh, Johto y Teselia con cuatro guías completas.',
+    pages: '87–120',
     icon: Gamepad2,
   },
   {
