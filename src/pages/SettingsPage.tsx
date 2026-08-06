@@ -1,0 +1,364 @@
+import { useTheme } from '@/app/ThemeProvider'
+import { getSetting, setSetting } from '@/lib/storage'
+import {
+  getGeneration,
+  getPokemon,
+  getPokemonSpecies,
+  getType,
+  getSpanishName,
+  PokeApiError,
+} from '@/lib/pokeapi'
+import { buildSpeciesIndex, clearSpeciesIndex } from '@/lib/pokedex'
+import { useSpeciesIndex } from '@/hooks/useSpeciesIndex'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { Switch } from '@/components/ui/switch'
+import { useCallback, useEffect, useRef, useState } from 'react'
+
+type DefaultView = 'grid' | 'list'
+
+type DiagState = 'idle' | 'loading' | 'success' | 'error'
+
+interface DiagResult {
+  generation?: { name: string; speciesCount: number }
+  type?: { name: string; doubleFrom: number; halfFrom: number; noFrom: number }
+  pokemon?: { id: number; name: string; statsCount: number; typesCount: number }
+  species?: { id: number; nameEs: string | null }
+}
+
+type BuildPhase = 'generations' | 'species' | 'done'
+
+const PHASE_LABELS: Record<BuildPhase, string> = {
+  generations: 'Cargando generaciones…',
+  species: 'Procesando especies…',
+  done: 'Listo',
+}
+
+export function SettingsPage() {
+  const { theme, setTheme } = useTheme()
+  const { meta, status, refresh } = useSpeciesIndex()
+  const [defaultView, setDefaultViewState] = useState<DefaultView>(() =>
+    getSetting('defaultView', 'grid')
+  )
+  const [diagState, setDiagState] = useState<DiagState>('idle')
+  const [diagResult, setDiagResult] = useState<DiagResult | null>(null)
+  const [diagError, setDiagError] = useState<string | null>(null)
+  const [buildRunning, setBuildRunning] = useState(false)
+  const [buildProgress, setBuildProgress] = useState<{
+    done: number
+    total: number
+    phase: BuildPhase
+    currentSpeciesName?: string
+  } | null>(null)
+  const [buildError, setBuildError] = useState<string | null>(null)
+  const abortRef = useRef<AbortController | null>(null)
+
+  useEffect(() => {
+    setSetting('defaultView', defaultView)
+  }, [defaultView])
+
+  const handleThemeChange = useCallback(
+    (checked: boolean) => {
+      setTheme(checked ? 'dark' : 'light')
+    },
+    [setTheme]
+  )
+
+  const handleDefaultViewChange = useCallback((checked: boolean) => {
+    setDefaultViewState(checked ? 'list' : 'grid')
+  }, [])
+
+  const startBuild = useCallback(() => {
+    if (buildRunning) return
+    abortRef.current = new AbortController()
+    setBuildRunning(true)
+    setBuildProgress({ done: 0, total: 0, phase: 'generations' })
+    setBuildError(null)
+    buildSpeciesIndex({
+      maxGen: 5,
+      concurrency: 6,
+      signal: abortRef.current.signal,
+      onProgress: (p) => {
+        setBuildProgress({
+          done: p.done,
+          total: p.total,
+          phase: p.phase as BuildPhase,
+          currentSpeciesName: p.currentSpeciesName,
+        })
+      },
+    })
+      .then(() => {
+        refresh()
+        setBuildProgress((prev) => (prev ? { ...prev, phase: 'done' } : null))
+      })
+      .catch((e) => {
+        setBuildError(e instanceof Error ? e.message : 'Error al construir índice')
+      })
+      .finally(() => {
+        setBuildRunning(false)
+        abortRef.current = null
+      })
+  }, [buildRunning, refresh])
+
+  const cancelBuild = useCallback(() => {
+    if (abortRef.current) {
+      abortRef.current.abort()
+    }
+  }, [])
+
+  const handleClearIndex = useCallback(() => {
+    if (buildRunning) return
+    clearSpeciesIndex()
+    refresh()
+  }, [buildRunning, refresh])
+
+  const runDiagnostic = useCallback(async () => {
+    setDiagState('loading')
+    setDiagResult(null)
+    setDiagError(null)
+
+    try {
+      const [generation, typeRes, pokemon, species] = await Promise.all([
+        getGeneration(1),
+        getType('fire'),
+        getPokemon('pikachu'),
+        getPokemonSpecies('pikachu'),
+      ])
+
+      const nameEs = getSpanishName(species)
+
+      setDiagResult({
+        generation: {
+          name: generation.name,
+          speciesCount: generation.pokemon_species.length,
+        },
+        type: {
+          name: typeRes.name,
+          doubleFrom: typeRes.damage_relations.double_damage_from.length,
+          halfFrom: typeRes.damage_relations.half_damage_from.length,
+          noFrom: typeRes.damage_relations.no_damage_from.length,
+        },
+        pokemon: {
+          id: pokemon.id,
+          name: pokemon.name,
+          statsCount: pokemon.stats.length,
+          typesCount: pokemon.types.length,
+        },
+        species: { id: species.id, nameEs },
+      })
+      setDiagState('success')
+    } catch (e) {
+      if (e instanceof PokeApiError) {
+        const parts = [e.message]
+        if (e.kind) parts.push(`kind: ${e.kind}`)
+        if (e.status != null) parts.push(`status: ${e.status}`)
+        if (e.path) parts.push(`path: ${e.path}`)
+        setDiagError(parts.join(' · '))
+      } else {
+        setDiagError(e instanceof Error ? e.message : 'Error desconocido')
+      }
+      setDiagState('error')
+    }
+  }, [])
+
+  return (
+    <>
+      <h1 className="mb-2 text-2xl font-semibold text-foreground">Ajustes</h1>
+      <p className="mb-6 text-muted-foreground">
+        Cambia el idioma, el tema o las notificaciones. Aquí controlas cómo
+        quieres usar PokéApp.
+      </p>
+
+      <div className="space-y-4">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base">Apariencia</CardTitle>
+            <CardDescription>
+              Modo día o noche. La preferencia se guarda automáticamente.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-row items-center justify-between">
+            <span className="text-sm font-medium text-foreground">
+              {theme === 'dark' ? 'Modo oscuro' : 'Modo claro'}
+            </span>
+            <Switch
+              checked={theme === 'dark'}
+              onCheckedChange={handleThemeChange}
+              aria-label="Alternar entre modo claro y oscuro"
+            />
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base">Vista por defecto</CardTitle>
+            <CardDescription>
+              Cómo ver las listas de Pokémon (grid o lista). Por ahora solo se
+              guarda la preferencia.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex flex-row items-center justify-between">
+            <span className="text-sm font-medium text-foreground">
+              {defaultView === 'list' ? 'Lista' : 'Cuadrícula'}
+            </span>
+            <Switch
+              checked={defaultView === 'list'}
+              onCheckedChange={handleDefaultViewChange}
+              aria-label="Alternar entre vista cuadrícula y lista"
+            />
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base">Datos de Pokédex (Gen I–V)</CardTitle>
+            <CardDescription>
+              La primera vez descargamos un índice local para que el buscador y la
+              Pokédex sean instantáneos. Se guarda en tu navegador. No afecta a
+              favoritos ni al tema.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {meta != null && status === 'ready' && (
+              <p className="text-sm text-muted-foreground">
+                {meta.counts.species} especies · Gen 1–{meta.maxGen} · Actualizado:{' '}
+                {new Date(meta.timestamp).toLocaleString()}
+              </p>
+            )}
+            <div className="flex flex-wrap gap-2">
+              {!buildRunning && (
+                <>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={startBuild}
+                    aria-label={status === 'missing' ? 'Construir índice de especies' : 'Reconstruir índice'}
+                  >
+                    {status === 'missing' ? 'Construir índice' : 'Reconstruir'}
+                  </Button>
+                  {status === 'ready' && (
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={handleClearIndex}
+                      aria-label="Borrar datos locales del índice"
+                    >
+                      Borrar datos locales
+                    </Button>
+                  )}
+                </>
+              )}
+              {buildRunning && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={cancelBuild}
+                  aria-label="Cancelar construcción"
+                >
+                  Cancelar
+                </Button>
+              )}
+            </div>
+            {buildRunning && buildProgress != null && (
+              <div className="space-y-1 text-sm text-muted-foreground">
+                <p>{PHASE_LABELS[buildProgress.phase]}</p>
+                {buildProgress.total > 0 && (
+                  <>
+                    <p>
+                      {buildProgress.done} / {buildProgress.total} (
+                      {Math.round((buildProgress.done / buildProgress.total) * 100)}%)
+                    </p>
+                    {buildProgress.currentSpeciesName != null &&
+                      buildProgress.phase === 'species' && (
+                        <p>Última: {buildProgress.currentSpeciesName}</p>
+                      )}
+                  </>
+                )}
+              </div>
+            )}
+            {buildError != null && (
+              <p className="text-sm text-destructive" role="alert">
+                {buildError}
+              </p>
+            )}
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base">Diagnóstico PokeAPI</CardTitle>
+            <CardDescription>
+              Prueba la capa de datos: generation(1), type(fire), pokemon(pikachu),
+              species(pikachu). La segunda vez debería leer desde cache.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={runDiagnostic}
+              disabled={diagState === 'loading'}
+              aria-label="Probar API PokeAPI"
+            >
+              {diagState === 'loading' ? 'Cargando…' : 'Probar API'}
+            </Button>
+
+            {diagState === 'success' && diagResult && (
+              <dl className="grid gap-2 text-sm text-muted-foreground">
+                {diagResult.generation && (
+                  <>
+                    <dt className="font-medium text-foreground">Generation</dt>
+                    <dd>
+                      {diagResult.generation.name} —{' '}
+                      {diagResult.generation.speciesCount} species
+                    </dd>
+                  </>
+                )}
+                {diagResult.type && (
+                  <>
+                    <dt className="font-medium text-foreground">Type</dt>
+                    <dd>
+                      {diagResult.type.name} — double_from:{' '}
+                      {diagResult.type.doubleFrom}, half_from:{' '}
+                      {diagResult.type.halfFrom}, no_from:{' '}
+                      {diagResult.type.noFrom}
+                    </dd>
+                  </>
+                )}
+                {diagResult.pokemon && (
+                  <>
+                    <dt className="font-medium text-foreground">Pokemon</dt>
+                    <dd>
+                      #{diagResult.pokemon.id} {diagResult.pokemon.name} —{' '}
+                      {diagResult.pokemon.statsCount} stats,{' '}
+                      {diagResult.pokemon.typesCount} types
+                    </dd>
+                  </>
+                )}
+                {diagResult.species && (
+                  <>
+                    <dt className="font-medium text-foreground">Species</dt>
+                    <dd>
+                      id {diagResult.species.id}, nombre ES:{' '}
+                      {diagResult.species.nameEs ?? '—'}
+                    </dd>
+                  </>
+                )}
+              </dl>
+            )}
+
+            {diagState === 'error' && diagError && (
+              <p className="text-sm text-destructive" role="alert">
+                {diagError}
+              </p>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+    </>
+  )
+}
