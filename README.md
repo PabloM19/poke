@@ -19,13 +19,15 @@ Disponible:
 - Pokédex en cuadrícula o lista.
 - Ficha básica de Pokémon accesible directamente sin índice.
 - Manuales 21–86 con rutas profundas, búsqueda, progreso y referencias físicas.
+- Favoritos persistentes con carga, error, retry y eliminación.
+- Comparación compartible de 2–4 Pokémon, adaptada a móvil.
 - Navegación móvil de cinco destinos y hub Más.
 - Tema claro/oscuro.
 - Diagnóstico local de PokeAPI.
 
 En ejecución según el plan maestro:
 
-- Favoritos, comparación y filtros.
+- Filtros completos de Pokédex.
 - Manuales por juego y recursos digitales.
 - Tipos históricos y recursos digitales.
 - Integración con el manual físico mediante rutas QR estables.

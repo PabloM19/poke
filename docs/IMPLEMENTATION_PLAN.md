@@ -1,6 +1,6 @@
 # PokéApp — Plan maestro de finalización e integración con el manual
 
-**Estado:** canónico para la ejecución; fases 0–2 completadas
+**Estado:** canónico para la ejecución; fases 0–3 completadas
 **Fecha:** 6 de agosto de 2026  
 **Regla principal:** no se empieza una fase hasta que la anterior cumpla todos sus criterios de salida.
 
@@ -225,8 +225,8 @@ PMD y los cuatro spin-offs no tienen un contexto de juego equivalente en PokeAPI
 | 0 | Completada | Fuente canónica, tests base y calidad inicial bajo control. |
 | 1 | Completada | Red, caché e índice fiables. |
 | 2 | Completada | Manuales 21–86 publicados y accesibles offline. |
-| 3 | En curso | Favoritos y Comparar completos. |
-| 4 | Pendiente | Filtros sobre todo Gen I–V sin ráfagas de red. |
+| 3 | Completada | Favoritos y Comparar completos. |
+| 4 | En curso | Filtros sobre todo Gen I–V sin ráfagas de red. |
 | 5 | Pendiente | Motor histórico y recursos `R-01/R-02`. |
 | 6 | Pendiente | Cinco fichas de saga principal. |
 | 7 | Pendiente | Dos fichas PMD, cuatro minifichas y `R-03…R-06`. |
@@ -518,6 +518,8 @@ Las pruebas unitarias usan fixtures locales. Un smoke test real de PokeAPI puede
 - **Verificación de cierre de Fase 1:** 43 pruebas automatizadas, lint, TypeScript y build correctos; smoke local real de PokeAPI y UI a 390×844 sin errores de consola.
 - **Fase 2 cerrada:** navegación responsive y hub Más, rutas anidadas, migas, índice, anterior/siguiente y 404; modelo y generador determinista de las páginas 21–156; componentes editoriales; contenido 21–86, búsqueda local, progreso opcional y code splitting.
 - **Verificación de cierre de Fase 2:** 74 pruebas automatizadas, `manual:check`, lint, TypeScript y build correctos; build local profundo a 390×844 sin errores, PokeAPI bloqueada sin impedir la lectura y paquete inicial reducido de 540 kB a 423 kB.
+- **Fase 3 cerrada:** store validado de Favoritos, toggles accesibles, pantalla con vacío/carga/error/retry y Comparar con selector 2–4, URL compartible, carga directa, stats móviles y entradas desde las superficies previstas.
+- **Verificación de cierre de Fase 3:** 91 pruebas automatizadas y `npm run check` correcto; Favoritos persiste tras recarga y Comparar funciona con datos reales a 390×844 sin desbordamiento ni errores de consola.
 - **Restricción de entrega:** por instrucción del usuario no se hará ningún despliegue remoto. Los puntos de las fases 8–9 que exijan un dominio HTTPS o publicar hosting quedarán sin ejecutar salvo autorización posterior; el resto se implementará y verificará en local.
 
-La próxima acción autorizada es exclusivamente el primer punto de la **Fase 3**: crear el store versionado y validado de Favoritos por ID de especie.
+La próxima acción autorizada es exclusivamente el primer punto de la **Fase 4**: implementar el filtro de generación con el Species Index actual.
