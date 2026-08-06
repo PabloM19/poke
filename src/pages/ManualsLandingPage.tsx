@@ -1,10 +1,17 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Compass, Gamepad2, Library, Map, Sparkles, TableProperties } from 'lucide-react'
+import { ArrowRight, Compass, Gamepad2, Library, Map, ShieldCheck, Sparkles, TableProperties } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { ManualSearchBox } from '@/features/manuals/search/ManualSearchBox'
 import { ContinueReadingCard } from '@/features/manuals/progress/ContinueReadingCard'
 
 const routes = [
+  {
+    path: '/manuales/juegos/equipo-rescate-azul',
+    title: 'Equipo de Rescate Azul',
+    description: 'Protagonistas, compañero, equipos, rangos y primera misión.',
+    pages: '129–136',
+    icon: ShieldCheck,
+  },
   {
     path: '/manuales/juegos/perla',
     title: 'Guías por juego',

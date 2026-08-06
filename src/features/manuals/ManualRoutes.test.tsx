@@ -6,6 +6,7 @@ import { ManualEntryPage } from './ManualEntryPage'
 import { ManualNotFoundPage } from './ManualNotFoundPage'
 import { ManualsLayout } from './ManualsLayout'
 import { MainGameGuidePage } from './mainGames/MainGameGuidePage'
+import { PmdGuidePage } from './pmd/PmdGuidePage'
 
 function renderManualRoute(path: string) {
   return render(
@@ -18,6 +19,7 @@ function renderManualRoute(path: string) {
           <Route path="mundo-misterioso/:tema" element={<ManualEntryPage />} />
           <Route path="otros" element={<ManualEntryPage />} />
           <Route path="juegos/:juego" element={<MainGameGuidePage />} />
+          <Route path="juegos/equipo-rescate-azul" element={<PmdGuidePage />} />
           <Route path="*" element={<ManualNotFoundPage />} />
         </Route>
       </Routes>
@@ -120,5 +122,20 @@ describe('rutas de Manuales', () => {
     expect(screen.getByText(/Lista de Hábitats permite explorar/)).toBeInTheDocument()
     expect(screen.getByText(/Equipo Plasma pueden revelar conexiones/)).toBeInTheDocument()
     expect(screen.getByText('En el manual físico: páginas 121–128')).toBeInTheDocument()
+  })
+
+  it('publica Equipo de Rescate Azul sin pedir datos de saga principal', () => {
+    const fetchMock = vi.fn(() => Promise.reject(new Error('blocked')))
+    vi.stubGlobal('fetch', fetchMock)
+    renderManualRoute('/manuales/juegos/equipo-rescate-azul')
+
+    expect(screen.getByRole('heading', { name: 'Equipo de Rescate Azul' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Los dieciséis protagonistas' })).toBeInTheDocument()
+    expect(screen.getByText('Equipo Bellaco')).toBeInTheDocument()
+    expect(screen.getByText('Lucario')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Tu primera misión' })).toBeInTheDocument()
+    expect(screen.getByText('En el manual físico: páginas 129–136')).toBeInTheDocument()
+    expect(fetchMock).not.toHaveBeenCalled()
+    vi.unstubAllGlobals()
   })
 })
