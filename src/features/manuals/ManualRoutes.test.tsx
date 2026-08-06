@@ -85,4 +85,16 @@ describe('rutas de Manuales', () => {
     expect(screen.getByText(/Evita consultar el Mundo Distorsión/)).toBeInTheDocument()
     expect(screen.getByText('En el manual físico: páginas 95–102')).toBeInTheDocument()
   })
+
+  it('separa las ocho Medallas de Johto y las ocho de Kanto en HeartGold', () => {
+    renderManualRoute('/manuales/juegos/oro-heartgold')
+
+    expect(screen.getByRole('heading', { name: 'Pokémon Edición Oro HeartGold' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Las ocho Medallas de Johto' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Las ocho Medallas de Kanto' })).toBeInTheDocument()
+    expect(screen.getByText('Medalla Dragón')).toBeInTheDocument()
+    expect(screen.getByText('Medalla Tierra')).toBeInTheDocument()
+    expect(screen.getByText(/R4 convencional/)).toBeInTheDocument()
+    expect(screen.getByText('En el manual físico: páginas 103–112')).toBeInTheDocument()
+  })
 })

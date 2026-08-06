@@ -83,6 +83,7 @@ function formatArea(value: string): string {
   const known: Record<string, string> = {
     'lake-verity-before-galactic-intervention': 'Lago Veraz (inicio de la aventura)',
     'sinnoh-route-201-area': 'Ruta 201 (Sinnoh)',
+    'new-bark-town-area': 'Pueblo Primavera',
   }
   if (known[value]) return known[value]
   return humanizePokeApiName(value.replace(/^sinnoh-/, '').replace(/-area$/, ''))

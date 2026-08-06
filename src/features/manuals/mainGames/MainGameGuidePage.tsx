@@ -48,6 +48,7 @@ export function MainGameGuidePage() {
   const { juego } = useParams()
   const guide = isMainGameSlug(juego) ? publishedMainGameGuides.get(juego) : null
   if (!guide) return <ManualNotFoundPage />
+  const gymGroups = guide.gymGroups ?? [{ title: 'Las ocho Medallas', start: 0, end: guide.gyms.length }]
   return (
     <article className="space-y-10">
       <header className="overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-primary/15 via-card to-secondary p-5 sm:p-8">
@@ -89,19 +90,24 @@ export function MainGameGuidePage() {
 
       <section className="scroll-mt-20" id="medallas">
         <p className="text-sm font-medium text-primary">El recorrido de {guide.region}</p>
-        <h2 className="mb-4 text-2xl font-semibold">Las ocho Medallas</h2>
-        <div className="grid gap-3 sm:grid-cols-2">
-          {guide.gyms.map((gym, index) => (
-            <Card key={gym.badge} className="gap-3 py-5">
-              <CardHeader className="grid-cols-[auto_1fr] items-center gap-x-3 px-5">
-                <span className="row-span-2 flex size-9 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">{index + 1}</span>
-                <CardTitle>{gym.badge}</CardTitle>
-                <p className="text-sm text-muted-foreground">{gym.leader} · {gym.type} · {gym.city}</p>
-              </CardHeader>
-              <CardContent className="px-5 text-sm leading-6 text-foreground/85">{gym.lesson}</CardContent>
-            </Card>
-          ))}
-        </div>
+        {gymGroups.map((group) => (
+          <div key={group.title} className="mb-8 last:mb-0">
+            <h2 className="mb-4 text-2xl font-semibold">{group.title}</h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {guide.gyms.slice(group.start, group.end).map((gym, index) => (
+                <Card key={gym.badge} className="gap-3 py-5">
+                  <CardHeader className="grid-cols-[auto_1fr] items-center gap-x-3 px-5">
+                    <span className="row-span-2 flex size-9 items-center justify-center rounded-full bg-primary text-sm font-semibold text-primary-foreground">{index + 1}</span>
+                    <CardTitle>{gym.badge}</CardTitle>
+                    <p className="text-sm text-muted-foreground">{gym.leader} · {gym.type} · {gym.city}</p>
+                  </CardHeader>
+                  <CardContent className="px-5 text-sm leading-6 text-foreground/85">{gym.lesson}</CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        ))}
+        {guide.gymNote && <LessonCallout kind="note">{guide.gymNote}</LessonCallout>}
       </section>
 
       <section>

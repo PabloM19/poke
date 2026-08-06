@@ -32,7 +32,7 @@ function blockText(block: ManualBlock): string {
 function gameDestination(family: 'main' | 'pmd' | 'spin-off', slug: string): string {
   if (family === 'spin-off') return '/manuales/otros'
   if (family === 'pmd') return '/manuales/mundo-misterioso/misiones-y-fracaso'
-  return ['perla', 'platino'].includes(slug)
+  return ['perla', 'platino', 'oro-heartgold'].includes(slug)
     ? `/manuales/juegos/${slug}`
     : '/manuales/empezar/recursos-y-coleccion'
 }

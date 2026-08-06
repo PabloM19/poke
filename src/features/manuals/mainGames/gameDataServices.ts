@@ -55,6 +55,13 @@ export function selectEncountersForGame(areas: readonly EncounterArea[], game: M
 
 export function selectEvolutionForGame(chain: EvolutionChain, game: MainGameContext): EvolutionChain {
   const versionOrder: Record<string, number> = {
+    'red-blue': 1,
+    yellow: 2,
+    'gold-silver': 3,
+    crystal: 4,
+    'ruby-sapphire': 5,
+    emerald: 6,
+    'firered-leafgreen': 7,
     'diamond-pearl': 8,
     platinum: 9,
     'heartgold-soulsilver': 10,

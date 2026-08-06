@@ -26,6 +26,8 @@ export interface MainGameGuide {
     supporters: readonly { title: string; description: string }[]
   }
   gyms: readonly GymGuide[]
+  gymGroups?: readonly { title: string; start: number; end: number }[]
+  gymNote?: string
   systems: readonly { title: string; description: string }[]
   systemsTitle: string
   systemsNote: string
@@ -158,7 +160,82 @@ export const platinumGuide: MainGameGuide = {
   spoilerWarning: 'Evita consultar el Mundo Distorsión antes de llegar si quieres conservar la sorpresa.',
 }
 
+export const heartGoldGuide: MainGameGuide = {
+  slug: 'oro-heartgold',
+  region: 'Johto',
+  eyebrow: 'Generación IV · Johto',
+  title: 'Pokémon Edición Oro HeartGold',
+  summary: 'Dos regiones y un compañero que camina a tu lado.',
+  lead: 'Tu aventura comienza en Pueblo Primavera, en la región de Johto. Recibirás un Pokémon del Profesor Elm, investigarás un hallazgo inesperado y emprenderás un viaje por Gimnasios, bosques, torres y ciudades unidas por antiguas tradiciones.',
+  pages: [103, 112],
+  starters: [
+    { speciesId: 152, name: 'Chikorita', type: 'Planta', description: 'Resistente y orientada al apoyo. Sus primeros Gimnasios pueden ser exigentes, pero aprende herramientas defensivas muy valiosas.' },
+    { speciesId: 155, name: 'Cyndaquil', type: 'Fuego', description: 'Rápido y ofensivo. Resulta sencillo de comprender y obtiene buenas ventajas durante la primera parte de Johto.' },
+    { speciesId: 158, name: 'Totodile', type: 'Agua', description: 'Fuerte físicamente y muy fiable. Aprende ataques variados y encaja con facilidad en equipos diferentes.' },
+  ],
+  starterTitle: 'Tu compañero de Johto',
+  starterTip: 'En HeartGold tu primer Pokémon caminará detrás de ti. Habla con él para ver cómo reacciona a cada lugar.',
+  rival: {
+    title: 'El misterioso chico pelirrojo',
+    description: 'Observa desde fuera el laboratorio del Profesor Elm y pronto se cruza en tu camino. Su nombre se elige durante la partida; habitualmente se le conoce como Silver. Se apropia del Pokémon inicial con ventaja frente al tuyo. Al principio considera a los Pokémon simples herramientas, pero su relación con el equipo evoluciona a lo largo de la historia.',
+    supporters: [
+      { title: 'Profesor Elm', description: 'Investiga la crianza y los Huevos Pokémon y te entrega tu primer compañero.' },
+    ],
+  },
+  gyms: [
+    { badge: 'Medalla Céfiro', leader: 'Pegaso', type: 'Volador', city: 'Ciudad Malva', lesson: 'Enseña a responder a Pokémon veloces y ataques desde el aire.' },
+    { badge: 'Medalla Colmena', leader: 'Antón', type: 'Bicho', city: 'Pueblo Azalea', lesson: 'Fuego, Volador y Roca ayudan a detener un equipo rápido y ofensivo.' },
+    { badge: 'Medalla Planicie', leader: 'Blanca', type: 'Normal', city: 'Ciudad Trigal', lesson: 'Su aparente sencillez es engañosa: exige resistencia, estados y una respuesta al tipo Normal.' },
+    { badge: 'Medalla Niebla', leader: 'Morti', type: 'Fantasma', city: 'Ciudad Iris', lesson: 'Introduce inmunidades y movimientos que alteran el estado o dificultan el cambio.' },
+    { badge: 'Medalla Tormenta', leader: 'Aníbal', type: 'Lucha', city: 'Ciudad Orquídea', lesson: 'Volador y Psíquico ofrecen ventaja frente a sus potentes ataques físicos.' },
+    { badge: 'Medalla Mineral', leader: 'Yasmina', type: 'Acero', city: 'Ciudad Olivo', lesson: 'Fuego, Lucha y Tierra son claves contra las numerosas resistencias del Acero.' },
+    { badge: 'Medalla Glaciar', leader: 'Fredo', type: 'Hielo', city: 'Pueblo Caoba', lesson: 'Premia el uso de Fuego, Lucha, Roca y Acero, además de una buena preparación contra estados.' },
+    { badge: 'Medalla Dragón', leader: 'Débora', type: 'Dragón', city: 'Ciudad Endrino', lesson: 'Es la prueba final de Johto y exige un equipo equilibrado, resistente y bien entrenado.' },
+    { badge: 'Medalla Roca', leader: 'Brock', type: 'Roca', city: 'Ciudad Plateada', lesson: 'Agua, Planta, Lucha, Tierra y Acero permiten superar sus defensas.' },
+    { badge: 'Medalla Cascada', leader: 'Misty', type: 'Agua', city: 'Ciudad Celeste', lesson: 'Planta y Eléctrico son buenas respuestas, pero conviene prever coberturas.' },
+    { badge: 'Medalla Trueno', leader: 'Teniente Surge', type: 'Eléctrico', city: 'Ciudad Carmín', lesson: 'Tierra ayuda tanto por su ventaja como por su inmunidad.' },
+    { badge: 'Medalla Arcoíris', leader: 'Erika', type: 'Planta', city: 'Ciudad Azulona', lesson: 'Fuego, Hielo, Veneno, Volador y Bicho ofrecen múltiples caminos.' },
+    { badge: 'Medalla Alma', leader: 'Sachiko', type: 'Veneno', city: 'Ciudad Fucsia', lesson: 'Tierra y Psíquico ayudan, pero sus estados y tácticas evasivas pueden alargar el combate.' },
+    { badge: 'Medalla Pantano', leader: 'Sabrina', type: 'Psíquico', city: 'Ciudad Azafrán', lesson: 'Bicho, Fantasma y Siniestro deben emplearse con cuidado frente a su gran poder especial.' },
+    { badge: 'Medalla Volcán', leader: 'Blaine', type: 'Fuego', city: 'Islas Espuma', lesson: 'Agua, Tierra y Roca apagan su ofensiva, aunque sus ataques pueden causar quemaduras.' },
+    { badge: 'Medalla Tierra', leader: 'Azul', type: 'Varios tipos', city: 'Ciudad Verde', lesson: 'No se especializa en un único tipo: funciona como examen general del equipo construido durante todo el viaje.' },
+  ],
+  gymGroups: [
+    { title: 'Las ocho Medallas de Johto', start: 0, end: 8 },
+    { title: 'Las ocho Medallas de Kanto', start: 8, end: 16 },
+  ],
+  gymNote: 'En Kanto varios Gimnasios pueden abordarse con mayor libertad que en Johto.',
+  systems: [
+    { title: 'Pokémon acompañante', description: 'El primer Pokémon del equipo camina detrás de ti.' },
+    { title: 'Pokégear', description: 'Reúne mapa, teléfono y radio.' },
+    { title: 'Día y noche', description: 'Modifican encuentros y acontecimientos.' },
+    { title: 'Bonguri', description: 'Se convierten en Poké Balls especiales.' },
+    { title: 'Kanto', description: 'Amplía el viaje después de la Liga.' },
+    { title: 'Pokéwalker', description: 'Añade actividades con el accesorio y un cartucho original compatible; no funciona mediante una R4 convencional.' },
+  ],
+  systemsTitle: 'Un mundo que acompaña al reloj',
+  systemsNote: 'El reloj, las llamadas y el Pokémon acompañante hacen que volver a una ruta pueda ofrecer algo distinto.',
+  firstHour: [
+    'Elige a Chikorita, Cyndaquil o Totodile.',
+    'Completa el primer encargo del Profesor Elm.',
+    'Recibe la Pokédex y regresa cuando la historia lo indique.',
+    'Captura compañeros para cubrir los tipos que te falten.',
+    'Aprende a utilizar mapa y teléfono.',
+    'Visita las casas y rutas opcionales antes del primer Gimnasio.',
+  ],
+  firstHourTip: 'El nivel de los rivales puede variar mucho entre zonas; reparte experiencia con regularidad.',
+  reminders: [
+    'Algunos Pokémon aparecen solo a determinadas horas.',
+    'Guarda Bonguri y prueba diferentes Poké Balls.',
+    'Las llamadas pueden abrir revanchas y pequeños acontecimientos.',
+    'La Liga no es el final: reserva ganas de explorar Kanto.',
+  ],
+  resources: ['Pokédex de Johto', 'Encuentros por horario', 'Mapa de ambas regiones', 'Bonguri y Balls'],
+  spoilerWarning: 'Las guías de Kanto suelen revelar el contenido posterior a la Liga.',
+}
+
 export const publishedMainGameGuides: ReadonlyMap<MainGameSlug, MainGameGuide> = new Map([
   [pearlGuide.slug, pearlGuide],
   [platinumGuide.slug, platinumGuide],
+  [heartGoldGuide.slug, heartGoldGuide],
 ])

@@ -65,6 +65,23 @@ describe('datos dinámicos por juego', () => {
     expect(selectEvolutionForGame(chain, getMainGameContext('platino')).chain.evolvesTo.map((node) => node.species.name)).toEqual(['staravia'])
   })
 
+  it('conserva en HeartGold reglas evolutivas introducidas en Oro y Plata', () => {
+    const oldDetail = {
+      trigger: ref('level-up', 'evolution-trigger'), version_group: { name: 'gold-silver', url: 'https://pokeapi.co/api/v2/version-group/3/' },
+      min_level: 14, min_happiness: null, min_beauty: null, time_of_day: '',
+      item: null, held_item: null, known_move: null, location: null,
+    }
+    const chain = normalizeEvolutionChain({
+      id: 93,
+      chain: { species: ref('cyndaquil', 'pokemon-species'), evolution_details: [], evolves_to: [
+        { species: ref('quilava', 'pokemon-species'), evolution_details: [oldDetail], evolves_to: [] },
+      ] },
+    }, '/evolution-chain/93')
+
+    expect(selectEvolutionForGame(chain, getMainGameContext('oro-heartgold')).chain.evolvesTo[0])
+      .toMatchObject({ species: { name: 'quilava' }, details: [{ minLevel: 14 }] })
+  })
+
   it('rechaza contratos incompletos en vez de mostrar datos dudosos', () => {
     expect(() => normalizeRegionalPokedex({ name: 'original-sinnoh', pokemon_entries: [] }, '/pokedex/original-sinnoh')).toThrow('pokedex.id')
   })

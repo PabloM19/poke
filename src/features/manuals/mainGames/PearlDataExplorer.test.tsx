@@ -30,8 +30,8 @@ vi.mock('@/lib/pokeapi', async () => ({
   getPokemon: mocks.getPokemon,
 }))
 
-function renderExplorer() {
-  return render(<MemoryRouter><GameDataExplorer gameSlug="perla" region="Sinnoh" /></MemoryRouter>)
+function renderExplorer(gameSlug: 'perla' | 'oro-heartgold' = 'perla', region = 'Sinnoh') {
+  return render(<MemoryRouter><GameDataExplorer gameSlug={gameSlug} region={region} /></MemoryRouter>)
 }
 
 describe('explorador de Perla', () => {
@@ -94,5 +94,22 @@ describe('explorador de Perla', () => {
 
     expect(await screen.findByRole('alert')).toHaveTextContent('Puedes seguir leyendo toda la guía')
     expect(screen.getByRole('button', { name: 'Reintentar Pokédex' })).toBeInTheDocument()
+  })
+
+  it('aplica la Pokédex y versión propias de HeartGold', async () => {
+    mocks.getRegionalPokedex.mockResolvedValueOnce({
+      id: 7,
+      name: 'updated-johto',
+      entries: [{ entryNumber: 1, species: { name: 'chikorita', url: 'https://pokeapi.co/api/v2/pokemon-species/152/' } }],
+    })
+    renderExplorer('oro-heartgold', 'Johto')
+
+    await userEvent.click(screen.getByRole('button', { name: 'Cargar Pokédex de Johto' }))
+
+    expect(await screen.findAllByText('Chikorita')).toHaveLength(2)
+    expect(mocks.getRegionalPokedex).toHaveBeenCalledWith(
+      expect.objectContaining({ version: 'heartgold', versionGroup: 'heartgold-soulsilver', pokedex: 'updated-johto' }),
+      { signal: expect.any(AbortSignal) }
+    )
   })
 })
