@@ -11,13 +11,25 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { PokedexCard } from '@/components/PokedexCard'
-import {
-  filterSpeciesByGeneration,
-  type GenerationFilter,
-} from '@/features/pokedex/filters/generationFilter'
 import { pokemonSummarySnapshot } from '@/features/pokedex/summary'
+import type { GenerationFilter } from '@/features/pokedex/filters/generationFilter'
+import {
+  filterAndSortPokemon,
+  getTotalBounds,
+  POKEMON_TYPES,
+  type PokedexSort,
+  type PokemonTypeName,
+} from '@/features/pokedex/filters/pokedexFilters'
 
 const CHUNK_SIZE = 24
+const TOTAL_BOUNDS = getTotalBounds(pokemonSummarySnapshot.items)
+const TYPE_LABELS: Record<PokemonTypeName, string> = {
+  normal: 'Normal', fire: 'Fuego', water: 'Agua', electric: 'Eléctrico',
+  grass: 'Planta', ice: 'Hielo', fighting: 'Lucha', poison: 'Veneno',
+  ground: 'Tierra', flying: 'Volador', psychic: 'Psíquico', bug: 'Bicho',
+  rock: 'Roca', ghost: 'Fantasma', dragon: 'Dragón', dark: 'Siniestro',
+  steel: 'Acero', fairy: 'Hada',
+}
 
 type ViewMode = 'grid' | 'list'
 
@@ -27,10 +39,18 @@ export function PokedexPage() {
   )
   const [visibleCount, setVisibleCount] = useState(CHUNK_SIZE)
   const [generation, setGeneration] = useState<GenerationFilter>(null)
+  const [primaryType, setPrimaryType] = useState<PokemonTypeName | null>(null)
+  const [secondaryType, setSecondaryType] = useState<PokemonTypeName | null>(null)
+  const [minTotal, setMinTotal] = useState(TOTAL_BOUNDS.min)
+  const [maxTotal, setMaxTotal] = useState(TOTAL_BOUNDS.max)
+  const [sort, setSort] = useState<PokedexSort>('number-asc')
 
-  const filteredItems = filterSpeciesByGeneration(
+  const selectedTypes = [primaryType, secondaryType].filter(
+    (type): type is PokemonTypeName => type != null
+  )
+  const filteredItems = filterAndSortPokemon(
     pokemonSummarySnapshot.items,
-    generation
+    { generation, types: selectedTypes, minTotal, maxTotal, sort }
   )
   const visibleItems = filteredItems.slice(0, visibleCount)
   const hasMore = visibleCount < filteredItems.length
@@ -43,6 +63,18 @@ export function PokedexPage() {
     setGeneration(next)
     setVisibleCount(CHUNK_SIZE)
   }, [])
+
+  const selectPrimaryType = (value: string) => {
+    const next = value === '' ? null : value as PokemonTypeName
+    setPrimaryType(next)
+    if (next == null || next === secondaryType) setSecondaryType(null)
+    setVisibleCount(CHUNK_SIZE)
+  }
+
+  const selectSecondaryType = (value: string) => {
+    setSecondaryType(value === '' ? null : value as PokemonTypeName)
+    setVisibleCount(CHUNK_SIZE)
+  }
 
   const toggleView = useCallback(() => {
     const next: ViewMode = viewMode === 'grid' ? 'list' : 'grid'
@@ -62,11 +94,11 @@ export function PokedexPage() {
                 Filtros
               </Button>
             </SheetTrigger>
-            <SheetContent side="right">
+            <SheetContent side="right" className="overflow-y-auto">
               <SheetHeader>
                 <SheetTitle>Filtros</SheetTitle>
                 <SheetDescription>
-                  Limita la Pokédex a una generación concreta.
+                  Combina generación, tipos, total de stats y orden.
                 </SheetDescription>
               </SheetHeader>
               <section className="mt-6 px-4" aria-labelledby="generation-filter-title">
@@ -93,6 +125,87 @@ export function PokedexPage() {
                 >
                   Limpiar generación
                 </Button>
+              </section>
+              <section className="mt-6 border-t border-border px-4 pt-5" aria-labelledby="type-filter-title">
+                <h2 id="type-filter-title" className="mb-3 text-sm font-semibold">Tipos</h2>
+                <div className="grid grid-cols-2 gap-3">
+                  <label className="text-xs font-medium" htmlFor="primary-type">
+                    Primer tipo
+                    <select
+                      id="primary-type"
+                      value={primaryType ?? ''}
+                      onChange={(event) => selectPrimaryType(event.target.value)}
+                      className="mt-1 h-10 w-full rounded-md border border-input bg-background px-2 text-sm"
+                    >
+                      <option value="">Cualquiera</option>
+                      {POKEMON_TYPES.map((type) => <option key={type} value={type}>{TYPE_LABELS[type]}</option>)}
+                    </select>
+                  </label>
+                  <label className="text-xs font-medium" htmlFor="secondary-type">
+                    Segundo tipo
+                    <select
+                      id="secondary-type"
+                      value={secondaryType ?? ''}
+                      disabled={primaryType == null}
+                      onChange={(event) => selectSecondaryType(event.target.value)}
+                      className="mt-1 h-10 w-full rounded-md border border-input bg-background px-2 text-sm disabled:opacity-50"
+                    >
+                      <option value="">Cualquiera</option>
+                      {POKEMON_TYPES.filter((type) => type !== primaryType).map((type) => (
+                        <option key={type} value={type}>{TYPE_LABELS[type]}</option>
+                      ))}
+                    </select>
+                  </label>
+                </div>
+              </section>
+              <section className="mt-6 border-t border-border px-4 pt-5" aria-labelledby="total-filter-title">
+                <div className="mb-3 flex items-center justify-between gap-3">
+                  <h2 id="total-filter-title" className="text-sm font-semibold">Total de stats</h2>
+                  <output className="text-sm tabular-nums">{minTotal}–{maxTotal}</output>
+                </div>
+                <label className="block text-xs font-medium" htmlFor="minimum-total">Mínimo: {minTotal}</label>
+                <input
+                  id="minimum-total"
+                  type="range"
+                  min={TOTAL_BOUNDS.min}
+                  max={TOTAL_BOUNDS.max}
+                  value={minTotal}
+                  onChange={(event) => {
+                    setMinTotal(Math.min(Number(event.target.value), maxTotal))
+                    setVisibleCount(CHUNK_SIZE)
+                  }}
+                  className="h-10 w-full accent-foreground"
+                />
+                <label className="block text-xs font-medium" htmlFor="maximum-total">Máximo: {maxTotal}</label>
+                <input
+                  id="maximum-total"
+                  type="range"
+                  min={TOTAL_BOUNDS.min}
+                  max={TOTAL_BOUNDS.max}
+                  value={maxTotal}
+                  onChange={(event) => {
+                    setMaxTotal(Math.max(Number(event.target.value), minTotal))
+                    setVisibleCount(CHUNK_SIZE)
+                  }}
+                  className="h-10 w-full accent-foreground"
+                />
+              </section>
+              <section className="mt-6 border-t border-border px-4 pb-6 pt-5">
+                <label className="text-sm font-semibold" htmlFor="pokedex-sort">Orden</label>
+                <select
+                  id="pokedex-sort"
+                  value={sort}
+                  onChange={(event) => {
+                    setSort(event.target.value as PokedexSort)
+                    setVisibleCount(CHUNK_SIZE)
+                  }}
+                  className="mt-2 h-10 w-full rounded-md border border-input bg-background px-2 text-sm"
+                >
+                  <option value="number-asc">Número Pokédex</option>
+                  <option value="name-asc">Nombre A–Z</option>
+                  <option value="total-desc">Mayor total</option>
+                  <option value="total-asc">Menor total</option>
+                </select>
               </section>
             </SheetContent>
           </Sheet>
