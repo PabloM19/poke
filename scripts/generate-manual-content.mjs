@@ -14,7 +14,10 @@ function extractPages(source) {
     const page = Number(match[1])
     const bodyStart = match.index + match[0].length
     const bodyEnd = matches[index + 1]?.index ?? source.length
-    const markdown = source.slice(bodyStart, bodyEnd).replace(/\n---\s*$/, '').trim()
+    const rawBody = source.slice(bodyStart, bodyEnd)
+    const sectionBreak = rawBody.search(/\n---\s*\n\n## /)
+    const pageBody = sectionBreak >= 0 ? rawBody.slice(0, sectionBreak) : rawBody
+    const markdown = pageBody.replace(/\n---\s*$/, '').trim()
     const title = /^\*\*Título:\*\*\s*(.+)$/m.exec(markdown)?.[1]?.trim() ?? null
     return { page, heading: match[2].trim(), title, markdown }
   }).filter((record) => record.page >= 21 && record.page <= 156)
