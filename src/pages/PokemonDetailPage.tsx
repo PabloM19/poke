@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom'
 import {
   getPokemon,
   getPokemonSpecies,
+  getType,
   getSpanishName,
   PokeApiError,
 } from '@/lib/pokeapi'
@@ -18,6 +19,13 @@ import {
 import { FavoriteButton } from '@/features/favorites/FavoriteButton'
 import { CompareLink } from '@/features/compare/CompareLink'
 import { translatePokemonStat, translatePokemonType } from '@/features/localization'
+import { useGameContext } from '@/features/games'
+import {
+  resolvePokemonDefenseForGame,
+  selectPokemonStatsForGeneration,
+  selectPokemonTypesForGeneration,
+  type DefensiveMatchup,
+} from '@/features/historical'
 
 const NAMES_ACCORDION_LIMIT = 10
 
@@ -28,6 +36,9 @@ interface PokemonDetailData {
   stats: Array<{ name: string; value: number }>
   totalBaseStats: number
   otherNames: Array<{ lang: string; name: string }>
+  gameTitle: string
+  generation: 4 | 5
+  defense: DefensiveMatchup[] | null
 }
 
 type DetailRequestResult =
@@ -38,14 +49,53 @@ function formatSpeciesId(id: number): string {
   return `#${String(id).padStart(3, '0')}`
 }
 
+function generationLabel(generation: 4 | 5): string {
+  return generation === 4 ? 'Generación IV' : 'Generación V'
+}
+
+function multiplierLabel(multiplier: DefensiveMatchup['multiplier']): string {
+  if (multiplier === 0.25) return '×¼'
+  if (multiplier === 0.5) return '×½'
+  return `×${multiplier}`
+}
+
+function MatchupGroup({
+  title,
+  matchups,
+}: {
+  title: string
+  matchups: DefensiveMatchup[]
+}) {
+  return (
+    <div className="rounded-xl border border-border p-3">
+      <h3 className="mb-2 text-sm font-semibold">{title}</h3>
+      {matchups.length === 0 ? (
+        <p className="text-sm text-muted-foreground">Ninguna</p>
+      ) : (
+        <ul className="flex flex-wrap gap-1.5">
+          {matchups.map((matchup) => (
+            <li key={matchup.attackingType}>
+              <Badge variant="outline">
+                {translatePokemonType(matchup.attackingType)} {multiplierLabel(matchup.multiplier)}
+              </Badge>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
+}
+
 export function PokemonDetailPage() {
+  const { game } = useGameContext()
   const { speciesId: speciesIdParam } = useParams<{ speciesId: string }>()
+  const [retry, setRetry] = useState(0)
   const [requestResult, setRequestResult] =
     useState<DetailRequestResult | null>(null)
 
   const speciesId = parseSpeciesIdParam(speciesIdParam)
   const invalidId = speciesId == null
-  const requestKey = speciesId == null ? null : String(speciesId)
+  const requestKey = speciesId == null ? null : `${speciesId}:${game.slug}:${retry}`
 
   useEffect(() => {
     if (!requestKey || speciesId == null) return
@@ -64,17 +114,32 @@ export function PokemonDetailPage() {
         if (controller.signal.aborted) return
         const nameEs = getSpanishName(species) ?? species.name
         const spriteUrl = pokemon.sprites?.front_default ?? null
-        const types = pokemon.types?.map((t) => t.type.name) ?? []
-        const stats =
-          pokemon.stats?.map((s) => ({
+        const types = selectPokemonTypesForGeneration(pokemon, game.generation)
+          .map((entry) => entry.type.name)
+        const stats = selectPokemonStatsForGeneration(pokemon, game.generation)
+          .map((s) => ({
             name: s.stat.name,
             value: s.base_stat ?? 0,
-          })) ?? []
+          }))
         const totalBaseStats = stats.reduce((sum, s) => sum + s.value, 0)
         const otherNames = species.names
           .filter((n) => n.language.name !== 'es')
           .slice(0, NAMES_ACCORDION_LIMIT)
           .map((n) => ({ lang: n.language.name, name: n.name }))
+        let defense: DefensiveMatchup[] | null = null
+        try {
+          const typeResources = await Promise.all(types.map((typeName) =>
+            getType(typeName, { signal: controller.signal })
+          ))
+          if (controller.signal.aborted) return
+          defense = resolvePokemonDefenseForGame(
+            pokemon,
+            new Map(typeResources.map((type) => [type.name, type])),
+            { id: game.slug, generation: game.generation }
+          ).matchups
+        } catch {
+          if (controller.signal.aborted) return
+        }
         setRequestResult({
           key: requestKey,
           status: 'success',
@@ -85,6 +150,9 @@ export function PokemonDetailPage() {
             stats,
             totalBaseStats,
             otherNames,
+            gameTitle: game.title,
+            generation: game.generation,
+            defense,
           },
         })
       } catch (error) {
@@ -105,7 +173,7 @@ export function PokemonDetailPage() {
     return () => {
       controller.abort()
     }
-  }, [requestKey, speciesId])
+  }, [game.generation, game.slug, game.title, requestKey, speciesId])
 
   if (invalidId) {
     return (
@@ -153,6 +221,9 @@ export function PokemonDetailPage() {
   }
 
   const detail = requestResult.data
+  const weaknesses = detail.defense?.filter((entry) => entry.multiplier > 1) ?? []
+  const resistances = detail.defense?.filter((entry) => entry.multiplier > 0 && entry.multiplier < 1) ?? []
+  const immunities = detail.defense?.filter((entry) => entry.multiplier === 0) ?? []
 
   return (
     <>
@@ -181,6 +252,12 @@ export function PokemonDetailPage() {
         </div>
       </div>
 
+      <div className="mb-6 rounded-xl border border-border bg-muted/40 p-4">
+        <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Contexto de juego</p>
+        <p className="mt-1 font-medium">{detail.gameTitle} · {generationLabel(detail.generation)}</p>
+        <p className="mt-1 text-sm text-muted-foreground">Tipos, stats y defensa se muestran como funcionan en este juego.</p>
+      </div>
+
       <section className="mb-6">
         <h2 className="mb-2 text-lg font-medium text-foreground">
           Estadísticas base
@@ -198,6 +275,22 @@ export function PokemonDetailPage() {
         <p className="mt-2 text-sm text-muted-foreground">
           Total: {detail.totalBaseStats}. Total = suma de las estadísticas base.
         </p>
+      </section>
+
+      <section className="mb-6" aria-labelledby="defense-title">
+        <h2 id="defense-title" className="mb-2 text-lg font-medium text-foreground">Defensa por tipos</h2>
+        {detail.defense == null ? (
+          <div className="rounded-xl border border-dashed border-border p-4" role="status">
+            <p className="text-sm text-muted-foreground">No se pudieron cargar las relaciones de tipos. La ficha básica sigue disponible.</p>
+            <Button type="button" variant="outline" size="sm" className="mt-3" onClick={() => setRetry((value) => value + 1)}>Reintentar defensa</Button>
+          </div>
+        ) : (
+          <div className="grid gap-3 sm:grid-cols-3">
+            <MatchupGroup title="Debilidades" matchups={weaknesses} />
+            <MatchupGroup title="Resistencias" matchups={resistances} />
+            <MatchupGroup title="Inmunidades" matchups={immunities} />
+          </div>
+        )}
       </section>
 
       {detail.otherNames.length > 0 && (

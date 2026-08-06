@@ -1,10 +1,8 @@
-import type { GenId } from '@/lib/pokeapi'
-
 export interface MainGameContext {
   slug: MainGameSlug
   title: string
   shortTitle: string
-  generation: GenId
+  generation: 4 | 5
   version: string
   versionGroup: string
   pokedex: string
