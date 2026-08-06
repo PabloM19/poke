@@ -36,6 +36,9 @@ const PmdGuidePage = lazy(async () => ({
 const ExplorersGuidePage = lazy(async () => ({
   default: (await import('@/features/manuals/pmd/ExplorersGuidePage')).ExplorersGuidePage,
 }))
+const RangerGuidePage = lazy(async () => ({
+  default: (await import('@/features/manuals/spinOffs/RangerGuidePage')).RangerGuidePage,
+}))
 const PokedexPage = lazy(async () => ({
   default: (await import('@/pages/PokedexPage')).PokedexPage,
 }))
@@ -69,6 +72,7 @@ const router = createBrowserRouter([
           { path: 'juegos/:juego', element: <DeferredRoute label="Guía por juego"><MainGameGuidePage /></DeferredRoute> },
           { path: 'juegos/equipo-rescate-azul', element: <DeferredRoute label="Equipo de Rescate Azul"><PmdGuidePage /></DeferredRoute> },
           { path: 'juegos/exploradores-oscuridad', element: <DeferredRoute label="Exploradores de la Oscuridad"><ExplorersGuidePage /></DeferredRoute> },
+          { path: 'juegos/ranger', element: <DeferredRoute label="Pokémon Ranger"><RangerGuidePage /></DeferredRoute> },
           { path: 'recursos/r-01', element: <DeferredRoute label="R-01"><TypeChartPage /></DeferredRoute> },
           { path: 'recursos/r-02', element: <DeferredRoute label="R-02"><StatusReferencePage /></DeferredRoute> },
           { path: '*', element: <DeferredRoute label="Manuales"><ManualNotFoundPage /></DeferredRoute> },

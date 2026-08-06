@@ -8,6 +8,7 @@ import { ManualsLayout } from './ManualsLayout'
 import { MainGameGuidePage } from './mainGames/MainGameGuidePage'
 import { PmdGuidePage } from './pmd/PmdGuidePage'
 import { ExplorersGuidePage } from './pmd/ExplorersGuidePage'
+import { RangerGuidePage } from './spinOffs/RangerGuidePage'
 
 function renderManualRoute(path: string) {
   return render(
@@ -22,6 +23,7 @@ function renderManualRoute(path: string) {
           <Route path="juegos/:juego" element={<MainGameGuidePage />} />
           <Route path="juegos/equipo-rescate-azul" element={<PmdGuidePage />} />
           <Route path="juegos/exploradores-oscuridad" element={<ExplorersGuidePage />} />
+          <Route path="juegos/ranger" element={<RangerGuidePage />} />
           <Route path="*" element={<ManualNotFoundPage />} />
         </Route>
       </Routes>
@@ -151,5 +153,15 @@ describe('rutas de Manuales', () => {
     expect(screen.getByRole('heading', { name: 'Tu primera expedición' })).toBeInTheDocument()
     expect(screen.getByText(/Engranajes del Tiempo/)).toBeInTheDocument()
     expect(screen.getByText('En el manual físico: páginas 137–144')).toBeInTheDocument()
+  })
+
+  it('publica la minificha táctil de Ranger', () => {
+    renderManualRoute('/manuales/juegos/ranger')
+
+    expect(screen.getByRole('heading', { name: 'Pokémon Ranger' })).toBeInTheDocument()
+    expect(screen.getByText(/Dibuja círculos continuos/)).toBeInTheDocument()
+    expect(screen.getByText(/reinicia el progreso de los círculos/)).toBeInTheDocument()
+    expect(screen.getByText(/R-05 · Técnica de captura/)).toBeInTheDocument()
+    expect(screen.getByText('En el manual físico: páginas 145–146')).toBeInTheDocument()
   })
 })

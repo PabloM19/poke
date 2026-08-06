@@ -30,7 +30,7 @@ function blockText(block: ManualBlock): string {
 }
 
 function gameDestination(family: 'main' | 'pmd' | 'spin-off', slug: string): string {
-  if (family === 'spin-off') return '/manuales/otros'
+  if (family === 'spin-off') return slug === 'ranger' ? '/manuales/juegos/ranger' : '/manuales/otros'
   if (family === 'pmd') return `/manuales/juegos/${slug}`
   return `/manuales/juegos/${slug}`
 }

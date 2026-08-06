@@ -1,4 +1,4 @@
-export type ManualFamily = 'start' | 'trainer' | 'main-games' | 'pmd-games' | 'mystery-dungeon' | 'other' | 'resources'
+export type ManualFamily = 'start' | 'trainer' | 'main-games' | 'pmd-games' | 'spin-off-games' | 'mystery-dungeon' | 'other' | 'resources'
 
 export interface ManualNavigationEntry {
   path: string
@@ -34,6 +34,7 @@ export const manualNavigationEntries: readonly ManualNavigationEntry[] = [
   { path: '/manuales/juegos/negro-2', title: 'Pokémon Edición Negra 2', shortTitle: 'Pokémon Negro 2', family: 'main-games', pages: [121, 128] },
   { path: '/manuales/juegos/equipo-rescate-azul', title: 'Equipo de Rescate Azul', shortTitle: 'Rescate Azul', family: 'pmd-games', pages: [129, 136] },
   { path: '/manuales/juegos/exploradores-oscuridad', title: 'Exploradores de la Oscuridad', shortTitle: 'Exploradores Oscuridad', family: 'pmd-games', pages: [137, 144] },
+  { path: '/manuales/juegos/ranger', title: 'Pokémon Ranger', shortTitle: 'Pokémon Ranger', family: 'spin-off-games', pages: [145, 146] },
   { path: '/manuales/recursos/r-01', title: 'R-01 · Tabla de tipos', shortTitle: 'R-01 · Tipos', family: 'resources', pages: [153, 154] },
   { path: '/manuales/recursos/r-02', title: 'R-02 · Estados y efectos', shortTitle: 'R-02 · Estados', family: 'resources', pages: [153, 154] },
 ] as const
@@ -43,6 +44,7 @@ export const manualFamilyLabels: Record<ManualFamily, string> = {
   trainer: 'Ser Entrenador',
   'main-games': 'Guías por juego',
   'pmd-games': 'Juegos de Mundo Misterioso',
+  'spin-off-games': 'Minifichas',
   'mystery-dungeon': 'Mundo Misterioso',
   other: 'Otras formas de jugar',
   resources: 'Recursos',
