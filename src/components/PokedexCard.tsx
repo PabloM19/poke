@@ -5,6 +5,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import { FavoriteButton } from '@/features/favorites/FavoriteButton'
+import { CompareLink } from '@/features/compare/CompareLink'
 
 function formatSpeciesId(id: number): string {
   return `#${String(id).padStart(3, '0')}`
@@ -94,10 +95,15 @@ export function PokedexCard({ item, layout = 'grid', className }: PokedexCardPro
         >
           {content}
         </Link>
+        <CompareLink
+          speciesId={item.speciesId}
+          speciesName={item.nameEs}
+          className={layout === 'grid' ? 'absolute left-2 top-2' : undefined}
+        />
         <FavoriteButton
           speciesId={item.speciesId}
           speciesName={item.nameEs}
-          className={layout === 'grid' ? 'absolute right-2 top-2' : 'ml-auto'}
+          className={layout === 'grid' ? 'absolute right-2 top-2' : undefined}
         />
       </CardContent>
     </Card>

@@ -33,6 +33,7 @@ describe('PokemonReferenceCard', () => {
     renderCard()
     expect(await screen.findByText('electric')).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Ver ficha de Pikachu' })).toHaveAttribute('href', '/pokemon/25')
+    expect(screen.getByRole('link', { name: 'Comparar Pikachu' })).toHaveAttribute('href', '/compare?ids=25')
     expect(mocks.getPokemonSpecies).toHaveBeenCalledWith(25, { signal: expect.any(AbortSignal) })
   })
 

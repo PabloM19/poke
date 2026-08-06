@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { FavoriteButton } from './FavoriteButton'
+import { CompareLink } from '@/features/compare/CompareLink'
 
 interface FavoriteCardData {
   name: string
@@ -62,6 +63,11 @@ export function FavoritePokemonCard({ speciesId }: { speciesId: number }) {
   return (
     <Card className="relative h-full py-4">
       <CardContent className="flex h-full flex-col items-center px-4 text-center">
+        <CompareLink
+          speciesId={speciesId}
+          speciesName={name}
+          className="absolute left-2 top-2"
+        />
         <FavoriteButton
           speciesId={speciesId}
           speciesName={name}

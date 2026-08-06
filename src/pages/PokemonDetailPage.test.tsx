@@ -46,6 +46,8 @@ describe('PokemonDetailPage', () => {
     expect(mocks.getPokemon).toHaveBeenCalledWith('pikachu', {
       signal: expect.any(AbortSignal),
     })
+    expect(screen.getByRole('link', { name: 'Comparar Pikachu' }))
+      .toHaveAttribute('href', '/compare?ids=25')
   })
 
   it('rechaza ids parciales sin llamar a PokeAPI', () => {

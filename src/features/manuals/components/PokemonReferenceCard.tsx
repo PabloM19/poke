@@ -4,6 +4,7 @@ import { getPokemon, getPokemonSpecies, getSpanishName, PokeApiError } from '@/l
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import type { PokemonReference } from '../content/types'
+import { CompareLink } from '@/features/compare/CompareLink'
 
 interface Enrichment {
   spriteUrl: string | null
@@ -52,14 +53,21 @@ export function PokemonReferenceCard({ reference }: { reference: PokemonReferenc
   const current = result?.key === requestKey ? result : null
   const data = current?.status === 'success' ? current.data : null
 
+  const displayName = data?.name ?? reference.name
+
   return (
-    <Link
-      to={`/pokemon/${reference.speciesId}`}
-      className="block rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-      aria-label={`Ver ficha de ${data?.name ?? reference.name}`}
-    >
-      <Card className="h-full transition-colors hover:bg-accent/50">
+      <Card className="relative h-full transition-colors hover:bg-accent/50">
         <CardContent className="flex h-full flex-col items-center p-4 text-center">
+          <CompareLink
+            speciesId={reference.speciesId}
+            speciesName={displayName}
+            className="absolute left-2 top-2"
+          />
+          <Link
+            to={`/pokemon/${reference.speciesId}`}
+            className="flex h-full w-full flex-col items-center rounded-lg pt-3 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            aria-label={`Ver ficha de ${displayName}`}
+          >
           <div className="mb-2 flex size-24 items-center justify-center rounded-full bg-secondary">
             {data?.spriteUrl ? (
               <img src={data.spriteUrl} alt="" className="size-24 object-contain [image-rendering:pixelated]" />
@@ -71,9 +79,9 @@ export function PokemonReferenceCard({ reference }: { reference: PokemonReferenc
           {data && <div className="mt-2 flex flex-wrap justify-center gap-1">{data.types.map((type) => <Badge key={type} variant="secondary">{type}</Badge>)}</div>}
           {reference.description && <p className="mt-2 text-sm leading-5 text-muted-foreground">{reference.description}</p>}
           {current?.status === 'error' && <p className="mt-2 text-xs text-muted-foreground">Datos dinámicos no disponibles</p>}
+          </Link>
         </CardContent>
       </Card>
-    </Link>
   )
 }
 

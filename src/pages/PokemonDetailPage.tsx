@@ -16,6 +16,7 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 import { FavoriteButton } from '@/features/favorites/FavoriteButton'
+import { CompareLink } from '@/features/compare/CompareLink'
 
 const NAMES_ACCORDION_LIMIT = 10
 
@@ -238,9 +239,7 @@ export function PokemonDetailPage() {
           speciesName={detail.nameEs}
           showLabel
         />
-        <Button asChild variant="outline" size="sm">
-          <Link to="/compare">Comparar</Link>
-        </Button>
+        <CompareLink speciesId={speciesId} speciesName={detail.nameEs} showLabel />
       </div>
 
       <Link

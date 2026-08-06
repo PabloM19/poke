@@ -35,6 +35,7 @@ describe('FavoritesPage', () => {
     renderPage()
 
     expect(await screen.findByRole('link', { name: 'Ver ficha de Pikachu' })).toHaveAttribute('href', '/pokemon/25')
+    expect(screen.getByRole('link', { name: 'Comparar Pikachu' })).toHaveAttribute('href', '/compare?ids=25')
     await user.click(screen.getByRole('button', { name: 'Quitar de favoritos: Pikachu' }))
     expect(screen.getByRole('heading', { name: 'Aún no tienes favoritos' })).toBeInTheDocument()
   })
