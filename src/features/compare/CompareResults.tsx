@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { getComparePokemonData, type ComparePokemonData } from './compareData'
 import { translatePokemonStat, translatePokemonType } from '@/features/localization'
+import { useGameContext } from '@/features/games'
 
 type LoadState = {
   key: string
@@ -14,8 +15,9 @@ type LoadState = {
 }
 
 export function CompareResults({ ids }: { ids: readonly number[] }) {
+  const { game } = useGameContext()
   const [retry, setRetry] = useState(0)
-  const requestKey = `${ids.join(',')}:${retry}`
+  const requestKey = `${ids.join(',')}:${game.slug}:${retry}`
   const [state, setState] = useState<LoadState | null>(null)
 
   useEffect(() => {
@@ -23,7 +25,7 @@ export function CompareResults({ ids }: { ids: readonly number[] }) {
     const controller = new AbortController()
     const load = async () => {
       const results = await Promise.allSettled(
-        ids.map((id) => getComparePokemonData(id, controller.signal))
+        ids.map((id) => getComparePokemonData(id, game.generation, controller.signal))
       )
       if (controller.signal.aborted) return
       const data: ComparePokemonData[] = []
@@ -36,7 +38,7 @@ export function CompareResults({ ids }: { ids: readonly number[] }) {
     }
     void load()
     return () => controller.abort()
-  }, [ids, requestKey])
+  }, [game.generation, ids, requestKey])
 
   if (ids.length < 2) {
     return (

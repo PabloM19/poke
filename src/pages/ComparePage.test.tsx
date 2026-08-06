@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { MemoryRouter, useLocation } from 'react-router-dom'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import type { Pokemon, PokemonSpecies } from '@/lib/pokeapi'
+import { GameProvider } from '@/features/games'
 
 const mocks = vi.hoisted(() => ({ getPokemon: vi.fn(), getPokemonSpecies: vi.fn() }))
 vi.mock('@/lib/pokeapi', async (importOriginal) => {
@@ -47,8 +48,10 @@ function LocationProbe() {
 function renderPage(path: string) {
   return render(
     <MemoryRouter initialEntries={[path]}>
-      <ComparePage />
-      <LocationProbe />
+      <GameProvider>
+        <ComparePage />
+        <LocationProbe />
+      </GameProvider>
     </MemoryRouter>
   )
 }
@@ -71,6 +74,7 @@ describe('ComparePage', () => {
     expect(screen.getByRole('heading', { name: 'Estadísticas base' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'PS' })).toBeInTheDocument()
     expect(screen.getByLabelText('URL actual')).toHaveTextContent('/compare?ids=25,150')
+    expect(screen.getByText('Contexto: Pokémon Perla')).toBeInTheDocument()
   })
 
   it('añade por número sin Species Index y sincroniza la URL', async () => {
