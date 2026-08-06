@@ -1,6 +1,6 @@
 # PokéApp — Plan maestro de finalización e integración con el manual
 
-**Estado:** canónico para la ejecución; fases 0–3 completadas
+**Estado:** canónico para la ejecución; fases 0–4 completadas
 **Fecha:** 6 de agosto de 2026  
 **Regla principal:** no se empieza una fase hasta que la anterior cumpla todos sus criterios de salida.
 
@@ -520,6 +520,8 @@ Las pruebas unitarias usan fixtures locales. Un smoke test real de PokeAPI puede
 - **Verificación de cierre de Fase 2:** 74 pruebas automatizadas, `manual:check`, lint, TypeScript y build correctos; build local profundo a 390×844 sin errores, PokeAPI bloqueada sin impedir la lectura y paquete inicial reducido de 540 kB a 423 kB.
 - **Fase 3 cerrada:** store validado de Favoritos, toggles accesibles, pantalla con vacío/carga/error/retry y Comparar con selector 2–4, URL compartible, carga directa, stats móviles y entradas desde las superficies previstas.
 - **Verificación de cierre de Fase 3:** 91 pruebas automatizadas y `npm run check` correcto; Favoritos persiste tras recarga y Comparar funciona con datos reales a 390×844 sin desbordamiento ni errores de consola.
+- **Fase 4 cerrada:** filtro inicial por generación; contrato de snapshot v1; generador explícito con concurrencia 6, retry y validación; DTO local de 649 especies; filtros combinados por generación, uno/dos tipos y total; orden, contador, chips, reset, vacío y URL canónica compartible.
+- **Verificación de cierre de Fase 4:** snapshot de 649 entradas con SHA-256 `7a6348b0c922e8d640ecee0f877235d28e79860eab991b71e3f2691551db144c`; 124 pruebas automatizadas y `npm run check` correcto; URL directa de Dialga recargada a 390×844 con cinco filtros, sin desbordamiento ni errores de consola.
 - **Restricción de entrega:** por instrucción del usuario no se hará ningún despliegue remoto. Los puntos de las fases 8–9 que exijan un dominio HTTPS o publicar hosting quedarán sin ejecutar salvo autorización posterior; el resto se implementará y verificará en local.
 
-La próxima acción autorizada es exclusivamente el primer punto de la **Fase 4**: implementar el filtro de generación con el Species Index actual.
+La próxima acción autorizada es exclusivamente el primer punto de la **Fase 5**: completar el tipado y los selectores puros de datos históricos (`past_types`, `past_stats` y `past_damage_relations`).
