@@ -27,6 +27,9 @@ const TypeChartPage = lazy(async () => ({
 const StatusReferencePage = lazy(async () => ({
   default: (await import('@/features/manuals/resources/StatusReferencePage')).StatusReferencePage,
 }))
+const MainGameGuidePage = lazy(async () => ({
+  default: (await import('@/features/manuals/mainGames/MainGameGuidePage')).MainGameGuidePage,
+}))
 const PokedexPage = lazy(async () => ({
   default: (await import('@/pages/PokedexPage')).PokedexPage,
 }))
@@ -57,6 +60,7 @@ const router = createBrowserRouter([
           { path: 'entrenador/:tema', element: <DeferredRoute label="Manuales"><ManualEntryPage /></DeferredRoute> },
           { path: 'mundo-misterioso/:tema', element: <DeferredRoute label="Manuales"><ManualEntryPage /></DeferredRoute> },
           { path: 'otros', element: <DeferredRoute label="Manuales"><ManualEntryPage /></DeferredRoute> },
+          { path: 'juegos/perla', element: <DeferredRoute label="Pokémon Perla"><MainGameGuidePage /></DeferredRoute> },
           { path: 'recursos/r-01', element: <DeferredRoute label="R-01"><TypeChartPage /></DeferredRoute> },
           { path: 'recursos/r-02', element: <DeferredRoute label="R-02"><StatusReferencePage /></DeferredRoute> },
           { path: '*', element: <DeferredRoute label="Manuales"><ManualNotFoundPage /></DeferredRoute> },

@@ -33,4 +33,11 @@ describe('manualNavigation', () => {
     expect(getManualEntry('/manuales/recursos/r-01')).toMatchObject({ family: 'resources', pages: [153, 154] })
     expect(getManualEntry('/manuales/recursos/r-02')).toMatchObject({ family: 'resources', pages: [153, 154] })
   })
+
+  it('publica Perla como primera guía por juego', () => {
+    expect(getManualEntry('/manuales/juegos/perla')).toMatchObject({
+      family: 'main-games',
+      pages: [87, 94],
+    })
+  })
 })

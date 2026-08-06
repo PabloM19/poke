@@ -1,10 +1,17 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Compass, Library, Map, Sparkles, TableProperties } from 'lucide-react'
+import { ArrowRight, Compass, Gamepad2, Library, Map, Sparkles, TableProperties } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { ManualSearchBox } from '@/features/manuals/search/ManualSearchBox'
 import { ContinueReadingCard } from '@/features/manuals/progress/ContinueReadingCard'
 
 const routes = [
+  {
+    path: '/manuales/juegos/perla',
+    title: 'Guías por juego',
+    description: 'Empieza en Sinnoh con la guía completa de Pokémon Perla.',
+    pages: '87–94',
+    icon: Gamepad2,
+  },
   {
     path: '/manuales/empezar/que-es-pokemon',
     title: 'Empieza aquí',

@@ -9,10 +9,10 @@ describe('searchManuals', () => {
       .toContain('/manuales/entrenador/captura')
   })
 
-  it('encuentra juegos y los envía a una lección ya publicada', () => {
+  it('encuentra juegos y envía Perla a su ficha publicada', () => {
     expect(searchManuals('Pokémon Perla')[0]).toMatchObject({
       kind: 'game',
-      path: '/manuales/empezar/recursos-y-coleccion',
+      path: '/manuales/juegos/perla',
     })
     expect(searchManuals('Conquest')[0]).toMatchObject({
       kind: 'game',

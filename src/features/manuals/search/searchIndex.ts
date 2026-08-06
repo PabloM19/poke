@@ -29,10 +29,10 @@ function blockText(block: ManualBlock): string {
   return ''
 }
 
-function gameDestination(family: 'main' | 'pmd' | 'spin-off'): string {
+function gameDestination(family: 'main' | 'pmd' | 'spin-off', slug: string): string {
   if (family === 'spin-off') return '/manuales/otros'
   if (family === 'pmd') return '/manuales/mundo-misterioso/misiones-y-fracaso'
-  return '/manuales/empezar/recursos-y-coleccion'
+  return slug === 'perla' ? '/manuales/juegos/perla' : '/manuales/empezar/recursos-y-coleccion'
 }
 
 function resourceDestination(code: string): string {
@@ -64,7 +64,7 @@ const searchableEntries = [
     description: game.family === 'main'
       ? 'Juego de la saga principal'
       : game.family === 'pmd' ? 'Juego de Mundo Misterioso' : 'Otra forma de jugar',
-    path: gameDestination(game.family),
+    path: gameDestination(game.family, game.slug),
     searchText: `${game.title} ${game.slug} ${game.version ?? ''} ${game.versionGroup ?? ''}`,
   })),
   ...resourceDefinitions.map((resource) => ({
