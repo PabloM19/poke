@@ -229,7 +229,7 @@ PMD y los cuatro spin-offs no tienen un contexto de juego equivalente en PokeAPI
 | 4 | Completada | Filtros sobre todo Gen I–V sin ráfagas de red. |
 | 5 | Completada | Motor histórico y recursos `R-01/R-02`. |
 | 6 | Completada | Cinco fichas de saga principal. |
-| 7 | En curso (Equipo de Rescate Azul completado) | Dos fichas PMD, cuatro minifichas y `R-03…R-06`. |
+| 7 | En curso (dos fichas PMD completadas) | Dos fichas PMD, cuatro minifichas y `R-03…R-06`. |
 | 8 | Pendiente | QR y vínculo bidireccional con el manual físico. |
 | 9 | Pendiente | Accesibilidad, offline, E2E, despliegue y cierre. |
 
@@ -536,6 +536,8 @@ Las pruebas unitarias usan fixtures locales. Un smoke test real de PokeAPI puede
 - **Verificación de Negro 2 y cierre de Fase 6:** 168 pruebas automatizadas y `npm run check` correcto; Pokédex real con 301 entradas; Snivy conserva evolución 17/36, aparece como regalo de nivel 5 en Ciudad Engobe, carga movimientos españoles de Negro 2/Blanco 2 y defensa Gen V; estado completo a 390×844 con ancho 390/390 y cero errores de consola. Las cinco fichas cubren de forma continua las páginas 87–128.
 - **Fase 7, punto 1 cerrado — Equipo de Rescate Azul:** ficha editorial completa de las páginas 129–136 con 16 protagonistas, 10 compañeros válidos, Equipo Bellaco, Equipo de Alakazam, rangos, ciclo del equipo y primera misión; PokeAPI solo enriquece especies bajo demanda y no aporta mecánicas PMD.
 - **Verificación de Rescate Azul:** 169 pruebas automatizadas y `npm run check` correcto; lectura íntegra sin peticiones y carga real opcional de las 16 especies desde Bulbasaur hasta Skitty; ruta profunda a 390×844 con ancho 390/390 y cero errores de consola.
+- **Fase 7, punto 2 cerrado — Exploradores de la Oscuridad:** ficha editorial completa de las páginas 137–144 con 16 protagonistas, 13 compañeros posibles, Equipo Calavera, Pokégremio, nueve rangos, ciclo de misiones y primera expedición; las especies se enriquecen solo bajo demanda.
+- **Verificación de Exploradores:** 170 pruebas automatizadas y `npm run check` correcto; contenido local completo y carga real opcional desde Bulbasaur hasta Munchlax; ruta profunda a 390×844 con ancho 390/390 y cero errores de consola.
 - **Restricción de entrega:** por instrucción del usuario no se hará ningún despliegue remoto. Los puntos de las fases 8–9 que exijan un dominio HTTPS o publicar hosting quedarán sin ejecutar salvo autorización posterior; el resto se implementará y verificará en local.
 
-La próxima acción autorizada es exclusivamente el segundo punto de la **Fase 7**: publicar y verificar la ficha completa de Pokémon Mundo Misterioso: Exploradores de la Oscuridad antes de empezar las cuatro minifichas.
+La próxima acción autorizada es exclusivamente el tercer punto de la **Fase 7**: publicar y verificar la minificha de Pokémon Ranger antes de empezar Pokémon Dash.
