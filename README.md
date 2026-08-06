@@ -23,7 +23,7 @@ Disponible:
 - Tipos, estadísticas y relaciones defensivas históricas en ficha y Comparar.
 - Manuales 21–86 con rutas profundas, búsqueda, progreso y referencias físicas.
 - Recursos locales R-01 (tabla de tipos) y R-02 (estados y efectos).
-- Guías completas de Perla y Platino (87–102) con exploradores regionales por versión.
+- Guías completas de Perla, Platino y HeartGold (87–112) con exploradores regionales por versión.
 - Favoritos persistentes con carga, error, retry y eliminación.
 - Comparación compartible de 2–4 Pokémon, adaptada a móvil.
 - Navegación móvil de cinco destinos y hub Más.
