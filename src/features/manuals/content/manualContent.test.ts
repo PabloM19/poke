@@ -49,7 +49,7 @@ describe('integridad editorial del manual', () => {
 
   it('sincroniza las rutas publicadas de Fase 2 con el manifiesto', () => {
     const published = manualArticleDefinitions.filter((entry) => entry.pageRange[1] <= 86)
-    expect(manualNavigationEntries.map((entry) => ({ path: entry.path, pages: entry.pages })))
+    expect(manualNavigationEntries.filter((entry) => entry.pages[1] <= 86).map((entry) => ({ path: entry.path, pages: entry.pages })))
       .toEqual(published.map((entry) => ({ path: entry.path, pages: entry.pageRange })))
   })
 

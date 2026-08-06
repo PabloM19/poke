@@ -1,4 +1,4 @@
-export type ManualFamily = 'start' | 'trainer' | 'mystery-dungeon' | 'other'
+export type ManualFamily = 'start' | 'trainer' | 'mystery-dungeon' | 'other' | 'resources'
 
 export interface ManualNavigationEntry {
   path: string
@@ -27,6 +27,8 @@ export const manualNavigationEntries: readonly ManualNavigationEntry[] = [
   { path: '/manuales/mundo-misterioso/companeros', title: 'Compañeros y crecimiento', shortTitle: 'Compañeros', family: 'mystery-dungeon', pages: [75, 76] },
   { path: '/manuales/mundo-misterioso/misiones-y-fracaso', title: 'Misiones, rango y nuevos intentos', shortTitle: 'Misiones y fracaso', family: 'mystery-dungeon', pages: [77, 78] },
   { path: '/manuales/otros', title: 'Otras formas de jugar', shortTitle: 'Otros juegos', family: 'other', pages: [79, 86] },
+  { path: '/manuales/recursos/r-01', title: 'R-01 · Tabla de tipos', shortTitle: 'R-01 · Tipos', family: 'resources', pages: [153, 154] },
+  { path: '/manuales/recursos/r-02', title: 'R-02 · Estados y efectos', shortTitle: 'R-02 · Estados', family: 'resources', pages: [153, 154] },
 ] as const
 
 export const manualFamilyLabels: Record<ManualFamily, string> = {
@@ -34,6 +36,7 @@ export const manualFamilyLabels: Record<ManualFamily, string> = {
   trainer: 'Ser Entrenador',
   'mystery-dungeon': 'Mundo Misterioso',
   other: 'Otras formas de jugar',
+  resources: 'Recursos',
 }
 
 export function getManualEntry(pathname: string): ManualNavigationEntry | null {

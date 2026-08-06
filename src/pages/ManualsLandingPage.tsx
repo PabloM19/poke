@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Compass, Library, Map, Sparkles } from 'lucide-react'
+import { ArrowRight, Compass, Library, Map, Sparkles, TableProperties } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { ManualSearchBox } from '@/features/manuals/search/ManualSearchBox'
 import { ContinueReadingCard } from '@/features/manuals/progress/ContinueReadingCard'
@@ -32,6 +32,13 @@ const routes = [
     description: 'Ranger, Dash, Link! y Conquest en una vista rápida.',
     pages: '79–86',
     icon: Library,
+  },
+  {
+    path: '/manuales/recursos/r-01',
+    title: 'Recursos rápidos',
+    description: 'Tabla de tipos histórica y referencia de estados, siempre a mano.',
+    pages: '153–154',
+    icon: TableProperties,
   },
 ] as const
 

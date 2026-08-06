@@ -21,6 +21,12 @@ const ManualEntryPage = lazy(async () => ({
 const ManualNotFoundPage = lazy(async () => ({
   default: (await import('@/features/manuals/ManualNotFoundPage')).ManualNotFoundPage,
 }))
+const TypeChartPage = lazy(async () => ({
+  default: (await import('@/features/manuals/resources/TypeChartPage')).TypeChartPage,
+}))
+const StatusReferencePage = lazy(async () => ({
+  default: (await import('@/features/manuals/resources/StatusReferencePage')).StatusReferencePage,
+}))
 const PokedexPage = lazy(async () => ({
   default: (await import('@/pages/PokedexPage')).PokedexPage,
 }))
@@ -51,6 +57,8 @@ const router = createBrowserRouter([
           { path: 'entrenador/:tema', element: <DeferredRoute label="Manuales"><ManualEntryPage /></DeferredRoute> },
           { path: 'mundo-misterioso/:tema', element: <DeferredRoute label="Manuales"><ManualEntryPage /></DeferredRoute> },
           { path: 'otros', element: <DeferredRoute label="Manuales"><ManualEntryPage /></DeferredRoute> },
+          { path: 'recursos/r-01', element: <DeferredRoute label="R-01"><TypeChartPage /></DeferredRoute> },
+          { path: 'recursos/r-02', element: <DeferredRoute label="R-02"><StatusReferencePage /></DeferredRoute> },
           { path: '*', element: <DeferredRoute label="Manuales"><ManualNotFoundPage /></DeferredRoute> },
         ],
       },

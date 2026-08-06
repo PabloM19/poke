@@ -14,7 +14,9 @@
     "manual:check": "node scripts/generate-manual-content.mjs --check",
     "pokedex:summary:generate": "node scripts/generate-pokemon-summary.mjs",
     "pokedex:summary:check": "node scripts/generate-pokemon-summary.mjs --check",
-    "check": "npm run manual:check && npm run pokedex:summary:check && npm run lint && npm run typecheck && npm test && npm run build",
+    "pokedex:types:generate": "node scripts/generate-type-relations.mjs",
+    "pokedex:types:check": "node scripts/generate-type-relations.mjs --check",
+    "check": "npm run manual:check && npm run pokedex:summary:check && npm run pokedex:types:check && npm run lint && npm run typecheck && npm test && npm run build",
     "preview": "vite preview"
   },
   "dependencies": {

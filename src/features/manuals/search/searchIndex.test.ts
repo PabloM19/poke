@@ -25,6 +25,7 @@ describe('searchManuals', () => {
     expect(searchManuals('r01')[0]).toMatchObject({
       kind: 'resource',
       title: 'R-01 · Tabla de tipos',
+      path: '/manuales/recursos/r-01',
     })
   })
 

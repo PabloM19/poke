@@ -7,7 +7,7 @@ import {
   type ManualFamily,
 } from './manualNavigation'
 
-const familyOrder: readonly ManualFamily[] = ['start', 'trainer', 'mystery-dungeon', 'other']
+const familyOrder: readonly ManualFamily[] = ['start', 'trainer', 'mystery-dungeon', 'other', 'resources']
 
 function IndexContent() {
   const location = useLocation()

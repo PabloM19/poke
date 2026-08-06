@@ -12,7 +12,7 @@ describe('ManualSearchBox', () => {
     await user.type(screen.getByRole('searchbox', { name: 'Buscar en Manuales' }), 'R-01')
 
     const result = await screen.findByRole('link', { name: /R-01 · Tabla de tipos/ })
-    expect(result).toHaveAttribute('href', '/manuales/empezar/recursos-y-coleccion')
+    expect(result).toHaveAttribute('href', '/manuales/recursos/r-01')
     expect(screen.getByRole('region', { name: 'Resultados del manual' })).toBeInTheDocument()
   })
 
