@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { FavoriteButton } from './FavoriteButton'
+import { translatePokemonType } from '@/features/localization'
 import { CompareLink } from '@/features/compare/CompareLink'
 
 interface FavoriteCardData {
@@ -94,7 +95,7 @@ export function FavoritePokemonCard({ speciesId }: { speciesId: number }) {
             <h2 className="font-semibold">{data?.name ?? 'Cargando…'}</h2>
             {data && (
               <div className="mt-2 flex flex-wrap justify-center gap-1">
-                {data.types.map((type) => <Badge key={type} variant="secondary">{type}</Badge>)}
+                {data.types.map((type) => <Badge key={type} variant="secondary">{translatePokemonType(type)}</Badge>)}
               </div>
             )}
           </Link>

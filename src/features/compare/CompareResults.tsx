@@ -5,15 +5,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { getComparePokemonData, type ComparePokemonData } from './compareData'
-
-const statLabels: Record<string, string> = {
-  hp: 'PS',
-  attack: 'Ataque',
-  defense: 'Defensa',
-  'special-attack': 'At. Esp.',
-  'special-defense': 'Def. Esp.',
-  speed: 'Velocidad',
-}
+import { translatePokemonStat, translatePokemonType } from '@/features/localization'
 
 type LoadState = {
   key: string
@@ -79,7 +71,7 @@ export function CompareResults({ ids }: { ids: readonly number[] }) {
                 <p className="mt-2 text-xs text-muted-foreground">#{String(pokemon.speciesId).padStart(3, '0')}</p>
                 <h2 className="font-semibold">{pokemon.name}</h2>
                 <div className="mt-2 flex flex-wrap justify-center gap-1">
-                  {pokemon.types.map((type) => <Badge key={type} variant="secondary" className="text-[10px]">{type}</Badge>)}
+                  {pokemon.types.map((type) => <Badge key={type} variant="secondary" className="text-[10px]">{translatePokemonType(type)}</Badge>)}
                 </div>
                 <p className="mt-2 text-sm font-medium">Total {pokemon.total}</p>
               </CardContent>
@@ -94,7 +86,7 @@ export function CompareResults({ ids }: { ids: readonly number[] }) {
           <div className="space-y-6">
             {(current.data[0]?.stats ?? []).map((stat) => (
               <section key={stat.name}>
-                <h3 className="mb-2 text-sm font-semibold">{statLabels[stat.name] ?? stat.name}</h3>
+                <h3 className="mb-2 text-sm font-semibold">{translatePokemonStat(stat.name, true)}</h3>
                 <ul className="space-y-2">
                   {current.data.map((pokemon) => {
                     const value = pokemon.stats.find((entry) => entry.name === stat.name)?.value ?? 0

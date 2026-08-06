@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils'
 import { FavoriteButton } from '@/features/favorites/FavoriteButton'
 import { CompareLink } from '@/features/compare/CompareLink'
 import type { PokemonSummaryItem } from '@/features/pokedex/summary'
+import { translatePokemonType } from '@/features/localization'
 
 function formatSpeciesId(id: number): string {
   return `#${String(id).padStart(3, '0')}`
@@ -40,7 +41,7 @@ export function PokedexCard({ item, layout = 'grid', className }: PokedexCardPro
         <div className="mt-1 flex flex-wrap gap-1">
           {item.types.map((t) => (
               <Badge key={t} variant="secondary" className="text-[10px]">
-                {t}
+                {translatePokemonType(t)}
               </Badge>
             ))}
         </div>

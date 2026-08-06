@@ -26,16 +26,10 @@ import {
   parsePokedexFilterParams,
   serializePokedexFilterParams,
 } from '@/features/pokedex/filters/pokedexFilterParams'
+import { translatePokemonType } from '@/features/localization'
 
 const CHUNK_SIZE = 24
 const TOTAL_BOUNDS = getTotalBounds(pokemonSummarySnapshot.items)
-const TYPE_LABELS: Record<PokemonTypeName, string> = {
-  normal: 'Normal', fire: 'Fuego', water: 'Agua', electric: 'Eléctrico',
-  grass: 'Planta', ice: 'Hielo', fighting: 'Lucha', poison: 'Veneno',
-  ground: 'Tierra', flying: 'Volador', psychic: 'Psíquico', bug: 'Bicho',
-  rock: 'Roca', ghost: 'Fantasma', dragon: 'Dragón', dark: 'Siniestro',
-  steel: 'Acero', fairy: 'Hada',
-}
 const SORT_LABELS: Record<PokedexSort, string> = {
   'number-asc': 'Número Pokédex',
   'name-asc': 'Nombre A–Z',
@@ -198,7 +192,7 @@ export function PokedexPage() {
                       className="mt-1 h-10 w-full rounded-md border border-input bg-background px-2 text-sm"
                     >
                       <option value="">Cualquiera</option>
-                      {POKEMON_TYPES.map((type) => <option key={type} value={type}>{TYPE_LABELS[type]}</option>)}
+                      {POKEMON_TYPES.map((type) => <option key={type} value={type}>{translatePokemonType(type)}</option>)}
                     </select>
                   </label>
                   <label className="text-xs font-medium" htmlFor="secondary-type">
@@ -212,7 +206,7 @@ export function PokedexPage() {
                     >
                       <option value="">Cualquiera</option>
                       {POKEMON_TYPES.filter((type) => type !== primaryType).map((type) => (
-                        <option key={type} value={type}>{TYPE_LABELS[type]}</option>
+                        <option key={type} value={type}>{translatePokemonType(type)}</option>
                       ))}
                     </select>
                   </label>
@@ -302,10 +296,10 @@ export function PokedexPage() {
             <FilterChip label={`Generación ${['I', 'II', 'III', 'IV', 'V'][generation - 1]}`} onRemove={() => selectGeneration(null)} />
           )}
           {primaryType != null && (
-            <FilterChip label={TYPE_LABELS[primaryType]} onRemove={removePrimaryType} />
+            <FilterChip label={translatePokemonType(primaryType)} onRemove={removePrimaryType} />
           )}
           {secondaryType != null && (
-            <FilterChip label={TYPE_LABELS[secondaryType]} onRemove={() => {
+            <FilterChip label={translatePokemonType(secondaryType)} onRemove={() => {
               updateFilters({ types: primaryType == null ? [] : [primaryType] })
             }} />
           )}

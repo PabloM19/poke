@@ -5,6 +5,7 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import type { PokemonReference } from '../content/types'
 import { CompareLink } from '@/features/compare/CompareLink'
+import { translatePokemonType } from '@/features/localization'
 
 interface Enrichment {
   spriteUrl: string | null
@@ -76,7 +77,7 @@ export function PokemonReferenceCard({ reference }: { reference: PokemonReferenc
             )}
           </div>
           <h3 className="font-semibold">{data?.name ?? reference.name}</h3>
-          {data && <div className="mt-2 flex flex-wrap justify-center gap-1">{data.types.map((type) => <Badge key={type} variant="secondary">{type}</Badge>)}</div>}
+          {data && <div className="mt-2 flex flex-wrap justify-center gap-1">{data.types.map((type) => <Badge key={type} variant="secondary">{translatePokemonType(type)}</Badge>)}</div>}
           {reference.description && <p className="mt-2 text-sm leading-5 text-muted-foreground">{reference.description}</p>}
           {current?.status === 'error' && <p className="mt-2 text-xs text-muted-foreground">Datos dinámicos no disponibles</p>}
           </Link>

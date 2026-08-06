@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/accordion'
 import { FavoriteButton } from '@/features/favorites/FavoriteButton'
 import { CompareLink } from '@/features/compare/CompareLink'
+import { translatePokemonStat, translatePokemonType } from '@/features/localization'
 
 const NAMES_ACCORDION_LIMIT = 10
 
@@ -35,18 +36,6 @@ type DetailRequestResult =
 
 function formatSpeciesId(id: number): string {
   return `#${String(id).padStart(3, '0')}`
-}
-
-function statLabel(name: string): string {
-  const labels: Record<string, string> = {
-    hp: 'PS',
-    attack: 'Ataque',
-    defense: 'Defensa',
-    'special-attack': 'At. Esp.',
-    'special-defense': 'Def. Esp.',
-    speed: 'Velocidad',
-  }
-  return labels[name] ?? name
 }
 
 export function PokemonDetailPage() {
@@ -185,7 +174,7 @@ export function PokemonDetailPage() {
           <div className="mt-2 flex flex-wrap justify-center gap-1">
             {detail.types.map((t) => (
               <Badge key={t} variant="secondary">
-                {t}
+                {translatePokemonType(t)}
               </Badge>
             ))}
           </div>
@@ -200,7 +189,7 @@ export function PokemonDetailPage() {
           {detail.stats.map((s) => (
             <li key={s.name} className="flex justify-between gap-4">
               <span className="text-muted-foreground">
-                {statLabel(s.name)}
+                {translatePokemonStat(s.name, true)}
               </span>
               <span className="font-medium">{s.value}</span>
             </li>
