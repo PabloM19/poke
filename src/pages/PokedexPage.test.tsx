@@ -43,4 +43,25 @@ describe('PokedexPage', () => {
     expect(screen.getAllByText('Gloom')[0]).toBeInTheDocument()
     expect(screen.queryByText('Venusaur')).not.toBeInTheDocument()
   })
+
+  it('muestra chips, un vacío útil y recupera todo al limpiar', async () => {
+    const user = userEvent.setup()
+    render(<MemoryRouter><PokedexPage /></MemoryRouter>)
+
+    await user.click(screen.getByRole('button', { name: 'Abrir filtros' }))
+    await user.click(screen.getByRole('button', { name: /^Gen I$/ }))
+    await user.selectOptions(screen.getByLabelText('Primer tipo'), 'dragon')
+    await user.selectOptions(screen.getByLabelText('Segundo tipo'), 'steel')
+
+    expect(screen.getByRole('button', { name: 'Quitar filtro: Generación I' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Quitar filtro: Dragón' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: 'Quitar filtro: Acero' })).toBeInTheDocument()
+
+    await user.click(screen.getByRole('button', { name: 'Close' }))
+    expect(screen.getByText('No hay especies con estos filtros.')).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'Limpiar todos los filtros' }))
+
+    expect(screen.getByText('649 especies de las Generaciones I–V. Toca una para ver su ficha completa.')).toBeInTheDocument()
+    expect(screen.queryByLabelText('Filtros activos')).not.toBeInTheDocument()
+  })
 })

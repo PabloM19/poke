@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { LayoutGrid, List, Filter } from 'lucide-react'
+import { LayoutGrid, List, Filter, X } from 'lucide-react'
 import { getSetting, setSetting } from '@/lib/storage'
 import { Button } from '@/components/ui/button'
 import {
@@ -30,8 +30,30 @@ const TYPE_LABELS: Record<PokemonTypeName, string> = {
   rock: 'Roca', ghost: 'Fantasma', dragon: 'Dragón', dark: 'Siniestro',
   steel: 'Acero', fairy: 'Hada',
 }
+const SORT_LABELS: Record<PokedexSort, string> = {
+  'number-asc': 'Número Pokédex',
+  'name-asc': 'Nombre A–Z',
+  'total-desc': 'Mayor total',
+  'total-asc': 'Menor total',
+}
 
 type ViewMode = 'grid' | 'list'
+
+function FilterChip({ label, onRemove }: { label: string; onRemove: () => void }) {
+  return (
+    <Button
+      type="button"
+      variant="outline"
+      size="xs"
+      className="rounded-full"
+      aria-label={`Quitar filtro: ${label}`}
+      onClick={onRemove}
+    >
+      {label}
+      <X aria-hidden />
+    </Button>
+  )
+}
 
 export function PokedexPage() {
   const [viewMode, setViewMode] = useState<ViewMode>(() =>
@@ -54,6 +76,11 @@ export function PokedexPage() {
   )
   const visibleItems = filteredItems.slice(0, visibleCount)
   const hasMore = visibleCount < filteredItems.length
+  const hasCustomTotal = minTotal !== TOTAL_BOUNDS.min || maxTotal !== TOTAL_BOUNDS.max
+  const activeFilterCount = Number(generation != null)
+    + selectedTypes.length
+    + Number(hasCustomTotal)
+    + Number(sort !== 'number-asc')
 
   const loadMore = () => {
     setVisibleCount((n) => Math.min(n + CHUNK_SIZE, filteredItems.length))
@@ -76,6 +103,22 @@ export function PokedexPage() {
     setVisibleCount(CHUNK_SIZE)
   }
 
+  const removePrimaryType = () => {
+    setPrimaryType(secondaryType)
+    setSecondaryType(null)
+    setVisibleCount(CHUNK_SIZE)
+  }
+
+  const resetAllFilters = () => {
+    setGeneration(null)
+    setPrimaryType(null)
+    setSecondaryType(null)
+    setMinTotal(TOTAL_BOUNDS.min)
+    setMaxTotal(TOTAL_BOUNDS.max)
+    setSort('number-asc')
+    setVisibleCount(CHUNK_SIZE)
+  }
+
   const toggleView = useCallback(() => {
     const next: ViewMode = viewMode === 'grid' ? 'list' : 'grid'
     setViewMode(next)
@@ -92,6 +135,11 @@ export function PokedexPage() {
               <Button variant="outline" size="sm" aria-label="Abrir filtros">
                 <Filter className="size-4" />
                 Filtros
+                {activeFilterCount > 0 && (
+                  <span className="flex size-5 items-center justify-center rounded-full bg-foreground text-[11px] text-background" aria-label={`${activeFilterCount} filtros activos`}>
+                    {activeFilterCount}
+                  </span>
+                )}
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="overflow-y-auto">
@@ -206,6 +254,15 @@ export function PokedexPage() {
                   <option value="total-desc">Mayor total</option>
                   <option value="total-asc">Menor total</option>
                 </select>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="mt-5 w-full"
+                  disabled={activeFilterCount === 0}
+                  onClick={resetAllFilters}
+                >
+                  Limpiar todos los filtros
+                </Button>
               </section>
             </SheetContent>
           </Sheet>
@@ -224,16 +281,52 @@ export function PokedexPage() {
         </div>
       </div>
 
-      <p className="mb-4 text-muted-foreground">
-        {filteredItems.length} especies{generation != null
+      <p className="text-muted-foreground" aria-live="polite">
+        {filteredItems.length} {filteredItems.length === 1 ? 'especie' : 'especies'}{generation != null
           ? ` de la Generación ${['I', 'II', 'III', 'IV', 'V'][generation - 1]}`
           : ' de las Generaciones I–V'}. Toca una para ver su ficha completa.
       </p>
 
+      {activeFilterCount > 0 && (
+        <div className="my-3 flex flex-wrap items-center gap-2" aria-label="Filtros activos">
+          {generation != null && (
+            <FilterChip label={`Generación ${['I', 'II', 'III', 'IV', 'V'][generation - 1]}`} onRemove={() => selectGeneration(null)} />
+          )}
+          {primaryType != null && (
+            <FilterChip label={TYPE_LABELS[primaryType]} onRemove={removePrimaryType} />
+          )}
+          {secondaryType != null && (
+            <FilterChip label={TYPE_LABELS[secondaryType]} onRemove={() => {
+              setSecondaryType(null)
+              setVisibleCount(CHUNK_SIZE)
+            }} />
+          )}
+          {hasCustomTotal && (
+            <FilterChip label={`Total ${minTotal}–${maxTotal}`} onRemove={() => {
+              setMinTotal(TOTAL_BOUNDS.min)
+              setMaxTotal(TOTAL_BOUNDS.max)
+              setVisibleCount(CHUNK_SIZE)
+            }} />
+          )}
+          {sort !== 'number-asc' && (
+            <FilterChip label={`Orden: ${SORT_LABELS[sort]}`} onRemove={() => {
+              setSort('number-asc')
+              setVisibleCount(CHUNK_SIZE)
+            }} />
+          )}
+          <Button type="button" variant="ghost" size="xs" onClick={resetAllFilters}>
+            Limpiar todo
+          </Button>
+        </div>
+      )}
+
+      {activeFilterCount === 0 && <div className="mb-4" />}
+
       {filteredItems.length === 0 && (
         <div className="rounded-xl border border-dashed border-border p-8 text-center" role="status">
-          <p className="font-medium">No hay especies con este filtro.</p>
-          <Button type="button" variant="outline" size="sm" className="mt-3" onClick={() => selectGeneration(null)}>Limpiar filtro</Button>
+          <p className="font-medium">No hay especies con estos filtros.</p>
+          <p className="mt-1 text-sm text-muted-foreground">Prueba a quitar un tipo o ampliar el rango de stats.</p>
+          <Button type="button" variant="outline" size="sm" className="mt-3" onClick={resetAllFilters}>Limpiar todos los filtros</Button>
         </div>
       )}
 
