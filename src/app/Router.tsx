@@ -1,3 +1,4 @@
+import { lazy, Suspense, type ReactNode } from 'react'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import { Layout } from './Layout'
 import { SearchPage } from '../pages/SearchPage'
@@ -6,12 +7,29 @@ import { FavoritesPage } from '../pages/FavoritesPage'
 import { SettingsPage } from '../pages/SettingsPage'
 import { ComparePage } from '../pages/ComparePage'
 import { PokemonDetailPage } from '../pages/PokemonDetailPage'
-import { ManualsLandingPage } from '../pages/ManualsLandingPage'
 import { MorePage } from '../pages/MorePage'
 import { NotFoundPage } from '../pages/NotFoundPage'
-import { ManualsLayout } from '@/features/manuals/ManualsLayout'
-import { ManualEntryPage } from '@/features/manuals/ManualEntryPage'
-import { ManualNotFoundPage } from '@/features/manuals/ManualNotFoundPage'
+
+const ManualsLayout = lazy(async () => ({
+  default: (await import('@/features/manuals/ManualsLayout')).ManualsLayout,
+}))
+const ManualsLandingPage = lazy(async () => ({
+  default: (await import('@/pages/ManualsLandingPage')).ManualsLandingPage,
+}))
+const ManualEntryPage = lazy(async () => ({
+  default: (await import('@/features/manuals/ManualEntryPage')).ManualEntryPage,
+}))
+const ManualNotFoundPage = lazy(async () => ({
+  default: (await import('@/features/manuals/ManualNotFoundPage')).ManualNotFoundPage,
+}))
+
+function DeferredRoute({ children }: { children: ReactNode }) {
+  return (
+    <Suspense fallback={<p className="text-sm text-muted-foreground" role="status">Cargando Manuales…</p>}>
+      {children}
+    </Suspense>
+  )
+}
 import { UiDemo } from '../components/ui-demo'
 
 const router = createBrowserRouter([
@@ -24,14 +42,14 @@ const router = createBrowserRouter([
       { path: 'pokemon/:speciesId', element: <PokemonDetailPage /> },
       {
         path: 'manuales',
-        element: <ManualsLayout />,
+        element: <DeferredRoute><ManualsLayout /></DeferredRoute>,
         children: [
-          { index: true, element: <ManualsLandingPage /> },
-          { path: 'empezar/:tema', element: <ManualEntryPage /> },
-          { path: 'entrenador/:tema', element: <ManualEntryPage /> },
-          { path: 'mundo-misterioso/:tema', element: <ManualEntryPage /> },
-          { path: 'otros', element: <ManualEntryPage /> },
-          { path: '*', element: <ManualNotFoundPage /> },
+          { index: true, element: <DeferredRoute><ManualsLandingPage /></DeferredRoute> },
+          { path: 'empezar/:tema', element: <DeferredRoute><ManualEntryPage /></DeferredRoute> },
+          { path: 'entrenador/:tema', element: <DeferredRoute><ManualEntryPage /></DeferredRoute> },
+          { path: 'mundo-misterioso/:tema', element: <DeferredRoute><ManualEntryPage /></DeferredRoute> },
+          { path: 'otros', element: <DeferredRoute><ManualEntryPage /></DeferredRoute> },
+          { path: '*', element: <DeferredRoute><ManualNotFoundPage /></DeferredRoute> },
         ],
       },
       { path: 'pokedex', element: <PokedexPage /> },

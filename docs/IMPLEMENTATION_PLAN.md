@@ -1,6 +1,6 @@
 # PokéApp — Plan maestro de finalización e integración con el manual
 
-**Estado:** canónico para la ejecución; fases 0 y 1 completadas  
+**Estado:** canónico para la ejecución; fases 0–2 completadas
 **Fecha:** 6 de agosto de 2026  
 **Regla principal:** no se empieza una fase hasta que la anterior cumpla todos sus criterios de salida.
 
@@ -224,8 +224,8 @@ PMD y los cuatro spin-offs no tienen un contexto de juego equivalente en PokeAPI
 |---:|---|---|
 | 0 | Completada | Fuente canónica, tests base y calidad inicial bajo control. |
 | 1 | Completada | Red, caché e índice fiables. |
-| 2 | En curso | Manuales 21–86 publicados y accesibles offline. |
-| 3 | Pendiente | Favoritos y Comparar completos. |
+| 2 | Completada | Manuales 21–86 publicados y accesibles offline. |
+| 3 | En curso | Favoritos y Comparar completos. |
 | 4 | Pendiente | Filtros sobre todo Gen I–V sin ráfagas de red. |
 | 5 | Pendiente | Motor histórico y recursos `R-01/R-02`. |
 | 6 | Pendiente | Cinco fichas de saga principal. |
@@ -516,5 +516,8 @@ Las pruebas unitarias usan fixtures locales. Un smoke test real de PokeAPI puede
 - **Fase 0 cerrada:** fuente de 156 páginas copiada y verificada, Git local, lint/tipos/tests/build y documentación base.
 - **Fase 1 cerrada:** DTOs normalizados antes de caché, caché v2 y migración, cuota observable, cliente con deduplicación/concurrencia/timeout/retry/abort, índice íntegro y reanudable, rutas estrictas y ficha independiente del índice.
 - **Verificación de cierre de Fase 1:** 43 pruebas automatizadas, lint, TypeScript y build correctos; smoke local real de PokeAPI y UI a 390×844 sin errores de consola.
+- **Fase 2 cerrada:** navegación responsive y hub Más, rutas anidadas, migas, índice, anterior/siguiente y 404; modelo y generador determinista de las páginas 21–156; componentes editoriales; contenido 21–86, búsqueda local, progreso opcional y code splitting.
+- **Verificación de cierre de Fase 2:** 74 pruebas automatizadas, `manual:check`, lint, TypeScript y build correctos; build local profundo a 390×844 sin errores, PokeAPI bloqueada sin impedir la lectura y paquete inicial reducido de 540 kB a 423 kB.
+- **Restricción de entrega:** por instrucción del usuario no se hará ningún despliegue remoto. Los puntos de las fases 8–9 que exijan un dominio HTTPS o publicar hosting quedarán sin ejecutar salvo autorización posterior; el resto se implementará y verificará en local.
 
-La próxima acción autorizada es exclusivamente el primer punto de la **Fase 2**: implementar la navegación móvil de cinco destinos y el hub `Más`, conservando accesos directos a Comparar y Ajustes en escritorio.
+La próxima acción autorizada es exclusivamente el primer punto de la **Fase 3**: crear el store versionado y validado de Favoritos por ID de especie.

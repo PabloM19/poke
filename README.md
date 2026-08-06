@@ -13,18 +13,20 @@ encuentros.
 
 Disponible:
 
-- Construcción de un índice local de especies Gen I–V.
+- Cliente PokeAPI normalizado con caché v2, retry, timeout y concurrencia limitada.
+- Construcción reanudable de un índice local íntegro de especies Gen I–V.
 - Búsqueda por nombre español o número.
 - Pokédex en cuadrícula o lista.
-- Ficha básica de Pokémon.
+- Ficha básica de Pokémon accesible directamente sin índice.
+- Manuales 21–86 con rutas profundas, búsqueda, progreso y referencias físicas.
+- Navegación móvil de cinco destinos y hub Más.
 - Tema claro/oscuro.
 - Diagnóstico local de PokeAPI.
 
 En ejecución según el plan maestro:
 
-- Fiabilidad de caché, red e índice.
-- Manuales generales y por juego.
 - Favoritos, comparación y filtros.
+- Manuales por juego y recursos digitales.
 - Tipos históricos y recursos digitales.
 - Integración con el manual físico mediante rutas QR estables.
 
@@ -59,7 +61,9 @@ npm test             # Vitest + Testing Library
 npm run test:watch   # tests en modo watch
 npm run build        # build local de producción
 npm run preview      # previsualizar el build local
-npm run check        # lint + typecheck + tests + build
+npm run manual:generate # regenerar snapshot tipado desde el Markdown
+npm run manual:check # comprobar que el snapshot editorial está sincronizado
+npm run check        # manual + lint + typecheck + tests + build
 ```
 
 ## Arquitectura
@@ -68,6 +72,8 @@ npm run check        # lint + typecheck + tests + build
 src/
   app/          router, layout y providers
   components/   componentes compartidos y UI
+  features/
+    manuals/    contenido, generador, rutas, búsqueda y progreso
   hooks/        integración de datos con React
   lib/
     pokeapi/    HTTP, modelos y servicios PokeAPI
@@ -77,6 +83,7 @@ src/
   test/         setup y fixtures
 docs/
   sources/      fuente editorial versionada del manual
+scripts/        generadores locales reproducibles
 ```
 
 Reglas principales:
@@ -95,3 +102,7 @@ La copia canónica se encuentra en
 
 Los números de página se tratan como referencias de impresión, nunca como IDs
 de ruta permanentes.
+
+`npm run manual:generate` extrae exactamente las páginas 21–156 y genera un
+snapshot determinista. `npm run manual:check` falla si la fuente y el snapshot
+dejan de coincidir.
