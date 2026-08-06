@@ -1,7 +1,7 @@
 /**
  * Capa de almacenamiento y cache.
  * - Settings: preferencias (prefijo pokeapp:, sin versión).
- * - Cache: datos con TTL (prefijo pokeapp:v2:, versionado).
+ * - Cache: datos con TTL (prefijo pokeapp:v3:, versionado).
  */
 
 export {

@@ -10,4 +10,4 @@ export const POKEAPI_BASE_URL = 'https://pokeapi.co/api/v2'
 export const APP_STORAGE_PREFIX = 'pokeapp:'
 
 /** Versión del esquema de cache; incrementar al cambiar formato. */
-export const CACHE_VERSION = 'v2'
+export const CACHE_VERSION = 'v3'

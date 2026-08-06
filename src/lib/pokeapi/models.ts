@@ -29,6 +29,11 @@ export interface PokemonStat {
   stat: NamedAPIResource
 }
 
+export interface PokemonStatPast {
+  generation: NamedAPIResource
+  stats: PokemonStat[]
+}
+
 export interface PokemonTypePast {
   generation: NamedAPIResource
   types: PokemonType[]
@@ -42,6 +47,7 @@ export interface Pokemon {
   types: PokemonType[]
   sprites: PokemonSprites
   past_types: PokemonTypePast[]
+  past_stats: PokemonStatPast[]
 }
 
 /** Nombre en un idioma. */

@@ -13,7 +13,7 @@ encuentros.
 
 Disponible:
 
-- Cliente PokeAPI normalizado con caché v2, retry, timeout y concurrencia limitada.
+- Cliente PokeAPI normalizado con caché v3, retry, timeout y concurrencia limitada.
 - Construcción reanudable de un índice local íntegro de especies Gen I–V.
 - Búsqueda por nombre español o número.
 - Pokédex en cuadrícula o lista con snapshot local de 649 especies.

@@ -26,6 +26,7 @@ export const pikachuPokemonFixture: Pokemon = {
     },
   ],
   past_types: [],
+  past_stats: [],
 }
 
 export const pikachuSpeciesFixture: PokemonSpecies = {

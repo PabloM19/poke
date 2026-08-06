@@ -35,6 +35,7 @@ function pokemon(id: number, name: string, hp: number): Pokemon {
       stat: { name: statName, url: '' },
     })),
     past_types: [],
+    past_stats: [],
   }
 }
 

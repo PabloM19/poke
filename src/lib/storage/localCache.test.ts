@@ -13,9 +13,9 @@ describe('localCache', () => {
     clearCacheWriteIssue()
   })
 
-  it('usa la versión v2 en las claves', () => {
+  it('usa la versión v3 en las claves', () => {
     expect(makeKey(['pokemon', 'pikachu'])).toBe(
-      'pokeapp:v2:pokemon:pikachu'
+      'pokeapp:v3:pokemon:pikachu'
     )
   })
 

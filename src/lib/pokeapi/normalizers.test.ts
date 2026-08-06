@@ -42,6 +42,41 @@ describe('normalizadores PokeAPI', () => {
     expect(normalized).not.toHaveProperty('flavor_text_entries')
   })
 
+  it('normaliza overrides históricos de stats sin conservar campos extra', () => {
+    const normalized = normalizePokemon({
+      ...pikachuPokemonFixture,
+      past_stats: [{
+        generation: {
+          name: 'generation-v',
+          url: 'https://pokeapi.co/api/v2/generation/5/',
+        },
+        stats: [{
+          base_stat: 30,
+          effort: 99,
+          stat: {
+            name: 'defense',
+            url: 'https://pokeapi.co/api/v2/stat/3/',
+          },
+        }],
+      }],
+    }, '/pokemon/pikachu')
+
+    expect(normalized.past_stats).toEqual([{
+      generation: {
+        name: 'generation-v',
+        url: 'https://pokeapi.co/api/v2/generation/5/',
+      },
+      stats: [{
+        base_stat: 30,
+        stat: {
+          name: 'defense',
+          url: 'https://pokeapi.co/api/v2/stat/3/',
+        },
+      }],
+    }])
+    expect(normalized.past_stats[0].stats[0]).not.toHaveProperty('effort')
+  })
+
   it('rechaza respuestas con una estructura inválida', () => {
     expect(() =>
       normalizePokemon({ id: '25' }, '/pokemon/pikachu')

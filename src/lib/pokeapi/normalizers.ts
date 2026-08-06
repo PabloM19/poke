@@ -4,6 +4,7 @@ import type {
   LanguageName,
   NamedAPIResource,
   Pokemon,
+  PokemonStat,
   PokemonSpecies,
   PokemonType,
   Type,
@@ -81,6 +82,18 @@ function normalizePokemonType(
   }
 }
 
+function normalizePokemonStat(
+  value: unknown,
+  path: string,
+  field: string
+): PokemonStat {
+  const stat = asRecord(value, path, field)
+  return {
+    base_stat: asNumber(stat.base_stat, path, `${field}.base_stat`),
+    stat: normalizeNamedResource(stat.stat, path, `${field}.stat`),
+  }
+}
+
 function normalizeLanguageName(
   value: unknown,
   path: string,
@@ -132,21 +145,9 @@ export function normalizePokemon(raw: unknown, path: string): Pokemon {
         'pokemon.sprites.front_default'
       ),
     },
-    stats: asArray(record.stats, path, 'pokemon.stats').map((entry, index) => {
-      const stat = asRecord(entry, path, `pokemon.stats[${index}]`)
-      return {
-        base_stat: asNumber(
-          stat.base_stat,
-          path,
-          `pokemon.stats[${index}].base_stat`
-        ),
-        stat: normalizeNamedResource(
-          stat.stat,
-          path,
-          `pokemon.stats[${index}].stat`
-        ),
-      }
-    }),
+    stats: asArray(record.stats, path, 'pokemon.stats').map((entry, index) =>
+      normalizePokemonStat(entry, path, `pokemon.stats[${index}]`)
+    ),
     types: asArray(record.types, path, 'pokemon.types').map((entry, index) =>
       normalizePokemonType(entry, path, `pokemon.types[${index}]`)
     ),
@@ -168,6 +169,29 @@ export function normalizePokemon(raw: unknown, path: string): Pokemon {
                 type,
                 path,
                 `pokemon.past_types[${index}].types[${typeIndex}]`
+              )
+            ),
+          }
+      })
+      : [],
+    past_stats: Array.isArray(record.past_stats)
+      ? record.past_stats.map((entry, index) => {
+          const past = asRecord(entry, path, `pokemon.past_stats[${index}]`)
+          return {
+            generation: normalizeNamedResource(
+              past.generation,
+              path,
+              `pokemon.past_stats[${index}].generation`
+            ),
+            stats: asArray(
+              past.stats,
+              path,
+              `pokemon.past_stats[${index}].stats`
+            ).map((stat, statIndex) =>
+              normalizePokemonStat(
+                stat,
+                path,
+                `pokemon.past_stats[${index}].stats[${statIndex}]`
               )
             ),
           }

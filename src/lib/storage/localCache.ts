@@ -43,7 +43,7 @@ export function clearCacheWriteIssue(): void {
 }
 
 /**
- * Construye la key de cache: pokeapp:v2:part1:part2:...
+ * Construye la key de cache: pokeapp:v3:part1:part2:...
  */
 export function makeKey(parts: string[]): string {
   return `${APP_STORAGE_PREFIX}${CACHE_VERSION}:${parts.join(':')}`
