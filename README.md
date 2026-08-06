@@ -19,7 +19,10 @@ Disponible:
 - Pokédex en cuadrícula o lista con snapshot local de 649 especies.
 - Filtros combinables y compartibles por generación, uno/dos tipos, total y orden.
 - Ficha básica de Pokémon accesible directamente sin índice.
+- Contexto persistente de Perla, Platino, HeartGold, Negro y Negro 2.
+- Tipos, estadísticas y relaciones defensivas históricas en ficha y Comparar.
 - Manuales 21–86 con rutas profundas, búsqueda, progreso y referencias físicas.
+- Recursos locales R-01 (tabla de tipos) y R-02 (estados y efectos).
 - Favoritos persistentes con carga, error, retry y eliminación.
 - Comparación compartible de 2–4 Pokémon, adaptada a móvil.
 - Navegación móvil de cinco destinos y hub Más.
@@ -29,7 +32,6 @@ Disponible:
 En ejecución según el plan maestro:
 
 - Manuales por juego y recursos digitales.
-- Tipos históricos y recursos digitales.
 - Integración con el manual físico mediante rutas QR estables.
 
 Consulta [docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) para el orden,
@@ -67,6 +69,8 @@ npm run manual:generate # regenerar snapshot tipado desde el Markdown
 npm run manual:check # comprobar que el snapshot editorial está sincronizado
 npm run pokedex:summary:generate # actualizar el snapshot Pokédex desde PokeAPI
 npm run pokedex:summary:check # validar las 649 entradas distribuidas
+npm run pokedex:types:generate # actualizar el snapshot de relaciones de tipos
+npm run pokedex:types:check # validar las 18 relaciones distribuidas
 npm run check        # snapshots + lint + typecheck + tests + build
 ```
 
@@ -78,6 +82,9 @@ src/
   components/   componentes compartidos y UI
   features/
     manuals/    contenido, generador, rutas, búsqueda y progreso
+    games/      contexto persistente de los cinco juegos principales
+    historical/ selectores y matriz histórica de tipos y estadísticas
+    localization/ terminología técnica en español
     pokedex/    filtros, URL y snapshot resumen versionado
   hooks/        integración de datos con React
   lib/
