@@ -1,6 +1,6 @@
 # PokéApp — Plan maestro de finalización e integración con el manual
 
-**Estado:** canónico para la ejecución  
+**Estado:** canónico para la ejecución; fases 0 y 1 completadas  
 **Fecha:** 6 de agosto de 2026  
 **Regla principal:** no se empieza una fase hasta que la anterior cumpla todos sus criterios de salida.
 
@@ -220,18 +220,18 @@ PMD y los cuatro spin-offs no tienen un contexto de juego equivalente en PokeAPI
 
 ## 7. Fases de ejecución
 
-| Fase | Resultado principal |
-|---:|---|
-| 0 | Fuente canónica, tests base y calidad inicial bajo control. |
-| 1 | Red, caché e índice fiables. |
-| 2 | Manuales 21–86 publicados y accesibles offline. |
-| 3 | Favoritos y Comparar completos. |
-| 4 | Filtros sobre todo Gen I–V sin ráfagas de red. |
-| 5 | Motor histórico y recursos `R-01/R-02`. |
-| 6 | Cinco fichas de saga principal. |
-| 7 | Dos fichas PMD, cuatro minifichas y `R-03…R-06`. |
-| 8 | QR y vínculo bidireccional con el manual físico. |
-| 9 | Accesibilidad, offline, E2E, despliegue y cierre. |
+| Fase | Estado | Resultado principal |
+|---:|---|---|
+| 0 | Completada | Fuente canónica, tests base y calidad inicial bajo control. |
+| 1 | Completada | Red, caché e índice fiables. |
+| 2 | En curso | Manuales 21–86 publicados y accesibles offline. |
+| 3 | Pendiente | Favoritos y Comparar completos. |
+| 4 | Pendiente | Filtros sobre todo Gen I–V sin ráfagas de red. |
+| 5 | Pendiente | Motor histórico y recursos `R-01/R-02`. |
+| 6 | Pendiente | Cinco fichas de saga principal. |
+| 7 | Pendiente | Dos fichas PMD, cuatro minifichas y `R-03…R-06`. |
+| 8 | Pendiente | QR y vínculo bidireccional con el manual físico. |
+| 9 | Pendiente | Accesibilidad, offline, E2E, despliegue y cierre. |
 
 ### Fase 0 — Congelar la fuente y crear la red de seguridad
 
@@ -511,6 +511,10 @@ Las pruebas unitarias usan fixtures locales. Un smoke test real de PokeAPI puede
 - **Datos ausentes en PokeAPI:** se resuelven con overrides locales documentados, nunca con inferencias silenciosas.
 - **Volumen de encuentros/learnsets:** se cargan bajo demanda o mediante snapshots; no se precargan en masa en el navegador.
 
-## 10. Próxima acción autorizada por este plan
+## 10. Registro de ejecución y próxima acción
 
-La próxima ejecución debe comenzar exclusivamente por **Fase 0**. No se añadirá todavía la pestaña Manuales ni se implementarán favoritos hasta que la red de seguridad, la fuente canónica y la calidad base estén cerradas.
+- **Fase 0 cerrada:** fuente de 156 páginas copiada y verificada, Git local, lint/tipos/tests/build y documentación base.
+- **Fase 1 cerrada:** DTOs normalizados antes de caché, caché v2 y migración, cuota observable, cliente con deduplicación/concurrencia/timeout/retry/abort, índice íntegro y reanudable, rutas estrictas y ficha independiente del índice.
+- **Verificación de cierre de Fase 1:** 43 pruebas automatizadas, lint, TypeScript y build correctos; smoke local real de PokeAPI y UI a 390×844 sin errores de consola.
+
+La próxima acción autorizada es exclusivamente el primer punto de la **Fase 2**: implementar la navegación móvil de cinco destinos y el hub `Más`, conservando accesos directos a Comparar y Ajustes en escritorio.

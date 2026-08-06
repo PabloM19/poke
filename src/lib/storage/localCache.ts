@@ -12,8 +12,38 @@ export interface CacheEntry<T> {
   expiresAt: number
 }
 
+export interface CacheWriteIssue {
+  key: string
+  reason: 'quota' | 'unavailable'
+  timestamp: number
+}
+
+let lastWriteIssue: CacheWriteIssue | null = null
+
+function isQuotaError(error: unknown): boolean {
+  return (
+    error instanceof DOMException &&
+    (error.name === 'QuotaExceededError' || error.code === 22)
+  )
+}
+
+function recordWriteIssue(
+  key: string,
+  reason: CacheWriteIssue['reason']
+): void {
+  lastWriteIssue = { key, reason, timestamp: Date.now() }
+}
+
+export function getCacheWriteIssue(): CacheWriteIssue | null {
+  return lastWriteIssue
+}
+
+export function clearCacheWriteIssue(): void {
+  lastWriteIssue = null
+}
+
 /**
- * Construye la key de cache: pokeapp:v1:part1:part2:...
+ * Construye la key de cache: pokeapp:v2:part1:part2:...
  */
 export function makeKey(parts: string[]): string {
   return `${APP_STORAGE_PREFIX}${CACHE_VERSION}:${parts.join(':')}`
@@ -21,21 +51,34 @@ export function makeKey(parts: string[]): string {
 
 function clearExpiredEntries(): void {
   const keysToRemove: string[] = []
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i)
-    if (key == null || !key.startsWith(CACHE_PREFIX)) continue
-    try {
+  try {
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i)
+      if (key == null || !key.startsWith(CACHE_PREFIX)) continue
       const raw = localStorage.getItem(key)
       if (raw == null) continue
-      const parsed = JSON.parse(raw) as { expiresAt?: number }
-      if (typeof parsed.expiresAt === 'number' && Date.now() > parsed.expiresAt) {
+      try {
+        const parsed = JSON.parse(raw) as { expiresAt?: number }
+        if (
+          typeof parsed.expiresAt === 'number' &&
+          Date.now() > parsed.expiresAt
+        ) {
+          keysToRemove.push(key)
+        }
+      } catch {
         keysToRemove.push(key)
       }
-    } catch {
-      keysToRemove.push(key)
     }
+  } catch {
+    return
   }
-  keysToRemove.forEach((k) => localStorage.removeItem(k))
+  keysToRemove.forEach((key) => {
+    try {
+      localStorage.removeItem(key)
+    } catch {
+      // best effort
+    }
+  })
 }
 
 /**
@@ -65,22 +108,28 @@ export function getCache<T>(key: string): CacheEntry<T> | null {
 /**
  * Guarda en cache con TTL. Si quota exceeded, limpia expiradas y reintenta una vez.
  */
-export function setCache<T>(key: string, value: T, ttlMs: number): void {
+export function setCache<T>(key: string, value: T, ttlMs: number): boolean {
   const expiresAt = Date.now() + ttlMs
   const payload = JSON.stringify({ value, expiresAt })
 
   try {
     localStorage.setItem(key, payload)
+    if (lastWriteIssue?.key === key) clearCacheWriteIssue()
+    return true
   } catch (e) {
-    const isQuota = e instanceof DOMException && (e.name === 'QuotaExceededError' || e.code === 22)
-    if (isQuota) {
+    if (isQuotaError(e)) {
       clearExpiredEntries()
       try {
         localStorage.setItem(key, payload)
+        if (lastWriteIssue?.key === key) clearCacheWriteIssue()
+        return true
       } catch {
-        // fallback falló; no relanzar
+        recordWriteIssue(key, 'quota')
+        return false
       }
     }
+    recordWriteIssue(key, 'unavailable')
+    return false
   }
 }
 
@@ -98,9 +147,13 @@ export function removeCache(key: string): void {
  */
 export function clearCacheByPrefix(prefix: string): void {
   const keysToRemove: string[] = []
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i)
-    if (key != null && key.startsWith(prefix)) keysToRemove.push(key)
+  try {
+    for (let i = 0; i < localStorage.length; i++) {
+      const key = localStorage.key(i)
+      if (key != null && key.startsWith(prefix)) keysToRemove.push(key)
+    }
+  } catch {
+    return
   }
   keysToRemove.forEach((k) => {
     try {
@@ -109,4 +162,10 @@ export function clearCacheByPrefix(prefix: string): void {
       // ignore
     }
   })
+}
+
+/** Borra solo la caché API actual, sin tocar preferencias ni índices. */
+export function clearApiCache(): void {
+  clearCacheByPrefix(CACHE_PREFIX)
+  clearCacheWriteIssue()
 }

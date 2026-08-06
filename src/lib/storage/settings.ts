@@ -54,10 +54,20 @@ export function getStored<T>(key: string): T | null {
 }
 
 /** Set genérico con prefijo de app. */
-export function setStored<T>(key: string, value: T): void {
+export function setStored<T>(key: string, value: T): boolean {
   try {
     localStorage.setItem(prefixedKey(key), JSON.stringify(value))
+    return true
   } catch {
-    // ignore
+    return false
+  }
+}
+
+export function removeStored(key: string): boolean {
+  try {
+    localStorage.removeItem(prefixedKey(key))
+    return true
+  } catch {
+    return false
   }
 }

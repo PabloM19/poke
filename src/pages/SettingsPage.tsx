@@ -1,5 +1,10 @@
 import { useTheme } from '@/app/theme'
-import { getSetting, setSetting } from '@/lib/storage'
+import {
+  clearApiCache,
+  getCacheWriteIssue,
+  getSetting,
+  setSetting,
+} from '@/lib/storage'
 import {
   getGeneration,
   getPokemon,
@@ -8,7 +13,11 @@ import {
   getSpanishName,
   PokeApiError,
 } from '@/lib/pokeapi'
-import { buildSpeciesIndex, clearSpeciesIndex } from '@/lib/pokedex'
+import {
+  buildSpeciesIndex,
+  clearSpeciesIndex,
+  SpeciesIndexBuildError,
+} from '@/lib/pokedex'
 import { useSpeciesIndex } from '@/hooks/useSpeciesIndex'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
@@ -43,6 +52,8 @@ export function SettingsPage() {
   const [diagState, setDiagState] = useState<DiagState>('idle')
   const [diagResult, setDiagResult] = useState<DiagResult | null>(null)
   const [diagError, setDiagError] = useState<string | null>(null)
+  const [cacheIssue, setCacheIssue] = useState(() => getCacheWriteIssue())
+  const [cacheNotice, setCacheNotice] = useState<string | null>(null)
   const [buildRunning, setBuildRunning] = useState(false)
   const [buildProgress, setBuildProgress] = useState<{
     done: number
@@ -51,11 +62,16 @@ export function SettingsPage() {
     currentSpeciesName?: string
   } | null>(null)
   const [buildError, setBuildError] = useState<string | null>(null)
+  const [buildNotice, setBuildNotice] = useState<string | null>(null)
   const abortRef = useRef<AbortController | null>(null)
 
   useEffect(() => {
     setSetting('defaultView', defaultView)
   }, [defaultView])
+
+  useEffect(() => () => {
+    abortRef.current?.abort()
+  }, [])
 
   const handleThemeChange = useCallback(
     (checked: boolean) => {
@@ -74,6 +90,7 @@ export function SettingsPage() {
     setBuildRunning(true)
     setBuildProgress({ done: 0, total: 0, phase: 'generations' })
     setBuildError(null)
+    setBuildNotice(null)
     buildSpeciesIndex({
       maxGen: 5,
       concurrency: 6,
@@ -92,7 +109,11 @@ export function SettingsPage() {
         setBuildProgress((prev) => (prev ? { ...prev, phase: 'done' } : null))
       })
       .catch((e) => {
-        setBuildError(e instanceof Error ? e.message : 'Error al construir índice')
+        if (e instanceof SpeciesIndexBuildError && e.kind === 'abort') {
+          setBuildNotice(e.message)
+        } else {
+          setBuildError(e instanceof Error ? e.message : 'Error al construir índice')
+        }
       })
       .finally(() => {
         setBuildRunning(false)
@@ -109,6 +130,8 @@ export function SettingsPage() {
   const handleClearIndex = useCallback(() => {
     if (buildRunning) return
     clearSpeciesIndex()
+    setBuildError(null)
+    setBuildNotice(null)
     refresh()
   }, [buildRunning, refresh])
 
@@ -159,6 +182,13 @@ export function SettingsPage() {
       }
       setDiagState('error')
     }
+    setCacheIssue(getCacheWriteIssue())
+  }, [])
+
+  const handleClearApiCache = useCallback(() => {
+    clearApiCache()
+    setCacheIssue(null)
+    setCacheNotice('Caché de PokeAPI eliminada. Tus preferencias y el índice se conservan.')
   }, [])
 
   return (
@@ -283,6 +313,36 @@ export function SettingsPage() {
               <p className="text-sm text-destructive" role="alert">
                 {buildError}
               </p>
+            )}
+            {buildNotice != null && (
+              <p className="text-sm text-muted-foreground" role="status">
+                {buildNotice}
+              </p>
+            )}
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base">Almacenamiento de PokeAPI</CardTitle>
+            <CardDescription>
+              Los datos consultados se guardan temporalmente para ahorrar red.
+              Puedes vaciar esta caché sin borrar el tema, favoritos ni el índice.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            {cacheIssue != null && (
+              <p className="text-sm text-destructive" role="alert">
+                No se pudo guardar la caché local ({cacheIssue.reason === 'quota'
+                  ? 'espacio agotado'
+                  : 'almacenamiento no disponible'}). La app seguirá funcionando con conexión.
+              </p>
+            )}
+            <Button type="button" variant="outline" size="sm" onClick={handleClearApiCache}>
+              Vaciar caché API
+            </Button>
+            {cacheNotice != null && (
+              <p className="text-sm text-muted-foreground" role="status">{cacheNotice}</p>
             )}
           </CardContent>
         </Card>

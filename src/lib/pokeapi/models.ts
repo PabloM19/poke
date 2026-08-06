@@ -29,6 +29,11 @@ export interface PokemonStat {
   stat: NamedAPIResource
 }
 
+export interface PokemonTypePast {
+  generation: NamedAPIResource
+  types: PokemonType[]
+}
+
 /** Pokémon mínimo: id, nombre, stats, tipos, sprites. past_* opcionales para formas anteriores. */
 export interface Pokemon {
   id: number
@@ -36,8 +41,7 @@ export interface Pokemon {
   stats: PokemonStat[]
   types: PokemonType[]
   sprites: PokemonSprites
-  past_types?: Array<{ generation: NamedAPIResource; types: PokemonType[] }>
-  past_stats?: unknown
+  past_types: PokemonTypePast[]
 }
 
 /** Nombre en un idioma. */
@@ -53,13 +57,22 @@ export interface PokemonSpecies {
   names: LanguageName[]
   generation: NamedAPIResource
   varieties: Array<{ is_default: boolean; pokemon: NamedAPIResource }>
+  evolution_chain: { url: string } | null
 }
 
 /** Relaciones de daño de un tipo. */
 export interface TypeRelations {
+  double_damage_to: NamedAPIResource[]
+  half_damage_to: NamedAPIResource[]
+  no_damage_to: NamedAPIResource[]
   double_damage_from: NamedAPIResource[]
   half_damage_from: NamedAPIResource[]
   no_damage_from: NamedAPIResource[]
+}
+
+export interface TypeRelationsPast {
+  generation: NamedAPIResource
+  damage_relations: TypeRelations
 }
 
 /** Tipo (recurso /type): id, nombre, damage_relations. past_damage_relations opcional. */
@@ -67,7 +80,7 @@ export interface Type {
   id: number
   name: string
   damage_relations: TypeRelations
-  past_damage_relations?: unknown
+  past_damage_relations: TypeRelationsPast[]
 }
 
 /** Generación: id, nombre, especies y tipos de la generación. */

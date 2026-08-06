@@ -4,4 +4,9 @@
 
 export * from './indexTypes'
 export * from './indexStore'
-export { buildSpeciesIndex, type BuildSpeciesIndexOptions } from './indexBuilder'
+export {
+  buildSpeciesIndex,
+  SpeciesIndexBuildError,
+  type BuildSpeciesIndexOptions,
+  type SpeciesIndexBuildErrorKind,
+} from './indexBuilder'

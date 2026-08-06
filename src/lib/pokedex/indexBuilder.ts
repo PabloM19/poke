@@ -2,13 +2,37 @@
  * Construcción del índice de especies (Gen I–V) con progreso, reanudación y concurrencia limitada.
  */
 
-import { APP_STORAGE_PREFIX } from '../config'
-import { getStored, setStored } from '../storage'
-import { getGeneration, getPokemonSpecies, getSpanishName, getSpeciesIdFromUrl } from '../pokeapi'
-import { KEY_INDEX, KEY_META, KEY_PARTIAL } from './indexStore'
+import { getStored, removeStored, setStored } from '../storage'
+import {
+  getGeneration,
+  getPokemonSpecies,
+  getSpanishName,
+  getSpeciesIdFromUrl,
+  PokeApiError,
+} from '../pokeapi'
+import { KEY_INDEX, KEY_META, KEY_PARTIAL, SPECIES_INDEX_VERSION } from './indexStore'
 import type { SpeciesIndexItem, SpeciesIndexPartial } from './indexTypes'
 
 const SAVE_PARTIAL_EVERY = 20
+
+export type SpeciesIndexBuildErrorKind = 'abort' | 'incomplete' | 'storage'
+
+export class SpeciesIndexBuildError extends Error {
+  readonly kind: SpeciesIndexBuildErrorKind
+  readonly failedSpeciesIds: number[]
+
+  constructor(
+    message: string,
+    kind: SpeciesIndexBuildErrorKind,
+    failedSpeciesIds: number[] = []
+  ) {
+    super(message)
+    this.name = 'SpeciesIndexBuildError'
+    this.kind = kind
+    this.failedSpeciesIds = failedSpeciesIds
+    Object.setPrototypeOf(this, SpeciesIndexBuildError.prototype)
+  }
+}
 
 export interface BuildSpeciesIndexOptions {
   maxGen?: number
@@ -36,7 +60,9 @@ async function loadSpeciesRefs(
 ): Promise<SpeciesRef[]> {
   const byId = new Map<number, SpeciesRef>()
   for (let g = 1; g <= maxGen; g++) {
-    if (signal?.aborted) return []
+    if (signal?.aborted) {
+      throw new SpeciesIndexBuildError('Construcción cancelada', 'abort')
+    }
     const gen = await getGeneration(g, { signal })
     for (const ref of gen.pokemon_species) {
       const id = getSpeciesIdFromUrl(ref.url)
@@ -79,32 +105,32 @@ export async function buildSpeciesIndex(
     signal,
   } = options
 
-  let items: SpeciesIndexItem[] = []
-  let refs: SpeciesRef[]
-
+  onProgress?.({ done: 0, total: 0, phase: 'generations' })
+  const allRefs = await loadSpeciesRefs(maxGen, signal)
+  const expectedIds = new Set(allRefs.map((ref) => ref.id))
   const partial = getStored<SpeciesIndexPartial>(KEY_PARTIAL)
-  if (partial?.items?.length && partial.maxGen === maxGen) {
-    items = [...partial.items]
-    onProgress?.({ done: items.length, total: 0, phase: 'generations' })
-    refs = await loadSpeciesRefs(maxGen, signal)
-    const doneIds = new Set(items.map((i) => i.speciesId))
-    refs = refs.filter((r) => !doneIds.has(r.id))
-    onProgress?.({
-      done: items.length,
-      total: items.length + refs.length,
-      phase: 'species',
-    })
-  } else {
-    onProgress?.({ done: 0, total: 0, phase: 'generations' })
-    refs = await loadSpeciesRefs(maxGen, signal)
-    onProgress?.({ done: 0, total: refs.length, phase: 'species' })
-  }
-
-  const total = items.length + refs.length
+  const resumedItems = partial?.maxGen === maxGen && Array.isArray(partial.items)
+    ? partial.items.filter((item, index, source) =>
+        expectedIds.has(item.speciesId) &&
+        source.findIndex((candidate) => candidate.speciesId === item.speciesId) === index
+      )
+    : []
+  const items: SpeciesIndexItem[] = [...resumedItems]
+  const doneIds = new Set(items.map((item) => item.speciesId))
+  const refs = allRefs.filter((ref) => !doneIds.has(ref.id))
+  const total = allRefs.length
   let doneCount = items.length
+  const failedSpeciesIds: number[] = []
+
+  onProgress?.({ done: doneCount, total, phase: 'species' })
 
   const savePartial = () => {
-    setStored(KEY_PARTIAL, { items: [...items], maxGen })
+    if (!setStored(KEY_PARTIAL, { items: [...items], maxGen })) {
+      throw new SpeciesIndexBuildError(
+        'No hay espacio para guardar el progreso del índice',
+        'storage'
+      )
+    }
   }
 
   if (refs.length > 0) {
@@ -127,8 +153,10 @@ export async function buildSpeciesIndex(
               currentSpecies: ref.id,
               currentSpeciesName: item.nameEs,
             })
-          } catch {
-            // skip
+          } catch (error) {
+            if (error instanceof PokeApiError && error.kind === 'abort') continue
+            if (error instanceof SpeciesIndexBuildError) throw error
+            failedSpeciesIds.push(ref.id)
           }
         }
       })
@@ -137,22 +165,54 @@ export async function buildSpeciesIndex(
 
   if (signal?.aborted) {
     savePartial()
-    return items
+    throw new SpeciesIndexBuildError(
+      'Construcción cancelada; el progreso se ha guardado',
+      'abort'
+    )
+  }
+
+  if (failedSpeciesIds.length > 0) {
+    savePartial()
+    throw new SpeciesIndexBuildError(
+      `No se pudieron descargar ${failedSpeciesIds.length} especies; vuelve a intentarlo para reanudar`,
+      'incomplete',
+      failedSpeciesIds.sort((a, b) => a - b)
+    )
   }
 
   items.sort((a, b) => a.speciesId - b.speciesId)
-  setStored(KEY_INDEX, items)
-  setStored(KEY_META, {
+  const finalIds = new Set(items.map((item) => item.speciesId))
+  if (
+    items.length !== total ||
+    finalIds.size !== total ||
+    allRefs.some((ref) => !finalIds.has(ref.id))
+  ) {
+    savePartial()
+    throw new SpeciesIndexBuildError(
+      `El índice está incompleto (${items.length}/${total})`,
+      'incomplete'
+    )
+  }
+
+  if (!setStored(KEY_INDEX, items)) {
+    savePartial()
+    throw new SpeciesIndexBuildError('No hay espacio para guardar el índice', 'storage')
+  }
+  const metaSaved = setStored(KEY_META, {
     timestamp: Date.now(),
     maxGen,
     counts: { species: items.length },
-    version: 'v1',
+    version: SPECIES_INDEX_VERSION,
   })
-  try {
-    localStorage.removeItem(APP_STORAGE_PREFIX + KEY_PARTIAL)
-  } catch {
-    setStored(KEY_PARTIAL, null as unknown as SpeciesIndexPartial)
+  if (!metaSaved) {
+    removeStored(KEY_INDEX)
+    savePartial()
+    throw new SpeciesIndexBuildError(
+      'No hay espacio para guardar los metadatos del índice',
+      'storage'
+    )
   }
+  removeStored(KEY_PARTIAL)
   onProgress?.({ done: items.length, total: items.length, phase: 'done' })
   return items
 }

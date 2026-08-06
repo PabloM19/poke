@@ -4,6 +4,12 @@
 
 import { getCache, makeKey, setCache } from '../storage'
 import { fetchJson } from './http'
+import {
+  normalizeGeneration,
+  normalizePokemon,
+  normalizePokemonSpecies,
+  normalizeType,
+} from './normalizers'
 import type { Generation, Pokemon, PokemonSpecies, Type } from './models'
 
 const TTL_7_DAYS_MS = 7 * 24 * 60 * 60 * 1000
@@ -26,9 +32,11 @@ export async function getGeneration(
   const cached = getCache<Generation>(key)
   if (cached) return cached.value
 
-  const data = await fetchJson<Generation>(`/generation/${idOrName}`, {
+  const path = `/generation/${idOrName}`
+  const raw = await fetchJson<unknown>(path, {
     signal: opts?.signal,
   })
+  const data = normalizeGeneration(raw, path)
   setCache(key, data, opts?.ttlMs ?? TTL_7_DAYS_MS)
   return data
 }
@@ -41,9 +49,11 @@ export async function getType(
   const cached = getCache<Type>(key)
   if (cached) return cached.value
 
-  const data = await fetchJson<Type>(`/type/${idOrName}`, {
+  const path = `/type/${idOrName}`
+  const raw = await fetchJson<unknown>(path, {
     signal: opts?.signal,
   })
+  const data = normalizeType(raw, path)
   setCache(key, data, opts?.ttlMs ?? TTL_7_DAYS_MS)
   return data
 }
@@ -56,9 +66,11 @@ export async function getPokemon(
   const cached = getCache<Pokemon>(key)
   if (cached) return cached.value
 
-  const data = await fetchJson<Pokemon>(`/pokemon/${idOrName}`, {
+  const path = `/pokemon/${idOrName}`
+  const raw = await fetchJson<unknown>(path, {
     signal: opts?.signal,
   })
+  const data = normalizePokemon(raw, path)
   setCache(key, data, opts?.ttlMs ?? TTL_30_DAYS_MS)
   return data
 }
@@ -71,9 +83,11 @@ export async function getPokemonSpecies(
   const cached = getCache<PokemonSpecies>(key)
   if (cached) return cached.value
 
-  const data = await fetchJson<PokemonSpecies>(`/pokemon-species/${idOrName}`, {
+  const path = `/pokemon-species/${idOrName}`
+  const raw = await fetchJson<unknown>(path, {
     signal: opts?.signal,
   })
+  const data = normalizePokemonSpecies(raw, path)
   setCache(key, data, opts?.ttlMs ?? TTL_30_DAYS_MS)
   return data
 }

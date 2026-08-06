@@ -15,7 +15,7 @@ export interface SpeciesIndexMeta {
   timestamp: number
   maxGen: number
   counts: { species: number }
-  version: string
+  version: 'v2'
 }
 
 export interface SpeciesIndexPartial {

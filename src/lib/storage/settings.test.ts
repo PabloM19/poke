@@ -16,7 +16,7 @@ describe('settings', () => {
   })
 
   it('persiste datos genéricos bajo el namespace de la app', () => {
-    setStored('test:value', { ok: true })
+    expect(setStored('test:value', { ok: true })).toBe(true)
 
     expect(getStored<{ ok: boolean }>('test:value')).toEqual({ ok: true })
   })

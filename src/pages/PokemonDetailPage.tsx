@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { useSpeciesIndex } from '@/hooks/useSpeciesIndex'
 import {
   getPokemon,
   getPokemonSpecies,
   getSpanishName,
+  PokeApiError,
 } from '@/lib/pokeapi'
+import { parseSpeciesIdParam } from '@/lib/routing/speciesId'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import {
@@ -48,34 +49,28 @@ function statLabel(name: string): string {
 
 export function PokemonDetailPage() {
   const { speciesId: speciesIdParam } = useParams<{ speciesId: string }>()
-  const { index, status: indexStatus, refresh } = useSpeciesIndex()
   const [requestResult, setRequestResult] =
     useState<DetailRequestResult | null>(null)
 
-  const speciesId = speciesIdParam != null ? parseInt(speciesIdParam, 10) : NaN
-  const invalidId = !Number.isInteger(speciesId) || speciesId < 1
-  const item = invalidId
-    ? null
-    : index.find((candidate) => candidate.speciesId === speciesId) ?? null
-  const requestKey =
-    indexStatus === 'ready' && item
-      ? `${speciesId}:${item.defaultPokemonName}`
-      : null
+  const speciesId = parseSpeciesIdParam(speciesIdParam)
+  const invalidId = speciesId == null
+  const requestKey = speciesId == null ? null : String(speciesId)
 
   useEffect(() => {
-    refresh()
-  }, [refresh])
+    if (!requestKey || speciesId == null) return
 
-  useEffect(() => {
-    if (!requestKey || !item) return
-
-    let cancelled = false
-    Promise.all([
-      getPokemonSpecies(speciesId),
-      getPokemon(item.defaultPokemonName),
-    ])
-      .then(([species, pokemon]) => {
-        if (cancelled) return
+    const controller = new AbortController()
+    const load = async () => {
+      try {
+        const species = await getPokemonSpecies(speciesId, {
+          signal: controller.signal,
+        })
+        const variety = species.varieties.find((candidate) => candidate.is_default)
+          ?? species.varieties[0]
+        const pokemon = await getPokemon(variety?.pokemon.name ?? species.name, {
+          signal: controller.signal,
+        })
+        if (controller.signal.aborted) return
         const nameEs = getSpanishName(species) ?? species.name
         const spriteUrl = pokemon.sprites?.front_default ?? null
         const types = pokemon.types?.map((t) => t.type.name) ?? []
@@ -101,48 +96,34 @@ export function PokemonDetailPage() {
             otherNames,
           },
         })
-      })
-      .catch(() => {
-        if (!cancelled) {
-          setRequestResult({
-            key: requestKey,
-            status: 'error',
-            message: 'Error al cargar los datos.',
-          })
-        }
-      })
+      } catch (error) {
+        if (controller.signal.aborted ||
+            (error instanceof PokeApiError && error.kind === 'abort')) return
+        setRequestResult({
+          key: requestKey,
+          status: 'error',
+          message: error instanceof PokeApiError && error.status === 404
+            ? 'No existe ninguna especie con este identificador.'
+            : 'Error al cargar los datos. Comprueba tu conexión e inténtalo de nuevo.',
+        })
+      }
+    }
+
+    void load()
 
     return () => {
-      cancelled = true
+      controller.abort()
     }
-  }, [item, requestKey, speciesId])
+  }, [requestKey, speciesId])
 
-  if (indexStatus === 'missing' || invalidId) {
+  if (invalidId) {
     return (
       <>
         <h1 className="mb-2 text-2xl font-semibold text-foreground">
           Pokémon no disponible
         </h1>
         <p className="mb-4 text-muted-foreground">
-          {invalidId
-            ? 'Identificador no válido.'
-            : 'Aún no has descargado los datos. Construye el índice en Ajustes para ver fichas.'}
-        </p>
-        <Button asChild variant="outline" size="sm">
-          <Link to="/pokedex">Ir a Pokédex</Link>
-        </Button>
-      </>
-    )
-  }
-
-  if (indexStatus === 'ready' && !item) {
-    return (
-      <>
-        <h1 className="mb-2 text-2xl font-semibold text-foreground">
-          Pokémon no disponible
-        </h1>
-        <p className="mb-4 text-muted-foreground">
-          Especie no encontrada en el índice.
+          Identificador no válido.
         </p>
         <Button asChild variant="outline" size="sm">
           <Link to="/pokedex">Ir a Pokédex</Link>

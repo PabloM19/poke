@@ -8,6 +8,12 @@ export { PokeApiError, type PokeApiErrorKind } from './errors'
 export * from './models'
 export * from './constants'
 export {
+  normalizeGeneration,
+  normalizePokemon,
+  normalizePokemonSpecies,
+  normalizeType,
+} from './normalizers'
+export {
   getGeneration,
   getType,
   getPokemon,

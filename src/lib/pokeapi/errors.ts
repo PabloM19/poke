@@ -2,7 +2,12 @@
  * Errores tipados del cliente PokeAPI.
  */
 
-export type PokeApiErrorKind = 'http' | 'parse' | 'network'
+export type PokeApiErrorKind =
+  | 'http'
+  | 'parse'
+  | 'network'
+  | 'abort'
+  | 'timeout'
 
 export class PokeApiError extends Error {
   readonly status?: number

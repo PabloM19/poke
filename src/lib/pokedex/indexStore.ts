@@ -7,9 +7,30 @@ import { APP_STORAGE_PREFIX } from '../config'
 import { getStored } from '../storage'
 import type { SpeciesIndexItem, SpeciesIndexMeta } from './indexTypes'
 
-export const KEY_INDEX = 'index:species:v1'
-export const KEY_META = 'index:species:meta:v1'
-export const KEY_PARTIAL = 'index:species:partial:v1'
+export const SPECIES_INDEX_VERSION = 'v2'
+export const KEY_INDEX = 'index:species:v2'
+export const KEY_META = 'index:species:meta:v2'
+export const KEY_PARTIAL = 'index:species:partial:v2'
+
+function isIndexItem(value: unknown): value is SpeciesIndexItem {
+  if (typeof value !== 'object' || value == null) return false
+  const item = value as Partial<SpeciesIndexItem>
+  return Number.isInteger(item.speciesId) && (item.speciesId ?? 0) > 0 &&
+    typeof item.speciesName === 'string' && typeof item.nameEs === 'string' &&
+    Number.isInteger(item.generationId) && (item.generationId ?? 0) > 0 &&
+    typeof item.defaultPokemonName === 'string' && typeof item.speciesUrl === 'string'
+}
+
+export function isSpeciesIndexReady(
+  index: SpeciesIndexItem[] | null,
+  meta: SpeciesIndexMeta | null,
+  maxGen?: number
+): index is SpeciesIndexItem[] {
+  if (!index || !meta || meta.version !== SPECIES_INDEX_VERSION || index.length === 0) return false
+  if (maxGen != null && meta.maxGen !== maxGen) return false
+  if (meta.counts.species !== index.length || !index.every(isIndexItem)) return false
+  return new Set(index.map((item) => item.speciesId)).size === index.length
+}
 
 export function getSpeciesIndex(): SpeciesIndexItem[] | null {
   return getStored<SpeciesIndexItem[]>(KEY_INDEX)
@@ -24,6 +45,9 @@ export function clearSpeciesIndex(): void {
     localStorage.removeItem(APP_STORAGE_PREFIX + KEY_INDEX)
     localStorage.removeItem(APP_STORAGE_PREFIX + KEY_META)
     localStorage.removeItem(APP_STORAGE_PREFIX + KEY_PARTIAL)
+    localStorage.removeItem(APP_STORAGE_PREFIX + 'index:species:v1')
+    localStorage.removeItem(APP_STORAGE_PREFIX + 'index:species:meta:v1')
+    localStorage.removeItem(APP_STORAGE_PREFIX + 'index:species:partial:v1')
   } catch {
     // best effort
   }
@@ -36,7 +60,5 @@ export function clearSpeciesIndex(): void {
 export function ensureSpeciesIndex(opts: { maxGen: number }): SpeciesIndexItem[] | null {
   const meta = getSpeciesIndexMeta()
   const index = getSpeciesIndex()
-  if (!meta || !index || meta.maxGen !== opts.maxGen) return null
-  return index
+  return isSpeciesIndexReady(index, meta, opts.maxGen) ? index : null
 }
-

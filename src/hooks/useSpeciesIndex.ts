@@ -4,7 +4,7 @@
  */
 
 import { useCallback, useState } from 'react'
-import { getSpeciesIndex, getSpeciesIndexMeta } from '@/lib/pokedex'
+import { getSpeciesIndex, getSpeciesIndexMeta, isSpeciesIndexReady } from '@/lib/pokedex'
 import type { SpeciesIndexItem, SpeciesIndexMeta } from '@/lib/pokedex'
 
 function readSnapshot(): { index: SpeciesIndexItem[]; meta: SpeciesIndexMeta | null } {
@@ -33,8 +33,9 @@ export function useSpeciesIndex(): UseSpeciesIndexResult {
     setSnapshot(readSnapshot())
   }, [])
 
-  const status: SpeciesIndexStatus =
-    Array.isArray(snapshot.index) && snapshot.index.length > 0 ? 'ready' : 'missing'
+  const status: SpeciesIndexStatus = isSpeciesIndexReady(snapshot.index, snapshot.meta)
+    ? 'ready'
+    : 'missing'
 
   return {
     index: snapshot.index,

@@ -25,6 +25,7 @@ export const pikachuPokemonFixture: Pokemon = {
       },
     },
   ],
+  past_types: [],
 }
 
 export const pikachuSpeciesFixture: PokemonSpecies = {
@@ -52,4 +53,7 @@ export const pikachuSpeciesFixture: PokemonSpecies = {
       },
     },
   ],
+  evolution_chain: {
+    url: 'https://pokeapi.co/api/v2/evolution-chain/10/',
+  },
 }

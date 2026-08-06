@@ -46,10 +46,11 @@ export function usePokemonSummary(
     if (!requestKey) return
 
     let cancelled = false
+    const controller = new AbortController()
 
     const cachedTotal = speciesId != null ? getCachedTotalStats(speciesId) : null
 
-    getPokemon(pokemonName)
+    getPokemon(pokemonName, { signal: controller.signal })
       .then((pokemon) => {
         if (cancelled) return
         const spriteUrl = pokemon.sprites?.front_default ?? null
@@ -75,6 +76,7 @@ export function usePokemonSummary(
 
     return () => {
       cancelled = true
+      controller.abort()
     }
   }, [pokemonName, requestKey, speciesId])
 
