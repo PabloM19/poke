@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, Compass, Library, Map, Sparkles } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { ManualSearchBox } from '@/features/manuals/search/ManualSearchBox'
 
 const routes = [
   {
@@ -44,6 +45,7 @@ export function ManualsLandingPage() {
         Empieza por las ideas generales y elige después tu recorrido: Entrenador
         Pokémon o Mundo Misterioso. Todo este contenido funciona sin PokeAPI.
       </p>
+      <ManualSearchBox />
       <div className="grid gap-4 sm:grid-cols-2">
         {routes.map(({ path, title, description, pages, icon: Icon }) => (
           <Link key={path} to={path} className="rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
