@@ -1,4 +1,5 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { LayoutGrid, List, Filter, X } from 'lucide-react'
 import { getSetting, setSetting } from '@/lib/storage'
 import { Button } from '@/components/ui/button'
@@ -19,7 +20,12 @@ import {
   POKEMON_TYPES,
   type PokedexSort,
   type PokemonTypeName,
+  type PokedexFilters,
 } from '@/features/pokedex/filters/pokedexFilters'
+import {
+  parsePokedexFilterParams,
+  serializePokedexFilterParams,
+} from '@/features/pokedex/filters/pokedexFilterParams'
 
 const CHUNK_SIZE = 24
 const TOTAL_BOUNDS = getTotalBounds(pokemonSummarySnapshot.items)
@@ -56,20 +62,16 @@ function FilterChip({ label, onRemove }: { label: string; onRemove: () => void }
 }
 
 export function PokedexPage() {
+  const [searchParams, setSearchParams] = useSearchParams()
   const [viewMode, setViewMode] = useState<ViewMode>(() =>
     getSetting('defaultView', 'grid')
   )
   const [visibleCount, setVisibleCount] = useState(CHUNK_SIZE)
-  const [generation, setGeneration] = useState<GenerationFilter>(null)
-  const [primaryType, setPrimaryType] = useState<PokemonTypeName | null>(null)
-  const [secondaryType, setSecondaryType] = useState<PokemonTypeName | null>(null)
-  const [minTotal, setMinTotal] = useState(TOTAL_BOUNDS.min)
-  const [maxTotal, setMaxTotal] = useState(TOTAL_BOUNDS.max)
-  const [sort, setSort] = useState<PokedexSort>('number-asc')
-
-  const selectedTypes = [primaryType, secondaryType].filter(
-    (type): type is PokemonTypeName => type != null
-  )
+  const filters = parsePokedexFilterParams(searchParams, TOTAL_BOUNDS)
+  const { generation, minTotal, maxTotal, sort } = filters
+  const primaryType = filters.types[0] ?? null
+  const secondaryType = filters.types[1] ?? null
+  const selectedTypes = filters.types
   const filteredItems = filterAndSortPokemon(
     pokemonSummarySnapshot.items,
     { generation, types: selectedTypes, minTotal, maxTotal, sort }
@@ -82,40 +84,50 @@ export function PokedexPage() {
     + Number(hasCustomTotal)
     + Number(sort !== 'number-asc')
 
+  const canonicalSearch = serializePokedexFilterParams(filters, TOTAL_BOUNDS).toString()
+  const currentSearch = searchParams.toString()
+
+  useEffect(() => {
+    if (currentSearch !== canonicalSearch) {
+      setSearchParams(canonicalSearch, { replace: true })
+    }
+  }, [canonicalSearch, currentSearch, setSearchParams])
+
   const loadMore = () => {
     setVisibleCount((n) => Math.min(n + CHUNK_SIZE, filteredItems.length))
   }
 
-  const selectGeneration = useCallback((next: GenerationFilter) => {
-    setGeneration(next)
+  const updateFilters = (next: Partial<PokedexFilters>) => {
+    setSearchParams(
+      serializePokedexFilterParams({ ...filters, ...next }, TOTAL_BOUNDS),
+      { replace: true }
+    )
     setVisibleCount(CHUNK_SIZE)
-  }, [])
+  }
+
+  const selectGeneration = (next: GenerationFilter) => {
+    updateFilters({ generation: next })
+  }
 
   const selectPrimaryType = (value: string) => {
     const next = value === '' ? null : value as PokemonTypeName
-    setPrimaryType(next)
-    if (next == null || next === secondaryType) setSecondaryType(null)
-    setVisibleCount(CHUNK_SIZE)
+    updateFilters({ types: next == null ? [] : [next] })
   }
 
   const selectSecondaryType = (value: string) => {
-    setSecondaryType(value === '' ? null : value as PokemonTypeName)
-    setVisibleCount(CHUNK_SIZE)
+    const next = value === '' ? null : value as PokemonTypeName
+    const types = primaryType == null
+      ? []
+      : next == null ? [primaryType] : [primaryType, next]
+    updateFilters({ types })
   }
 
   const removePrimaryType = () => {
-    setPrimaryType(secondaryType)
-    setSecondaryType(null)
-    setVisibleCount(CHUNK_SIZE)
+    updateFilters({ types: secondaryType == null ? [] : [secondaryType] })
   }
 
   const resetAllFilters = () => {
-    setGeneration(null)
-    setPrimaryType(null)
-    setSecondaryType(null)
-    setMinTotal(TOTAL_BOUNDS.min)
-    setMaxTotal(TOTAL_BOUNDS.max)
-    setSort('number-asc')
+    setSearchParams('', { replace: true })
     setVisibleCount(CHUNK_SIZE)
   }
 
@@ -219,8 +231,7 @@ export function PokedexPage() {
                   max={TOTAL_BOUNDS.max}
                   value={minTotal}
                   onChange={(event) => {
-                    setMinTotal(Math.min(Number(event.target.value), maxTotal))
-                    setVisibleCount(CHUNK_SIZE)
+                    updateFilters({ minTotal: Math.min(Number(event.target.value), maxTotal) })
                   }}
                   className="h-10 w-full accent-foreground"
                 />
@@ -232,8 +243,7 @@ export function PokedexPage() {
                   max={TOTAL_BOUNDS.max}
                   value={maxTotal}
                   onChange={(event) => {
-                    setMaxTotal(Math.max(Number(event.target.value), minTotal))
-                    setVisibleCount(CHUNK_SIZE)
+                    updateFilters({ maxTotal: Math.max(Number(event.target.value), minTotal) })
                   }}
                   className="h-10 w-full accent-foreground"
                 />
@@ -244,8 +254,7 @@ export function PokedexPage() {
                   id="pokedex-sort"
                   value={sort}
                   onChange={(event) => {
-                    setSort(event.target.value as PokedexSort)
-                    setVisibleCount(CHUNK_SIZE)
+                    updateFilters({ sort: event.target.value as PokedexSort })
                   }}
                   className="mt-2 h-10 w-full rounded-md border border-input bg-background px-2 text-sm"
                 >
@@ -297,21 +306,17 @@ export function PokedexPage() {
           )}
           {secondaryType != null && (
             <FilterChip label={TYPE_LABELS[secondaryType]} onRemove={() => {
-              setSecondaryType(null)
-              setVisibleCount(CHUNK_SIZE)
+              updateFilters({ types: primaryType == null ? [] : [primaryType] })
             }} />
           )}
           {hasCustomTotal && (
             <FilterChip label={`Total ${minTotal}–${maxTotal}`} onRemove={() => {
-              setMinTotal(TOTAL_BOUNDS.min)
-              setMaxTotal(TOTAL_BOUNDS.max)
-              setVisibleCount(CHUNK_SIZE)
+              updateFilters({ minTotal: TOTAL_BOUNDS.min, maxTotal: TOTAL_BOUNDS.max })
             }} />
           )}
           {sort !== 'number-asc' && (
             <FilterChip label={`Orden: ${SORT_LABELS[sort]}`} onRemove={() => {
-              setSort('number-asc')
-              setVisibleCount(CHUNK_SIZE)
+              updateFilters({ sort: 'number-asc' })
             }} />
           )}
           <Button type="button" variant="ghost" size="xs" onClick={resetAllFilters}>
