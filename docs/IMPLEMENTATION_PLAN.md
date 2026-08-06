@@ -228,7 +228,7 @@ PMD y los cuatro spin-offs no tienen un contexto de juego equivalente en PokeAPI
 | 3 | Completada | Favoritos y Comparar completos. |
 | 4 | Completada | Filtros sobre todo Gen I–V sin ráfagas de red. |
 | 5 | Completada | Motor histórico y recursos `R-01/R-02`. |
-| 6 | En curso (Perla, Platino y HeartGold completados) | Cinco fichas de saga principal. |
+| 6 | En curso (cuatro de cinco fichas completadas) | Cinco fichas de saga principal. |
 | 7 | Pendiente | Dos fichas PMD, cuatro minifichas y `R-03…R-06`. |
 | 8 | Pendiente | QR y vínculo bidireccional con el manual físico. |
 | 9 | Pendiente | Accesibilidad, offline, E2E, despliegue y cierre. |
@@ -530,6 +530,8 @@ Las pruebas unitarias usan fixtures locales. Un smoke test real de PokeAPI puede
 - **Verificación de Platino:** 161 pruebas automatizadas y `npm run check` correcto; Pokédex real ampliada con 210 entradas; Turtwig conserva evolución 18/32, aparece como regalo de nivel 5 en Ruta 201, carga movimientos españoles del grupo Platino y defensa Gen IV; estado completo a 390×844 con ancho 390/390 y cero errores de consola.
 - **Fase 6, punto 3 cerrado — Oro HeartGold:** ficha editorial completa de las páginas 103–112; iniciales, Silver, sistemas, primera hora y recursos; 16 Medallas publicadas en bloques separados de Johto y Kanto; explorador con `updated-johto`, `heartgold` y `heartgold-soulsilver`, capaz de heredar reglas evolutivas de generaciones anteriores.
 - **Verificación de HeartGold:** 164 pruebas automatizadas y `npm run check` correcto; Pokédex real con 256 entradas; Chikorita evoluciona a nivel 16/32, aparece como regalo de nivel 5 en Pueblo Primavera, carga movimientos españoles y defensa Gen IV; estado completo a 390×844 con ancho 390/390 y cero errores de consola.
+- **Fase 6, punto 4 cerrado — Negro:** ficha editorial completa de las páginas 113–120 con Cheren, Bel y N, ocho Medallas, sistemas propios, primera hora y aviso de historia; explorador con `original-unova`, `black`, `black-white` y defensa histórica de Generación V.
+- **Verificación de Negro:** 166 pruebas automatizadas y `npm run check` correcto; Pokédex real con 156 entradas; Snivy evoluciona a nivel 17/36, aparece como regalo de nivel 5 en Pueblo Arcilla, carga movimientos españoles de Negro/Blanco y defensa Gen V; estado completo a 390×844 con ancho 390/390 y cero errores de consola.
 - **Restricción de entrega:** por instrucción del usuario no se hará ningún despliegue remoto. Los puntos de las fases 8–9 que exijan un dominio HTTPS o publicar hosting quedarán sin ejecutar salvo autorización posterior; el resto se implementará y verificará en local.
 
-La próxima acción autorizada es exclusivamente el cuarto punto de la **Fase 6**: publicar y verificar la ficha completa de Pokémon Negro antes de empezar Negro 2.
+La próxima acción autorizada es exclusivamente el quinto punto de la **Fase 6**: publicar y verificar la ficha completa de Pokémon Negro 2 antes de cerrar la fase.
