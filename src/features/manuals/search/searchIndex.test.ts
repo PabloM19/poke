@@ -50,6 +50,10 @@ describe('searchManuals', () => {
       kind: 'game',
       path: '/manuales/juegos/dash',
     })
+    expect(searchManuals('Pokémon Link')[0]).toMatchObject({
+      kind: 'game',
+      path: '/manuales/juegos/link',
+    })
   })
 
   it('normaliza tildes y códigos con o sin guion', () => {

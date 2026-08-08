@@ -14,7 +14,7 @@ describe('progreso de lectura', () => {
   beforeEach(() => localStorage.clear())
 
   it('guarda el último artículo y permite completar/deshacer', () => {
-    expect(manualLessonCount).toBe(27)
+    expect(manualLessonCount).toBe(28)
     expect(recordLastRead(validPath).lastPath).toBe(validPath)
     expect(setArticleCompleted(validPath, true).completedPaths).toEqual([validPath])
     expect(setArticleCompleted(validPath, true).completedPaths).toEqual([validPath])
@@ -35,7 +35,7 @@ describe('progreso de lectura', () => {
   })
 
   it('ignora rutas no publicadas', () => {
-    recordLastRead('/manuales/juegos/link')
+    recordLastRead('/manuales/juegos/conquest')
     expect(getManualReadingProgress().lastPath).toBeNull()
   })
 })

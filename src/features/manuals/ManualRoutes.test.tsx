@@ -10,6 +10,7 @@ import { PmdGuidePage } from './pmd/PmdGuidePage'
 import { ExplorersGuidePage } from './pmd/ExplorersGuidePage'
 import { RangerGuidePage } from './spinOffs/RangerGuidePage'
 import { DashGuidePage } from './spinOffs/DashGuidePage'
+import { LinkGuidePage } from './spinOffs/LinkGuidePage'
 
 function renderManualRoute(path: string) {
   return render(
@@ -26,6 +27,7 @@ function renderManualRoute(path: string) {
           <Route path="juegos/exploradores-oscuridad" element={<ExplorersGuidePage />} />
           <Route path="juegos/ranger" element={<RangerGuidePage />} />
           <Route path="juegos/dash" element={<DashGuidePage />} />
+          <Route path="juegos/link" element={<LinkGuidePage />} />
           <Route path="*" element={<ManualNotFoundPage />} />
         </Route>
       </Routes>
@@ -176,5 +178,16 @@ describe('rutas de Manuales', () => {
       .toHaveTextContent(/Punto de control.*Cambio de terreno.*Meta/)
     expect(screen.getByText(/frotar la pantalla con demasiada fuerza/)).toBeInTheDocument()
     expect(screen.getByText('En el manual físico: páginas 147–148')).toBeInTheDocument()
+  })
+
+  it('publica la cadena completa de Pokémon Link!', () => {
+    renderManualRoute('/manuales/juegos/link')
+
+    expect(screen.getByRole('heading', { name: 'Pokémon Link!' })).toBeInTheDocument()
+    expect(screen.getByRole('region', { name: 'Secuencia Link Chance' }))
+      .toHaveTextContent(/4iguales→★Link Chance→3iguales→2iguales/)
+    expect(screen.getByText(/fichas restantes caen/)).toBeInTheDocument()
+    expect(screen.getByText(/mover por impulso/)).toBeInTheDocument()
+    expect(screen.getByText('En el manual físico: páginas 149–150')).toBeInTheDocument()
   })
 })

@@ -36,6 +36,7 @@ export const manualNavigationEntries: readonly ManualNavigationEntry[] = [
   { path: '/manuales/juegos/exploradores-oscuridad', title: 'Exploradores de la Oscuridad', shortTitle: 'Exploradores Oscuridad', family: 'pmd-games', pages: [137, 144] },
   { path: '/manuales/juegos/ranger', title: 'Pokémon Ranger', shortTitle: 'Pokémon Ranger', family: 'spin-off-games', pages: [145, 146] },
   { path: '/manuales/juegos/dash', title: 'Pokémon Dash', shortTitle: 'Pokémon Dash', family: 'spin-off-games', pages: [147, 148] },
+  { path: '/manuales/juegos/link', title: 'Pokémon Link!', shortTitle: 'Pokémon Link!', family: 'spin-off-games', pages: [149, 150] },
   { path: '/manuales/recursos/r-01', title: 'R-01 · Tabla de tipos', shortTitle: 'R-01 · Tipos', family: 'resources', pages: [153, 154] },
   { path: '/manuales/recursos/r-02', title: 'R-02 · Estados y efectos', shortTitle: 'R-02 · Estados', family: 'resources', pages: [153, 154] },
 ] as const
