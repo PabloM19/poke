@@ -46,6 +46,10 @@ describe('searchManuals', () => {
       kind: 'game',
       path: '/manuales/juegos/ranger',
     })
+    expect(searchManuals('Pokémon Dash')[0]).toMatchObject({
+      kind: 'game',
+      path: '/manuales/juegos/dash',
+    })
   })
 
   it('normaliza tildes y códigos con o sin guion', () => {

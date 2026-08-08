@@ -9,6 +9,7 @@ import { MainGameGuidePage } from './mainGames/MainGameGuidePage'
 import { PmdGuidePage } from './pmd/PmdGuidePage'
 import { ExplorersGuidePage } from './pmd/ExplorersGuidePage'
 import { RangerGuidePage } from './spinOffs/RangerGuidePage'
+import { DashGuidePage } from './spinOffs/DashGuidePage'
 
 function renderManualRoute(path: string) {
   return render(
@@ -24,6 +25,7 @@ function renderManualRoute(path: string) {
           <Route path="juegos/equipo-rescate-azul" element={<PmdGuidePage />} />
           <Route path="juegos/exploradores-oscuridad" element={<ExplorersGuidePage />} />
           <Route path="juegos/ranger" element={<RangerGuidePage />} />
+          <Route path="juegos/dash" element={<DashGuidePage />} />
           <Route path="*" element={<ManualNotFoundPage />} />
         </Route>
       </Routes>
@@ -163,5 +165,16 @@ describe('rutas de Manuales', () => {
     expect(screen.getByText(/reinicia el progreso de los círculos/)).toBeInTheDocument()
     expect(screen.getByText(/R-05 · Técnica de captura/)).toBeInTheDocument()
     expect(screen.getByText('En el manual físico: páginas 145–146')).toBeInTheDocument()
+  })
+
+  it('publica la minificha móvil de Pokémon Dash', () => {
+    renderManualRoute('/manuales/juegos/dash')
+
+    expect(screen.getByRole('heading', { name: 'Pokémon Dash' })).toBeInTheDocument()
+    expect(screen.getByText(/movimientos pequeños y regulares/)).toBeInTheDocument()
+    expect(screen.getByRole('region', { name: 'Secuencia de carrera' }))
+      .toHaveTextContent(/Punto de control.*Cambio de terreno.*Meta/)
+    expect(screen.getByText(/frotar la pantalla con demasiada fuerza/)).toBeInTheDocument()
+    expect(screen.getByText('En el manual físico: páginas 147–148')).toBeInTheDocument()
   })
 })
