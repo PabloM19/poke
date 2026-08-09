@@ -69,6 +69,7 @@ export function PmdExplorationKitPage() {
         <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/juegos/equipo-rescate-azul">Equipo de Rescate Azul</Link>
         <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/juegos/exploradores-oscuridad">Exploradores de la Oscuridad</Link>
         <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/recursos/r-03">Anterior: R-03</Link>
+        <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/recursos/r-05">Siguiente: R-05 · Ranger</Link>
       </nav>
     </article>
   )

@@ -33,6 +33,9 @@ const IconSymbolsPage = lazy(async () => ({
 const PmdExplorationKitPage = lazy(async () => ({
   default: (await import('@/features/manuals/resources/PmdExplorationKitPage')).PmdExplorationKitPage,
 }))
+const RangerCaptureTechniquePage = lazy(async () => ({
+  default: (await import('@/features/manuals/resources/RangerCaptureTechniquePage')).RangerCaptureTechniquePage,
+}))
 const MainGameGuidePage = lazy(async () => ({
   default: (await import('@/features/manuals/mainGames/MainGameGuidePage')).MainGameGuidePage,
 }))
@@ -95,6 +98,7 @@ const router = createBrowserRouter([
           { path: 'recursos/r-02', element: <DeferredRoute label="R-02"><StatusReferencePage /></DeferredRoute> },
           { path: 'recursos/r-03', element: <DeferredRoute label="R-03"><IconSymbolsPage /></DeferredRoute> },
           { path: 'recursos/r-04', element: <DeferredRoute label="R-04"><PmdExplorationKitPage /></DeferredRoute> },
+          { path: 'recursos/r-05', element: <DeferredRoute label="R-05"><RangerCaptureTechniquePage /></DeferredRoute> },
           { path: '*', element: <DeferredRoute label="Manuales"><ManualNotFoundPage /></DeferredRoute> },
         ],
       },

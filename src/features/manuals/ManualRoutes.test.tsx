@@ -14,6 +14,7 @@ import { LinkGuidePage } from './spinOffs/LinkGuidePage'
 import { ConquestGuidePage } from './spinOffs/ConquestGuidePage'
 import { IconSymbolsPage } from './resources/IconSymbolsPage'
 import { PmdExplorationKitPage } from './resources/PmdExplorationKitPage'
+import { RangerCaptureTechniquePage } from './resources/RangerCaptureTechniquePage'
 
 function renderManualRoute(path: string) {
   return render(
@@ -34,6 +35,7 @@ function renderManualRoute(path: string) {
           <Route path="juegos/conquest" element={<ConquestGuidePage />} />
           <Route path="recursos/r-03" element={<IconSymbolsPage />} />
           <Route path="recursos/r-04" element={<PmdExplorationKitPage />} />
+          <Route path="recursos/r-05" element={<RangerCaptureTechniquePage />} />
           <Route path="*" element={<ManualNotFoundPage />} />
         </Route>
       </Routes>
@@ -229,5 +231,17 @@ describe('rutas de Manuales', () => {
     expect(screen.getByText(/Usar, entregar o lanzar/)).toBeInTheDocument()
     expect(screen.getByText(/conserva los orbes/)).toBeInTheDocument()
     expect(screen.getByText('En el manual físico: páginas 70–74')).toBeInTheDocument()
+  })
+
+  it('publica R-05 con el ritmo interactivo de captura Ranger', () => {
+    renderManualRoute('/manuales/recursos/r-05')
+
+    expect(screen.getByRole('heading', { name: 'Técnica de captura Ranger' })).toBeInTheDocument()
+    expect(screen.getByRole('status')).toHaveTextContent(/Identifica el recorrido/)
+    fireEvent.click(screen.getByRole('button', { name: '2 · Esquivar' }))
+    expect(screen.getByRole('status')).toHaveTextContent(/Retira el lápiz/)
+    expect(screen.getByText(/se reinicia el progreso de los círculos actuales/)).toBeInTheDocument()
+    expect(screen.getByText(/No presiones ni traces con fuerza/)).toBeInTheDocument()
+    expect(screen.getByText('En el manual físico: páginas 145–146')).toBeInTheDocument()
   })
 })

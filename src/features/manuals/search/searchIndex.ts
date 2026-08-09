@@ -40,7 +40,8 @@ function resourceDestination(code: string): string {
   if (code === 'R-02') return '/manuales/recursos/r-02'
   if (code === 'R-03') return '/manuales/recursos/r-03'
   if (code === 'R-04') return '/manuales/recursos/r-04'
-  return ['R-05', 'R-06'].includes(code)
+  if (code === 'R-05') return '/manuales/recursos/r-05'
+  return code === 'R-06'
     ? '/manuales/otros'
     : '/manuales/empezar/recursos-y-coleccion'
 }

@@ -42,6 +42,7 @@ export const manualNavigationEntries: readonly ManualNavigationEntry[] = [
   { path: '/manuales/recursos/r-02', title: 'R-02 · Estados y efectos', shortTitle: 'R-02 · Estados', family: 'resources', pages: [153, 154] },
   { path: '/manuales/recursos/r-03', title: 'R-03 · Iconos y símbolos', shortTitle: 'R-03 · Iconos', family: 'resources', pages: [153, 154] },
   { path: '/manuales/recursos/r-04', title: 'R-04 · Kit de exploración PMD', shortTitle: 'R-04 · Kit PMD', family: 'resources', pages: [153, 154] },
+  { path: '/manuales/recursos/r-05', title: 'R-05 · Técnica de captura Ranger', shortTitle: 'R-05 · Captura', family: 'resources', pages: [153, 154] },
 ] as const
 
 export const manualFamilyLabels: Record<ManualFamily, string> = {

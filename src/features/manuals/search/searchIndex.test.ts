@@ -73,6 +73,11 @@ describe('searchManuals', () => {
       title: 'R-04 · Kit de exploración PMD',
       path: '/manuales/recursos/r-04',
     })
+    expect(searchManuals('r05')[0]).toMatchObject({
+      kind: 'resource',
+      title: 'R-05 · Técnica de captura Ranger',
+      path: '/manuales/recursos/r-05',
+    })
   })
 
   it('no devuelve ruido para consultas de una letra', () => {

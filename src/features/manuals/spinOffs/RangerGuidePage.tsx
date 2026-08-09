@@ -1,4 +1,5 @@
 import { CircleDot, PenTool, Shield } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { LessonCallout, LessonSteps, PhysicalReference } from '../components/LessonBlocks'
@@ -30,7 +31,7 @@ export function RangerGuidePage() {
 
       <LessonCallout kind="tip" title="Error típico">Intentar encerrar al objetivo sin observar sus ataques.</LessonCallout>
       <LessonCallout kind="warning" title="Aviso de spoilers">Las guías de misiones pueden revelar la identidad de personajes y jefes.</LessonCallout>
-      <Card className="gap-2 py-5"><CardHeader className="px-5"><CardTitle>Recurso relacionado</CardTitle></CardHeader><CardContent className="px-5 text-sm text-muted-foreground">R-05 · Técnica de captura. Se publicará como recurso local en su punto de esta fase.</CardContent></Card>
+      <Link to="/manuales/recursos/r-05" className="block rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring"><Card className="gap-2 py-5 transition-colors hover:bg-accent/50"><CardHeader className="px-5"><CardTitle>Recurso relacionado</CardTitle></CardHeader><CardContent className="px-5 text-sm text-muted-foreground">Abrir R-05 · Técnica de captura: patrón, pausa segura, Poké-Ayudas y movimientos de campo.</CardContent></Card></Link>
       <PhysicalReference reference={{ edition: 'ds-156-v1', pages: [145, 146] }} />
       <ReadingProgressControls articlePath="/manuales/juegos/ranger" />
     </article>
