@@ -69,6 +69,7 @@ export function StatusReferencePage() {
       <nav className="mt-8 flex flex-wrap gap-3" aria-label="Recursos relacionados">
         <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/entrenador/combate">Volver a Comprender el combate</Link>
         <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/recursos/r-01">Abrir R-01 · Tipos</Link>
+        <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/recursos/r-03">Siguiente: R-03 · Iconos</Link>
       </nav>
     </article>
   )

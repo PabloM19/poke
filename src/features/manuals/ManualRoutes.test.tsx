@@ -12,6 +12,7 @@ import { RangerGuidePage } from './spinOffs/RangerGuidePage'
 import { DashGuidePage } from './spinOffs/DashGuidePage'
 import { LinkGuidePage } from './spinOffs/LinkGuidePage'
 import { ConquestGuidePage } from './spinOffs/ConquestGuidePage'
+import { IconSymbolsPage } from './resources/IconSymbolsPage'
 
 function renderManualRoute(path: string) {
   return render(
@@ -30,6 +31,7 @@ function renderManualRoute(path: string) {
           <Route path="juegos/dash" element={<DashGuidePage />} />
           <Route path="juegos/link" element={<LinkGuidePage />} />
           <Route path="juegos/conquest" element={<ConquestGuidePage />} />
+          <Route path="recursos/r-03" element={<IconSymbolsPage />} />
           <Route path="*" element={<ManualNotFoundPage />} />
         </Route>
       </Routes>
@@ -202,5 +204,16 @@ describe('rutas de Manuales', () => {
     expect(screen.getByText(/dirección, la distancia, el terreno/)).toBeInTheDocument()
     expect(screen.getByText(/perseguir daño e ignorar el objetivo/)).toBeInTheDocument()
     expect(screen.getByText('En el manual físico: páginas 151–152')).toBeInTheDocument()
+  })
+
+  it('publica R-03 con controles, símbolos y etiquetas', () => {
+    renderManualRoute('/manuales/recursos/r-03')
+
+    expect(screen.getByRole('heading', { name: 'Iconos y símbolos' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Botones de Nintendo DS' })).toBeInTheDocument()
+    expect(screen.getByText('START / SELECT')).toBeInTheDocument()
+    expect(screen.getByText('Guía · spoilers')).toBeInTheDocument()
+    expect(screen.getByText(/indicación que aparece en la pantalla del juego/)).toBeInTheDocument()
+    expect(screen.getByText('En el manual físico: páginas 153–154')).toBeInTheDocument()
   })
 })

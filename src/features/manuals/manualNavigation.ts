@@ -40,6 +40,7 @@ export const manualNavigationEntries: readonly ManualNavigationEntry[] = [
   { path: '/manuales/juegos/conquest', title: 'Pokémon Conquest', shortTitle: 'Pokémon Conquest', family: 'spin-off-games', pages: [151, 152] },
   { path: '/manuales/recursos/r-01', title: 'R-01 · Tabla de tipos', shortTitle: 'R-01 · Tipos', family: 'resources', pages: [153, 154] },
   { path: '/manuales/recursos/r-02', title: 'R-02 · Estados y efectos', shortTitle: 'R-02 · Estados', family: 'resources', pages: [153, 154] },
+  { path: '/manuales/recursos/r-03', title: 'R-03 · Iconos y símbolos', shortTitle: 'R-03 · Iconos', family: 'resources', pages: [153, 154] },
 ] as const
 
 export const manualFamilyLabels: Record<ManualFamily, string> = {

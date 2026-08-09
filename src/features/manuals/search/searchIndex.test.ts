@@ -63,6 +63,11 @@ describe('searchManuals', () => {
       title: 'R-01 · Tabla de tipos',
       path: '/manuales/recursos/r-01',
     })
+    expect(searchManuals('r03')[0]).toMatchObject({
+      kind: 'resource',
+      title: 'R-03 · Iconos y símbolos',
+      path: '/manuales/recursos/r-03',
+    })
   })
 
   it('no devuelve ruido para consultas de una letra', () => {

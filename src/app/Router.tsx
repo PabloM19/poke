@@ -27,6 +27,9 @@ const TypeChartPage = lazy(async () => ({
 const StatusReferencePage = lazy(async () => ({
   default: (await import('@/features/manuals/resources/StatusReferencePage')).StatusReferencePage,
 }))
+const IconSymbolsPage = lazy(async () => ({
+  default: (await import('@/features/manuals/resources/IconSymbolsPage')).IconSymbolsPage,
+}))
 const MainGameGuidePage = lazy(async () => ({
   default: (await import('@/features/manuals/mainGames/MainGameGuidePage')).MainGameGuidePage,
 }))
@@ -87,6 +90,7 @@ const router = createBrowserRouter([
           { path: 'juegos/conquest', element: <DeferredRoute label="Pokémon Conquest"><ConquestGuidePage /></DeferredRoute> },
           { path: 'recursos/r-01', element: <DeferredRoute label="R-01"><TypeChartPage /></DeferredRoute> },
           { path: 'recursos/r-02', element: <DeferredRoute label="R-02"><StatusReferencePage /></DeferredRoute> },
+          { path: 'recursos/r-03', element: <DeferredRoute label="R-03"><IconSymbolsPage /></DeferredRoute> },
           { path: '*', element: <DeferredRoute label="Manuales"><ManualNotFoundPage /></DeferredRoute> },
         ],
       },
