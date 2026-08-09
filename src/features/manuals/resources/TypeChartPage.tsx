@@ -10,6 +10,7 @@ import {
 import { bundledTypesByName } from '@/features/historical/typeRelationsData'
 import { translatePokemonType } from '@/features/localization'
 import { cn } from '@/lib/utils'
+import { PhysicalReference } from '../components/LessonBlocks'
 
 function multiplierLabel(multiplier: DamageMultiplier): string {
   if (multiplier === 0.25) return '¼'
@@ -58,7 +59,7 @@ export function TypeChartPage() {
         <p className="font-medium">{game.title} · Generación {game.generation === 4 ? 'IV' : 'V'}</p>
         <p className="mt-1 text-muted-foreground">La tabla usa las relaciones históricas del juego activo y no incluye Hada.</p>
       </div>
-      <p className="mb-5 text-sm text-muted-foreground">En el manual físico: páginas 153–154.</p>
+      <PhysicalReference reference={{ edition: 'ds-156-v1', pages: [153, 154] }} />
 
       <section className="md:hidden" aria-labelledby="mobile-chart-title">
         <h2 id="mobile-chart-title" className="mb-3 text-xl font-semibold">Consulta compacta</h2>

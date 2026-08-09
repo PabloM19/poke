@@ -15,6 +15,7 @@ describe('componentes de lección', () => {
       <LessonCallout kind="warning">No apagues durante el guardado.</LessonCallout>
       <TypeExample matchups={['Agua vence a Fuego', 'Fuego vence a Planta']} />
       <PhysicalReference reference={{ edition: 'ds-156-v1', pages: [24, 25] }} />
+      <PhysicalReference reference={{ edition: 'ds-156-v1', pages: [49, 50, 51, 52, 53, 54, 153, 154] }} />
     </>)
 
     expect(screen.getByRole('list')).toBeInTheDocument()
@@ -23,6 +24,7 @@ describe('componentes de lección', () => {
     expect(screen.getByLabelText('Atención')).toHaveTextContent('No apagues')
     expect(screen.getByText('Agua vence a Fuego')).toBeInTheDocument()
     expect(screen.getByText('En el manual físico: páginas 24–25')).toBeInTheDocument()
+    expect(screen.getByText('En el manual físico: páginas 49–54 y 153–154')).toBeInTheDocument()
   })
 
   it('ofrece tabla de escritorio y tarjetas móviles con el mismo contenido', () => {

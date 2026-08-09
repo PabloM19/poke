@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useGameContext } from '@/features/games'
+import { PhysicalReference } from '../components/LessonBlocks'
 
 const persistentStatuses = [
   { name: 'Parálisis', effect: 'Reduce mucho la Velocidad y a veces impide actuar.', care: 'Antiparalizador, Cura Total o ciertos objetos y movimientos.' },
@@ -27,7 +28,7 @@ export function StatusReferencePage() {
         <p className="font-medium">{game.title} · Generación {game.generation === 4 ? 'IV' : 'V'}</p>
         <p className="mt-1 text-muted-foreground">Referencia pensada para los juegos principales de Nintendo DS.</p>
       </div>
-      <p className="mb-6 text-sm text-muted-foreground">En el manual físico: páginas 49–54 y 153–154.</p>
+      <PhysicalReference reference={{ edition: 'ds-156-v1', pages: [49, 50, 51, 52, 53, 54, 153, 154] }} />
 
       <section aria-labelledby="persistent-title">
         <h2 id="persistent-title" className="mb-3 text-xl font-semibold">Estados principales</h2>

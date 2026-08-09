@@ -115,9 +115,17 @@ export function LessonTable({
 }
 
 export function PhysicalReference({ reference }: { reference: PrintReference }) {
-  const first = reference.pages[0]
-  const last = reference.pages.at(-1)
-  const pages = first === last ? String(first) : `${first}–${last}`
+  const pageNumbers = [...new Set(reference.pages)].sort((left, right) => left - right)
+  const ranges: Array<readonly [number, number]> = []
+  for (const page of pageNumbers) {
+    const last = ranges.at(-1)
+    if (last != null && page === last[1] + 1) ranges[ranges.length - 1] = [last[0], page]
+    else ranges.push([page, page])
+  }
+  const labels = ranges.map(([first, last]) => first === last ? String(first) : `${first}–${last}`)
+  const pages = labels.length > 1
+    ? `${labels.slice(0, -1).join(', ')} y ${labels.at(-1)}`
+    : labels[0] ?? '—'
   return (
     <aside className="my-8 flex items-start gap-3 rounded-xl border border-border bg-muted p-4 text-sm">
       <BookMarked className="mt-0.5 size-5 shrink-0" aria-hidden />
