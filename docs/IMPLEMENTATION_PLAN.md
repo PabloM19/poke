@@ -552,6 +552,8 @@ Las pruebas unitarias usan fixtures locales. Un smoke test real de PokeAPI puede
 - **Verificación de R-04:** 176 pruebas automatizadas y `npm run check` correcto; chunk diferido propio de 7,04 kB; checklist operativa a 390×844 con ancho 390/390 y cero errores de consola.
 - **Fase 7, punto 9 cerrado — R-05:** técnica local de captura Ranger con lectura de patrones, trazo controlado, pausa segura, Poké-Ayudas, movimientos de campo y recordatorio interactivo de tres fases; enlazada desde Ranger y R-04.
 - **Verificación de R-05:** 177 pruebas automatizadas y `npm run check` correcto; chunk diferido propio de 5,31 kB; selector de fase operativo a 390×844 con ancho 390/390 y cero errores de consola.
+- **Fase 7, punto 10 cerrado — R-06 y cierre:** recordatorio local de Conquest con objetivo, turnos, alcance, terreno, posición, orden, vínculo, checklist interactiva y secuencia de decisión; enlazado desde Conquest y R-05. La fase publica los once juegos, las páginas 129–152 y los seis recursos.
+- **Verificación de R-06 y Fase 7:** 178 pruebas automatizadas y `npm run check` correcto; chunk diferido propio de 5,56 kB; checklist y retorno a Conquest operativos a 390×844 con ancho 390/390 y cero errores de consola.
 - **Restricción de entrega:** por instrucción del usuario no se hará ningún despliegue remoto. Los puntos de las fases 8–9 que exijan un dominio HTTPS o publicar hosting quedarán sin ejecutar salvo autorización posterior; el resto se implementará y verificará en local.
 
-La próxima acción es exclusivamente el décimo punto de la **Fase 7**: implementar y verificar `R-06 · Recordatorio táctico Conquest` y cerrar la fase.
+La próxima acción es la **Fase 8**. Por la restricción de no desplegar, la URL HTTPS y la emisión/prueba física de QR quedan aplazadas; se implementarán primero las rutas cortas, referencias, enlaces de vuelta, preferencia de spoilers y centro de recursos que pueden verificarse completamente en local.
