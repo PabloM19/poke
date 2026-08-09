@@ -1,15 +1,30 @@
 import { lazy, Suspense, type ReactNode } from 'react'
 import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import { Layout } from './Layout'
-import { SearchPage } from '../pages/SearchPage'
-import { FavoritesPage } from '../pages/FavoritesPage'
-import { SettingsPage } from '../pages/SettingsPage'
-import { ComparePage } from '../pages/ComparePage'
-import { PokemonDetailPage } from '../pages/PokemonDetailPage'
-import { MorePage } from '../pages/MorePage'
-import { NotFoundPage } from '../pages/NotFoundPage'
 import { ShortManualRedirect } from '@/features/manuals/ShortManualRedirect'
 import { SpoilerGate } from '@/features/manuals/spoilers/SpoilerGate'
+
+const SearchPage = lazy(async () => ({
+  default: (await import('@/pages/SearchPage')).SearchPage,
+}))
+const FavoritesPage = lazy(async () => ({
+  default: (await import('@/pages/FavoritesPage')).FavoritesPage,
+}))
+const SettingsPage = lazy(async () => ({
+  default: (await import('@/pages/SettingsPage')).SettingsPage,
+}))
+const ComparePage = lazy(async () => ({
+  default: (await import('@/pages/ComparePage')).ComparePage,
+}))
+const PokemonDetailPage = lazy(async () => ({
+  default: (await import('@/pages/PokemonDetailPage')).PokemonDetailPage,
+}))
+const MorePage = lazy(async () => ({
+  default: (await import('@/pages/MorePage')).MorePage,
+}))
+const NotFoundPage = lazy(async () => ({
+  default: (await import('@/pages/NotFoundPage')).NotFoundPage,
+}))
 
 const ManualsLayout = lazy(async () => ({
   default: (await import('@/features/manuals/ManualsLayout')).ManualsLayout,
@@ -80,7 +95,6 @@ function DeferredRoute({ children, label = 'contenido' }: { children: ReactNode;
 function MechanicsRoute({ children, label }: { children: ReactNode; label: string }) {
   return <DeferredRoute label={label}><SpoilerGate level="mechanics" title={label}>{children}</SpoilerGate></DeferredRoute>
 }
-import { UiDemo } from '../components/ui-demo'
 
 const router = createBrowserRouter([
   {
@@ -88,8 +102,8 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { index: true, element: <Navigate to="/search" replace /> },
-      { path: 'search', element: <SearchPage /> },
-      { path: 'pokemon/:speciesId', element: <PokemonDetailPage /> },
+      { path: 'search', element: <DeferredRoute label="Buscador"><SearchPage /></DeferredRoute> },
+      { path: 'pokemon/:speciesId', element: <DeferredRoute label="Pokémon"><PokemonDetailPage /></DeferredRoute> },
       { path: 'r/:shortCode', element: <ShortManualRedirect /> },
       {
         path: 'manuales',
@@ -118,12 +132,11 @@ const router = createBrowserRouter([
         ],
       },
       { path: 'pokedex', element: <DeferredRoute label="Pokédex"><PokedexPage /></DeferredRoute> },
-      { path: 'favorites', element: <FavoritesPage /> },
-      { path: 'settings', element: <SettingsPage /> },
-      { path: 'compare', element: <ComparePage /> },
-      { path: 'more', element: <MorePage /> },
-      { path: 'demo', element: <UiDemo /> },
-      { path: '*', element: <NotFoundPage /> },
+      { path: 'favorites', element: <DeferredRoute label="Favoritos"><FavoritesPage /></DeferredRoute> },
+      { path: 'settings', element: <DeferredRoute label="Ajustes"><SettingsPage /></DeferredRoute> },
+      { path: 'compare', element: <DeferredRoute label="Comparador"><ComparePage /></DeferredRoute> },
+      { path: 'more', element: <DeferredRoute label="Más opciones"><MorePage /></DeferredRoute> },
+      { path: '*', element: <DeferredRoute label="Página"><NotFoundPage /></DeferredRoute> },
     ],
   },
 ])
