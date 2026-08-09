@@ -12,8 +12,9 @@ describe('actividad de Inicio', () => {
 
   it('no muestra secciones vacías', () => {
     render(<MemoryRouter><HomeActivity /></MemoryRouter>)
-    expect(screen.queryByText('Pokémon recientes')).not.toBeInTheDocument()
+    expect(screen.queryByText('Pokémon visitados')).not.toBeInTheDocument()
     expect(screen.queryByText('Continuar leyendo')).not.toBeInTheDocument()
+    expect(screen.getByText('Te recomendamos')).toBeInTheDocument()
   })
 
   it('muestra Pokémon reales y una lectura reanudable', () => {
@@ -28,7 +29,7 @@ describe('actividad de Inicio', () => {
     })
     render(<MemoryRouter><HomeActivity /></MemoryRouter>)
 
-    expect(screen.getByText('Pokémon recientes')).toBeInTheDocument()
+    expect(screen.getByText('Pokémon visitados')).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Abrir ficha de Pikachu' })).toHaveAttribute('href', '/pokemon/25')
     expect(screen.getByText('Continúa donde lo dejaste')).toBeInTheDocument()
     expect(screen.getAllByText('50%').length).toBeGreaterThan(0)

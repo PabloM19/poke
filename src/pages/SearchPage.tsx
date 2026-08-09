@@ -6,7 +6,7 @@ import type { SpeciesIndexItem } from '@/lib/pokedex'
 import { SearchField } from '@/components/ui/search-field'
 import { Button } from '@/components/ui/button'
 import { BentoCard } from '@/components/ui/card'
-import { Search } from '@/components/icons'
+import { Search, Sparkles } from '@/components/icons'
 import { HomeActivity } from '@/features/activity'
 
 const MAX_RESULTS = 20
@@ -109,13 +109,22 @@ export function SearchPage() {
     [navigate]
   )
 
+  const homeHero = (
+    <BentoCard tone="blue" className="relative overflow-hidden" data-tour="home-overview">
+      <span className="pointer-events-none absolute -right-12 -top-20 size-48 rounded-full bg-card/40" aria-hidden />
+      <div className="relative">
+        <span className="flex size-11 items-center justify-center rounded-[var(--radius-md)] bg-card/75 text-ui-blue-strong shadow-[var(--shadow-xs)]"><Sparkles className="size-5" aria-hidden /></span>
+        <p className="mt-5 text-xs font-semibold uppercase tracking-[0.12em] text-ui-blue-strong">Tu centro Pokémon</p>
+        <h1 className="page-title mt-1">Inicio</h1>
+        <p className="mt-3 max-w-2xl text-lg leading-8 text-foreground/75">Retoma tus últimas consultas, continúa una guía o encuentra cualquier Pokémon.</p>
+      </div>
+    </BentoCard>
+  )
+
   if (status === 'missing') {
     return (
       <div className="page-stack">
-        <div className="page-heading" data-tour="home-overview">
-          <h1 className="page-title">Buscar</h1>
-          <p className="page-lead">Encuentra una especie por nombre o número y abre su ficha histórica.</p>
-        </div>
+        {homeHero}
         <HomeActivity />
         <BentoCard tone="yellow" role="status" data-tour="search-field">
           <Search className="size-8 text-ui-yellow-strong" aria-hidden />
@@ -134,15 +143,12 @@ export function SearchPage() {
 
   return (
     <div className="page-stack">
-      <div className="page-heading" data-tour="home-overview">
-        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-ui-lavender-strong">Consulta rápida</p>
-        <h1 className="page-title mt-1">Buscar</h1>
-        <p className="page-lead">Encuentra cualquier Pokémon de las generaciones I–V por nombre o número.</p>
-      </div>
+      {homeHero}
 
       <HomeActivity />
 
       <BentoCard tone="lavender" className="relative z-20" data-tour="search-field">
+        <div className="mb-4"><p className="text-xs font-semibold uppercase tracking-[0.12em] text-ui-lavender-strong">Consulta rápida</p><h2 className="mt-1 text-xl font-bold">Buscar un Pokémon</h2></div>
         <SearchField
           type="search"
           placeholder="Busca un Pokémon (en español)…"

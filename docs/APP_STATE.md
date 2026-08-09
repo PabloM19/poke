@@ -94,7 +94,7 @@ Los códigos desconocidos terminan en el 404 editorial. No se han generado QR ab
 - Reinicio voluntario desde Ajustes. El tour no genera actividad reciente falsa mientras visita sus rutas de demostración.
 - Actividad reciente versionada en `pokeapp:recent-activity:v1`, validada al leer, deduplicada y limitada por categoría.
 - Se registran fichas Pokémon abiertas de forma significativa, comparaciones con al menos dos especies y lecturas reales del manual.
-- Inicio crece progresivamente con un Bento para reanudar, Pokémon recientes y lecturas en curso; no renderiza módulos vacíos.
+- Inicio tiene hero propio y crece progresivamente con el último contenido visitado, Pokémon recientes y lecturas en curso. Sin historial recomienda cuatro destinos reales —ficha, introducción, tabla de tipos y comparador— en lugar de renderizar módulos vacíos.
 - Progreso editorial en `pokeapp:manuals:reading:v2`, con migración desde v1, heading/anchor estable, porcentaje aproximado y escritura limitada a cambios de sección o intervalos de scroll.
 - Al reanudar se prioriza el anchor guardado; si desaparece tras una actualización editorial, se utiliza el porcentaje como fallback.
 - Ajustes permite borrar la actividad reciente sin eliminar las lecciones marcadas como leídas.
