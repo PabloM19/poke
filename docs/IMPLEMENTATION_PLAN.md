@@ -560,6 +560,8 @@ Las pruebas unitarias usan fixtures locales. Un smoke test real de PokeAPI puede
 - **Fase 8, punto 3 aplazado — QR:** no se emiten QR absolutos mientras no exista el origen HTTPS canónico; se evita publicar códigos provisionales con localhost o una identidad inestable.
 - **Fase 8, punto 4 cerrado — referencias físicas:** los 29 artículos quedan cubiertos por una prueba de integridad contra la edición `ds-156-v1`; todas las páginas son válidas y coinciden con navegación. El componente agrupa rangos discontinuos correctamente.
 - **Verificación de referencias:** 211 pruebas automatizadas y `npm run check` correcto; R-02 muestra `49–54 y 153–154` a 390×844 con ancho 390/390 y cero errores de consola.
+- **Fase 8, punto 5 cerrado — enlaces de vuelta:** recursos, lecciones y familias editoriales enlazan a sus guías; las fichas Pokémon abiertas desde una guía reciben un retorno interno validado al origen, mientras conservan la salida a Buscar.
+- **Verificación de enlaces:** 213 pruebas automatizadas y `npm run check` correcto; a 390×844, Combate enlaza a Perla y la tarjeta de Turtwig abre `/pokemon/387` con retorno a `/manuales/juegos/perla`, ancho 390/390 y cero errores de consola.
 - **Restricción de entrega:** por instrucción del usuario no se hará ningún despliegue remoto. Los puntos de las fases 8–9 que exijan un dominio HTTPS o publicar hosting quedarán sin ejecutar salvo autorización posterior; el resto se implementará y verificará en local.
 
-La próxima acción es el siguiente punto local de la **Fase 8**: consolidar y verificar enlaces de vuelta entre recurso, lección, juego y Pokémon.
+La próxima acción es el siguiente punto local de la **Fase 8**: guardar la preferencia de spoilers y ocultar por defecto los niveles superiores.

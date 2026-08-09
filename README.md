@@ -24,6 +24,7 @@ Disponible:
 - Manuales 21–86 con rutas profundas, búsqueda, progreso y referencias físicas.
 - Los seis recursos locales R-01…R-06: tipos, estados, iconos, kit PMD, captura Ranger y táctica Conquest.
 - Diecisiete rutas cortas estables bajo `/r/` para los seis recursos y once juegos.
+- Enlaces contextuales entre recursos, lecciones, juegos y fichas Pokémon, con retorno seguro al manual.
 - Cinco guías completas de la saga principal (87–128) con exploradores regionales por versión.
 - Guías completas de Equipo de Rescate Azul y Exploradores de la Oscuridad (129–144), con especies enriquecibles bajo demanda.
 - Las cuatro minifichas locales: Pokémon Ranger, Dash, Link! y Conquest (145–152).
