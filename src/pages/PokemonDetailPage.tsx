@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useLocation, useParams } from 'react-router-dom'
 import {
   getPokemon,
   getPokemonSpecies,
@@ -26,6 +26,7 @@ import {
   selectPokemonTypesForGeneration,
   type DefensiveMatchup,
 } from '@/features/historical'
+import { readManualReturn } from '@/features/manuals/manualReturn'
 
 const NAMES_ACCORDION_LIMIT = 10
 
@@ -87,6 +88,8 @@ function MatchupGroup({
 }
 
 export function PokemonDetailPage() {
+  const location = useLocation()
+  const manualReturn = readManualReturn(location.state)
   const { game } = useGameContext()
   const { speciesId: speciesIdParam } = useParams<{ speciesId: string }>()
   const [retry, setRetry] = useState(0)
@@ -324,12 +327,10 @@ export function PokemonDetailPage() {
         <CompareLink speciesId={speciesId} speciesName={detail.nameEs} showLabel />
       </div>
 
-      <Link
-        to="/search"
-        className="mt-6 inline-block text-sm font-medium text-primary hover:underline"
-      >
-        Volver a Buscar
-      </Link>
+      <nav className="mt-6 flex flex-wrap gap-4" aria-label="Volver desde la ficha">
+        {manualReturn && <Link to={manualReturn.path} className="text-sm font-medium text-primary hover:underline">{manualReturn.label}</Link>}
+        <Link to="/search" className="text-sm font-medium text-primary hover:underline">Volver a Buscar</Link>
+      </nav>
     </>
   )
 }

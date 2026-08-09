@@ -1,6 +1,7 @@
-import { fireEvent, render, screen } from '@testing-library/react'
+import { fireEvent, render, screen, within } from '@testing-library/react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { describe, expect, it, vi } from 'vitest'
+import { GameProvider } from '@/features/games'
 import { ManualsLandingPage } from '@/pages/ManualsLandingPage'
 import { ManualEntryPage } from './ManualEntryPage'
 import { ManualNotFoundPage } from './ManualNotFoundPage'
@@ -20,7 +21,7 @@ import { ConquestTacticalReminderPage } from './resources/ConquestTacticalRemind
 function renderManualRoute(path: string) {
   return render(
     <MemoryRouter initialEntries={[path]}>
-      <Routes>
+      <GameProvider><Routes>
         <Route path="/manuales" element={<ManualsLayout />}>
           <Route index element={<ManualsLandingPage />} />
           <Route path="empezar/:tema" element={<ManualEntryPage />} />
@@ -40,7 +41,7 @@ function renderManualRoute(path: string) {
           <Route path="recursos/r-06" element={<ConquestTacticalReminderPage />} />
           <Route path="*" element={<ManualNotFoundPage />} />
         </Route>
-      </Routes>
+      </Routes></GameProvider>
     </MemoryRouter>
   )
 }
@@ -56,6 +57,7 @@ describe('rutas de Manuales', () => {
     expect(screen.getByRole('navigation', { name: 'Lección anterior y siguiente' }))
       .toHaveTextContent('AnteriorExplorar la regiónSiguiente Captura')
     expect(screen.getByText(/Cuando empieza un combate/)).toBeInTheDocument()
+    expect(within(screen.getByRole('region', { name: 'Guías relacionadas' })).getByRole('link', { name: /Pokémon Perla/ })).toHaveAttribute('href', '/manuales/juegos/perla')
   })
 
   it('ofrece un 404 propio y una salida segura', () => {
@@ -75,6 +77,9 @@ describe('rutas de Manuales', () => {
       .toBeInTheDocument()
     expect(screen.getByText(/La Tripa disminuye mientras caminas/)).toBeInTheDocument()
     expect(fetchMock).not.toHaveBeenCalled()
+    const related = within(screen.getByRole('region', { name: 'Guías relacionadas' }))
+    expect(related.getByRole('link', { name: /Equipo de Rescate Azul/ })).toHaveAttribute('href', '/manuales/juegos/equipo-rescate-azul')
+    expect(related.getByRole('link', { name: /Exploradores de la Oscuridad/ })).toHaveAttribute('href', '/manuales/juegos/exploradores-oscuridad')
     vi.unstubAllGlobals()
   })
 

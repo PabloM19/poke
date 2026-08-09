@@ -5,6 +5,7 @@ import { ManualNotFoundPage } from './ManualNotFoundPage'
 import { getPublishedManualArticle } from './content/articles'
 import { ManualArticleContent } from './components/ManualArticleContent'
 import { ReadingProgressControls } from './progress/ReadingProgressControls'
+import { ManualJourneyLinks } from './ManualJourneyLinks'
 
 export function ManualEntryPage() {
   const location = useLocation()
@@ -16,6 +17,7 @@ export function ManualEntryPage() {
   return (
     <>
       <ManualArticleContent article={article} />
+      <ManualJourneyLinks family={article.family} />
       <ReadingProgressControls key={article.path} articlePath={article.path} />
       <nav aria-label="Lección anterior y siguiente" className="mt-10 grid gap-3 sm:grid-cols-2">
         {adjacent.previous ? (

@@ -5,6 +5,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { pikachuPokemonFixture, pikachuSpeciesFixture } from '@/test/fixtures/pokeapi'
 import type { Type } from '@/lib/pokeapi'
 import { GameProvider } from '@/features/games'
+import { createManualReturnState } from '@/features/manuals/manualReturn'
 
 const mocks = vi.hoisted(() => ({
   getPokemon: vi.fn(),
@@ -24,7 +25,7 @@ vi.mock('@/lib/pokeapi', async (importOriginal) => {
 
 import { PokemonDetailPage } from './PokemonDetailPage'
 
-function renderPath(path: string) {
+function renderPath(path: string | { pathname: string; state: unknown }) {
   return render(
     <MemoryRouter initialEntries={[path]}>
       <GameProvider>
@@ -73,6 +74,13 @@ describe('PokemonDetailPage', () => {
     expect(screen.getByText('Pokémon Perla · Generación IV')).toBeInTheDocument()
     expect(screen.getByText('Tierra ×2')).toBeInTheDocument()
     expect(screen.getByText('Eléctrico ×½')).toBeInTheDocument()
+  })
+
+  it('ofrece retorno seguro cuando se abre desde una guía', async () => {
+    renderPath({ pathname: '/pokemon/25', state: createManualReturnState('/manuales/juegos/perla', 'Volver a Pokémon Perla') })
+
+    expect(await screen.findByRole('heading', { name: 'Pikachu' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Volver a Pokémon Perla' })).toHaveAttribute('href', '/manuales/juegos/perla')
   })
 
   it('rechaza ids parciales sin llamar a PokeAPI', () => {

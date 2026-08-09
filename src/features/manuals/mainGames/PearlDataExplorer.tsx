@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { BookOpen, Dna, MapPin, RefreshCw, Search, Shield, Sparkles } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -11,6 +11,7 @@ import { humanizePokeApiName, translateMoveLearnMethod, translatePokemonType, tr
 import { pokemonSummarySnapshot, type PokemonSummaryItem } from '@/features/pokedex/summary'
 import { getPokemon, getPokemonSpecies } from '@/lib/pokeapi'
 import type { EncounterArea, EvolutionChain, EvolutionDetail } from './gameDataModels'
+import { createManualReturnState } from '../manualReturn'
 import {
   getEvolutionChain,
   getMoveName,
@@ -119,6 +120,7 @@ interface LearnsetView {
 }
 
 function SpeciesResources({ pokemon, game }: { pokemon: PokemonSummaryItem; game: MainGameContext }) {
+  const location = useLocation()
   const moves = async (signal: AbortSignal): Promise<LearnsetView> => {
     const selected = selectMovesForGame(await getPokemonGameMoves(pokemon.id, { signal }), game)
     const levelMoves = selected
@@ -158,7 +160,7 @@ function SpeciesResources({ pokemon, game }: { pokemon: PokemonSummaryItem; game
     <div className="mt-6 grid gap-3 lg:grid-cols-2">
       <ResourcePanel title={`Evolución en ${game.shortTitle}`} description={`Reglas vigentes en ${translateVersionGroup(game.versionGroup)}, incluidas las heredadas.`} icon={Dna} load={evolution}>
         {(chain) => chain ? (
-          <ol className="space-y-2">{flattenEvolution(chain.chain).map((entry, index) => <li key={`${entry.id}-${index}`} className="rounded-lg bg-secondary/60 p-3" style={{ marginLeft: `${Math.min(entry.depth, 2) * 0.75}rem` }}><Link className="font-medium text-primary hover:underline" to={`/pokemon/${entry.id}`}>{pokemonSummarySnapshot.items.find((item) => item.id === entry.id)?.nameEs ?? humanizePokeApiName(entry.name)}</Link><p className="mt-1 text-xs text-muted-foreground">{entry.condition}</p></li>)}</ol>
+          <ol className="space-y-2">{flattenEvolution(chain.chain).map((entry, index) => <li key={`${entry.id}-${index}`} className="rounded-lg bg-secondary/60 p-3" style={{ marginLeft: `${Math.min(entry.depth, 2) * 0.75}rem` }}><Link className="font-medium text-primary hover:underline" to={`/pokemon/${entry.id}`} state={createManualReturnState(location.pathname, `Volver a ${game.title}`)}>{pokemonSummarySnapshot.items.find((item) => item.id === entry.id)?.nameEs ?? humanizePokeApiName(entry.name)}</Link><p className="mt-1 text-xs text-muted-foreground">{entry.condition}</p></li>)}</ol>
         ) : <p className="text-sm text-muted-foreground">No hay una cadena evolutiva registrada.</p>}
       </ResourcePanel>
 
@@ -178,6 +180,7 @@ function SpeciesResources({ pokemon, game }: { pokemon: PokemonSummaryItem; game
 }
 
 export function GameDataExplorer({ gameSlug, region }: { gameSlug: MainGameSlug; region: string }) {
+  const location = useLocation()
   const game = getMainGameContext(gameSlug)
   const [state, setState] = useState<LoadState<PokemonSummaryItem[]>>({ status: 'idle' })
   const [query, setQuery] = useState('')
@@ -230,7 +233,7 @@ export function GameDataExplorer({ gameSlug, region }: { gameSlug: MainGameSlug;
           {visible < filtered.length && <Button className="mt-4 w-full" type="button" variant="outline" onClick={() => setVisible((value) => value + 18)}>Ver 18 más</Button>}
           {filtered.length === 0 && <p className="mt-5 rounded-xl border border-dashed border-border p-5 text-center text-sm text-muted-foreground">No hay coincidencias en la Pokédex de {region}.</p>}
 
-          {selected && <div className="mt-8"><div className="flex flex-wrap items-center justify-between gap-3"><div><p className="text-sm text-muted-foreground">Especie seleccionada</p><h3 className="text-xl font-semibold">{selected.nameEs}</h3></div><Button asChild size="sm" variant="outline"><Link to={`/pokemon/${selected.id}`}>Abrir ficha</Link></Button></div><SpeciesResources key={`${game.slug}-${selected.id}`} pokemon={selected} game={game} /></div>}
+          {selected && <div className="mt-8"><div className="flex flex-wrap items-center justify-between gap-3"><div><p className="text-sm text-muted-foreground">Especie seleccionada</p><h3 className="text-xl font-semibold">{selected.nameEs}</h3></div><Button asChild size="sm" variant="outline"><Link to={`/pokemon/${selected.id}`} state={createManualReturnState(location.pathname, `Volver a ${game.title}`)}>Abrir ficha</Link></Button></div><SpeciesResources key={`${game.slug}-${selected.id}`} pokemon={selected} game={game} /></div>}
         </div>
       )}
     </section>

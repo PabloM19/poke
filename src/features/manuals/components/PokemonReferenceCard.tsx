@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { getPokemon, getPokemonSpecies, getSpanishName, PokeApiError } from '@/lib/pokeapi'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent } from '@/components/ui/card'
 import type { PokemonReference } from '../content/types'
 import { CompareLink } from '@/features/compare/CompareLink'
 import { translatePokemonType } from '@/features/localization'
+import { createManualReturnState } from '../manualReturn'
 
 interface Enrichment {
   spriteUrl: string | null
@@ -18,6 +19,7 @@ type EnrichmentResult =
   | { key: string; status: 'error' }
 
 export function PokemonReferenceCard({ reference }: { reference: PokemonReference }) {
+  const location = useLocation()
   const requestKey = `${reference.speciesId}:${reference.name}`
   const [result, setResult] = useState<EnrichmentResult | null>(null)
 
@@ -66,6 +68,7 @@ export function PokemonReferenceCard({ reference }: { reference: PokemonReferenc
           />
           <Link
             to={`/pokemon/${reference.speciesId}`}
+            state={createManualReturnState(location.pathname)}
             className="flex h-full w-full flex-col items-center rounded-lg pt-3 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             aria-label={`Ver ficha de ${displayName}`}
           >
