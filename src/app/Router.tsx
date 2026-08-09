@@ -8,6 +8,7 @@ import { ComparePage } from '../pages/ComparePage'
 import { PokemonDetailPage } from '../pages/PokemonDetailPage'
 import { MorePage } from '../pages/MorePage'
 import { NotFoundPage } from '../pages/NotFoundPage'
+import { ShortManualRedirect } from '@/features/manuals/ShortManualRedirect'
 
 const ManualsLayout = lazy(async () => ({
   default: (await import('@/features/manuals/ManualsLayout')).ManualsLayout,
@@ -81,6 +82,7 @@ const router = createBrowserRouter([
       { index: true, element: <Navigate to="/search" replace /> },
       { path: 'search', element: <SearchPage /> },
       { path: 'pokemon/:speciesId', element: <PokemonDetailPage /> },
+      { path: 'r/:shortCode', element: <ShortManualRedirect /> },
       {
         path: 'manuales',
         element: <DeferredRoute label="Manuales"><ManualsLayout /></DeferredRoute>,
