@@ -1,0 +1,21 @@
+{
+  "name": "PokéApp · Pokédex y manual Nintendo DS",
+  "short_name": "PokéApp",
+  "description": "Pokédex y manuales de los juegos de Pokémon para Nintendo DS.",
+  "lang": "es",
+  "start_url": "/manuales",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f8fafc",
+  "theme_color": "#111827",
+  "categories": ["education", "games", "reference"],
+  "icons": [
+    {
+      "src": "/pokeapp-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
