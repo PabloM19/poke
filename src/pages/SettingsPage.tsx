@@ -23,6 +23,9 @@ import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { SpoilerPreferenceControl } from '@/features/manuals/spoilers/SpoilerPreferenceControl'
+import { clearRecentActivity } from '@/features/activity'
+import { clearManualReadingActivity } from '@/features/manuals/progress/readingProgress'
+import { restartOnboarding } from '@/features/onboarding'
 
 type DefaultView = 'grid' | 'list'
 
@@ -62,6 +65,7 @@ export function SettingsPage() {
   } | null>(null)
   const [buildError, setBuildError] = useState<string | null>(null)
   const [buildNotice, setBuildNotice] = useState<string | null>(null)
+  const [experienceNotice, setExperienceNotice] = useState<string | null>(null)
   const abortRef = useRef<AbortController | null>(null)
 
   useEffect(() => {
@@ -183,6 +187,17 @@ export function SettingsPage() {
     setCacheNotice('Caché de PokeAPI eliminada. Tus preferencias y el índice se conservan.')
   }, [])
 
+  const handleRestartTour = useCallback(() => {
+    setExperienceNotice('El recorrido se ha reiniciado y comenzará ahora.')
+    restartOnboarding()
+  }, [])
+
+  const handleClearRecentActivity = useCallback(() => {
+    clearRecentActivity()
+    clearManualReadingActivity()
+    setExperienceNotice('Actividad reciente eliminada. Las lecciones marcadas como leídas se conservan.')
+  }, [])
+
   return (
     <>
       <h1 className="page-title">Ajustes</h1>
@@ -191,6 +206,20 @@ export function SettingsPage() {
       </p>
 
       <div className="space-y-4">
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base">Ayuda y actividad local</CardTitle>
+            <CardDescription>Vuelve a ver el recorrido o limpia las consultas recientes guardadas en este dispositivo.</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <div className="flex flex-wrap gap-2">
+              <Button type="button" variant="outline" size="sm" onClick={handleRestartTour}>Ver recorrido</Button>
+              <Button type="button" variant="ghost" size="sm" onClick={handleClearRecentActivity}>Borrar actividad reciente</Button>
+            </div>
+            {experienceNotice && <p className="text-sm text-muted-foreground" role="status">{experienceNotice}</p>}
+          </CardContent>
+        </Card>
+
         <Card>
           <CardHeader>
             <CardTitle className="text-base">Spoilers del manual</CardTitle>

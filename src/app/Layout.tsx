@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom'
 import { AppHeader } from '@/components/AppHeader'
 import { AppNav } from '@/components/AppNav'
 import { NetworkStatusBanner } from './NetworkStatusBanner'
+import { GuidedTour } from '@/features/onboarding'
 
 export function Layout() {
   return (
@@ -30,6 +31,7 @@ export function Layout() {
           <AppNav variant="mobile" />
         </div>
       </div>
+      <GuidedTour />
     </div>
   )
 }

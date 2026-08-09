@@ -67,7 +67,7 @@ const routes = [
 export function ManualsLandingPage() {
   return (
     <div className="page-stack">
-      <BentoCard tone="lavender" className="relative overflow-hidden">
+      <BentoCard tone="lavender" className="relative overflow-hidden" data-tour="manuals-home">
         <span className="pointer-events-none absolute -right-10 -top-16 size-44 rounded-full bg-card/40" aria-hidden />
         <div className="relative">
           <div className="mb-5 flex size-12 items-center justify-center rounded-[var(--radius-md)] bg-card/70 text-ui-lavender-strong shadow-[var(--shadow-xs)]">

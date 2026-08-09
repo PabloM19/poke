@@ -5,6 +5,8 @@ import { CompareSelector } from '@/features/compare/CompareSelector'
 import { compareSearchParams, parseCompareIds } from '@/features/compare/compareSelection'
 import { useGameContext } from '@/features/games'
 import { BentoCard } from '@/components/ui/card'
+import { recordRecentActivity } from '@/features/activity'
+import { isOnboardingInProgress } from '@/features/onboarding'
 
 export function ComparePage() {
   const { game } = useGameContext()
@@ -18,13 +20,26 @@ export function ComparePage() {
     }
   }, [canonical, searchParams, setSearchParams])
 
+  useEffect(() => {
+    if (ids.length < 2 || isOnboardingInProgress()) return
+    const query = canonical.toString()
+    recordRecentActivity({
+      kind: 'comparison',
+      id: ids.join('-'),
+      route: `/compare${query ? `?${query}` : ''}`,
+      title: `Comparación de ${ids.length} Pokémon`,
+      subtitle: `${game.title} · Generación ${game.generation === 4 ? 'IV' : 'V'}`,
+      pokemonIds: ids,
+    })
+  }, [canonical, game.generation, game.title, ids])
+
   const updateIds = (nextIds: readonly number[]) => {
     setSearchParams(compareSearchParams(nextIds), { replace: true })
   }
 
   return (
     <div className="page-stack">
-      <BentoCard tone="green">
+      <BentoCard tone="green" data-tour="combat-tools">
         <p className="text-xs font-semibold uppercase tracking-[0.12em] text-ui-green-strong">Herramienta de combate</p>
         <h1 className="page-title mt-1">Comparar</h1>
         <p className="mt-3 max-w-2xl leading-7 text-foreground/75">Elige entre dos y cuatro Pokémon. La selección queda guardada en la URL para compartirla.</p>

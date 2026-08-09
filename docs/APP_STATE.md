@@ -87,6 +87,18 @@ Los códigos desconocidos terminan en el 404 editorial. No se han generado QR ab
 - Manuales migrados de forma completa al mismo lenguaje visual, con búsqueda, progreso, spoilers, guías, recursos y enlaces de 44 px.
 - Tema oscuro, demo visual antigua, logo React y componentes de tema sin uso eliminados. La clave histórica de tema permanece únicamente en las migraciones de almacenamiento para no invalidar datos antiguos.
 
+### Onboarding y continuidad local
+
+- Recorrido contextual de siete pasos, multirruta y versionado, con bienvenida, spotlight, scroll automático, progreso, anterior/siguiente, salto, cierre con Escape y tolerancia a objetivos ausentes.
+- Estado del recorrido en `pokeapp:onboarding:v1`; distingue `in-progress`, `completed` y `skipped` y conserva el paso actual.
+- Reinicio voluntario desde Ajustes. El tour no genera actividad reciente falsa mientras visita sus rutas de demostración.
+- Actividad reciente versionada en `pokeapp:recent-activity:v1`, validada al leer, deduplicada y limitada por categoría.
+- Se registran fichas Pokémon abiertas de forma significativa, comparaciones con al menos dos especies y lecturas reales del manual.
+- Inicio crece progresivamente con un Bento para reanudar, Pokémon recientes y lecturas en curso; no renderiza módulos vacíos.
+- Progreso editorial en `pokeapp:manuals:reading:v2`, con migración desde v1, heading/anchor estable, porcentaje aproximado y escritura limitada a cambios de sección o intervalos de scroll.
+- Al reanudar se prioriza el anchor guardado; si desaparece tras una actualización editorial, se utiliza el porcentaje como fallback.
+- Ajustes permite borrar la actividad reciente sin eliminar las lecciones marcadas como leídas.
+
 ## Rutas públicas principales
 
 | Ruta | Contenido |
@@ -144,10 +156,12 @@ Reglas que deben mantenerse:
 
 ## Verificación de cierre
 
-- `npm run check`: **56 archivos y 231 pruebas** verdes, además de snapshots, ESLint, TypeScript estricto y build.
+- `npm run check`: **60 archivos y 240 pruebas** verdes, además de snapshots, ESLint, TypeScript estricto y build.
 - Snapshot Pokédex: 649 entradas, SHA-256 `7a6348b0c922e8d640ecee0f877235d28e79860eab991b71e3f2691551db144c`.
 - Snapshot de tipos: 18 entradas, SHA-256 `0b90be9dc4650fd159f0b496d5c957c0d2d103771a3765e3c1fe5cd39d396529`.
 - Auditoría local en 320×800, 390×844, 768×1024 y 1440×1000: navegación, búsqueda, ficha, guardados, Comparar, Pokédex, filtros, las 37 rutas del manual, recursos y 404; cero errores o avisos de consola, un `h1`, cero overflow y controles principales de al menos 44 px.
+- Onboarding verificado en 390×844, 844×390 y 1440×1000: primera visita, avance/retroceso, siete pasos, cambios de ruta, salto, finalización, refresh, segunda visita y reinicio desde Ajustes; sin overflow ni avisos de consola.
+- Continuidad verificada en 320×800: orden y deduplicación de Pokémon, persistencia entre rutas, ausencia de módulos vacíos, limpieza desde Ajustes y restauración de una guía a su heading guardado incluso después del control de spoilers.
 - Offline real en Chromium a 390×844: recarga directa de `/manuales/recursos/r-01`, sin peticiones fallidas ni desbordamiento.
 - Accesibilidad comprobada en ambos viewports: salto de contenido, targets visibles mínimos 54 px en móvil/44 px en escritorio y movimiento reducido efectivo.
 

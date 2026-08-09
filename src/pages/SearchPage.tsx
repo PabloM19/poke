@@ -7,6 +7,7 @@ import { SearchField } from '@/components/ui/search-field'
 import { Button } from '@/components/ui/button'
 import { BentoCard } from '@/components/ui/card'
 import { Search } from '@/components/icons'
+import { HomeActivity } from '@/features/activity'
 
 const MAX_RESULTS = 20
 
@@ -111,11 +112,12 @@ export function SearchPage() {
   if (status === 'missing') {
     return (
       <div className="page-stack">
-        <div className="page-heading">
+        <div className="page-heading" data-tour="home-overview">
           <h1 className="page-title">Buscar</h1>
           <p className="page-lead">Encuentra una especie por nombre o número y abre su ficha histórica.</p>
         </div>
-        <BentoCard tone="yellow" role="status">
+        <HomeActivity />
+        <BentoCard tone="yellow" role="status" data-tour="search-field">
           <Search className="size-8 text-ui-yellow-strong" aria-hidden />
           <h2 className="mt-4 text-lg font-bold">Prepara el buscador sin conexión</h2>
           <p className="mb-3">
@@ -132,13 +134,15 @@ export function SearchPage() {
 
   return (
     <div className="page-stack">
-      <div className="page-heading">
+      <div className="page-heading" data-tour="home-overview">
         <p className="text-xs font-semibold uppercase tracking-[0.12em] text-ui-lavender-strong">Consulta rápida</p>
         <h1 className="page-title mt-1">Buscar</h1>
         <p className="page-lead">Encuentra cualquier Pokémon de las generaciones I–V por nombre o número.</p>
       </div>
 
-      <BentoCard tone="lavender" className="relative z-20">
+      <HomeActivity />
+
+      <BentoCard tone="lavender" className="relative z-20" data-tour="search-field">
         <SearchField
           type="search"
           placeholder="Busca un Pokémon (en español)…"

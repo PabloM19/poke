@@ -28,6 +28,8 @@ import {
 } from '@/features/historical'
 import { readManualReturn } from '@/features/manuals/manualReturn'
 import { TypeChip } from '@/features/types'
+import { recordRecentActivity } from '@/features/activity'
+import { isOnboardingInProgress } from '@/features/onboarding'
 
 const NAMES_ACCORDION_LIMIT = 10
 
@@ -184,6 +186,21 @@ export function PokemonDetailPage() {
     }
   }, [game.generation, game.slug, game.title, requestKey, speciesId])
 
+  useEffect(() => {
+    if (speciesId == null || requestKey == null || requestResult?.key !== requestKey || requestResult.status !== 'success' || isOnboardingInProgress()) return
+    const detail = requestResult.data
+    recordRecentActivity({
+      kind: 'pokemon',
+      id: String(speciesId),
+      speciesId,
+      route: `/pokemon/${speciesId}`,
+      title: detail.nameEs,
+      subtitle: `${formatSpeciesId(speciesId)} · ${detail.gameTitle}`,
+      spriteUrl: detail.spriteUrl,
+      types: detail.types,
+    })
+  }, [requestKey, requestResult, speciesId])
+
   if (invalidId) {
     return (
       <>
@@ -236,7 +253,7 @@ export function PokemonDetailPage() {
 
   return (
     <div className="page-stack">
-      <BentoCard className="relative overflow-hidden p-0" aria-labelledby="pokemon-name">
+      <BentoCard className="relative overflow-hidden p-0" aria-labelledby="pokemon-name" data-tour="pokemon-identity">
         <span className="pointer-events-none absolute -right-12 -top-16 size-48 rounded-full bg-ui-lavender/35" aria-hidden />
         <div className="relative grid items-center gap-4 p-5 sm:grid-cols-[minmax(12rem,0.8fr)_1.2fr] sm:p-7">
           <div className="mx-auto flex size-48 items-center justify-center rounded-[var(--radius-xl)] bg-secondary shadow-[var(--shadow-xs)] sm:size-56">

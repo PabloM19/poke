@@ -4,10 +4,11 @@ import {
   getManualReadingProgress,
   manualLessonCount,
   recordLastRead,
+  recordReadingPosition,
   setArticleCompleted,
 } from './readingProgress'
 
-const key = 'manuals:reading:v1'
+const key = 'manuals:reading:v2'
 const validPath = '/manuales/entrenador/combate'
 
 describe('progreso de lectura', () => {
@@ -22,14 +23,16 @@ describe('progreso de lectura', () => {
   })
 
   it('limpia estructuras corruptas y filtra rutas desconocidas', () => {
-    setStored(key, { lastPath: '/manuales/no-existe', completedPaths: [validPath, '/mal', validPath], updatedAt: 'ayer' })
+    setStored(key, { version: 2, lastPath: '/manuales/no-existe', completedPaths: [validPath, '/mal', validPath], entries: [], updatedAt: 'ayer' })
     expect(getManualReadingProgress()).toEqual({
+      version: 2,
       lastPath: null,
       completedPaths: [validPath],
+      entries: [],
       updatedAt: 0,
     })
 
-    setStored(key, { completedPaths: 'no-array' })
+    setStored(key, { version: 2, completedPaths: 'no-array' })
     expect(getManualReadingProgress().completedPaths).toEqual([])
     expect(getStored(key)).toBeNull()
   })
@@ -37,5 +40,19 @@ describe('progreso de lectura', () => {
   it('ignora rutas no publicadas', () => {
     recordLastRead('/manuales/recursos/r-03')
     expect(getManualReadingProgress().lastPath).toBeNull()
+  })
+
+  it('guarda una sección estable y un porcentaje limitado', () => {
+    const progress = recordReadingPosition(validPath, {
+      sectionId: 'seccion-4',
+      sectionTitle: 'Afinidad de tipos',
+      progress: 1.4,
+    })
+    expect(progress.entries[0]).toMatchObject({
+      path: validPath,
+      sectionId: 'seccion-4',
+      sectionTitle: 'Afinidad de tipos',
+      progress: 1,
+    })
   })
 })

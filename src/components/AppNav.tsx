@@ -37,6 +37,7 @@ export function AppNav({ variant = 'mobile' }: { variant?: AppNavVariant }) {
 
   return (
     <nav
+      data-tour="main-navigation"
       className={cn(
         'flex items-center justify-center gap-1',
         variant === 'desktop' && 'gap-1 lg:gap-2'

@@ -4,9 +4,11 @@ import { createMemoryRouter, RouterProvider } from 'react-router-dom'
 import { describe, expect, it } from 'vitest'
 import { GameProvider } from '@/features/games'
 import { Layout } from './Layout'
+import { skipOnboarding } from '@/features/onboarding'
 
 describe('accesibilidad estructural', () => {
   it('permite saltar al contenido principal con el teclado', async () => {
+    skipOnboarding()
     const router = createMemoryRouter([
       {
         path: '/',
