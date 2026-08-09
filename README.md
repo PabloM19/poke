@@ -26,6 +26,7 @@ Disponible:
 - Diecisiete rutas cortas estables bajo `/r/` para los seis recursos y once juegos.
 - Enlaces contextuales entre recursos, lecciones, juegos y fichas Pokémon, con retorno seguro al manual.
 - Preferencia persistente de spoilers con nivel seguro por defecto, revelado puntual y filtrado de búsqueda.
+- Centro actualizable de R-01…R-06 con revisión canónica, niveles, rutas cortas y cierre 153–156.
 - Cinco guías completas de la saga principal (87–128) con exploradores regionales por versión.
 - Guías completas de Equipo de Rescate Azul y Exploradores de la Oscuridad (129–144), con especies enriquecibles bajo demanda.
 - Las cuatro minifichas locales: Pokémon Ranger, Dash, Link! y Conquest (145–152).
