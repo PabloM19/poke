@@ -544,6 +544,8 @@ Las pruebas unitarias usan fixtures locales. Un smoke test real de PokeAPI puede
 - **Verificación de Dash:** 172 pruebas automatizadas y `npm run check` correcto; chunk diferido propio de 3,99 kB; ruta profunda local a 390×844 con ancho 390/390 y cero errores de consola.
 - **Fase 7, punto 5 cerrado — Pokémon Link!:** minificha local de las páginas 149–150 con desplazamiento de filas y columnas, caída de fichas, preparación de cadenas, cinco primeros pasos y secuencia visual exacta `4 → Link Chance → 3 → 2`.
 - **Verificación de Link!:** 173 pruebas automatizadas y `npm run check` correcto; chunk diferido propio de 5,07 kB; ruta profunda local a 390×844 con ancho 390/390, control de lectura y cero errores de consola.
+- **Fase 7, punto 6 cerrado — Pokémon Conquest:** minificha local de las páginas 151–152 con objetivo, límite de turnos, terreno, alcance, dirección, orden de activación, vínculo y secuencia visual `unidad → movimiento → acción`.
+- **Verificación de Conquest:** 174 pruebas automatizadas y `npm run check` correcto; chunk diferido propio de 4,44 kB; ruta profunda local a 390×844 con ancho 390/390, control de lectura y cero errores de consola. Quedan publicados de forma continua los once juegos y las páginas 87–152.
 - **Restricción de entrega:** por instrucción del usuario no se hará ningún despliegue remoto. Los puntos de las fases 8–9 que exijan un dominio HTTPS o publicar hosting quedarán sin ejecutar salvo autorización posterior; el resto se implementará y verificará en local.
 
-La próxima acción es exclusivamente el sexto punto de la **Fase 7**: publicar y verificar la minificha de Pokémon Conquest antes de implementar `R-03…R-06`.
+La próxima acción es exclusivamente el séptimo punto de la **Fase 7**: implementar y verificar `R-03 · Iconos y símbolos` antes de comenzar R-04.
