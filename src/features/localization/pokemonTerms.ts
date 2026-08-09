@@ -1,10 +1,4 @@
-const TYPE_NAMES: Record<string, string> = {
-  normal: 'Normal', fire: 'Fuego', water: 'Agua', electric: 'Eléctrico',
-  grass: 'Planta', ice: 'Hielo', fighting: 'Lucha', poison: 'Veneno',
-  ground: 'Tierra', flying: 'Volador', psychic: 'Psíquico', bug: 'Bicho',
-  rock: 'Roca', ghost: 'Fantasma', dragon: 'Dragón', dark: 'Siniestro',
-  steel: 'Acero', fairy: 'Hada',
-}
+import { getPokemonTypeStyle } from '@/features/types/typeStyles'
 
 const STAT_NAMES: Record<string, string> = {
   hp: 'PS',
@@ -59,7 +53,7 @@ export function humanizePokeApiName(value: string): string {
 }
 
 export function translatePokemonType(value: string): string {
-  return TYPE_NAMES[value] ?? humanizePokeApiName(value)
+  return getPokemonTypeStyle(value)?.label ?? humanizePokeApiName(value)
 }
 
 export function translatePokemonStat(value: string, abbreviated = false): string {

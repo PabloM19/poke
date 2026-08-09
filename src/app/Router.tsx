@@ -3,6 +3,7 @@ import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom'
 import { Layout } from './Layout'
 import { ShortManualRedirect } from '@/features/manuals/ShortManualRedirect'
 import { SpoilerGate } from '@/features/manuals/spoilers/SpoilerGate'
+import { StatusState } from '@/components/ui/status-state'
 
 const SearchPage = lazy(async () => ({
   default: (await import('@/pages/SearchPage')).SearchPage,
@@ -86,7 +87,7 @@ const PokedexPage = lazy(async () => ({
 
 function DeferredRoute({ children, label = 'contenido' }: { children: ReactNode; label?: string }) {
   return (
-    <Suspense fallback={<p className="text-sm text-muted-foreground" role="status">Cargando {label}…</p>}>
+    <Suspense fallback={<StatusState title={`Cargando ${label}…`} tone="loading" compact />}>
       {children}
     </Suspense>
   )

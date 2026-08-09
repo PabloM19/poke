@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { RefreshCw } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
+import { RefreshCw } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { getComparePokemonData, type ComparePokemonData } from './compareData'
-import { translatePokemonStat, translatePokemonType } from '@/features/localization'
+import { translatePokemonStat } from '@/features/localization'
 import { useGameContext } from '@/features/games'
+import { TypeChip } from '@/features/types'
+import { StatusState } from '@/components/ui/status-state'
 
 type LoadState = {
   key: string
@@ -42,7 +43,7 @@ export function CompareResults({ ids }: { ids: readonly number[] }) {
 
   if (ids.length < 2) {
     return (
-      <div className="rounded-xl border border-dashed border-border p-8 text-center" role="status">
+      <div className="rounded-[var(--radius-xl)] border border-dashed border-border bg-card p-8 text-center shadow-[var(--shadow-xs)]" role="status">
         <p className="font-medium">Elige {2 - ids.length} Pokémon más</p>
         <p className="mt-2 text-sm text-muted-foreground">La comparación empieza con dos y admite hasta cuatro.</p>
       </div>
@@ -50,12 +51,12 @@ export function CompareResults({ ids }: { ids: readonly number[] }) {
   }
 
   const current = state?.key === requestKey ? state : null
-  if (!current) return <p className="py-10 text-center text-muted-foreground" role="status">Cargando comparación…</p>
+  if (!current) return <StatusState title="Cargando comparación…" tone="loading" compact />
 
   return (
     <div className="space-y-8">
       {current.failedIds.length > 0 && (
-        <div className="rounded-xl border border-destructive/40 bg-destructive/5 p-4" role="alert">
+        <div className="rounded-[var(--radius-lg)] border border-destructive/40 bg-card p-4 shadow-[var(--shadow-xs)]" role="alert">
           <p className="text-sm">No se pudieron cargar: {current.failedIds.map((id) => `#${id}`).join(', ')}.</p>
           <Button type="button" variant="outline" size="sm" className="mt-3" onClick={() => setRetry((value) => value + 1)}>
             <RefreshCw className="size-4" aria-hidden /> Reintentar
@@ -73,7 +74,7 @@ export function CompareResults({ ids }: { ids: readonly number[] }) {
                 <p className="mt-2 text-xs text-muted-foreground">#{String(pokemon.speciesId).padStart(3, '0')}</p>
                 <h2 className="font-semibold">{pokemon.name}</h2>
                 <div className="mt-2 flex flex-wrap justify-center gap-1">
-                  {pokemon.types.map((type) => <Badge key={type} variant="secondary" className="text-[10px]">{translatePokemonType(type)}</Badge>)}
+                  {pokemon.types.map((type) => <TypeChip key={type} type={type} size="compact" />)}
                 </div>
                 <p className="mt-2 text-sm font-medium">Total {pokemon.total}</p>
               </CardContent>

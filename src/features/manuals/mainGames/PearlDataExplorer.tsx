@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { BookOpen, Dna, MapPin, RefreshCw, Search, Shield, Sparkles } from 'lucide-react'
+import { BookOpen, Dna, MapPin, RefreshCw, Search, Shield, Sparkles } from '@/components/icons'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { getMainGameContext, type MainGameContext, type MainGameSlug } from '@/features/games/gameCatalog'
 import { bundledTypesByName } from '@/features/historical/typeRelationsData'
 import { resolvePokemonDefenseForGame } from '@/features/historical'
-import { humanizePokeApiName, translateMoveLearnMethod, translatePokemonType, translateVersionGroup } from '@/features/localization'
+import { humanizePokeApiName, translateMoveLearnMethod, translateVersionGroup } from '@/features/localization'
+import { TypeChip } from '@/features/types'
 import { pokemonSummarySnapshot, type PokemonSummaryItem } from '@/features/pokedex/summary'
 import { getPokemon, getPokemonSpecies } from '@/lib/pokeapi'
 import type { EncounterArea, EvolutionChain, EvolutionDetail } from './gameDataModels'
@@ -173,7 +174,7 @@ function SpeciesResources({ pokemon, game }: { pokemon: PokemonSummaryItem; game
       </ResourcePanel>
 
       <ResourcePanel title={`Defensa en Generación ${game.generation === 4 ? 'IV' : 'V'}`} description="Tipos y multiplicadores históricos, sin aplicar reglas modernas." icon={Shield} load={defense}>
-        {(result) => <div className="space-y-3"><div className="flex flex-wrap gap-2">{result.defendingTypes.map((type) => <Badge key={type}>{translatePokemonType(type)}</Badge>)}</div><div className="flex flex-wrap gap-2">{result.matchups.filter((matchup) => matchup.multiplier !== 1).map((matchup) => <Badge key={matchup.attackingType} variant="secondary">{translatePokemonType(matchup.attackingType)} ×{matchup.multiplier}</Badge>)}</div></div>}
+        {(result) => <div className="space-y-3"><div className="flex flex-wrap gap-2">{result.defendingTypes.map((type) => <TypeChip key={type} type={type} variant="solid" />)}</div><div className="flex flex-wrap gap-2">{result.matchups.filter((matchup) => matchup.multiplier !== 1).map((matchup) => <TypeChip key={matchup.attackingType} type={matchup.attackingType} suffix={`×${matchup.multiplier}`} />)}</div></div>}
       </ResourcePanel>
     </div>
   )
@@ -216,7 +217,7 @@ export function GameDataExplorer({ gameSlug, region }: { gameSlug: MainGameSlug;
 
   return (
     <section className="scroll-mt-20" id={`explorador-${game.slug}`}>
-      <div className="rounded-2xl border border-border bg-gradient-to-br from-secondary/80 to-card p-5 sm:p-7">
+      <div className="rounded-[var(--radius-xl)] border border-border bg-ui-lavender/35 p-5 shadow-[var(--shadow-sm)] sm:p-7">
         <div className="flex items-start gap-3"><span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground"><Sparkles className="size-5" aria-hidden /></span><div><p className="text-sm font-medium text-primary">Datos de PokeAPI bajo demanda</p><h2 className="text-2xl font-semibold">Explorador de {game.title}</h2><p className="mt-2 max-w-2xl text-sm leading-6 text-muted-foreground">Consulta la Pokédex regional y, para cada especie, su evolución, encuentros, movimientos y defensa en el contexto exacto de {game.shortTitle}.</p></div></div>
         {state.status !== 'success' && <div className="mt-5"><Button type="button" onClick={() => void load()} disabled={state.status === 'loading'}>{state.status === 'loading' ? <><RefreshCw className="animate-spin" aria-hidden />Cargando Pokédex…</> : state.status === 'error' ? <><RefreshCw aria-hidden />Reintentar Pokédex</> : `Cargar Pokédex de ${region}`}</Button>{state.status === 'error' && <p className="mt-3 text-sm text-muted-foreground" role="alert">No se pudo contactar con PokeAPI. Puedes seguir leyendo toda la guía y reintentarlo después.</p>}</div>}
       </div>
@@ -224,11 +225,11 @@ export function GameDataExplorer({ gameSlug, region }: { gameSlug: MainGameSlug;
       {state.status === 'success' && (
         <div className="mt-5">
           <div className="grid gap-3 sm:grid-cols-[1fr_auto]">
-            <label className="relative block"><span className="sr-only">Buscar en la Pokédex de {region}</span><Search className="pointer-events-none absolute left-3 top-3 size-4 text-muted-foreground" aria-hidden /><input value={query} onChange={(event) => { setQuery(event.target.value); setVisible(18) }} className="min-h-10 w-full rounded-md border border-input bg-background pl-9 pr-3 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring" placeholder="Buscar por nombre o número" /></label>
+            <label className="relative block"><span className="sr-only">Buscar en la Pokédex de {region}</span><Search className="pointer-events-none absolute left-3 top-3.5 size-4 text-muted-foreground" aria-hidden /><input value={query} onChange={(event) => { setQuery(event.target.value); setVisible(18) }} className="min-h-11 w-full rounded-[var(--radius-md)] border border-input bg-card pl-9 pr-3 text-sm shadow-[var(--shadow-xs)] outline-none focus-visible:ring-2 focus-visible:ring-ring" placeholder="Buscar por nombre o número" /></label>
             <Badge variant="secondary" className="w-fit self-center">{filtered.length} de {allItems.length}</Badge>
           </div>
           <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
-            {filtered.slice(0, visible).map((item) => <button type="button" key={item.id} onClick={() => setSelectedId(item.id)} aria-pressed={selectedId === item.id} className="flex min-w-0 items-center gap-2 rounded-xl border border-border bg-card p-2 text-left outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring aria-pressed:border-primary aria-pressed:bg-primary/10"><span className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-secondary">{item.sprite ? <img src={item.sprite} alt="" loading="lazy" className="size-12 object-contain [image-rendering:pixelated]" /> : <span className="text-xs">#{item.id}</span>}</span><span className="min-w-0"><span className="block truncate text-sm font-medium">{item.nameEs}</span><span className="text-xs text-muted-foreground">{region} #{allItems.indexOf(item) + 1}</span></span></button>)}
+            {filtered.slice(0, visible).map((item) => <button type="button" key={item.id} onClick={() => setSelectedId(item.id)} aria-pressed={selectedId === item.id} className="interactive-clay flex min-w-0 items-center gap-2 rounded-[var(--radius-md)] border border-border bg-card p-2 text-left shadow-[var(--shadow-xs)] outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring aria-pressed:border-ui-green-strong aria-pressed:bg-ui-green/35"><span className="flex size-12 shrink-0 items-center justify-center rounded-[var(--radius-sm)] bg-secondary">{item.sprite ? <img src={item.sprite} alt="" loading="lazy" className="size-12 object-contain [image-rendering:pixelated]" /> : <span className="text-xs">#{item.id}</span>}</span><span className="min-w-0"><span className="block truncate text-sm font-medium">{item.nameEs}</span><span className="text-xs text-muted-foreground">{region} #{allItems.indexOf(item) + 1}</span></span></button>)}
           </div>
           {visible < filtered.length && <Button className="mt-4 w-full" type="button" variant="outline" onClick={() => setVisible((value) => value + 18)}>Ver 18 más</Button>}
           {filtered.length === 0 && <p className="mt-5 rounded-xl border border-dashed border-border p-5 text-center text-sm text-muted-foreground">No hay coincidencias en la Pokédex de {region}.</p>}

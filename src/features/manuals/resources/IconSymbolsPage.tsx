@@ -1,4 +1,4 @@
-import { AlertTriangle, BookOpen, Gamepad2, Save, Tags } from 'lucide-react'
+import { AlertTriangle, BookOpen, Gamepad2, Save, Tags } from '@/components/icons'
 import { Link } from 'react-router-dom'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -23,10 +23,10 @@ const symbols = [
 export function IconSymbolsPage() {
   return (
     <article className="space-y-8">
-      <header className="rounded-2xl border border-border bg-gradient-to-br from-primary/15 via-card to-secondary p-5 sm:p-8">
-        <div className="mb-5 flex size-12 items-center justify-center rounded-xl bg-primary text-primary-foreground"><BookOpen className="size-6" aria-hidden /></div>
+      <header className="rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-sm)] sm:p-8">
+        <div className="mb-5 flex size-12 items-center justify-center rounded-[var(--radius-md)] bg-ui-blue text-ui-blue-strong shadow-[var(--shadow-xs)]"><BookOpen className="size-6" aria-hidden /></div>
         <p className="text-sm font-semibold uppercase tracking-widest text-primary">R-03 · Referencia sin spoilers</p>
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight">Iconos y símbolos</h1>
+        <h1 className="mt-2 page-title">Iconos y símbolos</h1>
         <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">Una leyenda compacta para reconocer controles, guardado, avisos y las etiquetas editoriales que aparecen en el manual y en esta app.</p>
         <div className="mt-5 flex flex-wrap gap-2"><Badge variant="secondary">Páginas 153–154</Badge><Badge variant="secondary">Consulta rápida</Badge></div>
       </header>
@@ -69,9 +69,9 @@ export function IconSymbolsPage() {
       <LessonCallout kind="note">Los usos de X, Y, L, R, START y SELECT cambian entre juegos. Sigue siempre la indicación que aparece en la pantalla del juego.</LessonCallout>
       <PhysicalReference reference={{ edition: 'ds-156-v1', pages: [153, 154] }} />
       <nav className="flex flex-wrap gap-3" aria-label="Recursos relacionados">
-        <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/recursos/r-02">Anterior: R-02 · Estados</Link>
-        <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/empezar/nintendo-ds">Ampliar controles de Nintendo DS</Link>
-        <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/recursos/r-04">Siguiente: R-04 · Kit PMD</Link>
+        <Link className="manual-nav-link" to="/manuales/recursos/r-02">Anterior: R-02 · Estados</Link>
+        <Link className="manual-nav-link" to="/manuales/empezar/nintendo-ds">Ampliar controles de Nintendo DS</Link>
+        <Link className="manual-nav-link" to="/manuales/recursos/r-04">Siguiente: R-04 · Kit PMD</Link>
       </nav>
     </article>
   )

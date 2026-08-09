@@ -1,13 +1,11 @@
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
+import { StatusState } from '@/components/ui/status-state'
 
 export function ManualNotFoundPage() {
   return (
-    <div className="py-8 text-center">
-      <p className="mb-2 text-sm font-medium text-muted-foreground">Error 404</p>
-      <h1 className="mb-2 text-2xl font-semibold">Lección no encontrada</h1>
-      <p className="mb-5 text-muted-foreground">Esta dirección no corresponde a una lección del manual.</p>
+    <StatusState title="Lección no encontrada" description="Error 404. Esta dirección no corresponde a una lección del manual." tone="empty" headingLevel={1}>
       <Button asChild variant="outline"><Link to="/manuales">Volver a Manuales</Link></Button>
-    </div>
+    </StatusState>
   )
 }

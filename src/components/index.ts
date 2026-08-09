@@ -1,2 +1,5 @@
-// Componentes reutilizables UI
-// Exportar aquí los componentes propios cuando se creen
+export { PokedexCard } from './PokedexCard'
+export { Chip } from './ui/chip'
+export { IconButton } from './ui/icon-button'
+export { SearchField } from './ui/search-field'
+export { BentoCard, MiniCard } from './ui/card'

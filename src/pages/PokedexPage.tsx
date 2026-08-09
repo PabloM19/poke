@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { LayoutGrid, List, Filter, X } from 'lucide-react'
+import { LayoutGrid, List, Filter, X } from '@/components/icons'
 import { getSetting, setSetting } from '@/lib/storage'
 import { Button } from '@/components/ui/button'
 import {
@@ -27,6 +27,7 @@ import {
   serializePokedexFilterParams,
 } from '@/features/pokedex/filters/pokedexFilterParams'
 import { translatePokemonType } from '@/features/localization'
+import { TypeChip } from '@/features/types'
 
 const CHUNK_SIZE = 24
 const TOTAL_BOUNDS = getTotalBounds(pokemonSummarySnapshot.items)
@@ -52,6 +53,20 @@ function FilterChip({ label, onRemove }: { label: string; onRemove: () => void }
       {label}
       <X aria-hidden />
     </Button>
+  )
+}
+
+function TypeFilterChip({ type, onRemove }: { type: PokemonTypeName; onRemove: () => void }) {
+  const label = translatePokemonType(type)
+  return (
+    <TypeChip
+      as="button"
+      type={type}
+      interactive
+      suffix="×"
+      ariaLabel={`Quitar filtro: ${label}`}
+      onClick={onRemove}
+    />
   )
 }
 
@@ -132,9 +147,12 @@ export function PokedexPage() {
   }, [viewMode])
 
   return (
-    <>
+    <div className="page-stack">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-        <h1 className="text-2xl font-semibold text-foreground">Pokédex</h1>
+        <div>
+          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-ui-blue-strong">649 especies</p>
+          <h1 className="page-title mt-1">Pokédex</h1>
+        </div>
         <div className="flex items-center gap-2">
           <Sheet>
             <SheetTrigger asChild>
@@ -189,7 +207,7 @@ export function PokedexPage() {
                       id="primary-type"
                       value={primaryType ?? ''}
                       onChange={(event) => selectPrimaryType(event.target.value)}
-                      className="mt-1 h-10 w-full rounded-md border border-input bg-background px-2 text-sm"
+                      className="mt-1 h-11 w-full rounded-[var(--radius-md)] border border-input bg-card px-3 text-sm shadow-[var(--shadow-xs)]"
                     >
                       <option value="">Cualquiera</option>
                       {POKEMON_TYPES.map((type) => <option key={type} value={type}>{translatePokemonType(type)}</option>)}
@@ -202,7 +220,7 @@ export function PokedexPage() {
                       value={secondaryType ?? ''}
                       disabled={primaryType == null}
                       onChange={(event) => selectSecondaryType(event.target.value)}
-                      className="mt-1 h-10 w-full rounded-md border border-input bg-background px-2 text-sm disabled:opacity-50"
+                      className="mt-1 h-11 w-full rounded-[var(--radius-md)] border border-input bg-card px-3 text-sm shadow-[var(--shadow-xs)] disabled:opacity-50"
                     >
                       <option value="">Cualquiera</option>
                       {POKEMON_TYPES.filter((type) => type !== primaryType).map((type) => (
@@ -227,7 +245,7 @@ export function PokedexPage() {
                   onChange={(event) => {
                     updateFilters({ minTotal: Math.min(Number(event.target.value), maxTotal) })
                   }}
-                  className="h-10 w-full accent-foreground"
+                  className="h-11 w-full accent-ui-green-strong"
                 />
                 <label className="block text-xs font-medium" htmlFor="maximum-total">Máximo: {maxTotal}</label>
                 <input
@@ -239,7 +257,7 @@ export function PokedexPage() {
                   onChange={(event) => {
                     updateFilters({ maxTotal: Math.max(Number(event.target.value), minTotal) })
                   }}
-                  className="h-10 w-full accent-foreground"
+                  className="h-11 w-full accent-ui-green-strong"
                 />
               </section>
               <section className="mt-6 border-t border-border px-4 pb-6 pt-5">
@@ -250,7 +268,7 @@ export function PokedexPage() {
                   onChange={(event) => {
                     updateFilters({ sort: event.target.value as PokedexSort })
                   }}
-                  className="mt-2 h-10 w-full rounded-md border border-input bg-background px-2 text-sm"
+                  className="mt-2 h-11 w-full rounded-[var(--radius-md)] border border-input bg-card px-3 text-sm shadow-[var(--shadow-xs)]"
                 >
                   <option value="number-asc">Número Pokédex</option>
                   <option value="name-asc">Nombre A–Z</option>
@@ -271,7 +289,7 @@ export function PokedexPage() {
           </Sheet>
           <Button
             variant="outline"
-            size="sm"
+            size="icon"
             onClick={toggleView}
             aria-label={viewMode === 'grid' ? 'Ver como lista' : 'Ver como cuadrícula'}
           >
@@ -284,7 +302,7 @@ export function PokedexPage() {
         </div>
       </div>
 
-      <p className="text-muted-foreground" aria-live="polite">
+      <p className="-mt-2 text-sm leading-6 text-muted-foreground" aria-live="polite">
         {filteredItems.length} {filteredItems.length === 1 ? 'especie' : 'especies'}{generation != null
           ? ` de la Generación ${['I', 'II', 'III', 'IV', 'V'][generation - 1]}`
           : ' de las Generaciones I–V'}. Toca una para ver su ficha completa.
@@ -296,10 +314,10 @@ export function PokedexPage() {
             <FilterChip label={`Generación ${['I', 'II', 'III', 'IV', 'V'][generation - 1]}`} onRemove={() => selectGeneration(null)} />
           )}
           {primaryType != null && (
-            <FilterChip label={translatePokemonType(primaryType)} onRemove={removePrimaryType} />
+            <TypeFilterChip type={primaryType} onRemove={removePrimaryType} />
           )}
           {secondaryType != null && (
-            <FilterChip label={translatePokemonType(secondaryType)} onRemove={() => {
+            <TypeFilterChip type={secondaryType} onRemove={() => {
               updateFilters({ types: primaryType == null ? [] : [primaryType] })
             }} />
           )}
@@ -322,7 +340,7 @@ export function PokedexPage() {
       {activeFilterCount === 0 && <div className="mb-4" />}
 
       {filteredItems.length === 0 && (
-        <div className="rounded-xl border border-dashed border-border p-8 text-center" role="status">
+        <div className="rounded-[var(--radius-xl)] border border-dashed border-border bg-card p-8 text-center shadow-[var(--shadow-xs)]" role="status">
           <p className="font-medium">No hay especies con estos filtros.</p>
           <p className="mt-1 text-sm text-muted-foreground">Prueba a quitar un tipo o ampliar el rango de stats.</p>
           <Button type="button" variant="outline" size="sm" className="mt-3" onClick={resetAllFilters}>Limpiar todos los filtros</Button>
@@ -330,7 +348,7 @@ export function PokedexPage() {
       )}
 
       {filteredItems.length > 0 && viewMode === 'grid' ? (
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {visibleItems.map((item) => (
             <PokedexCard key={item.id} item={item} layout="grid" />
           ))}
@@ -352,6 +370,6 @@ export function PokedexPage() {
           </Button>
         </div>
       )}
-    </>
+    </div>
   )
 }

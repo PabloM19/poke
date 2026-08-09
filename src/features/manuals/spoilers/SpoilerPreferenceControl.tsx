@@ -10,9 +10,9 @@ const options: readonly { value: SpoilerLevel; label: string }[] = [
 export function SpoilerPreferenceControl({ compact = false }: { compact?: boolean }) {
   const { level, setLevel } = useSpoilerPreference()
   return (
-    <div className={compact ? 'block text-sm font-medium' : 'block rounded-xl border border-border bg-card p-4 text-sm font-medium'}>
+    <div className={compact ? 'block text-sm font-medium' : 'block rounded-[var(--radius-lg)] text-sm font-medium'}>
       <label htmlFor="spoiler-level-select">Nivel de spoilers</label>
-      <select id="spoiler-level-select" value={level} onChange={(event) => setLevel(event.target.value as SpoilerLevel)} className="mt-2 h-11 w-full rounded-md border border-input bg-background px-3 font-normal">
+      <select id="spoiler-level-select" value={level} onChange={(event) => setLevel(event.target.value as SpoilerLevel)} className="mt-2 h-11 w-full rounded-[var(--radius-md)] border border-input bg-card px-3 font-normal shadow-[var(--shadow-xs)]">
         {options.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
       </select>
       {!compact && <span className="mt-2 block font-normal leading-5 text-muted-foreground">Por defecto se ocultan mecánicas y recorridos. Siempre puedes revelar una página una sola vez.</span>}

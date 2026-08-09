@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Flag, Map, Move, Shield, Users } from 'lucide-react'
+import { Flag, Map, Move, Shield, Users } from '@/components/icons'
 import { Link } from 'react-router-dom'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -21,10 +21,10 @@ export function ConquestTacticalReminderPage() {
 
   return (
     <article className="space-y-8">
-      <header className="rounded-2xl border border-border bg-gradient-to-br from-primary/15 via-card to-secondary p-5 sm:p-8">
-        <div className="mb-5 flex size-12 items-center justify-center rounded-xl bg-primary text-primary-foreground"><Map className="size-6" aria-hidden /></div>
+      <header className="rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-sm)] sm:p-8">
+        <div className="mb-5 flex size-12 items-center justify-center rounded-[var(--radius-md)] bg-ui-blue text-ui-blue-strong shadow-[var(--shadow-xs)]"><Map className="size-6" aria-hidden /></div>
         <p className="text-sm font-semibold uppercase tracking-widest text-primary">R-06 · Mecánica de Pokémon Conquest</p>
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight">Recordatorio táctico Conquest</h1>
+        <h1 className="mt-2 page-title">Recordatorio táctico Conquest</h1>
         <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">Una pausa breve antes de mover evita los errores caros: comprueba primero la misión y los turnos; después decide alcance, posición y orden.</p>
         <div className="mt-5 flex flex-wrap gap-2"><Badge variant="secondary">Páginas 151–154</Badge><Badge variant="secondary">Consulta durante la batalla</Badge></div>
       </header>
@@ -66,8 +66,8 @@ export function ConquestTacticalReminderPage() {
       <LessonCallout kind="note">Fortalecer el vínculo entre Guerrero y Pokémon es una decisión de progreso. La gestión de reinos se amplía gradualmente: no necesitas dominarla toda en la primera batalla.</LessonCallout>
       <PhysicalReference reference={{ edition: 'ds-156-v1', pages: [151, 152] }} />
       <nav className="flex flex-wrap gap-3" aria-label="Recursos relacionados">
-        <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/juegos/conquest">Volver a Pokémon Conquest</Link>
-        <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/recursos/r-05">Anterior: R-05</Link>
+        <Link className="manual-nav-link" to="/manuales/juegos/conquest">Volver a Pokémon Conquest</Link>
+        <Link className="manual-nav-link" to="/manuales/recursos/r-05">Anterior: R-05</Link>
       </nav>
     </article>
   )

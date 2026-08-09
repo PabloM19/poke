@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { BookOpen } from 'lucide-react'
+import { BookOpen } from '@/components/icons'
 import { cn } from '@/lib/utils'
 import {
   manualFamilyLabels,
@@ -27,8 +27,8 @@ function IndexContent() {
                     to={entry.path}
                     aria-current={active ? 'page' : undefined}
                     className={cn(
-                      'block rounded-md px-3 py-2 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring',
-                      active ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+                      'flex min-h-11 items-center rounded-[var(--radius-sm)] px-3 py-2 text-sm font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring',
+                      active ? 'bg-ui-green text-ui-green-strong shadow-[var(--shadow-xs)]' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
                     )}
                   >
                     {entry.shortTitle}
@@ -46,7 +46,7 @@ function IndexContent() {
 export function ManualIndex() {
   return (
     <>
-      <details className="mb-5 rounded-xl border border-border bg-card md:hidden">
+      <details className="mb-5 rounded-[var(--radius-lg)] border border-border bg-card shadow-[var(--shadow-xs)] md:hidden">
         <summary className="flex min-h-12 cursor-pointer list-none items-center gap-2 px-4 py-3 font-medium">
           <BookOpen className="size-5" aria-hidden />
           Índice del manual

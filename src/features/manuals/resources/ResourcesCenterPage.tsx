@@ -1,4 +1,4 @@
-import { BookOpen, CalendarDays, ShieldCheck } from 'lucide-react'
+import { BookOpen, CalendarDays, ShieldCheck } from '@/components/icons'
 import { Link } from 'react-router-dom'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -25,10 +25,10 @@ export function ResourcesCenterPage() {
 
   return (
     <article className="space-y-8">
-      <header className="rounded-2xl border border-border bg-gradient-to-br from-primary/15 via-card to-secondary p-5 sm:p-8">
-        <div className="mb-5 flex size-12 items-center justify-center rounded-xl bg-primary text-primary-foreground"><BookOpen className="size-6" aria-hidden /></div>
+      <header className="rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-sm)] sm:p-8">
+        <div className="mb-5 flex size-12 items-center justify-center rounded-[var(--radius-md)] bg-ui-blue text-ui-blue-strong shadow-[var(--shadow-xs)]"><BookOpen className="size-6" aria-hidden /></div>
         <p className="text-sm font-semibold uppercase tracking-widest text-primary">Consulta rápida · R-01…R-06</p>
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight">Centro de recursos</h1>
+        <h1 className="mt-2 page-title">Centro de recursos</h1>
         <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">El punto estable para consultar y actualizar los complementos del manual sin depender de la paginación ni reimprimir enlaces.</p>
         <div className="mt-5 flex flex-wrap gap-2"><Badge variant="secondary">Páginas 153–156</Badge><Badge variant="secondary">Edición {manualEdition}</Badge></div>
       </header>

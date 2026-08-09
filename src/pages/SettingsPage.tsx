@@ -1,4 +1,3 @@
-import { useTheme } from '@/app/theme'
 import {
   clearApiCache,
   getCacheWriteIssue,
@@ -45,7 +44,6 @@ const PHASE_LABELS: Record<BuildPhase, string> = {
 }
 
 export function SettingsPage() {
-  const { theme, setTheme } = useTheme()
   const { meta, status, refresh } = useSpeciesIndex()
   const [defaultView, setDefaultViewState] = useState<DefaultView>(() =>
     getSetting('defaultView', 'grid')
@@ -73,13 +71,6 @@ export function SettingsPage() {
   useEffect(() => () => {
     abortRef.current?.abort()
   }, [])
-
-  const handleThemeChange = useCallback(
-    (checked: boolean) => {
-      setTheme(checked ? 'dark' : 'light')
-    },
-    [setTheme]
-  )
 
   const handleDefaultViewChange = useCallback((checked: boolean) => {
     setDefaultViewState(checked ? 'list' : 'grid')
@@ -194,32 +185,12 @@ export function SettingsPage() {
 
   return (
     <>
-      <h1 className="mb-2 text-2xl font-semibold text-foreground">Ajustes</h1>
-      <p className="mb-6 text-muted-foreground">
-        Cambia el idioma, el tema o las notificaciones. Aquí controlas cómo
-        quieres usar PokéApp.
+      <h1 className="page-title">Ajustes</h1>
+      <p className="mb-6 mt-2 text-muted-foreground">
+        Controla la lectura del manual, tus preferencias de listas y los datos locales.
       </p>
 
       <div className="space-y-4">
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">Apariencia</CardTitle>
-            <CardDescription>
-              Modo día o noche. La preferencia se guarda automáticamente.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="flex flex-row items-center justify-between">
-            <span className="text-sm font-medium text-foreground">
-              {theme === 'dark' ? 'Modo oscuro' : 'Modo claro'}
-            </span>
-            <Switch
-              checked={theme === 'dark'}
-              onCheckedChange={handleThemeChange}
-              aria-label="Alternar entre modo claro y oscuro"
-            />
-          </CardContent>
-        </Card>
-
         <Card>
           <CardHeader>
             <CardTitle className="text-base">Spoilers del manual</CardTitle>
@@ -254,7 +225,7 @@ export function SettingsPage() {
             <CardDescription>
               La primera vez descargamos un índice local para que el buscador y la
               Pokédex sean instantáneos. Se guarda en tu navegador. No afecta a
-              favoritos ni al tema.
+              favoritos ni otras preferencias.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">
@@ -336,7 +307,7 @@ export function SettingsPage() {
             <CardTitle className="text-base">Almacenamiento de PokeAPI</CardTitle>
             <CardDescription>
               Los datos consultados se guardan temporalmente para ahorrar red.
-              Puedes vaciar esta caché sin borrar el tema, favoritos ni el índice.
+              Puedes vaciar esta caché sin borrar favoritos ni el índice.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-3">

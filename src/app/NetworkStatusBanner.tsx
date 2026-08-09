@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { WifiOff } from 'lucide-react'
+import { WifiOff } from '@/components/icons'
 
 export function NetworkStatusBanner() {
   const [online, setOnline] = useState(() => navigator.onLine)
@@ -14,8 +14,8 @@ export function NetworkStatusBanner() {
   }, [])
   if (online) return null
   return (
-    <div className="border-b border-amber-500/40 bg-amber-500/10 px-4 py-2 text-sm" role="status">
-      <div className="mx-auto flex max-w-4xl items-center gap-2"><WifiOff className="size-4 shrink-0" aria-hidden /><span><strong>Sin conexión.</strong> El manual y los datos locales siguen disponibles; los datos de PokeAPI pueden necesitar reintento.</span></div>
+    <div className="border-b border-ui-yellow-strong/20 bg-ui-yellow/55 px-4 py-2 text-sm text-ui-yellow-strong" role="status">
+      <div className="mx-auto flex max-w-6xl items-center gap-2"><WifiOff className="size-4 shrink-0" aria-hidden /><span><strong>Sin conexión.</strong> El manual y los datos locales siguen disponibles; los datos de PokeAPI pueden necesitar reintento.</span></div>
     </div>
   )
 }

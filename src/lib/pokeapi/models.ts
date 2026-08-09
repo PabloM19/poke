@@ -12,6 +12,7 @@ export interface NamedAPIResource {
 /** Sprites mínimos: frontal por defecto y opcionales para variantes. */
 export interface PokemonSprites {
   front_default: string | null
+  official_artwork?: string | null
   front_shiny?: string | null
   front_female?: string | null
   front_shiny_female?: string | null
@@ -43,6 +44,10 @@ export interface PokemonTypePast {
 export interface Pokemon {
   id: number
   name: string
+  /** Height in decimetres, as returned by PokeAPI. */
+  height?: number
+  /** Weight in hectograms, as returned by PokeAPI. */
+  weight?: number
   stats: PokemonStat[]
   types: PokemonType[]
   sprites: PokemonSprites

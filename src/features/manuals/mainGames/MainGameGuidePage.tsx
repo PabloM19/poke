@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { BookOpen, ChevronRight, Gamepad2, Map, Sparkles } from 'lucide-react'
+import { BookOpen, ChevronRight, Gamepad2, Map, Sparkles } from '@/components/icons'
 import { Badge } from '@/components/ui/badge'
+import { TypeChip, pokemonTypeFromLabel } from '@/features/types'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { PokemonReferenceGrid } from '../components/PokemonReferenceCard'
@@ -31,7 +32,7 @@ function StarterSection({ guide }: { guide: MainGameGuide }) {
           {guide.starters.map((starter) => (
             <Card key={starter.speciesId} className="gap-3 py-5">
               <CardHeader className="gap-2 px-5">
-                <Badge className="w-fit" variant="secondary">{starter.type}</Badge>
+                {pokemonTypeFromLabel(starter.type) ? <TypeChip type={pokemonTypeFromLabel(starter.type)!} size="compact" /> : <Badge className="w-fit" variant="secondary">{starter.type}</Badge>}
                 <CardTitle>{starter.name}</CardTitle>
               </CardHeader>
               <CardContent className="px-5 text-sm leading-6 text-muted-foreground">{starter.description}</CardContent>
@@ -52,10 +53,10 @@ export function MainGameGuidePage() {
   const gymGroups = guide.gymGroups ?? [{ title: 'Las ocho Medallas', start: 0, end: guide.gyms.length }]
   return (
     <article className="space-y-10">
-      <header className="overflow-hidden rounded-2xl border border-border bg-gradient-to-br from-primary/15 via-card to-secondary p-5 sm:p-8">
-        <div className="mb-5 flex size-12 items-center justify-center rounded-xl bg-primary text-primary-foreground"><Gamepad2 className="size-6" aria-hidden /></div>
+      <header className="overflow-hidden rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-sm)] sm:p-8">
+        <div className="mb-5 flex size-12 items-center justify-center rounded-[var(--radius-md)] bg-ui-blue text-ui-blue-strong shadow-[var(--shadow-xs)]"><Gamepad2 className="size-6" aria-hidden /></div>
         <p className="text-sm font-semibold uppercase tracking-widest text-primary">{guide.eyebrow}</p>
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight sm:text-4xl">{guide.title}</h1>
+        <h1 className="mt-2 page-title">{guide.title}</h1>
         <p className="mt-3 text-lg font-medium">{guide.summary}</p>
         <p className="mt-4 max-w-3xl leading-7 text-muted-foreground">{guide.lead}</p>
         <div className="mt-5 flex flex-wrap gap-2">

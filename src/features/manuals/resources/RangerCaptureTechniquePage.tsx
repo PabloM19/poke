@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { CircleDot, Eye, PenTool, Shield } from 'lucide-react'
+import { CircleDot, Eye, PenTool, Shield } from '@/components/icons'
 import { Link } from 'react-router-dom'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -17,10 +17,10 @@ export function RangerCaptureTechniquePage() {
 
   return (
     <article className="space-y-8">
-      <header className="rounded-2xl border border-border bg-gradient-to-br from-primary/15 via-card to-secondary p-5 sm:p-8">
-        <div className="mb-5 flex size-12 items-center justify-center rounded-xl bg-primary text-primary-foreground"><PenTool className="size-6" aria-hidden /></div>
+      <header className="rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-sm)] sm:p-8">
+        <div className="mb-5 flex size-12 items-center justify-center rounded-[var(--radius-md)] bg-ui-blue text-ui-blue-strong shadow-[var(--shadow-xs)]"><PenTool className="size-6" aria-hidden /></div>
         <p className="text-sm font-semibold uppercase tracking-widest text-primary">R-05 · Mecánica de Pokémon Ranger</p>
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight">Técnica de captura Ranger</h1>
+        <h1 className="mt-2 page-title">Técnica de captura Ranger</h1>
         <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">La captura no premia dibujar sin pausa: observa el ataque, retira el lápiz a tiempo y aprovecha una apertura con círculos continuos y controlados.</p>
         <div className="mt-5 flex flex-wrap gap-2"><Badge variant="secondary">Páginas 145–146 y 153–154</Badge><Badge variant="secondary">Precisión táctil</Badge></div>
       </header>
@@ -53,9 +53,9 @@ export function RangerCaptureTechniquePage() {
       <LessonCallout kind="note" title="Cuida la pantalla">No presiones ni traces con fuerza. Un movimiento ligero y preciso protege la pantalla y ofrece más control.</LessonCallout>
       <PhysicalReference reference={{ edition: 'ds-156-v1', pages: [145, 146] }} />
       <nav className="flex flex-wrap gap-3" aria-label="Recursos relacionados">
-        <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/juegos/ranger">Volver a Pokémon Ranger</Link>
-        <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/recursos/r-04">Anterior: R-04</Link>
-        <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/recursos/r-06">Siguiente: R-06 · Conquest</Link>
+        <Link className="manual-nav-link" to="/manuales/juegos/ranger">Volver a Pokémon Ranger</Link>
+        <Link className="manual-nav-link" to="/manuales/recursos/r-04">Anterior: R-04</Link>
+        <Link className="manual-nav-link" to="/manuales/recursos/r-06">Siguiente: R-06 · Conquest</Link>
       </nav>
     </article>
   )

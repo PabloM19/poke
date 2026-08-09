@@ -1,6 +1,6 @@
 import { useDeferredValue, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { BookOpen, Gamepad2, Search, Shapes } from 'lucide-react'
+import { BookOpen, Gamepad2, Search, Shapes } from '@/components/icons'
 import { Input } from '@/components/ui/input'
 import { searchManuals, type ManualSearchResultKind } from './searchIndex'
 import { useSpoilerPreference } from '../spoilers/spoilerPreference'
@@ -33,7 +33,7 @@ export function ManualSearchBox() {
         />
       </div>
       {showResults && (
-        <div className="mt-3 rounded-xl border border-border bg-card p-2" role="region" aria-label="Resultados del manual">
+        <div className="mt-3 rounded-[var(--radius-lg)] border border-border bg-card p-2 shadow-[var(--shadow-sm)]" role="region" aria-label="Resultados del manual">
           {results.length > 0 ? (
             <ul className="divide-y divide-border">
               {results.map((result) => {
@@ -41,7 +41,7 @@ export function ManualSearchBox() {
                 const Icon = config.icon
                 return (
                   <li key={`${result.kind}-${result.id}`}>
-                    <Link to={result.path} className="flex min-h-14 items-start gap-3 rounded-lg p-3 outline-none transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring">
+                    <Link to={result.path} className="flex min-h-14 items-start gap-3 rounded-[var(--radius-sm)] p-3 outline-none transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring">
                       <Icon className="mt-0.5 size-5 shrink-0 text-muted-foreground" aria-hidden />
                       <span className="min-w-0">
                         <span className="block font-medium">{result.title}</span>

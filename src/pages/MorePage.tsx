@@ -1,8 +1,14 @@
 import { Link } from 'react-router-dom'
-import { ChevronRight, GitCompare, Settings } from 'lucide-react'
+import { ChevronRight, GitCompare, Library, Settings } from '@/components/icons'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
 const entries = [
+  {
+    to: '/manuales/recursos',
+    title: 'Recursos rápidos',
+    description: 'Tablas de tipos, estados y recordatorios de juego.',
+    icon: Library,
+  },
   {
     to: '/compare',
     title: 'Comparar Pokémon',
@@ -12,7 +18,7 @@ const entries = [
   {
     to: '/settings',
     title: 'Ajustes',
-    description: 'Tema, vista, datos locales y diagnóstico.',
+    description: 'Vista, datos locales, spoilers y diagnóstico.',
     icon: Settings,
   },
 ] as const
@@ -20,9 +26,9 @@ const entries = [
 export function MorePage() {
   return (
     <>
-      <h1 className="mb-2 text-2xl font-semibold text-foreground">Más</h1>
+      <h1 className="page-title">Herramientas</h1>
       <p className="mb-6 text-muted-foreground">
-        Herramientas y opciones que no necesitas tener siempre a la vista.
+        Prepara comparaciones, consulta referencias y controla los datos de la app.
       </p>
       <div className="grid gap-4 sm:grid-cols-2">
         {entries.map(({ to, title, description, icon: Icon }) => (

@@ -8,6 +8,7 @@ import {
   TypeExample,
 } from './LessonBlocks'
 import { InlineManualText } from './InlineManualText'
+import { BentoCard } from '@/components/ui/card'
 
 function Block({ block, index }: { block: ManualBlock; index: number }) {
   if (block.type === 'heading') {
@@ -45,15 +46,15 @@ const spoilerLabels = {
 export function ManualArticleContent({ article }: { article: ManualArticle }) {
   return (
     <article>
-      <div className="mb-3 flex flex-wrap gap-2">
-        <Badge variant="secondary">{spoilerLabels[article.spoilerLevel]}</Badge>
-        <Badge variant="secondary">
-          Páginas {article.printReference.pages[0]}–{article.printReference.pages.at(-1)}
-        </Badge>
-      </div>
-      <h1 className="text-3xl font-semibold tracking-tight">{article.title}</h1>
-      <p className="mt-3 text-lg leading-8 text-muted-foreground">{article.summary}</p>
-      <div className="mt-8">
+      <BentoCard tone="yellow" className="mb-8">
+        <div className="mb-3 flex flex-wrap gap-2">
+          <Badge variant="secondary">{spoilerLabels[article.spoilerLevel]}</Badge>
+          <Badge variant="secondary">Páginas {article.printReference.pages[0]}–{article.printReference.pages.at(-1)}</Badge>
+        </div>
+        <h1 className="page-title">{article.title}</h1>
+        <p className="mt-3 text-lg leading-8 text-foreground/75">{article.summary}</p>
+      </BentoCard>
+      <div>
         {article.blocks.map((block, index) => <Block key={`${index}-${block.type}`} block={block} index={index} />)}
       </div>
       <PhysicalReference reference={article.printReference} />

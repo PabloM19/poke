@@ -134,16 +134,35 @@ function normalizeRelations(
 export function normalizePokemon(raw: unknown, path: string): Pokemon {
   const record = asRecord(raw, path, 'pokemon')
   const sprites = asRecord(record.sprites, path, 'pokemon.sprites')
+  const otherSprites = record.sprites && typeof sprites.other === 'object' && sprites.other !== null
+    ? sprites.other as UnknownRecord
+    : null
+  const officialArtwork = otherSprites?.['official-artwork'] && typeof otherSprites['official-artwork'] === 'object'
+    ? otherSprites['official-artwork'] as UnknownRecord
+    : null
 
   return {
     id: asNumber(record.id, path, 'pokemon.id'),
     name: asString(record.name, path, 'pokemon.name'),
+    ...(typeof record.height === 'number' && Number.isFinite(record.height)
+      ? { height: record.height }
+      : {}),
+    ...(typeof record.weight === 'number' && Number.isFinite(record.weight)
+      ? { weight: record.weight }
+      : {}),
     sprites: {
       front_default: asNullableString(
         sprites.front_default,
         path,
         'pokemon.sprites.front_default'
       ),
+      ...(officialArtwork == null
+        ? {}
+        : { official_artwork: asNullableString(
+            officialArtwork.front_default,
+            path,
+            'pokemon.sprites.other.official-artwork.front_default'
+          ) }),
     },
     stats: asArray(record.stats, path, 'pokemon.stats').map((entry, index) =>
       normalizePokemonStat(entry, path, `pokemon.stats[${index}]`)

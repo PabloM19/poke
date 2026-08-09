@@ -1,6 +1,6 @@
 # PokéApp — Plan maestro de finalización e integración con el manual
 
-**Estado:** ejecución local completada; solo quedan dominio, despliegue y QR físicos
+**Estado:** ejecución local y rediseño Pokédex Soft Bento completados; solo quedan dominio, despliegue y QR físicos
 **Fecha de cierre local:** 9 de agosto de 2026
 **Regla principal:** no se empieza una fase hasta que la anterior cumpla todos sus criterios de salida.
 
@@ -128,13 +128,13 @@ Las subsecciones de una ficha usan anclas estables como `#iniciales`, `#rival`, 
 
 La navegación principal móvil mantendrá cinco destinos:
 
-1. Buscar.
+1. Inicio (Buscar).
 2. Pokédex.
 3. Manuales.
-4. Favoritos.
-5. Más.
+4. Herramientas.
+5. Guardados.
 
-`Más` reúne accesos a Comparar y Ajustes. Comparar conserva `/compare` y también se abre desde fichas, resultados, favoritos y artículos del manual. En escritorio pueden mostrarse Comparar y Ajustes directamente. Así Manuales pasa a ser una función principal sin perder ninguno de los destinos actuales ni saturar la barra inferior.
+`Herramientas` reúne accesos a Comparar, recursos y Ajustes. Comparar conserva `/compare` y también se abre desde fichas, resultados, guardados y artículos del manual. Así Manuales pasa a ser una función principal sin perder ninguno de los destinos actuales ni saturar la barra inferior.
 
 La detección de ruta activa debe funcionar por segmento, no solo por igualdad exacta, para que `/manuales/juegos/perla` mantenga activa la pestaña Manuales.
 

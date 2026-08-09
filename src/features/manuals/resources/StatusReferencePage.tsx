@@ -22,7 +22,7 @@ export function StatusReferencePage() {
   return (
     <article>
       <p className="text-sm font-semibold text-muted-foreground">R-02 · REFERENCIA DE MECÁNICAS</p>
-      <h1 className="mt-1 text-3xl font-semibold tracking-tight">Estados y efectos</h1>
+      <h1 className="mt-1 page-title">Estados y efectos</h1>
       <p className="mt-3 leading-7 text-muted-foreground">Un Pokémon solo conserva un estado principal a la vez, pero puede sufrir además efectos temporales y cambios de características.</p>
       <div className="my-5 rounded-xl border border-border bg-muted/40 p-4 text-sm">
         <p className="font-medium">{game.title} · Generación {game.generation === 4 ? 'IV' : 'V'}</p>
@@ -68,9 +68,9 @@ export function StatusReferencePage() {
       </aside>
 
       <nav className="mt-8 flex flex-wrap gap-3" aria-label="Recursos relacionados">
-        <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/entrenador/combate">Volver a Comprender el combate</Link>
-        <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/recursos/r-01">Abrir R-01 · Tipos</Link>
-        <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/recursos/r-03">Siguiente: R-03 · Iconos</Link>
+        <Link className="manual-nav-link" to="/manuales/entrenador/combate">Volver a Comprender el combate</Link>
+        <Link className="manual-nav-link" to="/manuales/recursos/r-01">Abrir R-01 · Tipos</Link>
+        <Link className="manual-nav-link" to="/manuales/recursos/r-03">Siguiente: R-03 · Iconos</Link>
       </nav>
     </article>
   )

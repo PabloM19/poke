@@ -9,7 +9,7 @@ import {
 } from '@/lib/pokeapi'
 import { parseSpeciesIdParam } from '@/lib/routing/speciesId'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { BentoCard, MiniCard } from '@/components/ui/card'
 import {
   Accordion,
   AccordionContent,
@@ -18,7 +18,7 @@ import {
 } from '@/components/ui/accordion'
 import { FavoriteButton } from '@/features/favorites/FavoriteButton'
 import { CompareLink } from '@/features/compare/CompareLink'
-import { translatePokemonStat, translatePokemonType } from '@/features/localization'
+import { translatePokemonStat } from '@/features/localization'
 import { useGameContext } from '@/features/games'
 import {
   resolvePokemonDefenseForGame,
@@ -27,12 +27,16 @@ import {
   type DefensiveMatchup,
 } from '@/features/historical'
 import { readManualReturn } from '@/features/manuals/manualReturn'
+import { TypeChip } from '@/features/types'
 
 const NAMES_ACCORDION_LIMIT = 10
 
 interface PokemonDetailData {
   nameEs: string
   spriteUrl: string | null
+  artworkUrl: string | null
+  height: number | null
+  weight: number | null
   types: string[]
   stats: Array<{ name: string; value: number }>
   totalBaseStats: number
@@ -76,9 +80,7 @@ function MatchupGroup({
         <ul className="flex flex-wrap gap-1.5">
           {matchups.map((matchup) => (
             <li key={matchup.attackingType}>
-              <Badge variant="outline">
-                {translatePokemonType(matchup.attackingType)} {multiplierLabel(matchup.multiplier)}
-              </Badge>
+              <TypeChip type={matchup.attackingType} suffix={multiplierLabel(matchup.multiplier)} />
             </li>
           ))}
         </ul>
@@ -117,6 +119,7 @@ export function PokemonDetailPage() {
         if (controller.signal.aborted) return
         const nameEs = getSpanishName(species) ?? species.name
         const spriteUrl = pokemon.sprites?.front_default ?? null
+        const artworkUrl = pokemon.sprites?.official_artwork ?? null
         const types = selectPokemonTypesForGeneration(pokemon, game.generation)
           .map((entry) => entry.type.name)
         const stats = selectPokemonStatsForGeneration(pokemon, game.generation)
@@ -149,6 +152,9 @@ export function PokemonDetailPage() {
           data: {
             nameEs,
             spriteUrl,
+            artworkUrl,
+            height: pokemon.height ?? null,
+            weight: pokemon.weight ?? null,
             types,
             stats,
             totalBaseStats,
@@ -229,108 +235,131 @@ export function PokemonDetailPage() {
   const immunities = detail.defense?.filter((entry) => entry.multiplier === 0) ?? []
 
   return (
-    <>
-      <div className="mb-6 flex flex-col items-center gap-4">
-        {detail.spriteUrl && (
-          <img
-            src={detail.spriteUrl}
-            alt=""
-            className="h-32 w-32 object-contain"
-          />
-        )}
-        <div className="text-center">
-          <p className="text-sm text-muted-foreground">
-            {formatSpeciesId(speciesId)}
-          </p>
-          <h1 className="text-2xl font-semibold text-foreground">
-            {detail.nameEs}
-          </h1>
-          <div className="mt-2 flex flex-wrap justify-center gap-1">
-            {detail.types.map((t) => (
-              <Badge key={t} variant="secondary">
-                {translatePokemonType(t)}
-              </Badge>
-            ))}
+    <div className="page-stack">
+      <BentoCard className="relative overflow-hidden p-0" aria-labelledby="pokemon-name">
+        <span className="pointer-events-none absolute -right-12 -top-16 size-48 rounded-full bg-ui-lavender/35" aria-hidden />
+        <div className="relative grid items-center gap-4 p-5 sm:grid-cols-[minmax(12rem,0.8fr)_1.2fr] sm:p-7">
+          <div className="mx-auto flex size-48 items-center justify-center rounded-[var(--radius-xl)] bg-secondary shadow-[var(--shadow-xs)] sm:size-56">
+            {(detail.artworkUrl || detail.spriteUrl) ? (
+              <img
+                src={detail.artworkUrl ?? detail.spriteUrl ?? ''}
+                alt={`Ilustración de ${detail.nameEs}`}
+                className={detail.artworkUrl ? 'size-44 object-contain sm:size-52' : 'size-36 object-contain [image-rendering:pixelated] sm:size-44'}
+              />
+            ) : (
+              <span className="text-sm text-muted-foreground">Imagen no disponible</span>
+            )}
+          </div>
+          <div className="text-center sm:text-left">
+            <p className="text-sm font-semibold tracking-wide text-muted-foreground">{formatSpeciesId(speciesId)}</p>
+            <h1 id="pokemon-name" className="page-title mt-1">{detail.nameEs}</h1>
+            <div className="mt-3 flex flex-wrap justify-center gap-2 sm:justify-start">
+              {detail.types.map((type) => <TypeChip key={type} type={type} variant="solid" />)}
+            </div>
+            <p className="mt-4 text-sm font-semibold text-foreground">{detail.gameTitle} · {generationLabel(detail.generation)}</p>
+            <p className="mt-1 text-sm leading-6 text-muted-foreground">Tipos, stats y defensa respetan sus reglas históricas.</p>
+            <div className="mt-5 flex flex-wrap justify-center gap-2 sm:justify-start">
+              <FavoriteButton speciesId={speciesId} speciesName={detail.nameEs} showLabel />
+              <CompareLink speciesId={speciesId} speciesName={detail.nameEs} showLabel />
+            </div>
           </div>
         </div>
-      </div>
+      </BentoCard>
 
-      <div className="mb-6 rounded-xl border border-border bg-muted/40 p-4">
-        <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Contexto de juego</p>
-        <p className="mt-1 font-medium">{detail.gameTitle} · {generationLabel(detail.generation)}</p>
-        <p className="mt-1 text-sm text-muted-foreground">Tipos, stats y defensa se muestran como funcionan en este juego.</p>
-      </div>
+      <section aria-labelledby="quick-data-title">
+        <h2 id="quick-data-title" className="sr-only">Datos rápidos</h2>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <MiniCard className="bg-ui-blue/55">
+            <p className="text-xs font-semibold text-ui-blue-strong">Altura</p>
+            <p className="mt-1 text-xl font-bold tabular-nums">{detail.height == null ? '—' : `${detail.height / 10} m`}</p>
+          </MiniCard>
+          <MiniCard className="bg-ui-yellow/55">
+            <p className="text-xs font-semibold text-ui-yellow-strong">Peso</p>
+            <p className="mt-1 text-xl font-bold tabular-nums">{detail.weight == null ? '—' : `${detail.weight / 10} kg`}</p>
+          </MiniCard>
+          <MiniCard className="bg-ui-green/55">
+            <p className="text-xs font-semibold text-ui-green-strong">Total base</p>
+            <p className="mt-1 text-xl font-bold tabular-nums">{detail.totalBaseStats}</p>
+          </MiniCard>
+          <MiniCard className="bg-ui-lavender/55">
+            <p className="text-xs font-semibold text-ui-lavender-strong">Contexto</p>
+            <p className="mt-1 text-xl font-bold">Gen {detail.generation === 4 ? 'IV' : 'V'}</p>
+          </MiniCard>
+        </div>
+      </section>
 
-      <section className="mb-6">
-        <h2 className="mb-2 text-lg font-medium text-foreground">
-          Estadísticas base
-        </h2>
-        <ul className="space-y-1 text-sm">
-          {detail.stats.map((s) => (
-            <li key={s.name} className="flex justify-between gap-4">
-              <span className="text-muted-foreground">
-                {translatePokemonStat(s.name, true)}
+      <BentoCard aria-labelledby="stats-title">
+        <div className="mb-5 flex items-end justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.12em] text-ui-green-strong">Rendimiento</p>
+            <h2 id="stats-title" className="mt-1 text-xl font-bold">Estadísticas base</h2>
+          </div>
+          <p className="rounded-full bg-ui-green/55 px-3 py-1 text-sm font-bold tabular-nums">Total {detail.totalBaseStats}</p>
+        </div>
+        <ul className="grid gap-3">
+          {detail.stats.map((stat) => (
+            <li key={stat.name} className="grid grid-cols-[minmax(5.75rem,0.75fr)_2fr_2.5rem] items-center gap-3 text-sm">
+              <span className="font-medium text-muted-foreground">{translatePokemonStat(stat.name, true)}</span>
+              <span className="h-3 overflow-hidden rounded-full bg-secondary" aria-hidden>
+                <span className="block h-full rounded-full bg-ui-green-strong" style={{ width: `${Math.min(100, (stat.value / 180) * 100)}%` }} />
               </span>
-              <span className="font-medium">{s.value}</span>
+              <span className="text-right font-bold tabular-nums">{stat.value}</span>
             </li>
           ))}
         </ul>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Total: {detail.totalBaseStats}. Total = suma de las estadísticas base.
-        </p>
-      </section>
+        <p className="mt-4 text-xs leading-5 text-muted-foreground">El total es la suma de las estadísticas base; las barras comparten una misma escala visual.</p>
+      </BentoCard>
 
-      <section className="mb-6" aria-labelledby="defense-title">
-        <h2 id="defense-title" className="mb-2 text-lg font-medium text-foreground">Defensa por tipos</h2>
-        {detail.defense == null ? (
-          <div className="rounded-xl border border-dashed border-border p-4" role="status">
-            <p className="text-sm text-muted-foreground">No se pudieron cargar las relaciones de tipos. La ficha básica sigue disponible.</p>
-            <Button type="button" variant="outline" size="sm" className="mt-3" onClick={() => setRetry((value) => value + 1)}>Reintentar defensa</Button>
-          </div>
-        ) : (
-          <div className="grid gap-3 sm:grid-cols-3">
-            <MatchupGroup title="Debilidades" matchups={weaknesses} />
-            <MatchupGroup title="Resistencias" matchups={resistances} />
-            <MatchupGroup title="Inmunidades" matchups={immunities} />
-          </div>
-        )}
-      </section>
+      <BentoCard aria-labelledby="defense-title">
+        <Accordion type="single" collapsible defaultValue="defense">
+          <AccordionItem value="defense" className="border-0">
+            <AccordionTrigger className="p-0 hover:bg-transparent">
+              <span className="text-left">
+                <span className="block text-xs font-semibold uppercase tracking-[0.12em] text-ui-lavender-strong">Matchup</span>
+                <span id="defense-title" className="mt-1 block text-xl font-bold text-foreground">Defensa por tipos</span>
+              </span>
+            </AccordionTrigger>
+            <AccordionContent className="pt-5">
+              {detail.defense == null ? (
+                <div className="rounded-[var(--radius-md)] border border-dashed border-border bg-secondary/45 p-4" role="status">
+                  <p className="text-sm text-muted-foreground">No se pudieron cargar las relaciones de tipos. La ficha básica sigue disponible.</p>
+                  <Button type="button" variant="outline" size="sm" className="mt-3" onClick={() => setRetry((value) => value + 1)}>Reintentar defensa</Button>
+                </div>
+              ) : (
+                <div className="grid gap-3 md:grid-cols-3">
+                  <MatchupGroup title="Debilidades" matchups={weaknesses} />
+                  <MatchupGroup title="Resistencias" matchups={resistances} />
+                  <MatchupGroup title="Inmunidades" matchups={immunities} />
+                </div>
+              )}
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </BentoCard>
 
       {detail.otherNames.length > 0 && (
-        <section className="mb-6">
+        <BentoCard>
           <Accordion type="single" collapsible>
-            <AccordionItem value="names">
-              <AccordionTrigger>
-                Nombres en otros idiomas
-              </AccordionTrigger>
-              <AccordionContent>
-                <ul className="space-y-1 text-sm">
-                  {detail.otherNames.map((n) => (
-                    <li key={n.lang}>
-                      <span className="text-muted-foreground">{n.lang}:</span>{' '}
-                      {n.name}
+            <AccordionItem value="names" className="border-0">
+              <AccordionTrigger className="p-0 hover:bg-transparent">Nombres en otros idiomas</AccordionTrigger>
+              <AccordionContent className="pt-4">
+                <ul className="grid gap-2 text-sm sm:grid-cols-2">
+                  {detail.otherNames.map((name) => (
+                    <li key={name.lang} className="rounded-[var(--radius-sm)] bg-secondary/60 px-3 py-2">
+                      <span className="text-muted-foreground">{name.lang}:</span> {name.name}
                     </li>
                   ))}
                 </ul>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
-        </section>
+        </BentoCard>
       )}
 
-      <div className="flex flex-wrap gap-2">
-        <FavoriteButton
-          speciesId={speciesId}
-          speciesName={detail.nameEs}
-          showLabel
-        />
-        <CompareLink speciesId={speciesId} speciesName={detail.nameEs} showLabel />
-      </div>
-
-      <nav className="mt-6 flex flex-wrap gap-4" aria-label="Volver desde la ficha">
-        {manualReturn && <Link to={manualReturn.path} className="text-sm font-medium text-primary hover:underline">{manualReturn.label}</Link>}
-        <Link to="/search" className="text-sm font-medium text-primary hover:underline">Volver a Buscar</Link>
+      <nav className="flex flex-wrap gap-3 pb-2" aria-label="Volver desde la ficha">
+        {manualReturn && <Button asChild variant="outline"><Link to={manualReturn.path}>{manualReturn.label}</Link></Button>}
+        <Button asChild variant="ghost"><Link to="/search">Volver a Buscar</Link></Button>
       </nav>
-    </>
+    </div>
   )
 }

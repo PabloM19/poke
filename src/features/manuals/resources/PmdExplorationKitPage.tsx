@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Apple, PackageOpen, ShieldCheck, Sparkles } from 'lucide-react'
+import { Apple, PackageOpen, ShieldCheck, Sparkles } from '@/components/icons'
 import { Link } from 'react-router-dom'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -22,10 +22,10 @@ export function PmdExplorationKitPage() {
 
   return (
     <article className="space-y-8">
-      <header className="rounded-2xl border border-border bg-gradient-to-br from-primary/15 via-card to-secondary p-5 sm:p-8">
-        <div className="mb-5 flex size-12 items-center justify-center rounded-xl bg-primary text-primary-foreground"><PackageOpen className="size-6" aria-hidden /></div>
+      <header className="rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-sm)] sm:p-8">
+        <div className="mb-5 flex size-12 items-center justify-center rounded-[var(--radius-md)] bg-ui-blue text-ui-blue-strong shadow-[var(--shadow-xs)]"><PackageOpen className="size-6" aria-hidden /></div>
         <p className="text-sm font-semibold uppercase tracking-widest text-primary">R-04 · Mecánicas de Mundo Misterioso</p>
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight">Kit de exploración PMD</h1>
+        <h1 className="mt-2 page-title">Kit de exploración PMD</h1>
         <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">Prepara alimento, PP, semillas, orbes y equipamiento antes de entrar. La mochila también puede ganar combates si cada objeto tiene una función.</p>
         <div className="mt-5 flex flex-wrap gap-2"><Badge variant="secondary">Páginas 70–74 y 153–154</Badge><Badge variant="secondary">Sin red</Badge></div>
       </header>
@@ -66,10 +66,10 @@ export function PmdExplorationKitPage() {
       <LessonCallout kind="warning" title="No explores por inercia">Si la Tripa, los PP o la curación escasean, prioriza el objetivo o las escaleras en lugar de recorrer cada rincón.</LessonCallout>
       <PhysicalReference reference={{ edition: 'ds-156-v1', pages: [70, 71, 72, 73, 74] }} />
       <nav className="flex flex-wrap gap-3" aria-label="Recursos relacionados">
-        <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/juegos/equipo-rescate-azul">Equipo de Rescate Azul</Link>
-        <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/juegos/exploradores-oscuridad">Exploradores de la Oscuridad</Link>
-        <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/recursos/r-03">Anterior: R-03</Link>
-        <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/recursos/r-05">Siguiente: R-05 · Ranger</Link>
+        <Link className="manual-nav-link" to="/manuales/juegos/equipo-rescate-azul">Equipo de Rescate Azul</Link>
+        <Link className="manual-nav-link" to="/manuales/juegos/exploradores-oscuridad">Exploradores de la Oscuridad</Link>
+        <Link className="manual-nav-link" to="/manuales/recursos/r-03">Anterior: R-03</Link>
+        <Link className="manual-nav-link" to="/manuales/recursos/r-05">Siguiente: R-05 · Ranger</Link>
       </nav>
     </article>
   )

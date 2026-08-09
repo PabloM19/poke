@@ -11,6 +11,8 @@ import { bundledTypesByName } from '@/features/historical/typeRelationsData'
 import { translatePokemonType } from '@/features/localization'
 import { cn } from '@/lib/utils'
 import { PhysicalReference } from '../components/LessonBlocks'
+import { TypeChip } from '@/features/types'
+import { BentoCard } from '@/components/ui/card'
 
 function multiplierLabel(multiplier: DamageMultiplier): string {
   if (multiplier === 0.25) return '¼'
@@ -19,9 +21,9 @@ function multiplierLabel(multiplier: DamageMultiplier): string {
 }
 
 function multiplierClass(multiplier: DamageMultiplier): string {
-  if (multiplier === 0) return 'bg-muted text-muted-foreground'
-  if (multiplier < 1) return 'bg-emerald-100 text-emerald-950 dark:bg-emerald-950/60 dark:text-emerald-100'
-  if (multiplier > 1) return 'bg-rose-100 text-rose-950 dark:bg-rose-950/60 dark:text-rose-100'
+  if (multiplier === 0) return 'bg-secondary text-muted-foreground'
+  if (multiplier < 1) return 'bg-ui-green/65 text-ui-green-strong'
+  if (multiplier > 1) return 'bg-ui-yellow/70 text-ui-yellow-strong'
   return 'text-muted-foreground'
 }
 
@@ -49,13 +51,12 @@ export function TypeChartPage() {
 
   return (
     <article>
-      <p className="text-sm font-semibold text-muted-foreground">R-01 · REFERENCIA SIN SPOILERS</p>
-      <h1 className="mt-1 text-3xl font-semibold tracking-tight">Tabla de tipos</h1>
-      <p className="mt-3 leading-7 text-muted-foreground">
-        Elige el tipo del movimiento atacante y busca el tipo del Pokémon defensor.
-        Si tiene dos tipos, multiplica ambos valores: por ejemplo, 2 × 2 = 4.
-      </p>
-      <div className="my-5 rounded-xl border border-border bg-muted/40 p-4 text-sm">
+      <BentoCard tone="blue">
+        <p className="text-sm font-semibold text-ui-blue-strong">R-01 · REFERENCIA SIN SPOILERS</p>
+        <h1 className="mt-1 page-title">Tabla de tipos</h1>
+        <p className="mt-3 leading-7 text-foreground/75">Elige el tipo del movimiento atacante y busca el tipo del Pokémon defensor. Si tiene dos tipos, multiplica ambos valores: por ejemplo, 2 × 2 = 4.</p>
+      </BentoCard>
+      <div className="my-5 rounded-[var(--radius-lg)] border border-border bg-card p-4 text-sm shadow-[var(--shadow-xs)]">
         <p className="font-medium">{game.title} · Generación {game.generation === 4 ? 'IV' : 'V'}</p>
         <p className="mt-1 text-muted-foreground">La tabla usa las relaciones históricas del juego activo y no incluye Hada.</p>
       </div>
@@ -69,12 +70,12 @@ export function TypeChartPage() {
             id="attacking-type"
             value={attacker}
             onChange={(event) => setSelectedAttacker(event.target.value)}
-            className="mt-2 h-11 w-full rounded-md border border-input bg-background px-3"
+            className="mt-2 h-11 w-full rounded-[var(--radius-md)] border border-input bg-card px-3 shadow-[var(--shadow-xs)]"
           >
             {typeNames.map((type) => <option key={type} value={type}>{translatePokemonType(type)}</option>)}
           </select>
         </label>
-        <div className="mt-4 overflow-hidden rounded-xl border border-border">
+        <div className="mt-4 overflow-hidden rounded-[var(--radius-lg)] border border-border bg-card shadow-[var(--shadow-xs)]">
           <table className="w-full text-sm">
             <caption className="sr-only">Eficacia de {translatePokemonType(attacker)} contra cada tipo defensor</caption>
             <thead className="bg-muted/60 text-left"><tr><th className="p-3">Tipo defensor</th><th className="p-3 text-right">Daño</th></tr></thead>
@@ -83,7 +84,7 @@ export function TypeChartPage() {
                 const multiplier = matrix.get(attacker)!.get(defender)!
                 return (
                   <tr key={defender} className="border-t border-border">
-                    <th scope="row" className="p-3 font-medium">{translatePokemonType(defender)}</th>
+                    <th scope="row" className="p-3 font-medium"><TypeChip type={defender} size="compact" /></th>
                     <td className="p-2 text-right"><span className={cn('inline-flex min-w-10 justify-center rounded-md px-2 py-1 font-semibold', multiplierClass(multiplier))}>×{multiplierLabel(multiplier)}</span></td>
                   </tr>
                 )
@@ -95,11 +96,11 @@ export function TypeChartPage() {
 
       <section className="hidden md:block" aria-labelledby="desktop-chart-title">
         <h2 id="desktop-chart-title" className="mb-3 text-xl font-semibold">Matriz completa</h2>
-        <div className="overflow-x-auto rounded-xl border border-border">
+        <div className="overflow-x-auto rounded-[var(--radius-lg)] border border-border bg-card shadow-[var(--shadow-xs)]">
           <table className="min-w-[72rem] border-collapse text-center text-xs">
             <caption className="sr-only">Filas de tipo atacante y columnas de tipo defensor</caption>
-            <thead><tr className="bg-muted/60"><th className="sticky left-0 z-10 bg-muted p-2 text-left">Ataca ↓ / Defiende →</th>{typeNames.map((type) => <th key={type} className="p-2">{translatePokemonType(type)}</th>)}</tr></thead>
-            <tbody>{typeNames.map((attackingType) => <tr key={attackingType} className="border-t border-border"><th scope="row" className="sticky left-0 bg-background p-2 text-left">{translatePokemonType(attackingType)}</th>{typeNames.map((defendingType) => { const multiplier = matrix.get(attackingType)!.get(defendingType)!; return <td key={defendingType} className={cn('p-2 font-semibold', multiplierClass(multiplier))}>{multiplierLabel(multiplier)}</td> })}</tr>)}</tbody>
+            <thead><tr className="bg-muted/60"><th className="sticky left-0 z-10 bg-muted p-2 text-left">Ataca ↓ / Defiende →</th>{typeNames.map((type) => <th key={type} className="p-2"><TypeChip type={type} size="compact" /></th>)}</tr></thead>
+            <tbody>{typeNames.map((attackingType) => <tr key={attackingType} className="border-t border-border"><th scope="row" className="sticky left-0 bg-card p-2 text-left"><TypeChip type={attackingType} size="compact" /></th>{typeNames.map((defendingType) => { const multiplier = matrix.get(attackingType)!.get(defendingType)!; return <td key={defendingType} className={cn('p-2 font-semibold', multiplierClass(multiplier))}>{multiplierLabel(multiplier)}</td> })}</tr>)}</tbody>
           </table>
         </div>
       </section>
@@ -110,8 +111,8 @@ export function TypeChartPage() {
         <span><strong className="text-foreground">×0</strong> sin efecto</span>
       </div>
       <nav className="mt-8 flex flex-wrap gap-3" aria-label="Recursos relacionados">
-        <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/entrenador/combate">Volver a Comprender el combate</Link>
-        <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/recursos/r-02">Abrir R-02 · Estados</Link>
+        <Link className="inline-flex min-h-11 items-center rounded-[var(--radius-sm)] px-3 text-sm font-semibold text-primary hover:bg-accent" to="/manuales/entrenador/combate">Volver a Comprender el combate</Link>
+        <Link className="inline-flex min-h-11 items-center rounded-[var(--radius-sm)] px-3 text-sm font-semibold text-primary hover:bg-accent" to="/manuales/recursos/r-02">Abrir R-02 · Estados</Link>
       </nav>
     </article>
   )

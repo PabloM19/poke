@@ -3,8 +3,10 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useSpeciesIndex } from '@/hooks/useSpeciesIndex'
 import { usePokemonSummary } from '@/hooks/usePokemonSummary'
 import type { SpeciesIndexItem } from '@/lib/pokedex'
-import { Input } from '@/components/ui/input'
+import { SearchField } from '@/components/ui/search-field'
 import { Button } from '@/components/ui/button'
+import { BentoCard } from '@/components/ui/card'
+import { Search } from '@/components/icons'
 
 const MAX_RESULTS = 20
 
@@ -56,15 +58,15 @@ function SearchResultRow({
   return (
     <button
       type="button"
-      className="flex w-full items-center gap-3 px-3 py-3 text-left hover:bg-accent focus:bg-accent focus:outline-none"
+      className="interactive-clay flex min-h-16 w-full items-center gap-3 rounded-[var(--radius-md)] border border-border bg-card px-3 py-2.5 text-left shadow-[var(--shadow-xs)] hover:bg-accent focus-visible:outline-none focus-visible:ring-3 focus-visible:ring-ring/35"
       onClick={onSelect}
     >
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded bg-muted">
+      <span className="flex size-12 shrink-0 items-center justify-center overflow-hidden rounded-[var(--radius-sm)] bg-secondary">
         {spriteUrl ? (
           <img
             src={spriteUrl}
             alt=""
-            className="h-10 w-10 object-contain"
+            className="size-12 object-contain [image-rendering:pixelated]"
             loading="lazy"
           />
         ) : (
@@ -108,12 +110,14 @@ export function SearchPage() {
 
   if (status === 'missing') {
     return (
-      <>
-        <h1 className="mb-2 text-2xl font-semibold text-foreground">Buscar</h1>
-        <div
-          className="rounded-lg border border-border bg-muted/50 p-4 text-sm text-foreground"
-          role="status"
-        >
+      <div className="page-stack">
+        <div className="page-heading">
+          <h1 className="page-title">Buscar</h1>
+          <p className="page-lead">Encuentra una especie por nombre o número y abre su ficha histórica.</p>
+        </div>
+        <BentoCard tone="yellow" role="status">
+          <Search className="size-8 text-ui-yellow-strong" aria-hidden />
+          <h2 className="mt-4 text-lg font-bold">Prepara el buscador sin conexión</h2>
           <p className="mb-3">
             Aún no has descargado los datos. Ve a Ajustes → Datos de Pokédex
             para construir el índice.
@@ -121,41 +125,37 @@ export function SearchPage() {
           <Button asChild variant="outline" size="sm">
             <Link to="/settings">Ir a Ajustes</Link>
           </Button>
-        </div>
-      </>
+        </BentoCard>
+      </div>
     )
   }
 
   return (
-    <>
-      <h1 className="mb-2 text-2xl font-semibold text-foreground">Buscar</h1>
-      <p className="mb-4 text-muted-foreground">
-        Busca cualquier Pokémon por nombre o número. Escribe en el cuadro de
-        búsqueda y verás resultados al instante.
-      </p>
+    <div className="page-stack">
+      <div className="page-heading">
+        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-ui-lavender-strong">Consulta rápida</p>
+        <h1 className="page-title mt-1">Buscar</h1>
+        <p className="page-lead">Encuentra cualquier Pokémon de las generaciones I–V por nombre o número.</p>
+      </div>
 
-      <div className="relative">
-        <Input
+      <BentoCard tone="lavender" className="relative z-20">
+        <SearchField
           type="search"
           placeholder="Busca un Pokémon (en español)…"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="h-12 text-base"
           autoComplete="off"
           aria-label="Buscar Pokémon"
-          aria-autocomplete="list"
-          aria-controls="search-suggestions"
-          aria-expanded={results.length > 0}
         />
 
         {results.length > 0 && (
           <ul
             id="search-suggestions"
-            className="absolute left-0 right-0 top-full z-10 mt-1 max-h-[min(70vh,400px)] overflow-auto rounded-lg border border-border bg-background shadow-lg"
-            role="listbox"
+            className="mt-3 grid max-h-[min(62vh,32rem)] gap-2 overflow-auto pr-1"
+            aria-label="Resultados de búsqueda"
           >
             {results.map((item) => (
-              <li key={item.speciesId} role="option">
+              <li key={item.speciesId}>
                 <SearchResultRow
                   item={item}
                   onSelect={() => goToDetail(item.speciesId)}
@@ -164,7 +164,23 @@ export function SearchPage() {
             ))}
           </ul>
         )}
+        {query.trim().length > 0 && results.length === 0 && (
+          <p className="mt-4 rounded-[var(--radius-md)] bg-card/70 p-4 text-sm text-muted-foreground" role="status">
+            No hay coincidencias. Prueba con otro nombre o con el número de Pokédex.
+          </p>
+        )}
+      </BentoCard>
+
+      <div className="grid grid-cols-2 gap-3">
+        <BentoCard tone="green" className="p-4">
+          <p className="text-xs font-semibold text-ui-green-strong">Nombres</p>
+          <p className="mt-1 text-sm font-medium">Busca en español, con o sin tildes.</p>
+        </BentoCard>
+        <BentoCard tone="blue" className="p-4">
+          <p className="text-xs font-semibold text-ui-blue-strong">Números</p>
+          <p className="mt-1 text-sm font-medium">Escribe 25 para llegar a #025.</p>
+        </BentoCard>
       </div>
-    </>
+    </div>
   )
 }

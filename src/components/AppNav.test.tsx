@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest'
 import { AppNav } from './AppNav'
 
 describe('AppNav', () => {
-  it('muestra cinco destinos en móvil y agrupa Comparar/Ajustes bajo Más', () => {
+  it('muestra cinco destinos en móvil y agrupa Comparar/Ajustes bajo Herramientas', () => {
     render(
       <MemoryRouter initialEntries={['/settings']}>
         <AppNav variant="mobile" />
@@ -13,20 +13,20 @@ describe('AppNav', () => {
 
     expect(screen.getAllByRole('link')).toHaveLength(5)
     expect(screen.getByRole('link', { name: 'Manuales' })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Más' })).toHaveAttribute('aria-current', 'page')
+    expect(screen.getByRole('link', { name: 'Herramientas' })).toHaveAttribute('aria-current', 'page')
     expect(screen.queryByRole('link', { name: 'Ajustes' })).not.toBeInTheDocument()
   })
 
-  it('expone Comparar y Ajustes directamente en escritorio', () => {
+  it('mantiene las cinco áreas principales también en escritorio', () => {
     render(
       <MemoryRouter initialEntries={['/compare']}>
         <AppNav variant="desktop" />
       </MemoryRouter>
     )
 
-    expect(screen.getByRole('link', { name: 'Comparar' })).toHaveAttribute('aria-current', 'page')
-    expect(screen.getByRole('link', { name: 'Ajustes' })).toBeInTheDocument()
-    expect(screen.queryByRole('link', { name: 'Más' })).not.toBeInTheDocument()
+    expect(screen.getAllByRole('link')).toHaveLength(5)
+    expect(screen.getByRole('link', { name: 'Herramientas' })).toHaveAttribute('aria-current', 'page')
+    expect(screen.queryByRole('link', { name: 'Ajustes' })).not.toBeInTheDocument()
   })
 
   it('mantiene Manuales activo en rutas hijas', () => {

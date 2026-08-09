@@ -7,7 +7,7 @@ function Card({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card"
       className={cn(
-        "flex flex-col gap-6 rounded-xl border bg-card py-6 text-card-foreground shadow-sm",
+        "flex flex-col gap-4 rounded-[var(--radius-lg)] border border-border bg-card py-5 text-card-foreground shadow-[var(--shadow-sm)]",
         className
       )}
       {...props}
@@ -20,7 +20,7 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card-header"
       className={cn(
-        "@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-2 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6",
+        "@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-2 px-5 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-5 sm:px-6",
         className
       )}
       {...props}
@@ -28,19 +28,19 @@ function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
-function CardTitle({ className, ...props }: React.ComponentProps<"div">) {
+function CardTitle({ className, ...props }: React.ComponentProps<"h2">) {
   return (
-    <div
+    <h2
       data-slot="card-title"
-      className={cn("leading-none font-semibold", className)}
+      className={cn("text-lg leading-tight font-semibold tracking-[-0.015em]", className)}
       {...props}
     />
   )
 }
 
-function CardDescription({ className, ...props }: React.ComponentProps<"div">) {
+function CardDescription({ className, ...props }: React.ComponentProps<"p">) {
   return (
-    <div
+    <p
       data-slot="card-description"
       className={cn("text-sm text-muted-foreground", className)}
       {...props}
@@ -65,7 +65,38 @@ function CardContent({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card-content"
-      className={cn("px-6", className)}
+      className={cn("px-5 sm:px-6", className)}
+      {...props}
+    />
+  )
+}
+
+function BentoCard({
+  className,
+  tone = 'surface',
+  ...props
+}: React.ComponentProps<"section"> & {
+  tone?: 'surface' | 'green' | 'lavender' | 'blue' | 'yellow'
+}) {
+  return (
+    <section
+      data-slot="bento-card"
+      data-tone={tone}
+      className={cn(
+        "rounded-[var(--radius-xl)] border border-border p-5 shadow-[var(--shadow-sm)]",
+        "data-[tone=surface]:bg-card data-[tone=green]:bg-ui-green data-[tone=lavender]:bg-ui-lavender data-[tone=blue]:bg-ui-blue data-[tone=yellow]:bg-ui-yellow",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function MiniCard({ className, ...props }: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="mini-card"
+      className={cn("rounded-[var(--radius-md)] border border-border/80 bg-card p-4 shadow-[var(--shadow-xs)]", className)}
       {...props}
     />
   )
@@ -89,4 +120,6 @@ export {
   CardAction,
   CardDescription,
   CardContent,
+  BentoCard,
+  MiniCard,
 }

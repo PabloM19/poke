@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { RefreshCw } from 'lucide-react'
+import { RefreshCw } from '@/components/icons'
 import { getPokemon, getPokemonSpecies, getSpanishName, PokeApiError } from '@/lib/pokeapi'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { FavoriteButton } from './FavoriteButton'
-import { translatePokemonType } from '@/features/localization'
 import { CompareLink } from '@/features/compare/CompareLink'
+import { TypeChip } from '@/features/types'
 
 interface FavoriteCardData {
   name: string
@@ -95,7 +94,7 @@ export function FavoritePokemonCard({ speciesId }: { speciesId: number }) {
             <h2 className="font-semibold">{data?.name ?? 'Cargando…'}</h2>
             {data && (
               <div className="mt-2 flex flex-wrap justify-center gap-1">
-                {data.types.map((type) => <Badge key={type} variant="secondary">{translatePokemonType(type)}</Badge>)}
+                {data.types.map((type) => <TypeChip key={type} type={type} size="compact" />)}
               </div>
             )}
           </Link>

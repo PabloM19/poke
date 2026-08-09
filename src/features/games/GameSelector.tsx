@@ -11,7 +11,7 @@ export function GameSelector() {
         aria-label="Juego activo"
         value={game.slug}
         onChange={(event) => setGame(event.target.value as MainGameSlug)}
-        className="h-9 min-w-0 max-w-36 rounded-md border border-input bg-background px-2 text-sm text-foreground sm:max-w-44"
+        className="h-11 min-w-0 max-w-40 rounded-[var(--radius-md)] border border-input bg-card px-3 text-sm font-medium text-foreground shadow-[var(--shadow-xs)] outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/30 sm:max-w-48"
       >
         {MAIN_GAME_CONTEXTS.map((entry) => (
           <option key={entry.slug} value={entry.slug}>

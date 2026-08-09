@@ -3,9 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta name="color-scheme" content="light dark" />
-    <meta name="theme-color" content="#f8fafc" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#111827" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light" />
+    <meta name="theme-color" content="#F7F2E8" />
     <meta
       name="description"
       content="PokéApp: Pokédex, favoritos, comparador y manuales de los juegos de Pokémon para Nintendo DS."
@@ -15,18 +14,6 @@
     <link rel="icon" type="image/svg+xml" href="/src/assets/pokeapp-icon.svg" />
     <link rel="apple-touch-icon" href="/src/assets/pokeapp-icon.svg" />
     <title>PokéApp · Pokédex y manual Nintendo DS</title>
-    <script>
-      (function() {
-        try {
-          var v = localStorage.getItem('pokeapp:theme');
-          var theme = 'light';
-          if (v) try { theme = JSON.parse(v); } catch (e) {}
-          if (theme !== 'light' && theme !== 'dark') theme = 'light';
-          if (theme === 'dark') document.documentElement.classList.add('dark');
-          else document.documentElement.classList.remove('dark');
-        } catch (e) {}
-      })();
-    </script>
   </head>
   <body>
     <div id="root"></div>

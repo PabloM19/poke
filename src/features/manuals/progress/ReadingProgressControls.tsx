@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Check, Circle } from 'lucide-react'
+import { Check, Circle } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import {
   getManualReadingProgress,
@@ -24,7 +24,7 @@ export function ReadingProgressControls({ articlePath }: { articlePath: string }
   }
 
   return (
-    <section className="mt-8 flex flex-col gap-3 rounded-xl border border-border bg-card p-4 sm:flex-row sm:items-center sm:justify-between" aria-label="Progreso de lectura">
+    <section className="mt-8 flex flex-col gap-3 rounded-[var(--radius-lg)] border border-border bg-card p-4 shadow-[var(--shadow-xs)] sm:flex-row sm:items-center sm:justify-between" aria-label="Progreso de lectura">
       <div>
         <p className="font-medium">{completed ? 'Lección completada' : 'Tu progreso'}</p>
         <p className="mt-1 text-sm text-muted-foreground">{completedCount} de {manualLessonCount} lecciones completadas</p>

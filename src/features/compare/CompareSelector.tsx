@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
-import { Plus, X } from 'lucide-react'
+import { Plus, X } from '@/components/icons'
 import { useSpeciesIndex } from '@/hooks/useSpeciesIndex'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -45,7 +45,7 @@ export function CompareSelector({
   const numericCandidate = /^\d+$/.test(query.trim()) ? Number(query.trim()) : null
 
   return (
-    <section className="mb-7 rounded-xl border border-border bg-card p-4" aria-labelledby="compare-selector-title">
+    <section className="rounded-[var(--radius-xl)] border border-border bg-card p-4 shadow-[var(--shadow-sm)] sm:p-5" aria-labelledby="compare-selector-title">
       <div className="mb-3 flex items-center justify-between gap-3">
         <h2 id="compare-selector-title" className="font-semibold">Selección</h2>
         <span className="text-sm text-muted-foreground">{ids.length}/{MAX_COMPARE_POKEMON}</span>
@@ -55,7 +55,7 @@ export function CompareSelector({
           {ids.map((id) => (
             <li key={id} className="flex min-h-11 items-center gap-1 rounded-full bg-secondary pl-3 pr-1 text-sm font-medium">
               #{String(id).padStart(3, '0')}
-              <Button type="button" variant="ghost" size="icon" className="size-9 rounded-full" onClick={() => onChange(removeCompareId(ids, id))} aria-label={`Quitar #${id} de la comparación`}>
+              <Button type="button" variant="ghost" size="icon" className="size-11 rounded-full" onClick={() => onChange(removeCompareId(ids, id))} aria-label={`Quitar #${id} de la comparación`}>
                 <X className="size-4" aria-hidden />
               </Button>
             </li>
@@ -83,7 +83,7 @@ export function CompareSelector({
         </Button>
       </div>
       {matches.length > 0 && (
-        <ul className="mt-2 overflow-hidden rounded-lg border border-border" aria-label="Sugerencias de Pokémon">
+        <ul className="mt-2 overflow-hidden rounded-[var(--radius-md)] border border-border bg-card shadow-[var(--shadow-xs)]" aria-label="Sugerencias de Pokémon">
           {matches.map((item) => (
             <li key={item.speciesId} className="border-b border-border last:border-0">
               <button type="button" className="flex min-h-11 w-full items-center justify-between gap-3 px-3 py-2 text-left hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring" onClick={() => add(item.speciesId)}>

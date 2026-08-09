@@ -4,7 +4,7 @@ import { ManualIndex } from './ManualIndex'
 
 export function ManualsLayout() {
   return (
-    <div className="md:grid md:grid-cols-[13rem_minmax(0,1fr)] md:gap-8">
+    <div className="manual-shell md:grid md:grid-cols-[14rem_minmax(0,1fr)] md:gap-8 lg:gap-10">
       <ManualIndex />
       <div className="min-w-0">
         <ManualBreadcrumbs />

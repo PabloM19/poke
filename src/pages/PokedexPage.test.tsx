@@ -73,7 +73,7 @@ describe('PokedexPage', () => {
     expect(screen.getByRole('button', { name: 'Quitar filtro: Dragón' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Quitar filtro: Acero' })).toBeInTheDocument()
 
-    await user.click(screen.getByRole('button', { name: 'Close' }))
+    await user.click(screen.getByRole('button', { name: 'Cerrar' }))
     expect(screen.getByText('No hay especies con estos filtros.')).toBeInTheDocument()
     await user.click(screen.getByRole('button', { name: 'Limpiar todos los filtros' }))
 

@@ -1,4 +1,4 @@
-import { Flag, Gauge, MoveUpRight } from 'lucide-react'
+import { Flag, Gauge, MoveUpRight } from '@/components/icons'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { LessonCallout, LessonSteps, PhysicalReference } from '../components/LessonBlocks'
@@ -7,10 +7,10 @@ import { ReadingProgressControls } from '../progress/ReadingProgressControls'
 export function DashGuidePage() {
   return (
     <article className="space-y-8">
-      <header className="rounded-2xl border border-border bg-gradient-to-br from-primary/15 via-card to-secondary p-5 sm:p-8">
-        <div className="mb-5 flex size-12 items-center justify-center rounded-xl bg-primary text-primary-foreground"><Flag className="size-6" aria-hidden /></div>
+      <header className="rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-sm)] sm:p-8">
+        <div className="mb-5 flex size-12 items-center justify-center rounded-[var(--radius-md)] bg-ui-blue text-ui-blue-strong shadow-[var(--shadow-xs)]"><Flag className="size-6" aria-hidden /></div>
         <p className="text-sm font-semibold uppercase tracking-widest text-primary">Otra forma de jugar · Carreras táctiles</p>
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight">Pokémon Dash</h1>
+        <h1 className="mt-2 page-title">Pokémon Dash</h1>
         <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">Pikachu compite en carreras divididas en puntos de control. Para avanzar, desliza repetidamente el lápiz en la dirección deseada; el terreno cambia la velocidad y algunos tramos usan globos u otros medios.</p>
         <div className="mt-5 flex gap-2"><Badge variant="secondary">Páginas 147–148</Badge><Badge variant="secondary">Sesiones cortas</Badge></div>
       </header>

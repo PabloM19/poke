@@ -12,6 +12,8 @@ PokéApp es una aplicación React 19 + TypeScript + Vite, mobile-first y en espa
 - seis recursos de consulta y rutas cortas estables para unir la app con el manual impreso;
 - instalación PWA y lectura offline del contenido editorial.
 
+La interfaz utiliza el sistema **Pokédex Soft Bento**: modo claro exclusivo, superficies crema, acentos pastel de interfaz, profundidad Soft Clay 2D y color Pokémon reservado para significado semántico.
+
 No hay despliegue remoto. El proyecto se construye, sirve y prueba exclusivamente en local por decisión expresa del propietario.
 
 ## Fuente editorial canónica
@@ -73,6 +75,18 @@ Los códigos desconocidos terminan en el 404 editorial. No se han generado QR ab
 - Fallback SPA incluido en el artefacto: `_redirects`, `404.html` equivalente a `index.html` y `_headers` para actualizar el worker sin caché obsoleta.
 - El build funciona offline desde una recarga directa de una ruta editorial profunda.
 
+### Sistema visual y responsive
+
+- Tokens globales para canvas, superficies, texto, bordes, cuatro familias pastel de interfaz, radios, spacing, sombras, movimiento y estados.
+- Registro único `TYPE_STYLES` para los 18 tipos, con slug PokeAPI, etiqueta española, color canónico, superficie soft derivada y variante sólida accesible.
+- `TypeChip` compartido en ficha, Pokédex, guardados, comparador, manuales, filtros y tabla de tipos.
+- Iconografía general unificada con Phosphor; la dependencia y los imports de Lucide se han retirado.
+- Primitives comunes para Bento, mini cards, chips, controles de icono, búsqueda, estados, skeletons y accordions accesibles.
+- Navegación principal de cinco áreas: Inicio, Pokédex, Manuales, Herramientas y Guardados; barra inferior segura en móvil y navegación horizontal en escritorio.
+- Ficha Pokémon convertida en Bento con artwork oficial cuando existe, métricas rápidas, estadísticas monocromas y matchup desplegable.
+- Manuales migrados de forma completa al mismo lenguaje visual, con búsqueda, progreso, spoilers, guías, recursos y enlaces de 44 px.
+- Tema oscuro, demo visual antigua, logo React y componentes de tema sin uso eliminados. La clave histórica de tema permanece únicamente en las migraciones de almacenamiento para no invalidar datos antiguos.
+
 ## Rutas públicas principales
 
 | Ruta | Contenido |
@@ -82,8 +96,8 @@ Los códigos desconocidos terminan en el 404 editorial. No se han generado QR ab
 | `/pokemon/:speciesId` | Ficha independiente |
 | `/favorites` | Favoritos persistentes |
 | `/compare?ids=25,150` | Comparación compartible |
-| `/settings` | Apariencia, datos, spoilers y diagnóstico |
-| `/more` | Hub móvil para Comparar y Ajustes |
+| `/settings` | Datos, spoilers y diagnóstico |
+| `/more` | Hub de Herramientas para Comparar, recursos y Ajustes |
 | `/manuales` | Portada, búsqueda e índice editorial |
 | `/manuales/empezar/:tema` | Conceptos iniciales |
 | `/manuales/entrenador/:tema` | Saga principal |
@@ -130,10 +144,10 @@ Reglas que deben mantenerse:
 
 ## Verificación de cierre
 
-- `npm run check`: **55 archivos y 229 pruebas** verdes, además de snapshots, ESLint, TypeScript estricto y build.
+- `npm run check`: **56 archivos y 231 pruebas** verdes, además de snapshots, ESLint, TypeScript estricto y build.
 - Snapshot Pokédex: 649 entradas, SHA-256 `7a6348b0c922e8d640ecee0f877235d28e79860eab991b71e3f2691551db144c`.
 - Snapshot de tipos: 18 entradas, SHA-256 `0b90be9dc4650fd159f0b496d5c957c0d2d103771a3765e3c1fe5cd39d396529`.
-- E2E local de producción en 390×844 y 1280×900: navegación, búsqueda, ficha, favorito, Favoritos, Comparar, Pokédex, filtros, manuales, recursos y ruta corta; cero errores de consola, un `h1` y cero overflow.
+- Auditoría local en 320×800, 390×844, 768×1024 y 1440×1000: navegación, búsqueda, ficha, guardados, Comparar, Pokédex, filtros, las 37 rutas del manual, recursos y 404; cero errores o avisos de consola, un `h1`, cero overflow y controles principales de al menos 44 px.
 - Offline real en Chromium a 390×844: recarga directa de `/manuales/recursos/r-01`, sin peticiones fallidas ni desbordamiento.
 - Accesibilidad comprobada en ambos viewports: salto de contenido, targets visibles mínimos 54 px en móvil/44 px en escritorio y movimiento reducido efectivo.
 

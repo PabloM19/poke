@@ -1,4 +1,4 @@
-import { Eye, Grid3X3, Move, Sparkles } from 'lucide-react'
+import { Eye, Grid3X3, Move, Sparkles } from '@/components/icons'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { LessonCallout, LessonSteps, PhysicalReference } from '../components/LessonBlocks'
@@ -14,10 +14,10 @@ const chainStages = [
 export function LinkGuidePage() {
   return (
     <article className="space-y-8">
-      <header className="rounded-2xl border border-border bg-gradient-to-br from-primary/15 via-card to-secondary p-5 sm:p-8">
-        <div className="mb-5 flex size-12 items-center justify-center rounded-xl bg-primary text-primary-foreground"><Grid3X3 className="size-6" aria-hidden /></div>
+      <header className="rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-sm)] sm:p-8">
+        <div className="mb-5 flex size-12 items-center justify-center rounded-[var(--radius-md)] bg-ui-blue text-ui-blue-strong shadow-[var(--shadow-xs)]"><Grid3X3 className="size-6" aria-hidden /></div>
         <p className="text-sm font-semibold uppercase tracking-widest text-primary">Otra forma de jugar · Puzle táctico</p>
-        <h1 className="mt-2 text-3xl font-semibold tracking-tight">Pokémon Link!</h1>
+        <h1 className="mt-2 page-title">Pokémon Link!</h1>
         <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">Desplaza filas y columnas para reunir fichas Pokémon iguales. Cada hueco cambia el tablero: mira el movimiento inmediato y también qué piezas caerán después.</p>
         <div className="mt-5 flex flex-wrap gap-2"><Badge variant="secondary">Páginas 149–150</Badge><Badge variant="secondary">Cadenas y puntuación</Badge></div>
       </header>

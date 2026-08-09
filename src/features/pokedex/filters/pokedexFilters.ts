@@ -1,13 +1,9 @@
 import type { PokemonSummaryItem } from '@/features/pokedex/summary'
 import type { GenerationFilter } from './generationFilter'
+import { POKEMON_TYPE_SLUGS, type PokemonTypeSlug } from '@/features/types'
 
-export const POKEMON_TYPES = [
-  'normal', 'fire', 'water', 'electric', 'grass', 'ice', 'fighting', 'poison',
-  'ground', 'flying', 'psychic', 'bug', 'rock', 'ghost', 'dragon', 'dark',
-  'steel', 'fairy',
-] as const
-
-export type PokemonTypeName = (typeof POKEMON_TYPES)[number]
+export const POKEMON_TYPES = POKEMON_TYPE_SLUGS
+export type PokemonTypeName = PokemonTypeSlug
 export type PokedexSort = 'number-asc' | 'name-asc' | 'total-desc' | 'total-asc'
 
 export interface PokedexFilters {

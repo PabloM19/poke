@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { GitCompare } from 'lucide-react'
+import { GitCompare } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
