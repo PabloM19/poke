@@ -550,6 +550,8 @@ Las pruebas unitarias usan fixtures locales. Un smoke test real de PokeAPI puede
 - **Verificación de R-03:** 175 pruebas automatizadas y `npm run check` correcto; chunk diferido propio de 5,71 kB; ruta profunda a 390×844 con ancho 390/390, controles legibles y cero errores de consola.
 - **Fase 7, punto 8 cerrado — R-04:** kit local de exploración PMD con Tripa, PS, PP, semillas, orbes, equipamiento, usos de objetos y checklist interactiva; enlazado desde ambas guías PMD y desde R-03.
 - **Verificación de R-04:** 176 pruebas automatizadas y `npm run check` correcto; chunk diferido propio de 7,04 kB; checklist operativa a 390×844 con ancho 390/390 y cero errores de consola.
+- **Fase 7, punto 9 cerrado — R-05:** técnica local de captura Ranger con lectura de patrones, trazo controlado, pausa segura, Poké-Ayudas, movimientos de campo y recordatorio interactivo de tres fases; enlazada desde Ranger y R-04.
+- **Verificación de R-05:** 177 pruebas automatizadas y `npm run check` correcto; chunk diferido propio de 5,31 kB; selector de fase operativo a 390×844 con ancho 390/390 y cero errores de consola.
 - **Restricción de entrega:** por instrucción del usuario no se hará ningún despliegue remoto. Los puntos de las fases 8–9 que exijan un dominio HTTPS o publicar hosting quedarán sin ejecutar salvo autorización posterior; el resto se implementará y verificará en local.
 
-La próxima acción es exclusivamente el noveno punto de la **Fase 7**: implementar y verificar `R-05 · Técnica de captura Ranger` antes de comenzar R-06.
+La próxima acción es exclusivamente el décimo punto de la **Fase 7**: implementar y verificar `R-06 · Recordatorio táctico Conquest` y cerrar la fase.

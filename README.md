@@ -22,7 +22,7 @@ Disponible:
 - Contexto persistente de Perla, Platino, HeartGold, Negro y Negro 2.
 - Tipos, estadísticas y relaciones defensivas históricas en ficha y Comparar.
 - Manuales 21–86 con rutas profundas, búsqueda, progreso y referencias físicas.
-- Recursos locales R-01 (tipos), R-02 (estados), R-03 (iconos) y R-04 (kit PMD).
+- Recursos locales R-01…R-05: tipos, estados, iconos, kit PMD y captura Ranger.
 - Cinco guías completas de la saga principal (87–128) con exploradores regionales por versión.
 - Guías completas de Equipo de Rescate Azul y Exploradores de la Oscuridad (129–144), con especies enriquecibles bajo demanda.
 - Las cuatro minifichas locales: Pokémon Ranger, Dash, Link! y Conquest (145–152).
