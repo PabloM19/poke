@@ -562,6 +562,8 @@ Las pruebas unitarias usan fixtures locales. Un smoke test real de PokeAPI puede
 - **Verificación de referencias:** 211 pruebas automatizadas y `npm run check` correcto; R-02 muestra `49–54 y 153–154` a 390×844 con ancho 390/390 y cero errores de consola.
 - **Fase 8, punto 5 cerrado — enlaces de vuelta:** recursos, lecciones y familias editoriales enlazan a sus guías; las fichas Pokémon abiertas desde una guía reciben un retorno interno validado al origen, mientras conservan la salida a Buscar.
 - **Verificación de enlaces:** 213 pruebas automatizadas y `npm run check` correcto; a 390×844, Combate enlaza a Perla y la tarjeta de Turtwig abre `/pokemon/387` con retorno a `/manuales/juegos/perla`, ancho 390/390 y cero errores de consola.
+- **Fase 8, punto 6 cerrado — spoilers:** preferencia persistente `none | mechanics | guide`, nivel `none` por defecto, puertas reversibles para rutas directas, revelado solo para la visita actual, selector en Manuales/Ajustes y resultados filtrados sin ocultar índices seguros.
+- **Verificación de spoilers:** 218 pruebas automatizadas y `npm run check` correcto; Conquest queda oculto inicialmente, se revela una vez y aparece directamente tras guardar `mechanics`; preferencia conservada tras recarga a 390×844, ancho 390/390 y cero errores de consola.
 - **Restricción de entrega:** por instrucción del usuario no se hará ningún despliegue remoto. Los puntos de las fases 8–9 que exijan un dominio HTTPS o publicar hosting quedarán sin ejecutar salvo autorización posterior; el resto se implementará y verificará en local.
 
-La próxima acción es el siguiente punto local de la **Fase 8**: guardar la preferencia de spoilers y ocultar por defecto los niveles superiores.
+La próxima acción es el siguiente punto local de la **Fase 8**: crear el centro de recursos actualizable con revisión y niveles de spoilers.
