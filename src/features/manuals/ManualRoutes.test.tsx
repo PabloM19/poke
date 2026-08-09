@@ -15,6 +15,7 @@ import { ConquestGuidePage } from './spinOffs/ConquestGuidePage'
 import { IconSymbolsPage } from './resources/IconSymbolsPage'
 import { PmdExplorationKitPage } from './resources/PmdExplorationKitPage'
 import { RangerCaptureTechniquePage } from './resources/RangerCaptureTechniquePage'
+import { ConquestTacticalReminderPage } from './resources/ConquestTacticalReminderPage'
 
 function renderManualRoute(path: string) {
   return render(
@@ -36,6 +37,7 @@ function renderManualRoute(path: string) {
           <Route path="recursos/r-03" element={<IconSymbolsPage />} />
           <Route path="recursos/r-04" element={<PmdExplorationKitPage />} />
           <Route path="recursos/r-05" element={<RangerCaptureTechniquePage />} />
+          <Route path="recursos/r-06" element={<ConquestTacticalReminderPage />} />
           <Route path="*" element={<ManualNotFoundPage />} />
         </Route>
       </Routes>
@@ -243,5 +245,18 @@ describe('rutas de Manuales', () => {
     expect(screen.getByText(/se reinicia el progreso de los círculos actuales/)).toBeInTheDocument()
     expect(screen.getByText(/No presiones ni traces con fuerza/)).toBeInTheDocument()
     expect(screen.getByText('En el manual físico: páginas 145–146')).toBeInTheDocument()
+  })
+
+  it('publica R-06 con la revisión táctica de Conquest', () => {
+    renderManualRoute('/manuales/recursos/r-06')
+
+    expect(screen.getByRole('heading', { name: 'Recordatorio táctico Conquest' })).toBeInTheDocument()
+    expect(screen.getByRole('status')).toHaveTextContent('0 de 5')
+    fireEvent.click(screen.getByRole('checkbox', { name: /objetivo del mapa/ }))
+    fireEvent.click(screen.getByRole('checkbox', { name: /turnos quedan/ }))
+    expect(screen.getByRole('status')).toHaveTextContent('2 de 5')
+    expect(screen.getByRole('region', { name: 'Orden de decisión' })).toHaveTextContent(/Misión.*Posición.*Acción.*Revisar/)
+    expect(screen.getByText(/Fortalecer el vínculo/)).toBeInTheDocument()
+    expect(screen.getByText('En el manual físico: páginas 151–152')).toBeInTheDocument()
   })
 })

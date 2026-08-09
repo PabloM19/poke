@@ -41,9 +41,8 @@ function resourceDestination(code: string): string {
   if (code === 'R-03') return '/manuales/recursos/r-03'
   if (code === 'R-04') return '/manuales/recursos/r-04'
   if (code === 'R-05') return '/manuales/recursos/r-05'
-  return code === 'R-06'
-    ? '/manuales/otros'
-    : '/manuales/empezar/recursos-y-coleccion'
+  if (code === 'R-06') return '/manuales/recursos/r-06'
+  return '/manuales/empezar/recursos-y-coleccion'
 }
 
 const searchableEntries = [

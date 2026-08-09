@@ -78,6 +78,11 @@ describe('searchManuals', () => {
       title: 'R-05 · Técnica de captura Ranger',
       path: '/manuales/recursos/r-05',
     })
+    expect(searchManuals('r06')[0]).toMatchObject({
+      kind: 'resource',
+      title: 'R-06 · Recordatorio táctico Conquest',
+      path: '/manuales/recursos/r-06',
+    })
   })
 
   it('no devuelve ruido para consultas de una letra', () => {

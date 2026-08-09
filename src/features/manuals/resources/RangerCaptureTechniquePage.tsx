@@ -55,6 +55,7 @@ export function RangerCaptureTechniquePage() {
       <nav className="flex flex-wrap gap-3" aria-label="Recursos relacionados">
         <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/juegos/ranger">Volver a Pokémon Ranger</Link>
         <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/recursos/r-04">Anterior: R-04</Link>
+        <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/recursos/r-06">Siguiente: R-06 · Conquest</Link>
       </nav>
     </article>
   )
