@@ -548,6 +548,8 @@ Las pruebas unitarias usan fixtures locales. Un smoke test real de PokeAPI puede
 - **Verificación de Conquest:** 174 pruebas automatizadas y `npm run check` correcto; chunk diferido propio de 4,44 kB; ruta profunda local a 390×844 con ancho 390/390, control de lectura y cero errores de consola. Quedan publicados de forma continua los once juegos y las páginas 87–152.
 - **Fase 7, punto 7 cerrado — R-03:** referencia local sin spoilers para iconos, guardado, avisos, controles de Nintendo DS y las tres etiquetas editoriales; enlazada desde R-02 y desde el índice.
 - **Verificación de R-03:** 175 pruebas automatizadas y `npm run check` correcto; chunk diferido propio de 5,71 kB; ruta profunda a 390×844 con ancho 390/390, controles legibles y cero errores de consola.
+- **Fase 7, punto 8 cerrado — R-04:** kit local de exploración PMD con Tripa, PS, PP, semillas, orbes, equipamiento, usos de objetos y checklist interactiva; enlazado desde ambas guías PMD y desde R-03.
+- **Verificación de R-04:** 176 pruebas automatizadas y `npm run check` correcto; chunk diferido propio de 7,04 kB; checklist operativa a 390×844 con ancho 390/390 y cero errores de consola.
 - **Restricción de entrega:** por instrucción del usuario no se hará ningún despliegue remoto. Los puntos de las fases 8–9 que exijan un dominio HTTPS o publicar hosting quedarán sin ejecutar salvo autorización posterior; el resto se implementará y verificará en local.
 
-La próxima acción es exclusivamente el octavo punto de la **Fase 7**: implementar y verificar `R-04 · Kit de exploración PMD` antes de comenzar R-05.
+La próxima acción es exclusivamente el noveno punto de la **Fase 7**: implementar y verificar `R-05 · Técnica de captura Ranger` antes de comenzar R-06.
