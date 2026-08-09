@@ -567,6 +567,8 @@ Las pruebas unitarias usan fixtures locales. Un smoke test real de PokeAPI puede
 - **Fase 8, punto 7 cerrado — centro de recursos:** `/manuales/recursos` publica R-01…R-06, fecha y hash de la revisión canónica, edición, nivel de spoilers, relaciones por juego, rutas cortas, cinco preguntas de ayuda y cierre de las páginas 153–156. El manifiesto completo 21–156 ya está publicado en 30 artículos.
 - **Verificación del centro:** 220 pruebas automatizadas y `npm run check` correcto; seis recursos y seis rutas cortas visibles, R-04 abre su puerta de mecánicas, ancho 390/390 y cero errores de consola.
 - **Fase 8, punto 8 aplazado — prueba física de QR:** depende de los QR HTTPS no emitidos. El alcance local de la fase queda terminado; sus dos criterios remotos (origen HTTPS y cámara real) permanecen expresamente pendientes sin bloquear el cierre local.
+- **Fase 9, punto 1 cerrado — resiliencia:** Error Boundary global con recuperación, 404 general y editorial, aviso reactivo de desconexión y conservación de los reintentos aislados de ficha, Favoritos, Comparar y exploradores.
+- **Verificación de resiliencia:** 222 pruebas automatizadas y `npm run check` correcto; al cortar la red una lección cargada sigue visible y aparece el aviso offline, el 404 general resuelve correctamente a 390×844, ancho 390/390 y cero errores de consola.
 - **Restricción de entrega:** por instrucción del usuario no se hará ningún despliegue remoto. Los puntos de las fases 8–9 que exijan un dominio HTTPS o publicar hosting quedarán sin ejecutar salvo autorización posterior; el resto se implementará y verificará en local.
 
-La próxima acción es la **Fase 9**, empezando por Error Boundary, 404, reintento y estados offline; no se configurará hosting remoto.
+La próxima acción es el segundo punto de la **Fase 9**: identidad HTML en español, título, metadata, iconos y favicon propios.
