@@ -49,10 +49,10 @@ const routes = [
     icon: Library,
   },
   {
-    path: '/manuales/recursos/r-01',
+    path: '/manuales/recursos',
     title: 'Recursos rápidos',
-    description: 'Tabla de tipos histórica y referencia de estados, siempre a mano.',
-    pages: '153–154',
+    description: 'R-01…R-06, revisión editorial y niveles de spoilers.',
+    pages: '153–156',
     icon: TableProperties,
   },
 ] as const

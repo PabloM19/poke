@@ -36,6 +36,7 @@ const pages = extractPages(source)
 validatePages(pages)
 const output = `${JSON.stringify({
   edition: 'ds-156-v1',
+  revision: '2026-08-06',
   sourceSha256: createHash('sha256').update(source).digest('hex'),
   pages,
 }, null, 2)}\n`

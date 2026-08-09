@@ -18,6 +18,7 @@ import { IconSymbolsPage } from './resources/IconSymbolsPage'
 import { PmdExplorationKitPage } from './resources/PmdExplorationKitPage'
 import { RangerCaptureTechniquePage } from './resources/RangerCaptureTechniquePage'
 import { ConquestTacticalReminderPage } from './resources/ConquestTacticalReminderPage'
+import { ResourcesCenterPage } from './resources/ResourcesCenterPage'
 
 function renderManualRoute(path: string) {
   return render(
@@ -40,6 +41,7 @@ function renderManualRoute(path: string) {
           <Route path="recursos/r-04" element={<PmdExplorationKitPage />} />
           <Route path="recursos/r-05" element={<RangerCaptureTechniquePage />} />
           <Route path="recursos/r-06" element={<ConquestTacticalReminderPage />} />
+          <Route path="recursos" element={<ResourcesCenterPage />} />
           <Route path="*" element={<ManualNotFoundPage />} />
         </Route>
       </Routes></SpoilerPreferenceProvider></GameProvider>
@@ -264,5 +266,17 @@ describe('rutas de Manuales', () => {
     expect(screen.getByRole('region', { name: 'Orden de decisión' })).toHaveTextContent(/Misión.*Posición.*Acción.*Revisar/)
     expect(screen.getByText(/Fortalecer el vínculo/)).toBeInTheDocument()
     expect(screen.getByText('En el manual físico: páginas 151–152')).toBeInTheDocument()
+  })
+
+  it('publica el centro actualizable de R-01 a R-06', () => {
+    renderManualRoute('/manuales/recursos')
+
+    expect(screen.getByRole('heading', { name: 'Centro de recursos' })).toBeInTheDocument()
+    expect(screen.getByRole('region', { name: 'Estado de revisión' })).toHaveTextContent('6 de agosto de 2026')
+    expect(screen.getAllByText(/Ruta corta: \/r\/r-0[1-6]/)).toHaveLength(6)
+    expect(screen.getByRole('link', { name: /R-01.*Tabla de tipos/ })).toHaveAttribute('href', '/manuales/recursos/r-01')
+    expect(screen.getByRole('link', { name: /R-06.*Recordatorio táctico Conquest/ })).toHaveAttribute('href', '/manuales/recursos/r-06')
+    expect(screen.getByText(/Once juegos. Dos grandes formas/)).toBeInTheDocument()
+    expect(screen.getByText('En el manual físico: páginas 153–156')).toBeInTheDocument()
   })
 })

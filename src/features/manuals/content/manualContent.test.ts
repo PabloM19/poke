@@ -4,6 +4,7 @@ import { gameDefinitions, resourceDefinitions } from './definitions'
 import {
   getSourcePagesForArticle,
   manualArticleDefinitions,
+  manualContentRevision,
   manualEdition,
   manualSourcePages,
   manualSourceSha256,
@@ -13,6 +14,7 @@ import {
 describe('integridad editorial del manual', () => {
   it('extrae una vez cada página canónica de 21 a 156', () => {
     expect(manualEdition).toBe('ds-156-v1')
+    expect(manualContentRevision).toBe('2026-08-06')
     expect(manualSourceSha256).toBe(
       'b0f171fc829902ca182f0ca1cca224ea857d1cf6e568e549470d416533ad6d00'
     )

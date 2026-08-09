@@ -38,6 +38,7 @@ export const manualNavigationEntries: readonly ManualNavigationEntry[] = [
   { path: '/manuales/juegos/dash', title: 'Pokémon Dash', shortTitle: 'Pokémon Dash', family: 'spin-off-games', pages: [147, 148] },
   { path: '/manuales/juegos/link', title: 'Pokémon Link!', shortTitle: 'Pokémon Link!', family: 'spin-off-games', pages: [149, 150] },
   { path: '/manuales/juegos/conquest', title: 'Pokémon Conquest', shortTitle: 'Pokémon Conquest', family: 'spin-off-games', pages: [151, 152] },
+  { path: '/manuales/recursos', title: 'Centro de recursos', shortTitle: 'Centro de recursos', family: 'resources', pages: [153, 156] },
   { path: '/manuales/recursos/r-01', title: 'R-01 · Tabla de tipos', shortTitle: 'R-01 · Tipos', family: 'resources', pages: [153, 154] },
   { path: '/manuales/recursos/r-02', title: 'R-02 · Estados y efectos', shortTitle: 'R-02 · Estados', family: 'resources', pages: [153, 154] },
   { path: '/manuales/recursos/r-03', title: 'R-03 · Iconos y símbolos', shortTitle: 'R-03 · Iconos', family: 'resources', pages: [153, 154] },

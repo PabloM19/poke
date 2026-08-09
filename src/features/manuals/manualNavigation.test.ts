@@ -30,6 +30,7 @@ describe('manualNavigation', () => {
   })
 
   it('publica R-01 y R-02 con rutas estables', () => {
+    expect(getManualEntry('/manuales/recursos')).toMatchObject({ family: 'resources', pages: [153, 156] })
     expect(getManualEntry('/manuales/recursos/r-01')).toMatchObject({ family: 'resources', pages: [153, 154] })
     expect(getManualEntry('/manuales/recursos/r-02')).toMatchObject({ family: 'resources', pages: [153, 154] })
   })

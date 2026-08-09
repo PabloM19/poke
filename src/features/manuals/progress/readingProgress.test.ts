@@ -14,7 +14,7 @@ describe('progreso de lectura', () => {
   beforeEach(() => localStorage.clear())
 
   it('guarda el último artículo y permite completar/deshacer', () => {
-    expect(manualLessonCount).toBe(29)
+    expect(manualLessonCount).toBe(30)
     expect(recordLastRead(validPath).lastPath).toBe(validPath)
     expect(setArticleCompleted(validPath, true).completedPaths).toEqual([validPath])
     expect(setArticleCompleted(validPath, true).completedPaths).toEqual([validPath])

@@ -26,6 +26,9 @@ const ManualNotFoundPage = lazy(async () => ({
 const TypeChartPage = lazy(async () => ({
   default: (await import('@/features/manuals/resources/TypeChartPage')).TypeChartPage,
 }))
+const ResourcesCenterPage = lazy(async () => ({
+  default: (await import('@/features/manuals/resources/ResourcesCenterPage')).ResourcesCenterPage,
+}))
 const StatusReferencePage = lazy(async () => ({
   default: (await import('@/features/manuals/resources/StatusReferencePage')).StatusReferencePage,
 }))
@@ -104,6 +107,7 @@ const router = createBrowserRouter([
           { path: 'juegos/dash', element: <MechanicsRoute label="Pokémon Dash"><DashGuidePage /></MechanicsRoute> },
           { path: 'juegos/link', element: <MechanicsRoute label="Pokémon Link!"><LinkGuidePage /></MechanicsRoute> },
           { path: 'juegos/conquest', element: <MechanicsRoute label="Pokémon Conquest"><ConquestGuidePage /></MechanicsRoute> },
+          { path: 'recursos', element: <DeferredRoute label="Centro de recursos"><ResourcesCenterPage /></DeferredRoute> },
           { path: 'recursos/r-01', element: <DeferredRoute label="R-01"><TypeChartPage /></DeferredRoute> },
           { path: 'recursos/r-02', element: <MechanicsRoute label="R-02 · Estados"><StatusReferencePage /></MechanicsRoute> },
           { path: 'recursos/r-03', element: <DeferredRoute label="R-03"><IconSymbolsPage /></DeferredRoute> },

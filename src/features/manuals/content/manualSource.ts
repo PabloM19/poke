@@ -44,6 +44,7 @@ function assertArticleDefinition(value: unknown): asserts value is ManualArticle
 }
 
 export const manualEdition = generated.edition as PrintReference['edition']
+export const manualContentRevision = generated.revision
 export const manualSourceSha256 = generated.sourceSha256
 export const manualSourcePages: readonly ManualSourcePage[] = generated.pages
 export const manualArticleDefinitions: readonly ManualArticleDefinition[] = manifest.map((entry) => {

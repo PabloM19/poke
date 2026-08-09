@@ -5,8 +5,8 @@ import { manualNavigationEntries } from '../manualNavigation'
 import { publishedManualArticles } from './articles'
 
 describe('referencias de la edición física', () => {
-  it('mantiene los 29 artículos dentro de las 156 páginas canónicas', () => {
-    expect(publishedManualArticles).toHaveLength(29)
+  it('mantiene los 30 artículos dentro de las 156 páginas canónicas', () => {
+    expect(publishedManualArticles).toHaveLength(30)
     for (const article of publishedManualArticles) {
       expect(article.printReference.edition).toBe('ds-156-v1')
       expect(article.printReference.pages.length).toBeGreaterThan(0)
