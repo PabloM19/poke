@@ -71,6 +71,7 @@ export function IconSymbolsPage() {
       <nav className="flex flex-wrap gap-3" aria-label="Recursos relacionados">
         <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/recursos/r-02">Anterior: R-02 · Estados</Link>
         <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/empezar/nintendo-ds">Ampliar controles de Nintendo DS</Link>
+        <Link className="text-sm font-medium text-primary hover:underline" to="/manuales/recursos/r-04">Siguiente: R-04 · Kit PMD</Link>
       </nav>
     </article>
   )

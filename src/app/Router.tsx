@@ -30,6 +30,9 @@ const StatusReferencePage = lazy(async () => ({
 const IconSymbolsPage = lazy(async () => ({
   default: (await import('@/features/manuals/resources/IconSymbolsPage')).IconSymbolsPage,
 }))
+const PmdExplorationKitPage = lazy(async () => ({
+  default: (await import('@/features/manuals/resources/PmdExplorationKitPage')).PmdExplorationKitPage,
+}))
 const MainGameGuidePage = lazy(async () => ({
   default: (await import('@/features/manuals/mainGames/MainGameGuidePage')).MainGameGuidePage,
 }))
@@ -91,6 +94,7 @@ const router = createBrowserRouter([
           { path: 'recursos/r-01', element: <DeferredRoute label="R-01"><TypeChartPage /></DeferredRoute> },
           { path: 'recursos/r-02', element: <DeferredRoute label="R-02"><StatusReferencePage /></DeferredRoute> },
           { path: 'recursos/r-03', element: <DeferredRoute label="R-03"><IconSymbolsPage /></DeferredRoute> },
+          { path: 'recursos/r-04', element: <DeferredRoute label="R-04"><PmdExplorationKitPage /></DeferredRoute> },
           { path: '*', element: <DeferredRoute label="Manuales"><ManualNotFoundPage /></DeferredRoute> },
         ],
       },

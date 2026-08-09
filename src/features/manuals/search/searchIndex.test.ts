@@ -68,6 +68,11 @@ describe('searchManuals', () => {
       title: 'R-03 · Iconos y símbolos',
       path: '/manuales/recursos/r-03',
     })
+    expect(searchManuals('r04')[0]).toMatchObject({
+      kind: 'resource',
+      title: 'R-04 · Kit de exploración PMD',
+      path: '/manuales/recursos/r-04',
+    })
   })
 
   it('no devuelve ruido para consultas de una letra', () => {

@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { describe, expect, it, vi } from 'vitest'
 import { ManualsLandingPage } from '@/pages/ManualsLandingPage'
@@ -13,6 +13,7 @@ import { DashGuidePage } from './spinOffs/DashGuidePage'
 import { LinkGuidePage } from './spinOffs/LinkGuidePage'
 import { ConquestGuidePage } from './spinOffs/ConquestGuidePage'
 import { IconSymbolsPage } from './resources/IconSymbolsPage'
+import { PmdExplorationKitPage } from './resources/PmdExplorationKitPage'
 
 function renderManualRoute(path: string) {
   return render(
@@ -32,6 +33,7 @@ function renderManualRoute(path: string) {
           <Route path="juegos/link" element={<LinkGuidePage />} />
           <Route path="juegos/conquest" element={<ConquestGuidePage />} />
           <Route path="recursos/r-03" element={<IconSymbolsPage />} />
+          <Route path="recursos/r-04" element={<PmdExplorationKitPage />} />
           <Route path="*" element={<ManualNotFoundPage />} />
         </Route>
       </Routes>
@@ -215,5 +217,17 @@ describe('rutas de Manuales', () => {
     expect(screen.getByText('Guía · spoilers')).toBeInTheDocument()
     expect(screen.getByText(/indicación que aparece en la pantalla del juego/)).toBeInTheDocument()
     expect(screen.getByText('En el manual físico: páginas 153–154')).toBeInTheDocument()
+  })
+
+  it('publica R-04 con un kit PMD interactivo', () => {
+    renderManualRoute('/manuales/recursos/r-04')
+
+    expect(screen.getByRole('heading', { name: 'Kit de exploración PMD' })).toBeInTheDocument()
+    expect(screen.getByRole('status')).toHaveTextContent('0 de 6')
+    fireEvent.click(screen.getByRole('checkbox', { name: /Alimento/ }))
+    expect(screen.getByRole('status')).toHaveTextContent('1 de 6')
+    expect(screen.getByText(/Usar, entregar o lanzar/)).toBeInTheDocument()
+    expect(screen.getByText(/conserva los orbes/)).toBeInTheDocument()
+    expect(screen.getByText('En el manual físico: páginas 70–74')).toBeInTheDocument()
   })
 })

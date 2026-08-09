@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { ShieldCheck, Sparkles, Users } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -108,7 +109,7 @@ export function PmdGuidePage() {
         <h2 className="mb-4 text-2xl font-semibold">Tu primera misión</h2>
         <ul className="ml-5 list-disc space-y-2 leading-7"><li>Lleva una Manzana, una Baya Aranja y un Elixir Máx.</li><li>Deposita dinero y objetos valiosos.</li><li>Comprueba movimientos y tácticas.</li><li>Usa los pasillos para combatir de uno en uno.</li><li>Conserva recursos si ya has encontrado las escaleras.</li><li>Regresa a la Plaza después de cada salida.</li></ul>
         <LessonCallout kind="warning" title="Aviso de spoilers">No consultes la causa de los desastres naturales si quieres descubrir la historia sin spoilers.</LessonCallout>
-        <Card className="gap-2 py-5"><CardHeader className="px-5"><CardTitle>Recursos de rescate</CardTitle></CardHeader><CardContent className="px-5 text-sm text-muted-foreground">R-04 · objetos PMD · Gomis y CI · Zonas de Recreo · reclutamiento</CardContent></Card>
+        <Link to="/manuales/recursos/r-04" className="block rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring"><Card className="gap-2 py-5 transition-colors hover:bg-accent/50"><CardHeader className="px-5"><CardTitle>Recursos de rescate</CardTitle></CardHeader><CardContent className="px-5 text-sm text-muted-foreground">R-04 · objetos PMD · Gomis y CI · Zonas de Recreo · reclutamiento</CardContent></Card></Link>
       </section>
 
       <PhysicalReference reference={{ edition: 'ds-156-v1', pages: Array.from({ length: 8 }, (_, index) => 129 + index) }} />
