@@ -1,5 +1,6 @@
 import { AppNav } from './AppNav'
 import { GameSelector } from '@/features/games'
+import { Link } from 'react-router-dom'
 
 export function AppHeader() {
   return (
@@ -8,9 +9,13 @@ export function AppHeader() {
       role="banner"
     >
       <div className="flex h-14 items-center justify-between gap-4 px-4 sm:px-6">
-        <h1 className="text-lg font-semibold tracking-tight text-foreground">
+        <Link
+          to="/search"
+          className="rounded-md text-lg font-semibold tracking-tight text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          aria-label="PokéApp, ir al inicio"
+        >
           PokéApp
-        </h1>
+        </Link>
         <div className="flex min-w-0 items-center gap-3">
           <GameSelector />
           <div className="hidden md:block">

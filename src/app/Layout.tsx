@@ -6,9 +6,19 @@ import { NetworkStatusBanner } from './NetworkStatusBanner'
 export function Layout() {
   return (
     <div className="flex min-h-screen flex-col">
+      <a
+        href="#main-content"
+        className="fixed left-3 top-3 z-[60] -translate-y-20 rounded-md bg-primary px-4 py-3 font-medium text-primary-foreground shadow-lg transition-transform focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+      >
+        Saltar al contenido
+      </a>
       <AppHeader />
       <NetworkStatusBanner />
-      <main className="min-h-0 flex-1 px-4 py-5 pb-20 sm:px-6 sm:py-6 sm:pb-6 md:mx-auto md:max-w-3xl md:px-8 md:py-8 lg:max-w-4xl">
+      <main
+        id="main-content"
+        tabIndex={-1}
+        className="min-h-0 flex-1 px-4 py-5 pb-20 outline-none sm:px-6 sm:py-6 sm:pb-6 md:mx-auto md:max-w-3xl md:px-8 md:py-8 lg:max-w-4xl"
+      >
         <Outlet />
       </main>
       <div

@@ -14,7 +14,10 @@ describe('AppHeader', () => {
       </MemoryRouter>
     )
 
-    expect(screen.getByRole('heading', { name: 'PokéApp' })).toBeVisible()
+    expect(screen.getByRole('link', { name: 'PokéApp, ir al inicio' })).toHaveAttribute(
+      'href',
+      '/search'
+    )
     expect(
       screen.getByRole('navigation', { name: 'Navegación principal' })
     ).toBeInTheDocument()
