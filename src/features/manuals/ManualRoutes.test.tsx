@@ -11,6 +11,7 @@ import { ExplorersGuidePage } from './pmd/ExplorersGuidePage'
 import { RangerGuidePage } from './spinOffs/RangerGuidePage'
 import { DashGuidePage } from './spinOffs/DashGuidePage'
 import { LinkGuidePage } from './spinOffs/LinkGuidePage'
+import { ConquestGuidePage } from './spinOffs/ConquestGuidePage'
 
 function renderManualRoute(path: string) {
   return render(
@@ -28,6 +29,7 @@ function renderManualRoute(path: string) {
           <Route path="juegos/ranger" element={<RangerGuidePage />} />
           <Route path="juegos/dash" element={<DashGuidePage />} />
           <Route path="juegos/link" element={<LinkGuidePage />} />
+          <Route path="juegos/conquest" element={<ConquestGuidePage />} />
           <Route path="*" element={<ManualNotFoundPage />} />
         </Route>
       </Routes>
@@ -189,5 +191,16 @@ describe('rutas de Manuales', () => {
     expect(screen.getByText(/fichas restantes caen/)).toBeInTheDocument()
     expect(screen.getByText(/mover por impulso/)).toBeInTheDocument()
     expect(screen.getByText('En el manual físico: páginas 149–150')).toBeInTheDocument()
+  })
+
+  it('publica el ciclo táctico de Pokémon Conquest', () => {
+    renderManualRoute('/manuales/juegos/conquest')
+
+    expect(screen.getByRole('heading', { name: 'Pokémon Conquest' })).toBeInTheDocument()
+    expect(screen.getByRole('region', { name: 'Secuencia de un turno táctico' }))
+      .toHaveTextContent(/Elige unidad.*Mueve al alcance.*Elige acción/)
+    expect(screen.getByText(/dirección, la distancia, el terreno/)).toBeInTheDocument()
+    expect(screen.getByText(/perseguir daño e ignorar el objetivo/)).toBeInTheDocument()
+    expect(screen.getByText('En el manual físico: páginas 151–152')).toBeInTheDocument()
   })
 })

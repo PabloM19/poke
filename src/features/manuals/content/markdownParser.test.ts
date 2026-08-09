@@ -32,13 +32,13 @@ describe('parseManualPage', () => {
     expect(JSON.stringify(blocks)).toContain('personas y los Pokémon viven')
   })
 
-  it('publica los 28 artículos de 21–150 con contenido real', () => {
-    expect(publishedManualArticles).toHaveLength(28)
+  it('publica los 29 artículos de 21–152 con contenido real', () => {
+    expect(publishedManualArticles).toHaveLength(29)
     expect(publishedManualArticles.every((article) => article.blocks.length > 0)).toBe(true)
     expect(publishedManualArticles[0].printReference.pages[0]).toBe(21)
-    expect(publishedManualArticles.at(-1)?.printReference.pages.at(-1)).toBe(150)
+    expect(publishedManualArticles.at(-1)?.printReference.pages.at(-1)).toBe(152)
     expect(manualSourcePages.find((source) => source.page === 86)?.markdown)
       .not.toContain('Páginas 87–128')
-    expect(JSON.stringify(publishedManualArticles.at(-1)?.blocks)).toContain('Link Chance')
+    expect(JSON.stringify(publishedManualArticles.at(-1)?.blocks)).toContain('límite de turnos')
   })
 })

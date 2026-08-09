@@ -40,7 +40,7 @@ describe('searchManuals', () => {
     })
     expect(searchManuals('Conquest')[0]).toMatchObject({
       kind: 'game',
-      path: '/manuales/otros',
+      path: '/manuales/juegos/conquest',
     })
     expect(searchManuals('Pokémon Ranger')[0]).toMatchObject({
       kind: 'game',

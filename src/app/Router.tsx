@@ -45,6 +45,9 @@ const DashGuidePage = lazy(async () => ({
 const LinkGuidePage = lazy(async () => ({
   default: (await import('@/features/manuals/spinOffs/LinkGuidePage')).LinkGuidePage,
 }))
+const ConquestGuidePage = lazy(async () => ({
+  default: (await import('@/features/manuals/spinOffs/ConquestGuidePage')).ConquestGuidePage,
+}))
 const PokedexPage = lazy(async () => ({
   default: (await import('@/pages/PokedexPage')).PokedexPage,
 }))
@@ -81,6 +84,7 @@ const router = createBrowserRouter([
           { path: 'juegos/ranger', element: <DeferredRoute label="Pokémon Ranger"><RangerGuidePage /></DeferredRoute> },
           { path: 'juegos/dash', element: <DeferredRoute label="Pokémon Dash"><DashGuidePage /></DeferredRoute> },
           { path: 'juegos/link', element: <DeferredRoute label="Pokémon Link!"><LinkGuidePage /></DeferredRoute> },
+          { path: 'juegos/conquest', element: <DeferredRoute label="Pokémon Conquest"><ConquestGuidePage /></DeferredRoute> },
           { path: 'recursos/r-01', element: <DeferredRoute label="R-01"><TypeChartPage /></DeferredRoute> },
           { path: 'recursos/r-02', element: <DeferredRoute label="R-02"><StatusReferencePage /></DeferredRoute> },
           { path: '*', element: <DeferredRoute label="Manuales"><ManualNotFoundPage /></DeferredRoute> },
