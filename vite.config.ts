@@ -1,6 +1,6 @@
 import path from 'node:path'
 import { createHash } from 'node:crypto'
-import { readFileSync } from 'node:fs'
+import { readFileSync, writeFileSync } from 'node:fs'
 import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
@@ -27,6 +27,17 @@ function pwaAssets(): Plugin {
       this.emitFile({ type: 'asset', fileName: 'sw.js', source: serviceWorker })
       this.emitFile({ type: 'asset', fileName: 'manifest.webmanifest', source: manifest })
       this.emitFile({ type: 'asset', fileName: 'pokeapp-icon.svg', source: icon })
+      this.emitFile({ type: 'asset', fileName: '_redirects', source: '/* /index.html 200\n' })
+      this.emitFile({
+        type: 'asset',
+        fileName: '_headers',
+        source: '/sw.js\n  Cache-Control: no-cache, no-store, must-revalidate\n',
+      })
+
+    },
+    closeBundle() {
+      const indexUrl = new URL('./dist/index.html', import.meta.url)
+      writeFileSync(new URL('./dist/404.html', import.meta.url), readFileSync(indexUrl))
     },
   }
 }
