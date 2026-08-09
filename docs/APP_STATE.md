@@ -1,213 +1,149 @@
-# PokéApp — Estado del proyecto y rumbo
+# PokéApp — estado actual
 
-Documento orientado a agentes / generadores de código y a humanos. Resume arquitectura, lo implementado, convenciones, qué se puede hacer ahora y qué falta.
+Documento operativo para continuar el proyecto sin depender del historial del chat. Describe el build local verificado el **9 de agosto de 2026**.
 
----
+## Resumen
 
-## Guía humana: qué puedes hacer ahora
+PokéApp es una aplicación React 19 + TypeScript + Vite, mobile-first y en español. Combina:
 
-### Cómo empezar
+- una Pokédex de las generaciones I–V con snapshots locales y enriquecimiento bajo demanda desde PokeAPI;
+- Favoritos, Comparar, filtros históricos y contexto por juego;
+- un manual editorial completo para once juegos de Nintendo DS;
+- seis recursos de consulta y rutas cortas estables para unir la app con el manual impreso;
+- instalación PWA y lectura offline del contenido editorial.
 
-1. Arranca la app (`npm run dev`) y ábrela en el navegador.
-2. Ve a **Ajustes** (icono de engranaje abajo / arriba en desktop).
-3. En **Datos de Pokédex (Gen I–V)** pulsa **Construir índice**. Espera a que termine (hay progreso y puedes cancelar).
-4. Cuando veas meta tipo “N especies · Gen 1–5 · Actualizado…”, ya puedes usar Buscar y Pokédex.
+No hay despliegue remoto. El proyecto se construye, sirve y prueba exclusivamente en local por decisión expresa del propietario.
 
-Sin ese índice, Buscar y Pokédex te piden ir a Ajustes.
+## Fuente editorial canónica
 
-### Qué puedes hacer hoy
+- Archivo: `docs/sources/manual-pokemon-ds-contenido-revisado.md`
+- Extensión declarada por la última versión: **156 páginas**.
+- Alcance distribuido en la app: páginas **21–156**, sin huecos.
+- SHA-256: `b0f171fc829902ca182f0ca1cca224ea857d1cf6e568e549470d416533ad6d00`.
+- Edición de contenido de la app: `ds-156-v1`.
 
-| Qué | Dónde | Qué pasa |
-|-----|--------|----------|
-| **Buscar por nombre o número** | Buscar | Escribes (ej. “pika”, “25”) y salen hasta 20 sugerencias con sprite, nombre en español y `#001`. Tocas → ficha. |
-| **Ver la Pokédex** | Pokédex | Lista/grid de especies Gen I–V. Cards con sprite, tipos, total de stats. **Cargar más** de 24 en 24. |
-| **Cambiar vista** | Pokédex (icono grid/lista) | Alterna cuadrícula ↔ lista; se guarda en el navegador. |
-| **Ver ficha de un Pokémon** | Desde Buscar o Pokédex | Sprite grande, nombre ES, `#ID`, tipos, stats base + total, nombres en otros idiomas (acordeón). |
-| **Tema claro/oscuro** | Ajustes | Switch; se guarda. |
-| **Vista por defecto grid/lista** | Ajustes | Preferencia; también se usa en Pokédex. |
-| **Probar la API** | Ajustes → Diagnóstico | Botón “Probar API” (generation, type fire, pikachu…). |
-| **Reconstruir / borrar índice** | Ajustes | Reconstruir o “Borrar datos locales” (no borra tema ni favoritos futuros). |
+La cifra procede del contenido maestro adjunto: el propio documento indica que la incorporación de iniciales, rivales y Medallas amplía la versión anterior a 156 páginas. Los números de página son metadatos visibles, nunca IDs de ruta.
 
-### Qué aún no puedes hacer
+## Funcionalidad terminada
 
-- **Favoritos**: pantalla placeholder; el botón en la ficha dice “próximamente”.
-- **Comparar**: placeholder; el enlace existe pero no hay lógica.
-- **Filtros** (tipo, total, generación): el Sheet de Pokédex dice “próximamente”.
-- **Debilidades / resistencias** por generación: no implementado (previsto Fase 4).
-- **Sprites en bulk al construir el índice**: el índice solo guarda especies; los sprites se piden al ver cards/resultados (con cache).
+### Pokédex y datos
 
----
+- Cliente PokeAPI normalizado con deduplicación, límite de concurrencia, timeout, retry, cancelación y caché versionada.
+- Índice reanudable de especies I–V y ficha directa aunque no exista índice.
+- Snapshot distribuido de 649 especies, validado por hash.
+- Snapshot histórico de las 18 relaciones de tipos.
+- Búsqueda por nombre español o número.
+- Pokédex paginada en grid/lista con filtros combinables por generación, uno o dos tipos, total y orden; estado canónico en URL.
+- Detalle con tipos, estadísticas, total, defensa histórica y nombres alternativos.
+- Favoritos persistentes con estados vacío/carga/error/reintento.
+- Comparación compartible de 2–4 especies y comportamiento histórico según el juego activo.
+- Contexto persistente para Perla, Platino, HeartGold, Negro y Negro 2.
 
-## Visión (para agentes)
+### Manuales
 
-App **mobile-first** (React + TypeScript + Vite) para consultar Pokémon **Gen I–V** vía **PokeAPI**, con **índice local** en `localStorage` para búsqueda y listados rápidos. Sin Next.js. UI con Tailwind v4 + shadcn/ui (estilo new-york, baseColor neutral). Estética neutra (grises). Textos en español para usuarios novatos.
+- Conceptos generales y rutas de aprendizaje, páginas 21–86.
+- Guías completas de Perla, Platino, Oro HeartGold, Negro y Negro 2, páginas 87–128.
+- Guías completas de Equipo de Rescate Azul y Exploradores de la Oscuridad, páginas 129–144.
+- Minifichas de Ranger, Dash, Link! y Conquest, páginas 145–152.
+- Centro de recursos y cierre, páginas 153–156.
+- Recursos locales R-01…R-06: tabla histórica de tipos, estados, iconos, kit PMD, captura Ranger y táctica Conquest.
+- Búsqueda local, migas, anterior/siguiente, progreso de lectura y 404 editorial.
+- Referencias exactas al manual físico en los 30 artículos.
+- Retornos recurso → lección → juego → Pokémon y vuelta segura desde la ficha.
+- Spoilers persistentes `none | mechanics | guide`, con `none` por defecto y revelado puntual reversible.
+- Enriquecimiento PokeAPI solo cuando aporta datos verificables; las mecánicas editoriales permanecen locales.
 
-**Stack:** React 19, Vite 7, TypeScript, React Router 7, Tailwind 4 (`@tailwindcss/vite`), shadcn/ui (radix-ui, CVA, clsx, tailwind-merge, lucide-react). Alias `@/` → `src/`.
+### Integración física local
 
-## Arranque
+Hay 17 aliases estables bajo `/r/`:
 
-```bash
-npm install
-npm run dev    # http://localhost:5173 → redirige a /search
-npm run build
-npm run lint
-```
+- Recursos: `/r/r-01` … `/r/r-06`.
+- Juegos: `/r/perla`, `/r/platino`, `/r/heartgold`, `/r/negro`, `/r/negro-2`, `/r/rescate-azul`, `/r/exploradores-oscuridad`, `/r/ranger`, `/r/dash`, `/r/link` y `/r/conquest`.
 
-## Rutas
+Los códigos desconocidos terminan en el 404 editorial. No se han generado QR absolutos: deben esperar a una URL HTTPS canónica para no imprimir localhost ni un dominio provisional.
 
-| Ruta | Estado | Descripción |
-|------|--------|-------------|
-| `/` | Redirect | → `/search` |
-| `/search` | **Activo** | Buscador predictivo sobre Species Index |
-| `/pokedex` | **Activo** | Grid/lista + cards + “Cargar más” |
-| `/pokemon/:speciesId` | **Activo** | Ficha detalle (species + pokemon) |
-| `/favorites` | Placeholder | Solo título + copy |
-| `/compare` | Placeholder | Solo título + copy |
-| `/settings` | **Activo** | Tema, vista, índice Pokédex, diagnóstico API |
-| `/demo` | Dev | Demo componentes shadcn |
+### Cierre de producción local
 
-Layout: header “PokéApp”, nav inferior (móvil) / superior (desktop ≥ md). Tabs: Buscar, Pokédex, Favoritos, Comparar, Ajustes (`AppNav` + lucide).
+- Error Boundary global, 404 general/editorial, aviso de desconexión y reintentos aislados.
+- Documento `lang="es"`, título, descripción, colores, favicon e icono propios.
+- `/demo` retirado de producción.
+- Todas las páginas no estructurales cargan de forma diferida. El JS inicial pasó de 455,03 kB a 344,16 kB; gzip, de 143,32 kB a 110,68 kB.
+- Salto al contenido, foco visible, un `h1` por vista, targets de 44 px o más y `prefers-reduced-motion`.
+- PWA en español con manifiesto, icono, service worker versionado por contenido y precaché de chunks, snapshots y manuales.
+- Fallback SPA incluido en el artefacto: `_redirects`, `404.html` equivalente a `index.html` y `_headers` para actualizar el worker sin caché obsoleta.
+- El build funciona offline desde una recarga directa de una ruta editorial profunda.
 
-## Estructura `src/`
+## Rutas públicas principales
 
-```
+| Ruta | Contenido |
+|---|---|
+| `/search` | Buscador predictivo |
+| `/pokedex` | Catálogo y filtros I–V |
+| `/pokemon/:speciesId` | Ficha independiente |
+| `/favorites` | Favoritos persistentes |
+| `/compare?ids=25,150` | Comparación compartible |
+| `/settings` | Apariencia, datos, spoilers y diagnóstico |
+| `/more` | Hub móvil para Comparar y Ajustes |
+| `/manuales` | Portada, búsqueda e índice editorial |
+| `/manuales/empezar/:tema` | Conceptos iniciales |
+| `/manuales/entrenador/:tema` | Saga principal |
+| `/manuales/mundo-misterioso/:tema` | Conceptos PMD |
+| `/manuales/juegos/:juego` | Guías por juego |
+| `/manuales/recursos` | Centro actualizable |
+| `/manuales/recursos/r-01`…`r-06` | Referencias locales |
+| `/r/:shortCode` | Alias estable del manual |
+
+## Arquitectura
+
+```text
 src/
-  app/           Layout, Router, Providers, ThemeProvider
-  pages/         Pantallas por ruta
-  components/    AppHeader, AppNav, PokedexCard, ui/* (shadcn), ui-demo
-  hooks/         useSpeciesIndex, usePokemonSummary
+  app/             router, layout, resiliencia y providers
+  assets/          identidad visual propia
+  components/      UI compartida y navegación responsive
+  data/            snapshots distribuidos
+  features/
+    compare/       selección, URL y resultados históricos
+    favorites/     store y tarjetas persistentes
+    games/         contexto de los cinco juegos principales
+    historical/    tipos, stats y defensa por generación
+    manuals/       contenido, rutas, recursos, búsqueda y progreso
+    pokedex/       snapshot y filtros compartibles
   lib/
-    config.ts           POKEAPI_BASE_URL, APP_STORAGE_PREFIX, CACHE_VERSION
-    types/common.ts     Nullable, Result
-    storage/            settings + localCache (TTL + versión)
-    pokeapi/            http, errors, models, services, constants
-    pokedex/            indexTypes, indexStore, indexBuilder (Species Index)
-    utils.ts            cn()
-  styles/globals.css    Tailwind + tema shadcn light/dark
+    pokeapi/       red, DTOs, servicios y normalizadores
+    pokedex/       construcción y persistencia del índice
+    storage/       caché, migraciones y preferencias
+  pages/           pantallas de ruta
+  pwa/             manifiesto, registro y service worker
+  test/            configuración e integridad documental
+scripts/           generadores deterministas
+docs/sources/      fuente editorial canónica
 ```
 
-**Convenciones:**
+Reglas que deben mantenerse:
 
-- API solo en `src/lib/pokeapi/`
-- Storage/cache solo en `src/lib/storage/` (+ índice en `src/lib/pokedex/`)
-- UI no mezcla lógica de red: usa hooks + services
+1. La UI no llama directamente a PokeAPI; usa servicios y normalizadores.
+2. El manual no depende del índice ni de la red.
+3. Los datos externos nunca definen mecánicas de spin-offs.
+4. Las preferencias usan el prefijo `pokeapp:` y validación al leer.
+5. Las rutas no se identifican por páginas impresas.
+6. Cada cambio funcional termina con `npm run check` y verificación responsive proporcional al riesgo.
 
-## Capa de datos
+## Verificación de cierre
 
-### Config (`lib/config.ts`)
+- `npm run check`: **55 archivos y 229 pruebas** verdes, además de snapshots, ESLint, TypeScript estricto y build.
+- Snapshot Pokédex: 649 entradas, SHA-256 `7a6348b0c922e8d640ecee0f877235d28e79860eab991b71e3f2691551db144c`.
+- Snapshot de tipos: 18 entradas, SHA-256 `0b90be9dc4650fd159f0b496d5c957c0d2d103771a3765e3c1fe5cd39d396529`.
+- E2E local de producción en 390×844 y 1280×900: navegación, búsqueda, ficha, favorito, Favoritos, Comparar, Pokédex, filtros, manuales, recursos y ruta corta; cero errores de consola, un `h1` y cero overflow.
+- Offline real en Chromium a 390×844: recarga directa de `/manuales/recursos/r-01`, sin peticiones fallidas ni desbordamiento.
+- Accesibilidad comprobada en ambos viewports: salto de contenido, targets visibles mínimos 54 px en móvil/44 px en escritorio y movimiento reducido efectivo.
 
-- `POKEAPI_BASE_URL = "https://pokeapi.co/api/v2"`
-- `APP_STORAGE_PREFIX = "pokeapp:"`
-- `CACHE_VERSION = "v1"`
+## Trabajo pendiente que necesita estado externo
 
-### HTTP (`lib/pokeapi/http.ts` + `errors.ts`)
+El alcance local de las fases 0–9 está terminado. Solo quedan bloqueados deliberadamente:
 
-- `buildUrl`, `fetchJson<T>`
-- `PokeApiError` con `kind: "http"|"parse"|"network"`, `status?`, `path`
+1. elegir la URL HTTPS canónica;
+2. desplegar el artefacto en el hosting elegido;
+3. generar los QR absolutos con ese origen;
+4. probarlos con cámara y teléfono reales.
 
-### Modelos mínimos (`lib/pokeapi/models.ts`)
-
-NamedAPIResource, PokemonSprites, PokemonType, PokemonStat, Pokemon, LanguageName, PokemonSpecies, TypeRelations, Type, Generation.  
-**No** se modela toda la API.
-
-### Services (`lib/pokeapi/services.ts`)
-
-- `getGeneration`, `getType`, `getPokemon`, `getPokemonSpecies` → `fetchJson` + **localCache** (TTL: Gen/Type 7d, Pokemon/Species 30d)
-- Helpers: `getSpanishName(species)`, `getSpeciesIdFromUrl(url)`
-- `GEN_RANGE = [1,2,3,4,5]`
-
-### Cache (`lib/storage/localCache.ts`)
-
-- `makeKey(parts)` → `pokeapp:v1:part1:part2`
-- `getCache` / `setCache` / `removeCache` / `clearCacheByPrefix`
-- JSON inválido → borra key; QuotaExceeded → limpia expiradas y reintenta 1 vez
-
-### Settings (`lib/storage/settings.ts`)
-
-- Keys: `pokeapp:theme` (`light`|`dark`), `pokeapp:defaultView` (`grid`|`list`)
-- `getSetting` / `setSetting` con validación
-
-### Species Index (`lib/pokedex/`)
-
-Índice local Gen I–V (solo `/generation` + `/pokemon-species`, **no** bulk `/pokemon` al construir).
-
-**SpeciesIndexItem:** speciesId, speciesName, nameEs, generationId, defaultPokemonName, speciesUrl
-
-**Build:** `buildSpeciesIndex({ maxGen=5, concurrency=6, onProgress, signal })`
-
-- Carga generaciones, dedupe species, fetch species en paralelo (pool), guarda partial cada 20, al final índice ordenado + meta
-- Reanudable vía partial + AbortController
-
-**Store keys (localStorage):**
-
-- `pokeapp:index:species:v1` — array completo
-- `pokeapp:index:species:meta:v1` — timestamp, maxGen, counts, version
-- `pokeapp:index:species:partial:v1` — progreso para reanudar
-
-**API store:** `getSpeciesIndex`, `getSpeciesIndexMeta`, `clearSpeciesIndex`, `ensureSpeciesIndex` (no auto-build)
-
-**Hook:** `useSpeciesIndex()` → `{ index, meta, status: "missing"|"ready", error: null, refresh }` — **no** dispara builds.
-
-### Cache de totales en cards
-
-- `pokeapp:pokedex:totalStat:v1:{speciesId}` — número (total base stats)
-
-## Features UI implementadas
-
-### Tema
-
-ThemeProvider + clase `.dark` en `<html>`. Script en `index.html` evita flash. Switch en Settings.
-
-### Buscar (`/search`)
-
-- Índice missing → callout + “Ir a Ajustes”
-- Listo → input “Busca un Pokémon (en español)…”, matching normalizado (lowercase + sin tildes), prioridad startsWith luego includes, max 20
-- Resultados: sprite (lazy `usePokemonSummary`), nameEs, `#001` → `/pokemon/:speciesId`
-
-### Pokédex (`/pokedex`)
-
-- Callout si missing
-- Toolbar: título, Sheet “Filtros” (placeholder), toggle Grid/List (`defaultView` persistido)
-- Grid 2 / 3 / 4 cols o lista; chunks 24 + “Cargar más”
-- `PokedexCard` + `usePokemonSummary` (sprite, badges tipos, Total)
-
-### Detalle (`/pokemon/:speciesId`)
-
-- Missing / id inválido / no en índice → error amable + link Pokédex
-- Carga: `getPokemonSpecies` + `getPokemon(defaultPokemonName)`
-- UI: sprite, nameEs, #ID, tipos, stats + “Total = suma de las estadísticas base.”, acordeón nombres (top 10), Favoritos deshabilitado, Comparar → `/compare`
-
-### Ajustes
-
-- Apariencia (tema), Vista por defecto, Datos de Pokédex (construir/reconstruir/cancelar/borrar índice + progreso), Diagnóstico PokeAPI
-
-## Qué NO está implementado (rumbo)
-
-| Fase / feature | Estado |
-|----------------|--------|
-| Favoritos reales | Pendiente |
-| Comparar stats | Pendiente |
-| Filtros Pokédex (tipo, total, gen) | Sheet placeholder |
-| Debilidades / resistencias por generación | Fase 4 (Type + past_damage_relations) |
-| Motor defensivo / matchups | Pendiente |
-| Bulk fetch índice de búsqueda extra | No (el Species Index ya cubre Gen I–V) |
-| IndexedDB | No; solo localStorage |
-
-**Rumbo sugerido:** completar Favoritos y Comparar → filtros en Sheet → Fase 4 (tipos por gen / past_types) → pulido UX mobile.
-
-## Reglas para agentes futuros
-
-1. No Next.js; solo Vite + React TS.
-2. No mezclar UI en `lib/`; API en `pokeapi/`, persistencia en `storage/` / `pokedex/`.
-3. Antes de listar/buscar: el usuario debe haber construido el Species Index (UI en Settings).
-4. No descargar `/pokemon` para todas las especies al build del índice; lazy-fetch en cards/detalle.
-5. Mantener estética neutra; reutilizar shadcn.
-6. Preferencias: siempre `APP_STORAGE_PREFIX` + validación.
-7. Cache API: `makeKey` + TTL; índice: keys `index:species:*`.
-8. Textos novatos en español; no PokeAPI en copy de usuario salvo diagnóstico.
-
-## Checklist rápido “¿está listo el índice?”
-
-1. Settings → Construir índice → progreso → meta con N especies.
-2. Local Storage: `pokeapp:index:species:v1` y `pokeapp:index:species:meta:v1`.
-3. `/search` muestra input; `/pokedex` muestra cards.
+No ejecutar esos cuatro puntos sin una decisión explícita de dominio/hosting. El artefacto local ya incluye los fallbacks SPA necesarios para el futuro proveedor.

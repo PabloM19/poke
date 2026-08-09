@@ -28,6 +28,9 @@ Disponible:
 - Preferencia persistente de spoilers con nivel seguro por defecto, revelado puntual y filtrado de búsqueda.
 - Centro actualizable de R-01…R-06 con revisión canónica, niveles, rutas cortas y cierre 153–156.
 - Error Boundary global, 404 propios, aviso offline y reintentos en las superficies dinámicas.
+- PWA instalable con manifiesto propio y lectura offline de manuales, recursos y snapshots.
+- Accesibilidad por teclado, salto al contenido, targets táctiles y movimiento reducido.
+- Rutas diferidas y artefacto estático con fallback SPA para deep links.
 - Cinco guías completas de la saga principal (87–128) con exploradores regionales por versión.
 - Guías completas de Equipo de Rescate Azul y Exploradores de la Oscuridad (129–144), con especies enriquecibles bajo demanda.
 - Las cuatro minifichas locales: Pokémon Ranger, Dash, Link! y Conquest (145–152).
@@ -37,10 +40,10 @@ Disponible:
 - Tema claro/oscuro.
 - Diagnóstico local de PokeAPI.
 
-En ejecución según el plan maestro:
+Fuera del alcance local hasta disponer de un origen HTTPS real:
 
-- Manuales por juego y recursos digitales.
-- Integración con el manual físico mediante rutas QR estables.
+- Elección de dominio y despliegue remoto.
+- Generación y prueba con cámara de los QR absolutos. Las 17 rutas cortas ya están listas.
 
 Consulta [docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) para el orden,
 las decisiones y las puertas de calidad.
@@ -99,6 +102,7 @@ src/
     pokeapi/    HTTP, modelos y servicios PokeAPI
     pokedex/    índice de especies
     storage/    preferencias y caché local
+  pwa/          manifiesto, registro y worker offline
   pages/        pantallas por ruta
   test/         setup y fixtures
 docs/
@@ -117,8 +121,9 @@ Reglas principales:
 ## Fuente del manual
 
 La copia canónica se encuentra en
-`docs/sources/manual-pokemon-ds-contenido-revisado.md`. Declara una edición de
-156 páginas y sustituye al handoff anterior de 112 páginas.
+`docs/sources/manual-pokemon-ds-contenido-revisado.md`. Su última versión declara
+una edición ampliada de 156 páginas; la app distribuye las páginas 21–156 y
+verifica el contenido por SHA-256.
 
 Los números de página se tratan como referencias de impresión, nunca como IDs
 de ruta permanentes.
@@ -126,3 +131,12 @@ de ruta permanentes.
 `npm run manual:generate` extrae exactamente las páginas 21–156 y genera un
 snapshot determinista. `npm run manual:check` falla si la fuente y el snapshot
 dejan de coincidir.
+
+## Estado de calidad
+
+El cierre local actual pasa 55 archivos y 229 pruebas automatizadas, ESLint,
+TypeScript estricto, comprobaciones de snapshots y build. También se ha probado
+el build real en 390×844 y 1280×900, y una recarga editorial profunda sin red.
+
+Consulta [docs/APP_STATE.md](docs/APP_STATE.md) para el inventario exacto de
+rutas, arquitectura, verificaciones y los únicos puntos externos pendientes.

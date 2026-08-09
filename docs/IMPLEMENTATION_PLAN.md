@@ -1,7 +1,7 @@
 # PokéApp — Plan maestro de finalización e integración con el manual
 
-**Estado:** canónico para la ejecución; fases 0–4 completadas
-**Fecha:** 6 de agosto de 2026  
+**Estado:** ejecución local completada; solo quedan dominio, despliegue y QR físicos
+**Fecha de cierre local:** 9 de agosto de 2026
 **Regla principal:** no se empieza una fase hasta que la anterior cumpla todos sus criterios de salida.
 
 ## 1. Fuentes de verdad
@@ -44,7 +44,7 @@ La app estará terminada cuando:
 - Los recursos `R-01…R-06` tengan rutas digitales estables y puedan enlazarse desde QR impresos.
 - PokeAPI enriquezca los datos verificables, pero nunca sea necesaria para leer el contenido editorial.
 - La app pase lint, TypeScript, tests unitarios, tests de interfaz, build y pruebas E2E móviles/escritorio.
-- Exista una URL de producción con soporte de deep links.
+- El artefacto quede preparado para una URL de producción con soporte de deep links, sin desplegarlo mientras el propietario mantenga la restricción de entrega local.
 
 ## 3. Reglas inmutables de ejecución
 
@@ -59,7 +59,7 @@ La app estará terminada cuando:
 9. **Spoilers explícitos.** Todo enlace o bloque se etiqueta como `sin spoilers`, `mecánicas` o `guía`.
 10. **Cambios de alcance documentados.** Si nueva evidencia obliga a variar el plan, se modifica primero este archivo y se explica la razón.
 
-## 4. Diagnóstico de partida
+## 4. Diagnóstico de partida (histórico)
 
 ### Implementado
 
@@ -70,7 +70,7 @@ La app estará terminada cuando:
 - Ficha básica con sprite, tipos, estadísticas y nombres.
 - Cliente PokeAPI con caché TTL.
 
-### Pendiente funcional
+### Pendiente funcional al inicio (ya resuelto)
 
 - Favoritos reales.
 - Comparación real.
@@ -79,7 +79,7 @@ La app estará terminada cuando:
 - Manuales, recursos digitales, búsqueda editorial y deep links.
 - Despliegue y soporte de rutas directas.
 
-### Fallos que bloquean nuevas funcionalidades
+### Fallos de partida (ya resueltos)
 
 - Las interfaces TypeScript mínimas no recortan el JSON en ejecución; se cachean respuestas completas de cientos de KB.
 - Los errores de cuota de almacenamiento se silencian.
@@ -229,9 +229,9 @@ PMD y los cuatro spin-offs no tienen un contexto de juego equivalente en PokeAPI
 | 4 | Completada | Filtros sobre todo Gen I–V sin ráfagas de red. |
 | 5 | Completada | Motor histórico y recursos `R-01/R-02`. |
 | 6 | Completada | Cinco fichas de saga principal. |
-| 7 | En curso (dos fichas PMD, Ranger y Dash completados) | Dos fichas PMD, cuatro minifichas y `R-03…R-06`. |
-| 8 | Pendiente | QR y vínculo bidireccional con el manual físico. |
-| 9 | Pendiente | Accesibilidad, offline, E2E, despliegue y cierre. |
+| 7 | Completada | Dos fichas PMD, cuatro minifichas y `R-03…R-06`. |
+| 8 | Completada en local | Vínculo bidireccional y 17 rutas cortas; URL/QR físicos aplazados hasta disponer de HTTPS. |
+| 9 | Completada en local | Accesibilidad, offline, PWA, E2E, fallbacks y cierre documental; sin despliegue remoto. |
 
 ### Fase 0 — Congelar la fuente y crear la red de seguridad
 
@@ -569,6 +569,19 @@ Las pruebas unitarias usan fixtures locales. Un smoke test real de PokeAPI puede
 - **Fase 8, punto 8 aplazado — prueba física de QR:** depende de los QR HTTPS no emitidos. El alcance local de la fase queda terminado; sus dos criterios remotos (origen HTTPS y cámara real) permanecen expresamente pendientes sin bloquear el cierre local.
 - **Fase 9, punto 1 cerrado — resiliencia:** Error Boundary global con recuperación, 404 general y editorial, aviso reactivo de desconexión y conservación de los reintentos aislados de ficha, Favoritos, Comparar y exploradores.
 - **Verificación de resiliencia:** 222 pruebas automatizadas y `npm run check` correcto; al cortar la red una lección cargada sigue visible y aparece el aviso offline, el 404 general resuelve correctamente a 390×844, ancho 390/390 y cero errores de consola.
-- **Restricción de entrega:** por instrucción del usuario no se hará ningún despliegue remoto. Los puntos de las fases 8–9 que exijan un dominio HTTPS o publicar hosting quedarán sin ejecutar salvo autorización posterior; el resto se implementará y verificará en local.
+- **Fase 9, punto 2 cerrado — identidad:** documento en español con título, descripción, colores de navegador, favicon e icono vectorial propios.
+- **Verificación de identidad:** metadata evaluada en el build real a 390×844, ancho 390/390 y cero errores de consola; 224 pruebas automatizadas y `npm run check` correcto.
+- **Fase 9, puntos 3–4 cerrados — superficie y bundle:** `/demo` ya no existe en producción y todas las páginas se cargan de forma diferida.
+- **Verificación de bundle:** el JS inicial baja de 455,03 kB a 343,51 kB (gzip 143,32 → 110,47 kB), un 22,9 % menos comprimido; `/demo` termina en el 404 propio y 225 pruebas quedan verdes.
+- **Fase 9, punto 5 cerrado — accesibilidad:** salto al contenido, marca enlazada sin `h1` duplicado, foco visible, targets táctiles y regla global de movimiento reducido.
+- **Verificación de accesibilidad:** teclado, un único `h1`, targets mínimos de 54 px/44 px y ausencia de overflow comprobados en 390×844 y 1280×900; 226 pruebas y `npm run check` correctos.
+- **Fase 9, punto 6 cerrado — PWA/offline:** manifiesto en español, icono estable, worker registrado solo en producción, versión de caché derivada del build y precaché de todos los chunks, snapshots y contenido editorial.
+- **Verificación offline:** tras corregir el matching de respuestas con `Vary`, una recarga directa sin red de `/manuales/recursos/r-01` muestra la tabla completa a 390×844 sin peticiones fallidas, errores ni overflow; 228 pruebas y `npm run check` correctos.
+- **Fase 9, punto 7 cerrado localmente — fallback SPA:** el build emite `_redirects`, `404.html` idéntico a `index.html` y `_headers` para impedir que `sw.js` quede obsoleto. No se elige ni publica un proveedor remoto.
+- **Fase 9, punto 8 cerrado — E2E:** producción local verificada en 390×844 y 1280×900 con navegación, búsqueda, ficha, favorito, Favoritos, Comparar, filtros, manuales, recursos y ruta QR corta.
+- **Verificación E2E:** 14 recorridos verdes, PokeAPI real en ficha/Favoritos/Comparar, cero errores de consola, un `h1` y cero overflow en cada vista.
+- **Fase 9, punto 9 cerrado — documentación:** `APP_STATE.md`, README y este registro reflejan el estado real, la fuente de 156 páginas y la restricción de entrega.
+- **Verificación final local:** 55 archivos, 229 pruebas, snapshots, lint, TypeScript y build correctos. Las fases 0–9 quedan terminadas dentro del alcance local.
+- **Restricción de entrega:** por instrucción del usuario no se hará ningún despliegue remoto. Solo permanecen aplazados la URL HTTPS canónica, los QR absolutos y su prueba física con cámara/teléfono.
 
-La próxima acción es el segundo punto de la **Fase 9**: identidad HTML en español, título, metadata, iconos y favicon propios.
+No queda una acción local pendiente del plan. El siguiente hito necesita una decisión externa de dominio/hosting; no debe inventarse ni ejecutarse de forma automática.
