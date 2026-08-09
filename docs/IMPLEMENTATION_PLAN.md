@@ -557,6 +557,9 @@ Las pruebas unitarias usan fixtures locales. Un smoke test real de PokeAPI puede
 - **Fase 8, punto 1 aplazado — URL canónica:** no se inventa un dominio ni se despliega por la restricción expresa de entrega local; los QR absolutos HTTPS no se emitirán hasta disponer de un origen real.
 - **Fase 8, punto 2 cerrado — rutas cortas:** seis aliases `/r/r-01…r-06` y once aliases de juego resuelven a rutas editoriales sin usar páginas como identidad; los códigos desconocidos terminan en el 404 del manual.
 - **Verificación de rutas cortas:** 181 pruebas automatizadas y `npm run check` correcto; carga directa de `/r/r-04` redirige al kit PMD a 390×844 con ancho 390/390, y `/r/no-existe` muestra el 404 propio sin errores de consola.
+- **Fase 8, punto 3 aplazado — QR:** no se emiten QR absolutos mientras no exista el origen HTTPS canónico; se evita publicar códigos provisionales con localhost o una identidad inestable.
+- **Fase 8, punto 4 cerrado — referencias físicas:** los 29 artículos quedan cubiertos por una prueba de integridad contra la edición `ds-156-v1`; todas las páginas son válidas y coinciden con navegación. El componente agrupa rangos discontinuos correctamente.
+- **Verificación de referencias:** 211 pruebas automatizadas y `npm run check` correcto; R-02 muestra `49–54 y 153–154` a 390×844 con ancho 390/390 y cero errores de consola.
 - **Restricción de entrega:** por instrucción del usuario no se hará ningún despliegue remoto. Los puntos de las fases 8–9 que exijan un dominio HTTPS o publicar hosting quedarán sin ejecutar salvo autorización posterior; el resto se implementará y verificará en local.
 
-La próxima acción es el siguiente punto local de la **Fase 8**: auditar y completar las referencias físicas en todos los artículos antes de consolidar los enlaces de vuelta.
+La próxima acción es el siguiente punto local de la **Fase 8**: consolidar y verificar enlaces de vuelta entre recurso, lección, juego y Pokémon.
