@@ -6,6 +6,7 @@ import { getPublishedManualArticle } from './content/articles'
 import { ManualArticleContent } from './components/ManualArticleContent'
 import { ReadingProgressControls } from './progress/ReadingProgressControls'
 import { ManualJourneyLinks } from './ManualJourneyLinks'
+import { SpoilerGate } from './spoilers/SpoilerGate'
 
 export function ManualEntryPage() {
   const location = useLocation()
@@ -15,7 +16,7 @@ export function ManualEntryPage() {
   const adjacent = getAdjacentManualEntries(location.pathname)
 
   return (
-    <>
+    <SpoilerGate level={article.spoilerLevel} title={article.title}>
       <ManualArticleContent article={article} />
       <ManualJourneyLinks family={article.family} />
       <ReadingProgressControls key={article.path} articlePath={article.path} />
@@ -33,6 +34,6 @@ export function ManualEntryPage() {
           </Link>
         )}
       </nav>
-    </>
+    </SpoilerGate>
   )
 }

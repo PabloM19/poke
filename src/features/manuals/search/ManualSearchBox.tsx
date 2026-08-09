@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { BookOpen, Gamepad2, Search, Shapes } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { searchManuals, type ManualSearchResultKind } from './searchIndex'
+import { useSpoilerPreference } from '../spoilers/spoilerPreference'
 
 const kindConfig: Record<ManualSearchResultKind, { label: string; icon: typeof BookOpen }> = {
   article: { label: 'Lección', icon: BookOpen },
@@ -11,9 +12,10 @@ const kindConfig: Record<ManualSearchResultKind, { label: string; icon: typeof B
 }
 
 export function ManualSearchBox() {
+  const { level } = useSpoilerPreference()
   const [query, setQuery] = useState('')
   const deferredQuery = useDeferredValue(query)
-  const results = searchManuals(deferredQuery)
+  const results = searchManuals(deferredQuery, 12, level)
   const showResults = query.trim().length >= 2
 
   return (

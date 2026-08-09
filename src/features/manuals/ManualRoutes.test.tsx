@@ -2,6 +2,7 @@ import { fireEvent, render, screen, within } from '@testing-library/react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { describe, expect, it, vi } from 'vitest'
 import { GameProvider } from '@/features/games'
+import { SpoilerPreferenceProvider } from './spoilers/SpoilerPreferenceProvider'
 import { ManualsLandingPage } from '@/pages/ManualsLandingPage'
 import { ManualEntryPage } from './ManualEntryPage'
 import { ManualNotFoundPage } from './ManualNotFoundPage'
@@ -21,7 +22,7 @@ import { ConquestTacticalReminderPage } from './resources/ConquestTacticalRemind
 function renderManualRoute(path: string) {
   return render(
     <MemoryRouter initialEntries={[path]}>
-      <GameProvider><Routes>
+      <GameProvider><SpoilerPreferenceProvider initialLevel="guide"><Routes>
         <Route path="/manuales" element={<ManualsLayout />}>
           <Route index element={<ManualsLandingPage />} />
           <Route path="empezar/:tema" element={<ManualEntryPage />} />
@@ -41,7 +42,7 @@ function renderManualRoute(path: string) {
           <Route path="recursos/r-06" element={<ConquestTacticalReminderPage />} />
           <Route path="*" element={<ManualNotFoundPage />} />
         </Route>
-      </Routes></GameProvider>
+      </Routes></SpoilerPreferenceProvider></GameProvider>
     </MemoryRouter>
   )
 }

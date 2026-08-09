@@ -9,6 +9,7 @@ import { PokemonDetailPage } from '../pages/PokemonDetailPage'
 import { MorePage } from '../pages/MorePage'
 import { NotFoundPage } from '../pages/NotFoundPage'
 import { ShortManualRedirect } from '@/features/manuals/ShortManualRedirect'
+import { SpoilerGate } from '@/features/manuals/spoilers/SpoilerGate'
 
 const ManualsLayout = lazy(async () => ({
   default: (await import('@/features/manuals/ManualsLayout')).ManualsLayout,
@@ -72,6 +73,10 @@ function DeferredRoute({ children, label = 'contenido' }: { children: ReactNode;
     </Suspense>
   )
 }
+
+function MechanicsRoute({ children, label }: { children: ReactNode; label: string }) {
+  return <DeferredRoute label={label}><SpoilerGate level="mechanics" title={label}>{children}</SpoilerGate></DeferredRoute>
+}
 import { UiDemo } from '../components/ui-demo'
 
 const router = createBrowserRouter([
@@ -92,19 +97,19 @@ const router = createBrowserRouter([
           { path: 'entrenador/:tema', element: <DeferredRoute label="Manuales"><ManualEntryPage /></DeferredRoute> },
           { path: 'mundo-misterioso/:tema', element: <DeferredRoute label="Manuales"><ManualEntryPage /></DeferredRoute> },
           { path: 'otros', element: <DeferredRoute label="Manuales"><ManualEntryPage /></DeferredRoute> },
-          { path: 'juegos/:juego', element: <DeferredRoute label="Guía por juego"><MainGameGuidePage /></DeferredRoute> },
-          { path: 'juegos/equipo-rescate-azul', element: <DeferredRoute label="Equipo de Rescate Azul"><PmdGuidePage /></DeferredRoute> },
-          { path: 'juegos/exploradores-oscuridad', element: <DeferredRoute label="Exploradores de la Oscuridad"><ExplorersGuidePage /></DeferredRoute> },
-          { path: 'juegos/ranger', element: <DeferredRoute label="Pokémon Ranger"><RangerGuidePage /></DeferredRoute> },
-          { path: 'juegos/dash', element: <DeferredRoute label="Pokémon Dash"><DashGuidePage /></DeferredRoute> },
-          { path: 'juegos/link', element: <DeferredRoute label="Pokémon Link!"><LinkGuidePage /></DeferredRoute> },
-          { path: 'juegos/conquest', element: <DeferredRoute label="Pokémon Conquest"><ConquestGuidePage /></DeferredRoute> },
+          { path: 'juegos/:juego', element: <MechanicsRoute label="Guía por juego"><MainGameGuidePage /></MechanicsRoute> },
+          { path: 'juegos/equipo-rescate-azul', element: <MechanicsRoute label="Equipo de Rescate Azul"><PmdGuidePage /></MechanicsRoute> },
+          { path: 'juegos/exploradores-oscuridad', element: <MechanicsRoute label="Exploradores de la Oscuridad"><ExplorersGuidePage /></MechanicsRoute> },
+          { path: 'juegos/ranger', element: <MechanicsRoute label="Pokémon Ranger"><RangerGuidePage /></MechanicsRoute> },
+          { path: 'juegos/dash', element: <MechanicsRoute label="Pokémon Dash"><DashGuidePage /></MechanicsRoute> },
+          { path: 'juegos/link', element: <MechanicsRoute label="Pokémon Link!"><LinkGuidePage /></MechanicsRoute> },
+          { path: 'juegos/conquest', element: <MechanicsRoute label="Pokémon Conquest"><ConquestGuidePage /></MechanicsRoute> },
           { path: 'recursos/r-01', element: <DeferredRoute label="R-01"><TypeChartPage /></DeferredRoute> },
-          { path: 'recursos/r-02', element: <DeferredRoute label="R-02"><StatusReferencePage /></DeferredRoute> },
+          { path: 'recursos/r-02', element: <MechanicsRoute label="R-02 · Estados"><StatusReferencePage /></MechanicsRoute> },
           { path: 'recursos/r-03', element: <DeferredRoute label="R-03"><IconSymbolsPage /></DeferredRoute> },
-          { path: 'recursos/r-04', element: <DeferredRoute label="R-04"><PmdExplorationKitPage /></DeferredRoute> },
-          { path: 'recursos/r-05', element: <DeferredRoute label="R-05"><RangerCaptureTechniquePage /></DeferredRoute> },
-          { path: 'recursos/r-06', element: <DeferredRoute label="R-06"><ConquestTacticalReminderPage /></DeferredRoute> },
+          { path: 'recursos/r-04', element: <MechanicsRoute label="R-04 · Kit PMD"><PmdExplorationKitPage /></MechanicsRoute> },
+          { path: 'recursos/r-05', element: <MechanicsRoute label="R-05 · Captura Ranger"><RangerCaptureTechniquePage /></MechanicsRoute> },
+          { path: 'recursos/r-06', element: <MechanicsRoute label="R-06 · Táctica Conquest"><ConquestTacticalReminderPage /></MechanicsRoute> },
           { path: '*', element: <DeferredRoute label="Manuales"><ManualNotFoundPage /></DeferredRoute> },
         ],
       },

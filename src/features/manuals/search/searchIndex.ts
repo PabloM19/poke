@@ -1,6 +1,8 @@
 import { gameDefinitions, resourceDefinitions } from '../content/definitions'
 import { publishedManualArticles } from '../content/articles'
 import type { ManualBlock } from '../content/types'
+import type { SpoilerLevel } from '../content/types'
+import { canShowSpoilerLevel } from '../spoilers/spoilerPreference'
 
 export type ManualSearchResultKind = 'article' | 'game' | 'resource'
 
@@ -58,6 +60,7 @@ const searchableEntries = [
       ...article.searchTerms,
       ...article.blocks.map(blockText),
     ].join(' '),
+    spoilerLevel: article.spoilerLevel,
   })),
   ...gameDefinitions.map((game) => ({
     id: `game-${game.slug}`,
@@ -68,6 +71,7 @@ const searchableEntries = [
       : game.family === 'pmd' ? 'Juego de Mundo Misterioso' : 'Otra forma de jugar',
     path: gameDestination(game.family, game.slug),
     searchText: `${game.title} ${game.slug} ${game.version ?? ''} ${game.versionGroup ?? ''}`,
+    spoilerLevel: 'mechanics' as const,
   })),
   ...resourceDefinitions.map((resource) => ({
     id: `resource-${resource.code}`,
@@ -76,10 +80,11 @@ const searchableEntries = [
     description: 'Recurso complementario del manual',
     path: resourceDestination(resource.code),
     searchText: `${resource.code} ${resource.title}`,
+    spoilerLevel: resource.spoilerLevel,
   })),
 ]
 
-export function searchManuals(query: string, limit = 12): readonly ManualSearchResult[] {
+export function searchManuals(query: string, limit = 12, maxSpoilerLevel: SpoilerLevel = 'guide'): readonly ManualSearchResult[] {
   const normalizedQuery = normalize(query.trim())
   if (normalizedQuery.length < 2) return []
   const compactQuery = compact(query)
@@ -87,6 +92,7 @@ export function searchManuals(query: string, limit = 12): readonly ManualSearchR
 
   const results: ManualSearchResult[] = []
   for (const entry of searchableEntries) {
+    if (!canShowSpoilerLevel(maxSpoilerLevel, entry.spoilerLevel)) continue
     const title = normalize(entry.title)
     const text = normalize(entry.searchText)
     const compactText = compact(entry.searchText)

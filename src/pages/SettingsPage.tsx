@@ -23,6 +23,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { SpoilerPreferenceControl } from '@/features/manuals/spoilers/SpoilerPreferenceControl'
 
 type DefaultView = 'grid' | 'list'
 
@@ -217,6 +218,14 @@ export function SettingsPage() {
               aria-label="Alternar entre modo claro y oscuro"
             />
           </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base">Spoilers del manual</CardTitle>
+            <CardDescription>Elige el nivel máximo que puede aparecer sin una confirmación puntual.</CardDescription>
+          </CardHeader>
+          <CardContent><SpoilerPreferenceControl compact /></CardContent>
         </Card>
 
         <Card>

@@ -88,4 +88,13 @@ describe('searchManuals', () => {
   it('no devuelve ruido para consultas de una letra', () => {
     expect(searchManuals('r')).toEqual([])
   })
+
+  it('filtra por el nivel máximo de spoilers', () => {
+    expect(searchManuals('Conquest', 12, 'none').map((result) => result.path))
+      .not.toContain('/manuales/juegos/conquest')
+    expect(searchManuals('Conquest', 12, 'none').map((result) => result.path))
+      .toContain('/manuales/otros')
+    expect(searchManuals('Conquest', 12, 'mechanics')[0]).toMatchObject({ path: '/manuales/juegos/conquest' })
+    expect(searchManuals('R-01', 12, 'none')[0]).toMatchObject({ path: '/manuales/recursos/r-01' })
+  })
 })

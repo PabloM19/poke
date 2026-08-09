@@ -15,6 +15,13 @@ describe('settings', () => {
     expect(getSetting('defaultView', 'grid')).toBe('grid')
   })
 
+  it('guarda el nivel de spoilers y rechaza valores desconocidos', () => {
+    setSetting('spoilerLevel', 'mechanics')
+    expect(getSetting('spoilerLevel', 'none')).toBe('mechanics')
+    localStorage.setItem('pokeapp:spoilerLevel', '"everything"')
+    expect(getSetting('spoilerLevel', 'none')).toBe('none')
+  })
+
   it('persiste datos genéricos bajo el namespace de la app', () => {
     expect(setStored('test:value', { ok: true })).toBe(true)
 

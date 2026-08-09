@@ -3,6 +3,7 @@ import { ArrowRight, Compass, Gamepad2, Library, Map, ShieldCheck, Sparkles, Tab
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { ManualSearchBox } from '@/features/manuals/search/ManualSearchBox'
 import { ContinueReadingCard } from '@/features/manuals/progress/ContinueReadingCard'
+import { SpoilerPreferenceControl } from '@/features/manuals/spoilers/SpoilerPreferenceControl'
 
 const routes = [
   {
@@ -68,6 +69,7 @@ export function ManualsLandingPage() {
         Pokémon o Mundo Misterioso. Todo este contenido funciona sin PokeAPI.
       </p>
       <ContinueReadingCard />
+      <div className="mb-6"><SpoilerPreferenceControl /></div>
       <ManualSearchBox />
       <div className="grid gap-4 sm:grid-cols-2">
         {routes.map(({ path, title, description, pages, icon: Icon }) => (
