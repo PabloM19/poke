@@ -10,6 +10,7 @@ import { LessonCallout, LessonSteps, PhysicalReference } from '../components/Les
 import { ReadingProgressControls } from '../progress/ReadingProgressControls'
 import { ManualNotFoundPage } from '../ManualNotFoundPage'
 import { getMainGameContext, isMainGameSlug } from '@/features/games/gameCatalog'
+import { useGameContext } from '@/features/games'
 import { publishedMainGameGuides, type MainGameGuide } from './gameGuideData'
 import { GameDataExplorer } from './PearlDataExplorer'
 
@@ -47,12 +48,19 @@ function StarterSection({ guide }: { guide: MainGameGuide }) {
 
 export function MainGameGuidePage() {
   const { juego } = useParams()
+  const { game: activeGame } = useGameContext()
   const guide = isMainGameSlug(juego) ? publishedMainGameGuides.get(juego) : null
   if (!guide) return <ManualNotFoundPage />
   const game = getMainGameContext(guide.slug)
   const gymGroups = guide.gymGroups ?? [{ title: 'Las ocho Medallas', start: 0, end: guide.gyms.length }]
   return (
     <article className="space-y-10">
+      {activeGame.slug !== game.slug && (
+        <aside className="flex flex-col gap-3 rounded-[var(--radius-lg)] border border-ui-yellow-strong/25 bg-ui-yellow/35 p-4 text-sm sm:flex-row sm:items-center sm:justify-between" aria-label="Contexto de juego">
+          <p><strong>Guía de {game.shortTitle}.</strong> El juego activo es {activeGame.shortTitle}; las consultas enlazadas desde aquí mantienen el contexto de esta guía.</p>
+          <Button asChild size="sm" variant="outline" className="shrink-0"><Link to={`/manuales/juegos/${activeGame.slug}`}>Abrir guía activa</Link></Button>
+        </aside>
+      )}
       <header className="overflow-hidden rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-sm)] sm:p-8">
         <div className="mb-5 flex size-12 items-center justify-center rounded-[var(--radius-md)] bg-ui-blue text-ui-blue-strong shadow-[var(--shadow-xs)]"><Gamepad2 className="size-6" aria-hidden /></div>
         <p className="text-sm font-semibold uppercase tracking-widest text-primary">{guide.eyebrow}</p>
@@ -135,7 +143,7 @@ export function MainGameGuidePage() {
           <h3 className="font-semibold">Recursos de {game.shortTitle}</h3>
           <p className="mt-1 text-sm text-muted-foreground">{guide.resources.join(' · ')}</p>
           <div className="mt-4 flex flex-col gap-2 sm:flex-row">
-            <Button asChild><Link to="/pokedex?gen=4"><BookOpen aria-hidden />Abrir Pokédex Gen IV</Link></Button>
+            <Button asChild><Link to="/pokedex"><BookOpen aria-hidden />Abrir Pokédex de {game.shortTitle}</Link></Button>
             <Button asChild variant="outline"><Link to="/manuales/recursos/r-01">Consultar tabla de tipos</Link></Button>
           </div>
         </div>

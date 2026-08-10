@@ -13,3 +13,12 @@ export function useGameContext(): GameContextValue {
   if (value == null) throw new Error('useGameContext debe usarse dentro de GameProvider')
   return value
 }
+
+/**
+ * Permite que componentes de presentación sigan siendo renderizables de forma
+ * aislada (por ejemplo en storybooks y tests), sin crear una segunda fuente de
+ * verdad. En la aplicación siempre existe GameProvider.
+ */
+export function useOptionalGameContext(): GameContextValue | null {
+  return useContext(GameContext)
+}

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { LayoutGrid, List, Filter, X } from '@/components/icons'
+import { PageHeader } from '@/components/PageHeader'
 import { getSetting, setSetting } from '@/lib/storage'
 import { Button } from '@/components/ui/button'
 import {
@@ -28,9 +29,12 @@ import {
 } from '@/features/pokedex/filters/pokedexFilterParams'
 import { translatePokemonType } from '@/features/localization'
 import { TypeChip } from '@/features/types'
+import { useOptionalGameContext } from '@/features/games'
+import { useRegionalPokedexItems } from '@/features/pokedex/useRegionalPokedexItems'
+import { StatusState } from '@/components/ui/status-state'
 
 const CHUNK_SIZE = 24
-const TOTAL_BOUNDS = getTotalBounds(pokemonSummarySnapshot.items)
+const NATIONAL_TOTAL_BOUNDS = getTotalBounds(pokemonSummarySnapshot.items)
 const SORT_LABELS: Record<PokedexSort, string> = {
   'number-asc': 'Número Pokédex',
   'name-asc': 'Nombre A–Z',
@@ -72,28 +76,34 @@ function TypeFilterChip({ type, onRemove }: { type: PokemonTypeName; onRemove: (
 
 export function PokedexPage() {
   const [searchParams, setSearchParams] = useSearchParams()
+  const gameContext = useOptionalGameContext()
+  const game = gameContext?.game ?? null
+  const regional = useRegionalPokedexItems(game)
   const [viewMode, setViewMode] = useState<ViewMode>(() =>
     getSetting('defaultView', 'grid')
   )
   const [visibleCount, setVisibleCount] = useState(CHUNK_SIZE)
-  const filters = parsePokedexFilterParams(searchParams, TOTAL_BOUNDS)
+  const scopedItems = gameContext == null ? pokemonSummarySnapshot.items : regional.items
+  const totalBounds = scopedItems.length > 0 ? getTotalBounds(scopedItems) : NATIONAL_TOTAL_BOUNDS
+  const filters = parsePokedexFilterParams(searchParams, totalBounds)
   const { generation, minTotal, maxTotal, sort } = filters
   const primaryType = filters.types[0] ?? null
   const secondaryType = filters.types[1] ?? null
   const selectedTypes = filters.types
   const filteredItems = filterAndSortPokemon(
-    pokemonSummarySnapshot.items,
-    { generation, types: selectedTypes, minTotal, maxTotal, sort }
+    scopedItems,
+    { generation, types: selectedTypes, minTotal, maxTotal, sort },
+    (item) => regional.entryNumbers.get(item.id) ?? item.id
   )
   const visibleItems = filteredItems.slice(0, visibleCount)
   const hasMore = visibleCount < filteredItems.length
-  const hasCustomTotal = minTotal !== TOTAL_BOUNDS.min || maxTotal !== TOTAL_BOUNDS.max
+  const hasCustomTotal = minTotal !== totalBounds.min || maxTotal !== totalBounds.max
   const activeFilterCount = Number(generation != null)
     + selectedTypes.length
     + Number(hasCustomTotal)
     + Number(sort !== 'number-asc')
 
-  const canonicalSearch = serializePokedexFilterParams(filters, TOTAL_BOUNDS).toString()
+  const canonicalSearch = serializePokedexFilterParams(filters, totalBounds).toString()
   const currentSearch = searchParams.toString()
 
   useEffect(() => {
@@ -108,7 +118,7 @@ export function PokedexPage() {
 
   const updateFilters = (next: Partial<PokedexFilters>) => {
     setSearchParams(
-      serializePokedexFilterParams({ ...filters, ...next }, TOTAL_BOUNDS),
+      serializePokedexFilterParams({ ...filters, ...next }, totalBounds),
       { replace: true }
     )
     setVisibleCount(CHUNK_SIZE)
@@ -146,14 +156,28 @@ export function PokedexPage() {
     setSetting('defaultView', next)
   }, [viewMode])
 
+  const generationDescription = generation != null
+    ? ` de la Generación ${['I', 'II', 'III', 'IV', 'V'][generation - 1]}`
+    : ''
+  const pageEyebrow = gameContext == null
+    ? `${filteredItems.length} especies`
+    : regional.status === 'success'
+      ? `${filteredItems.length} especies`
+      : 'Pokédex regional'
+  const pageDescription = game == null
+    ? `${filteredItems.length} ${filteredItems.length === 1 ? 'especie' : 'especies'}${generationDescription || ' de las Generaciones I–V'}. Toca una para ver su ficha completa.`
+    : `${filteredItems.length} ${filteredItems.length === 1 ? 'especie' : 'especies'}${generationDescription} de la Pokédex regional de ${game.region} para ${game.shortTitle}. Toca una para ver su ficha completa.`
+
   return (
     <div className="page-stack">
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-ui-blue-strong">649 especies</p>
-          <h1 className="page-title mt-1">Pokédex</h1>
-        </div>
-        <div className="flex items-center gap-2">
+      <div className="relative">
+        <PageHeader
+          className="sm:pr-48"
+          eyebrow={pageEyebrow}
+          title="Pokédex"
+          description={pageDescription}
+        />
+      <div className="-mt-2 flex flex-wrap justify-end gap-2 sm:absolute sm:right-0 sm:top-0 sm:mt-0">
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" size="sm" aria-label="Abrir filtros">
@@ -173,6 +197,21 @@ export function PokedexPage() {
                   Combina generación, tipos, total de stats y orden.
                 </SheetDescription>
               </SheetHeader>
+              {activeFilterCount > 0 && (
+                <div className="mx-4 flex flex-wrap items-center gap-2" aria-label="Filtros activos en el panel">
+                  {generation != null && (
+                    <FilterChip label={`Generación ${['I', 'II', 'III', 'IV', 'V'][generation - 1]}`} onRemove={() => selectGeneration(null)} />
+                  )}
+                  {primaryType != null && (
+                    <TypeFilterChip type={primaryType} onRemove={removePrimaryType} />
+                  )}
+                  {secondaryType != null && (
+                    <TypeFilterChip type={secondaryType} onRemove={() => {
+                      updateFilters({ types: primaryType == null ? [] : [primaryType] })
+                    }} />
+                  )}
+                </div>
+              )}
               <section className="mt-6 px-4" aria-labelledby="generation-filter-title">
                 <h2 id="generation-filter-title" className="mb-3 text-sm font-semibold">Generación</h2>
                 <div className="grid grid-cols-2 gap-2">
@@ -239,8 +278,8 @@ export function PokedexPage() {
                 <input
                   id="minimum-total"
                   type="range"
-                  min={TOTAL_BOUNDS.min}
-                  max={TOTAL_BOUNDS.max}
+                  min={totalBounds.min}
+                  max={totalBounds.max}
                   value={minTotal}
                   onChange={(event) => {
                     updateFilters({ minTotal: Math.min(Number(event.target.value), maxTotal) })
@@ -251,8 +290,8 @@ export function PokedexPage() {
                 <input
                   id="maximum-total"
                   type="range"
-                  min={TOTAL_BOUNDS.min}
-                  max={TOTAL_BOUNDS.max}
+                  min={totalBounds.min}
+                  max={totalBounds.max}
                   value={maxTotal}
                   onChange={(event) => {
                     updateFilters({ maxTotal: Math.max(Number(event.target.value), minTotal) })
@@ -299,14 +338,27 @@ export function PokedexPage() {
               <LayoutGrid className="size-4" />
             )}
           </Button>
-        </div>
+      </div>
       </div>
 
-      <p className="-mt-2 text-sm leading-6 text-muted-foreground" aria-live="polite">
-        {filteredItems.length} {filteredItems.length === 1 ? 'especie' : 'especies'}{generation != null
-          ? ` de la Generación ${['I', 'II', 'III', 'IV', 'V'][generation - 1]}`
-          : ' de las Generaciones I–V'}. Toca una para ver su ficha completa.
-      </p>
+      {gameContext != null && regional.status === 'loading' && (
+        <StatusState
+          title={`Cargando la Pokédex de ${gameContext.game.shortTitle}…`}
+          description="Estamos recuperando la lista regional de PokeAPI."
+          tone="loading"
+          compact
+        />
+      )}
+      {gameContext != null && regional.status === 'error' && (
+        <StatusState
+          title="No se pudo cargar la Pokédex regional"
+          description={`Comprueba la conexión y vuelve a intentarlo para ${gameContext.game.shortTitle}.`}
+          tone="error"
+          compact
+        >
+          <Button type="button" variant="outline" onClick={regional.retry}>Reintentar</Button>
+        </StatusState>
+      )}
 
       {activeFilterCount > 0 && (
         <div className="my-3 flex flex-wrap items-center gap-2" aria-label="Filtros activos">
@@ -323,7 +375,7 @@ export function PokedexPage() {
           )}
           {hasCustomTotal && (
             <FilterChip label={`Total ${minTotal}–${maxTotal}`} onRemove={() => {
-              updateFilters({ minTotal: TOTAL_BOUNDS.min, maxTotal: TOTAL_BOUNDS.max })
+              updateFilters({ minTotal: totalBounds.min, maxTotal: totalBounds.max })
             }} />
           )}
           {sort !== 'number-asc' && (
@@ -339,7 +391,7 @@ export function PokedexPage() {
 
       {activeFilterCount === 0 && <div className="mb-4" />}
 
-      {filteredItems.length === 0 && (
+      {regional.status === 'success' && filteredItems.length === 0 && (
         <div className="rounded-[var(--radius-xl)] border border-dashed border-border bg-card p-8 text-center shadow-[var(--shadow-xs)]" role="status">
           <p className="font-medium">No hay especies con estos filtros.</p>
           <p className="mt-1 text-sm text-muted-foreground">Prueba a quitar un tipo o ampliar el rango de stats.</p>
@@ -347,17 +399,17 @@ export function PokedexPage() {
         </div>
       )}
 
-      {filteredItems.length > 0 && viewMode === 'grid' ? (
+      {regional.status === 'success' && filteredItems.length > 0 && viewMode === 'grid' ? (
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
           {visibleItems.map((item) => (
-            <PokedexCard key={item.id} item={item} layout="grid" />
+            <PokedexCard key={item.id} item={item} dexNumber={regional.entryNumbers.get(item.id)} layout="grid" />
           ))}
         </div>
-      ) : filteredItems.length > 0 ? (
+      ) : regional.status === 'success' && filteredItems.length > 0 ? (
         <ul className="flex flex-col gap-2">
           {visibleItems.map((item) => (
             <li key={item.id}>
-              <PokedexCard item={item} layout="list" />
+              <PokedexCard item={item} dexNumber={regional.entryNumbers.get(item.id)} layout="list" />
             </li>
           ))}
         </ul>

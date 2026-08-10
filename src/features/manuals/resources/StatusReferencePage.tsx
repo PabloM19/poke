@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useGameContext } from '@/features/games'
 import { PhysicalReference } from '../components/LessonBlocks'
+import { PageHeader } from '@/components/PageHeader'
 
 const persistentStatuses = [
   { name: 'Parálisis', effect: 'Reduce mucho la Velocidad y a veces impide actuar.', care: 'Antiparalizador, Cura Total o ciertos objetos y movimientos.' },
@@ -21,13 +22,12 @@ export function StatusReferencePage() {
   const { game } = useGameContext()
   return (
     <article>
-      <p className="text-sm font-semibold text-muted-foreground">R-02 · REFERENCIA DE MECÁNICAS</p>
-      <h1 className="mt-1 page-title">Estados y efectos</h1>
-      <p className="mt-3 leading-7 text-muted-foreground">Un Pokémon solo conserva un estado principal a la vez, pero puede sufrir además efectos temporales y cambios de características.</p>
-      <div className="my-5 rounded-xl border border-border bg-muted/40 p-4 text-sm">
-        <p className="font-medium">{game.title} · Generación {game.generation === 4 ? 'IV' : 'V'}</p>
-        <p className="mt-1 text-muted-foreground">Referencia pensada para los juegos principales de Nintendo DS.</p>
-      </div>
+      <PageHeader
+        eyebrow="R-02 · Referencia de mecánicas"
+        title="Estados y efectos"
+        description="Un Pokémon solo conserva un estado principal a la vez, pero puede sufrir además efectos temporales y cambios de características."
+        context={<><span className="font-semibold text-foreground">{game.title} · Generación {game.generation === 4 ? 'IV' : 'V'}</span><span> · Referencia pensada para los juegos principales de Nintendo DS.</span></>}
+      />
       <PhysicalReference reference={{ edition: 'ds-156-v1', pages: [49, 50, 51, 52, 53, 54, 153, 154] }} />
 
       <section aria-labelledby="persistent-title">

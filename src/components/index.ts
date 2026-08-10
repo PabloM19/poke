@@ -1,4 +1,5 @@
 export { PokedexCard } from './PokedexCard'
+export { PageHeader } from './PageHeader'
 export { Chip } from './ui/chip'
 export { IconButton } from './ui/icon-button'
 export { SearchField } from './ui/search-field'

@@ -34,7 +34,8 @@ export function getTotalBounds(items: readonly PokemonSummaryItem[]): TotalBound
 
 export function filterAndSortPokemon(
   items: readonly PokemonSummaryItem[],
-  filters: PokedexFilters
+  filters: PokedexFilters,
+  numberForSort: (item: PokemonSummaryItem) => number = (item) => item.id
 ): PokemonSummaryItem[] {
   const filtered = items.filter((item) => (
     (filters.generation == null || item.generationId === filters.generation)
@@ -52,7 +53,7 @@ export function filterAndSortPokemon(
       case 'total-asc':
         return left.total - right.total || left.id - right.id
       case 'number-asc':
-        return left.id - right.id
+        return numberForSort(left) - numberForSort(right) || left.id - right.id
     }
   })
 }

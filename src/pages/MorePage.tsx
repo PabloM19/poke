@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import { ChevronRight, GitCompare, Library, Settings } from '@/components/icons'
+import { ChevronRight, GitCompare, Library } from '@/components/icons'
+import { PageHeader } from '@/components/PageHeader'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
 const entries = [
@@ -15,21 +16,15 @@ const entries = [
     description: 'Pon sus estadísticas y tipos frente a frente.',
     icon: GitCompare,
   },
-  {
-    to: '/settings',
-    title: 'Ajustes',
-    description: 'Vista, datos locales, spoilers y diagnóstico.',
-    icon: Settings,
-  },
 ] as const
 
 export function MorePage() {
   return (
-    <>
-      <h1 className="page-title">Herramientas</h1>
-      <p className="mb-6 text-muted-foreground">
-        Prepara comparaciones, consulta referencias y controla los datos de la app.
-      </p>
+    <div className="page-stack">
+      <PageHeader
+        title="Herramientas"
+        description="Prepara comparaciones y consulta referencias del juego activo."
+      />
       <div className="grid gap-4 sm:grid-cols-2">
         {entries.map(({ to, title, description, icon: Icon }) => (
           <Link key={to} to={to} className="rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
@@ -48,6 +43,6 @@ export function MorePage() {
           </Link>
         ))}
       </div>
-    </>
+    </div>
   )
 }

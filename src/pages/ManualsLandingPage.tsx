@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, Compass, Gamepad2, Library, Map, ShieldCheck, Sparkles, TableProperties } from '@/components/icons'
+import { PageHeader } from '@/components/PageHeader'
 import { BentoCard, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { useGameContext } from '@/features/games'
 import { ManualSearchBox } from '@/features/manuals/search/ManualSearchBox'
 import { ContinueReadingCard } from '@/features/manuals/progress/ContinueReadingCard'
 import { SpoilerPreferenceControl } from '@/features/manuals/spoilers/SpoilerPreferenceControl'
@@ -21,6 +23,7 @@ const routes = [
     pages: '87–128',
     icon: Gamepad2,
     tone: 'blue',
+    activeGame: true,
   },
   {
     path: '/manuales/empezar/que-es-pokemon',
@@ -65,27 +68,29 @@ const routes = [
 ] as const
 
 export function ManualsLandingPage() {
+  const { game } = useGameContext()
+  const contextualRoutes = routes.map((route) => 'activeGame' in route && route.activeGame
+    ? {
+        ...route,
+        path: `/manuales/juegos/${game.slug}`,
+        description: `La guía específica de ${game.title}: recorrido, sistemas y recursos del juego activo.`,
+      }
+    : route)
+
   return (
     <div className="page-stack">
-      <BentoCard tone="lavender" className="relative overflow-hidden" data-tour="manuals-home">
-        <span className="pointer-events-none absolute -right-10 -top-16 size-44 rounded-full bg-card/40" aria-hidden />
-        <div className="relative">
-          <div className="mb-5 flex size-12 items-center justify-center rounded-[var(--radius-md)] bg-card/70 text-ui-lavender-strong shadow-[var(--shadow-xs)]">
-            <Library className="size-6" aria-hidden />
-          </div>
-          <p className="text-xs font-semibold uppercase tracking-[0.12em] text-ui-lavender-strong">Manual Nintendo DS · 156 páginas</p>
-          <h1 className="page-title mt-1">Manuales</h1>
-          <p className="mt-3 max-w-2xl text-lg leading-8 text-foreground/75">
-            Empieza por las ideas generales y elige después tu recorrido: Entrenador
-            Pokémon o Mundo Misterioso. Todo este contenido funciona sin PokeAPI.
-          </p>
-        </div>
-      </BentoCard>
+      <div data-tour="manuals-home">
+        <PageHeader
+          eyebrow="Manual Nintendo DS · 156 páginas"
+          title="Manuales"
+          description="Empieza por las ideas generales y elige después tu recorrido: Entrenador Pokémon, Mundo Misterioso o la guía de tu juego activo."
+        />
+      </div>
       <ContinueReadingCard />
       <BentoCard className="p-4"><SpoilerPreferenceControl /></BentoCard>
       <ManualSearchBox />
       <div className="grid gap-4 sm:grid-cols-2">
-        {routes.map(({ path, title, description, pages, icon: Icon, tone }) => (
+        {contextualRoutes.map(({ path, title, description, pages, icon: Icon, tone }) => (
           <Link key={path} to={path} className="rounded-[var(--radius-xl)] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
             <BentoCard tone={tone} className="interactive-clay h-full p-0 hover:-translate-y-0.5">
               <CardHeader>

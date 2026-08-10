@@ -20,6 +20,7 @@ import {
 import { useSpeciesIndex } from '@/hooks/useSpeciesIndex'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { PageHeader } from '@/components/PageHeader'
 import { Switch } from '@/components/ui/switch'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { SpoilerPreferenceControl } from '@/features/manuals/spoilers/SpoilerPreferenceControl'
@@ -200,10 +201,11 @@ export function SettingsPage() {
 
   return (
     <>
-      <h1 className="page-title">Ajustes</h1>
-      <p className="mb-6 mt-2 text-muted-foreground">
-        Controla la lectura del manual, tus preferencias de listas y los datos locales.
-      </p>
+      <PageHeader
+        title="Ajustes"
+        description="Controla la lectura del manual, tus preferencias de listas y los datos locales."
+        className="mb-6"
+      />
 
       <div className="space-y-4">
         <Card>

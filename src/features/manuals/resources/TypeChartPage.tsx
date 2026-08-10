@@ -12,7 +12,7 @@ import { translatePokemonType } from '@/features/localization'
 import { cn } from '@/lib/utils'
 import { PhysicalReference } from '../components/LessonBlocks'
 import { TypeChip } from '@/features/types'
-import { BentoCard } from '@/components/ui/card'
+import { PageHeader } from '@/components/PageHeader'
 
 function multiplierLabel(multiplier: DamageMultiplier): string {
   if (multiplier === 0.25) return '¼'
@@ -51,15 +51,12 @@ export function TypeChartPage() {
 
   return (
     <article>
-      <BentoCard tone="blue">
-        <p className="text-sm font-semibold text-ui-blue-strong">R-01 · REFERENCIA SIN SPOILERS</p>
-        <h1 className="mt-1 page-title">Tabla de tipos</h1>
-        <p className="mt-3 leading-7 text-foreground/75">Elige el tipo del movimiento atacante y busca el tipo del Pokémon defensor. Si tiene dos tipos, multiplica ambos valores: por ejemplo, 2 × 2 = 4.</p>
-      </BentoCard>
-      <div className="my-5 rounded-[var(--radius-lg)] border border-border bg-card p-4 text-sm shadow-[var(--shadow-xs)]">
-        <p className="font-medium">{game.title} · Generación {game.generation === 4 ? 'IV' : 'V'}</p>
-        <p className="mt-1 text-muted-foreground">La tabla usa las relaciones históricas del juego activo y no incluye Hada.</p>
-      </div>
+      <PageHeader
+        eyebrow="R-01 · Referencia sin spoilers"
+        title="Tabla de tipos"
+        description="Elige el tipo del movimiento atacante y busca el tipo del Pokémon defensor. Si tiene dos tipos, multiplica ambos valores: por ejemplo, 2 × 2 = 4."
+        context={<><span className="font-semibold text-foreground">{game.title} · Generación {game.generation === 4 ? 'IV' : 'V'}</span><span> · Relaciones históricas del juego activo, sin Hada.</span></>}
+      />
       <PhysicalReference reference={{ edition: 'ds-156-v1', pages: [153, 154] }} />
 
       <section className="md:hidden" aria-labelledby="mobile-chart-title">

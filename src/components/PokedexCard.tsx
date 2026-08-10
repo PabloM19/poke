@@ -13,10 +13,12 @@ function formatSpeciesId(id: number): string {
 interface PokedexCardProps {
   item: PokemonSummaryItem
   layout?: 'grid' | 'list'
+  /** Número mostrado; en una Pokédex regional no coincide necesariamente con el nacional. */
+  dexNumber?: number
   className?: string
 }
 
-export function PokedexCard({ item, layout = 'grid', className }: PokedexCardProps) {
+export function PokedexCard({ item, layout = 'grid', dexNumber, className }: PokedexCardProps) {
   const content = (
     <>
       <div className={cn(
@@ -37,7 +39,7 @@ export function PokedexCard({ item, layout = 'grid', className }: PokedexCardPro
       </div>
       <div className="min-w-0 flex-1">
         <p className="truncate text-xs font-semibold tracking-wide text-muted-foreground">
-          {formatSpeciesId(item.id)}
+          {formatSpeciesId(dexNumber ?? item.id)}
         </p>
         <p className="truncate text-base font-bold text-foreground">{item.nameEs}</p>
         <div className="mt-1 flex flex-wrap gap-1">

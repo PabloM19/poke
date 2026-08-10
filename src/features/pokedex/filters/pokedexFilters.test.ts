@@ -50,4 +50,15 @@ describe('pokedex filters', () => {
     filterAndSortPokemon(items, { ...defaults, sort: 'total-desc' })
     expect(items.slice(0, 3).map((item) => item.id)).toEqual(firstIds)
   })
+
+  it('puede ordenar por el número regional sin confundirlo con el nacional', () => {
+    const regional = [items[0], items[151], items[386]]
+    const result = filterAndSortPokemon(
+      regional,
+      defaults,
+      (item) => ({ 1: 3, 152: 1, 387: 2 }[item.id] ?? item.id),
+    )
+
+    expect(result.map((item) => item.id)).toEqual([152, 387, 1])
+  })
 })

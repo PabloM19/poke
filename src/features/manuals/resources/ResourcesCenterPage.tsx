@@ -1,7 +1,9 @@
-import { BookOpen, CalendarDays, ShieldCheck } from '@/components/icons'
+import { CalendarDays, ShieldCheck } from '@/components/icons'
 import { Link } from 'react-router-dom'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { PageHeader } from '@/components/PageHeader'
+import { useGameContext } from '@/features/games'
 import { gameDefinitions, resourceDefinitions } from '../content/definitions'
 import { manualContentRevision, manualEdition, manualSourceSha256 } from '../content/manualSource'
 import { LessonCallout, LessonSteps, PhysicalReference } from '../components/LessonBlocks'
@@ -19,19 +21,23 @@ const resourceDescriptions: Record<(typeof resourceDefinitions)[number]['code'],
 const spoilerLabels = { none: 'Sin spoilers', mechanics: 'Mecánicas', guide: 'Guía' } as const
 
 export function ResourcesCenterPage() {
+  const { game } = useGameContext()
   const gameTitles = new Map(gameDefinitions.map((game) => [game.slug, game.title]))
+  const orderedResources = [...resourceDefinitions].sort((left, right) => (
+    Number(right.relatedGames.includes(game.slug)) - Number(left.relatedGames.includes(game.slug))
+  ))
   const revised = new Intl.DateTimeFormat('es-ES', { dateStyle: 'long', timeZone: 'UTC' })
     .format(new Date(`${manualContentRevision}T12:00:00Z`))
 
   return (
     <article className="space-y-8">
-      <header className="rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-sm)] sm:p-8">
-        <div className="mb-5 flex size-12 items-center justify-center rounded-[var(--radius-md)] bg-ui-blue text-ui-blue-strong shadow-[var(--shadow-xs)]"><BookOpen className="size-6" aria-hidden /></div>
-        <p className="text-sm font-semibold uppercase tracking-widest text-primary">Consulta rápida · R-01…R-06</p>
-        <h1 className="mt-2 page-title">Centro de recursos</h1>
-        <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">El punto estable para consultar y actualizar los complementos del manual sin depender de la paginación ni reimprimir enlaces.</p>
-        <div className="mt-5 flex flex-wrap gap-2"><Badge variant="secondary">Páginas 153–156</Badge><Badge variant="secondary">Edición {manualEdition}</Badge></div>
-      </header>
+      <PageHeader
+        eyebrow="Consulta rápida · R-01…R-06"
+        title="Centro de recursos"
+        description="El punto estable para consultar y actualizar los complementos del manual sin depender de la paginación ni reimprimir enlaces."
+        context={<><span className="font-semibold text-foreground">Contexto: {game.title}</span><span> · Los recursos relacionados aparecen primero.</span></>}
+        actions={<div className="flex flex-wrap gap-2"><Badge variant="secondary">Páginas 153–156</Badge><Badge variant="secondary">Edición {manualEdition}</Badge></div>}
+      />
 
       <section aria-label="Estado de revisión" className="grid gap-3 sm:grid-cols-2">
         <Card><CardHeader><div className="mb-2 flex size-9 items-center justify-center rounded-lg bg-secondary"><CalendarDays className="size-5" aria-hidden /></div><CardTitle>Última revisión</CardTitle></CardHeader><CardContent><p className="font-medium">{revised}</p><p className="mt-1 text-xs text-muted-foreground">Fuente {manualSourceSha256.slice(0, 12)}…</p></CardContent></Card>
@@ -41,7 +47,7 @@ export function ResourcesCenterPage() {
       <section aria-labelledby="resources-title">
         <h2 id="resources-title" className="mb-3 text-xl font-semibold">Los seis recursos</h2>
         <div className="grid gap-3 sm:grid-cols-2">
-          {resourceDefinitions.map((resource) => {
+          {orderedResources.map((resource) => {
             const related = resource.relatedGames.map((slug) => gameTitles.get(slug)).filter(Boolean)
             const shortPath = `/r/${resource.code.toLowerCase()}`
             return (
