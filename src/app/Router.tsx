@@ -59,6 +59,15 @@ const EffectivenessHistoryPage = lazy(async () => ({
 const EffectivenessSessionDetailPage = lazy(async () => ({
   default: (await import('@/pages/EffectivenessSessionDetailPage')).EffectivenessSessionDetailPage,
 }))
+const EvolutionChainPage = lazy(async () => ({
+  default: (await import('@/pages/EvolutionChainPage')).EvolutionChainPage,
+}))
+const EvolutionChainHistoryPage = lazy(async () => ({
+  default: (await import('@/pages/EvolutionChainHistoryPage')).EvolutionChainHistoryPage,
+}))
+const EvolutionChainSessionDetailPage = lazy(async () => ({
+  default: (await import('@/pages/EvolutionChainSessionDetailPage')).EvolutionChainSessionDetailPage,
+}))
 const NotFoundPage = lazy(async () => ({
   default: (await import('@/pages/NotFoundPage')).NotFoundPage,
 }))
@@ -185,6 +194,9 @@ const router = createBrowserRouter([
       { path: 'more/juegos/es-eficaz', element: <DeferredRoute label="¿Es eficaz?"><EffectivenessQuizPage /></DeferredRoute> },
       { path: 'more/juegos/es-eficaz/historial', element: <DeferredRoute label="Historial de ¿Es eficaz?"><EffectivenessHistoryPage /></DeferredRoute> },
       { path: 'more/juegos/es-eficaz/historial/:sessionId', element: <DeferredRoute label="Intento de ¿Es eficaz?"><EffectivenessSessionDetailPage /></DeferredRoute> },
+      { path: 'more/juegos/cadena-evolutiva', element: <DeferredRoute label="Cadena evolutiva"><EvolutionChainPage /></DeferredRoute> },
+      { path: 'more/juegos/cadena-evolutiva/historial', element: <DeferredRoute label="Historial de Cadena evolutiva"><EvolutionChainHistoryPage /></DeferredRoute> },
+      { path: 'more/juegos/cadena-evolutiva/historial/:sessionId', element: <DeferredRoute label="Intento de Cadena evolutiva"><EvolutionChainSessionDetailPage /></DeferredRoute> },
       { path: '*', element: <DeferredRoute label="Página"><NotFoundPage /></DeferredRoute> },
     ],
   },
