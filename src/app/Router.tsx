@@ -23,6 +23,33 @@ const PokemonDetailPage = lazy(async () => ({
 const MorePage = lazy(async () => ({
   default: (await import('@/pages/MorePage')).MorePage,
 }))
+const TypeDuelPage = lazy(async () => ({
+  default: (await import('@/pages/TypeDuelPage')).TypeDuelPage,
+}))
+const TypeDuelHistoryPage = lazy(async () => ({
+  default: (await import('@/pages/TypeDuelHistoryPage')).TypeDuelHistoryPage,
+}))
+const TypeDuelSessionDetailPage = lazy(async () => ({
+  default: (await import('@/pages/TypeDuelSessionDetailPage')).TypeDuelSessionDetailPage,
+}))
+const GuessPokemonPage = lazy(async () => ({
+  default: (await import('@/pages/GuessPokemonPage')).GuessPokemonPage,
+}))
+const GuessPokemonHistoryPage = lazy(async () => ({
+  default: (await import('@/pages/GuessPokemonHistoryPage')).GuessPokemonHistoryPage,
+}))
+const GuessPokemonSessionDetailPage = lazy(async () => ({
+  default: (await import('@/pages/GuessPokemonSessionDetailPage')).GuessPokemonSessionDetailPage,
+}))
+const TypeGuessPage = lazy(async () => ({
+  default: (await import('@/pages/TypeGuessPage')).TypeGuessPage,
+}))
+const TypeGuessHistoryPage = lazy(async () => ({
+  default: (await import('@/pages/TypeGuessHistoryPage')).TypeGuessHistoryPage,
+}))
+const TypeGuessSessionDetailPage = lazy(async () => ({
+  default: (await import('@/pages/TypeGuessSessionDetailPage')).TypeGuessSessionDetailPage,
+}))
 const NotFoundPage = lazy(async () => ({
   default: (await import('@/pages/NotFoundPage')).NotFoundPage,
 }))
@@ -137,6 +164,15 @@ const router = createBrowserRouter([
       { path: 'settings', element: <DeferredRoute label="Ajustes"><SettingsPage /></DeferredRoute> },
       { path: 'compare', element: <DeferredRoute label="Comparador"><ComparePage /></DeferredRoute> },
       { path: 'more', element: <DeferredRoute label="Más opciones"><MorePage /></DeferredRoute> },
+      { path: 'more/juegos/duelo-tipos', element: <DeferredRoute label="Duelo de tipos"><TypeDuelPage /></DeferredRoute> },
+      { path: 'more/juegos/duelo-tipos/historial', element: <DeferredRoute label="Historial de Duelo de tipos"><TypeDuelHistoryPage /></DeferredRoute> },
+      { path: 'more/juegos/duelo-tipos/historial/:sessionId', element: <DeferredRoute label="Intento de Duelo de tipos"><TypeDuelSessionDetailPage /></DeferredRoute> },
+      { path: 'more/juegos/quien-es-ese-pokemon', element: <DeferredRoute label="¿Quién es ese Pokémon?"><GuessPokemonPage /></DeferredRoute> },
+      { path: 'more/juegos/quien-es-ese-pokemon/historial', element: <DeferredRoute label="Historial de ¿Quién es ese Pokémon?"><GuessPokemonHistoryPage /></DeferredRoute> },
+      { path: 'more/juegos/quien-es-ese-pokemon/historial/:sessionId', element: <DeferredRoute label="Intento de ¿Quién es ese Pokémon?"><GuessPokemonSessionDetailPage /></DeferredRoute> },
+      { path: 'more/juegos/adivina-el-tipo', element: <DeferredRoute label="Adivina el tipo"><TypeGuessPage /></DeferredRoute> },
+      { path: 'more/juegos/adivina-el-tipo/historial', element: <DeferredRoute label="Historial de Adivina el tipo"><TypeGuessHistoryPage /></DeferredRoute> },
+      { path: 'more/juegos/adivina-el-tipo/historial/:sessionId', element: <DeferredRoute label="Intento de Adivina el tipo"><TypeGuessSessionDetailPage /></DeferredRoute> },
       { path: '*', element: <DeferredRoute label="Página"><NotFoundPage /></DeferredRoute> },
     ],
   },

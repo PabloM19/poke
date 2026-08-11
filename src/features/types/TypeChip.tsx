@@ -16,6 +16,7 @@ interface TypeChipProps {
   pressed?: boolean
   suffix?: string
   ariaLabel?: string
+  disabled?: boolean
 }
 
 type TypeChipCssProperties = CSSProperties & {
@@ -35,6 +36,7 @@ export function TypeChip({
   pressed,
   suffix,
   ariaLabel,
+  disabled = false,
 }: TypeChipProps) {
   const definition = getPokemonTypeStyle(type)
   const Component: ElementType = as
@@ -53,6 +55,7 @@ export function TypeChip({
       data-variant={variant}
       aria-pressed={as === 'button' ? pressed : undefined}
       aria-label={ariaLabel}
+      disabled={as === 'button' ? disabled : undefined}
       onClick={onClick}
       style={style}
       className={cn(
@@ -60,7 +63,7 @@ export function TypeChip({
         'data-[variant=solid]:border-transparent data-[variant=solid]:bg-[var(--type-solid)] data-[variant=solid]:text-[var(--type-foreground)]',
         'data-[variant=soft]:border-[color-mix(in_srgb,var(--type-base)_30%,var(--border))] data-[variant=soft]:bg-[color-mix(in_srgb,var(--type-base)_14%,var(--card))] data-[variant=soft]:text-foreground',
         size === 'compact' ? 'min-h-6 px-2 text-[0.6875rem]' : 'min-h-8 px-3 text-xs',
-        interactive && 'interactive-clay min-h-11 cursor-pointer px-4 hover:border-[var(--type-base)] focus-visible:outline-none aria-pressed:ring-2 aria-pressed:ring-[var(--type-base)] aria-pressed:ring-offset-2',
+        interactive && 'interactive-clay min-h-11 cursor-pointer px-4 hover:border-[var(--type-base)] focus-visible:outline-none aria-pressed:ring-2 aria-pressed:ring-[var(--type-base)] aria-pressed:ring-offset-2 disabled:pointer-events-none disabled:opacity-55',
         !definition && 'border-border bg-secondary text-secondary-foreground',
         className
       )}

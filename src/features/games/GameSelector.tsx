@@ -16,6 +16,7 @@ const generationLabels: Record<4 | 5, string> = { 4: 'Generación IV', 5: 'Gener
 
 interface GameSelectorProps {
   className?: string
+  triggerLabel?: string
 }
 
 /**
@@ -23,7 +24,7 @@ interface GameSelectorProps {
  * not the global header, while the GameContext remains the single source of
  * truth for Pokédex, Manuales and game-dependent tools.
  */
-export function GameSelector({ className }: GameSelectorProps) {
+export function GameSelector({ className, triggerLabel }: GameSelectorProps) {
   const { game, setGame, isAll } = useGameContext()
   const activeLabel = isAll ? 'Todos los juegos' : game.title
   const generations = ([4, 5] as const).map((generation) => ({
@@ -45,7 +46,7 @@ export function GameSelector({ className }: GameSelectorProps) {
         >
           <span className="flex min-w-0 items-center gap-2">
             <Gamepad2 className="size-4 shrink-0 text-muted-foreground" aria-hidden />
-            <span className="min-w-0 truncate font-semibold">{isAll ? 'Todos' : game.title}</span>
+            <span className="min-w-0 truncate font-semibold">{triggerLabel ?? (isAll ? 'Todos' : game.title)}</span>
           </span>
           <span className="flex shrink-0 items-center gap-1.5 text-xs text-muted-foreground">
             {!isAll && <span className="hidden min-[380px]:inline">Gen {game.generation === 4 ? 'IV' : 'V'}</span>}

@@ -16,7 +16,7 @@ const mobileItems = [
     to: '/more',
     label: 'Herramientas',
     icon: GitCompare,
-    activePaths: ['/more', '/compare', '/settings'],
+    activePaths: ['/more', '/compare'],
   },
   { to: '/favorites', label: 'Guardados', icon: Heart },
 ] as const
