@@ -8,6 +8,7 @@ export {
   Warning,
   Orange as Apple,
   ArrowLeft,
+  ArrowDown,
   ArrowRight,
   ArrowUpRight as MoveUpRight,
   BookOpen,

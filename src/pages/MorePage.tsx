@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ChevronRight, GitCompare, Library, Question, Shapes, Sword, type PhosphorIcon } from '@/components/icons'
+import { ChevronRight, CircleDot, GitCompare, Library, Question, Shapes, Sword, type PhosphorIcon } from '@/components/icons'
 import { PageHeader } from '@/components/PageHeader'
 import { BentoCard, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
@@ -32,6 +32,13 @@ const gameEntries: readonly ToolEntry[] = [
     description: 'Observa el Pokémon y descubre su tipo o combinación de tipos.',
     icon: Shapes,
     tone: 'blue',
+  },
+  {
+    to: '/more/juegos/es-eficaz',
+    title: '¿Es eficaz?',
+    description: 'Aprende cómo interactúan los tipos entre sí.',
+    icon: CircleDot,
+    tone: 'green',
   },
 ]
 

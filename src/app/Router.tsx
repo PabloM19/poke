@@ -50,6 +50,15 @@ const TypeGuessHistoryPage = lazy(async () => ({
 const TypeGuessSessionDetailPage = lazy(async () => ({
   default: (await import('@/pages/TypeGuessSessionDetailPage')).TypeGuessSessionDetailPage,
 }))
+const EffectivenessQuizPage = lazy(async () => ({
+  default: (await import('@/pages/EffectivenessQuizPage')).EffectivenessQuizPage,
+}))
+const EffectivenessHistoryPage = lazy(async () => ({
+  default: (await import('@/pages/EffectivenessHistoryPage')).EffectivenessHistoryPage,
+}))
+const EffectivenessSessionDetailPage = lazy(async () => ({
+  default: (await import('@/pages/EffectivenessSessionDetailPage')).EffectivenessSessionDetailPage,
+}))
 const NotFoundPage = lazy(async () => ({
   default: (await import('@/pages/NotFoundPage')).NotFoundPage,
 }))
@@ -173,6 +182,9 @@ const router = createBrowserRouter([
       { path: 'more/juegos/adivina-el-tipo', element: <DeferredRoute label="Adivina el tipo"><TypeGuessPage /></DeferredRoute> },
       { path: 'more/juegos/adivina-el-tipo/historial', element: <DeferredRoute label="Historial de Adivina el tipo"><TypeGuessHistoryPage /></DeferredRoute> },
       { path: 'more/juegos/adivina-el-tipo/historial/:sessionId', element: <DeferredRoute label="Intento de Adivina el tipo"><TypeGuessSessionDetailPage /></DeferredRoute> },
+      { path: 'more/juegos/es-eficaz', element: <DeferredRoute label="¿Es eficaz?"><EffectivenessQuizPage /></DeferredRoute> },
+      { path: 'more/juegos/es-eficaz/historial', element: <DeferredRoute label="Historial de ¿Es eficaz?"><EffectivenessHistoryPage /></DeferredRoute> },
+      { path: 'more/juegos/es-eficaz/historial/:sessionId', element: <DeferredRoute label="Intento de ¿Es eficaz?"><EffectivenessSessionDetailPage /></DeferredRoute> },
       { path: '*', element: <DeferredRoute label="Página"><NotFoundPage /></DeferredRoute> },
     ],
   },

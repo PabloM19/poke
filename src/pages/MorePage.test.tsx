@@ -11,6 +11,7 @@ describe('Herramientas', () => {
     expect(within(games).getByRole('link', { name: /Duelo de tipos/ })).toHaveAttribute('href', '/more/juegos/duelo-tipos')
     expect(within(games).getByRole('link', { name: /¿Quién es ese Pokémon?/ })).toHaveAttribute('href', '/more/juegos/quien-es-ese-pokemon')
     expect(within(games).getByRole('link', { name: /Adivina el tipo/ })).toHaveAttribute('href', '/more/juegos/adivina-el-tipo')
+    expect(within(games).getByRole('link', { name: /¿Es eficaz?/ })).toHaveAttribute('href', '/more/juegos/es-eficaz')
 
     const utilities = screen.getByRole('region', { name: 'Utilidades' })
     expect(within(utilities).getByRole('link', { name: /Comparar Pokémon/ })).toHaveAttribute('href', '/compare')
