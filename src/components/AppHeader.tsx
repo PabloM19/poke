@@ -1,5 +1,4 @@
 import { AppNav } from './AppNav'
-import { GameSelector } from '@/features/games'
 import { Link } from 'react-router-dom'
 import { Settings } from '@/components/icons'
 
@@ -22,7 +21,6 @@ export function AppHeader() {
           <span className="hidden min-[360px]:inline">PokéApp</span>
         </Link>
         <div className="flex min-w-0 items-center gap-2">
-          <GameSelector />
           <div className="hidden lg:block">
             <AppNav variant="desktop" />
           </div>

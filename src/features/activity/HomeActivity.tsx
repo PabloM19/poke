@@ -19,7 +19,7 @@ function LatestActivityCard({ activity }: { activity: RecentActivity }) {
     <Link
       to={activity.route}
       state={isManual ? { restoreReading: true } : undefined}
-      className="block rounded-[var(--radius-xl)] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+      className="interactive-clay block rounded-[var(--radius-xl)] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
     >
       <BentoCard tone="green" className="interactive-clay relative overflow-hidden hover:-translate-y-0.5">
         <span className="pointer-events-none absolute -right-8 -top-12 size-32 rounded-full bg-card/35" aria-hidden />
@@ -90,7 +90,7 @@ function Recommendations() {
       <h2 id="recommendations-title" className="mb-3 mt-1 text-xl font-bold">Te recomendamos</h2>
       <div className="grid gap-3 sm:grid-cols-2">
         {recommendations.map(({ path, title, description, icon: Icon, tone }) => (
-          <Link key={path} to={path} className="rounded-[var(--radius-xl)] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+          <Link key={path} to={path} className="interactive-clay block h-full rounded-[var(--radius-xl)] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
             <BentoCard tone={tone} className="interactive-clay h-full p-4 hover:-translate-y-0.5">
               <div className="flex items-start justify-between gap-3"><Icon className="size-5 text-muted-foreground" aria-hidden /><ArrowRight className="size-4 text-muted-foreground" aria-hidden /></div>
               <h3 className="mt-4 font-bold">{title}</h3>

@@ -78,7 +78,7 @@ export function MainGameGuidePage() {
         {[
           ['#iniciales', 'Iniciales'], ['#rival', 'Rival'], ['#medallas', 'Medallas'], [`#recursos-${guide.slug}`, 'Recursos'],
         ].map(([href, label]) => (
-          <a key={href} href={href} className="flex min-h-11 items-center justify-between rounded-lg border border-border bg-card px-3 text-sm font-medium outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring">
+          <a key={href} href={href} className="interactive-clay flex min-h-11 items-center justify-between rounded-lg border border-border bg-card px-3 text-sm font-medium outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring">
             {label}<ChevronRight className="size-4 text-muted-foreground" aria-hidden />
           </a>
         ))}

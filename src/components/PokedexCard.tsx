@@ -72,7 +72,7 @@ export function PokedexCard({ item, layout = 'grid', dexNumber, className }: Pok
         <Link
           to={`/pokemon/${item.id}`}
           className={cn(
-            'block focus:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+            'interactive-clay block rounded-[var(--radius-md)] focus:outline-none focus-visible:ring-2 focus-visible:ring-ring',
             layout === 'grid' && 'flex h-full w-full flex-col items-center gap-2 pt-10',
             layout === 'list' && 'flex flex-1 flex-row items-center gap-3'
           )}

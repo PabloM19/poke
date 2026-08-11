@@ -27,7 +27,7 @@ export function MorePage() {
       />
       <div className="grid gap-4 sm:grid-cols-2">
         {entries.map(({ to, title, description, icon: Icon }) => (
-          <Link key={to} to={to} className="rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+          <Link key={to} to={to} className="interactive-clay block h-full rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
             <Card className="h-full transition-colors hover:bg-accent/50">
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between gap-3">

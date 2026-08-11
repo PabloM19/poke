@@ -82,7 +82,7 @@ export function FavoritePokemonCard({ speciesId }: { speciesId: number }) {
             </Button>
           </div>
         ) : (
-          <Link to={`/pokemon/${speciesId}`} className="flex w-full flex-1 flex-col items-center rounded-lg pt-4 outline-none focus-visible:ring-2 focus-visible:ring-ring" aria-label={`Ver ficha de ${name}`}>
+          <Link to={`/pokemon/${speciesId}`} className="interactive-clay flex w-full flex-1 flex-col items-center rounded-lg pt-4 outline-none focus-visible:ring-2 focus-visible:ring-ring" aria-label={`Ver ficha de ${name}`}>
             <div className="flex size-24 items-center justify-center rounded-full bg-secondary">
               {data?.spriteUrl ? (
                 <img src={data.spriteUrl} alt="" className="size-24 object-contain [image-rendering:pixelated]" />

@@ -21,6 +21,8 @@ describe('AppHeader', () => {
     expect(
       screen.getByRole('navigation', { name: 'Navegación principal' })
     ).toBeInTheDocument()
-    expect(screen.getByLabelText('Juego activo')).toHaveValue('perla')
+    expect(screen.getByRole('link', { name: 'Ajustes' })).toHaveAttribute('href', '/settings')
+    expect(screen.queryByLabelText('Juego activo')).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: /Cambiar juego activo/ })).not.toBeInTheDocument()
   })
 })

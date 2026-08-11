@@ -51,7 +51,7 @@ export function ResourcesCenterPage() {
             const related = resource.relatedGames.map((slug) => gameTitles.get(slug)).filter(Boolean)
             const shortPath = `/r/${resource.code.toLowerCase()}`
             return (
-              <Link key={resource.code} to={resource.path} className="rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring">
+              <Link key={resource.code} to={resource.path} className="interactive-clay block h-full rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring">
                 <Card className="h-full gap-3 py-5 transition-colors hover:bg-accent/50">
                   <CardHeader className="px-5"><div className="mb-1 flex flex-wrap gap-2"><Badge>{resource.code}</Badge><Badge variant="secondary">{spoilerLabels[resource.spoilerLevel]}</Badge></div><CardTitle className="text-lg">{resource.title}</CardTitle></CardHeader>
                   <CardContent className="space-y-3 px-5 text-sm leading-6 text-muted-foreground"><p>{resourceDescriptions[resource.code]}</p>{related.length > 0 && <p><strong className="text-foreground">Relacionado:</strong> {related.join(' · ')}</p>}<p className="font-mono text-xs">Ruta corta: {shortPath}</p></CardContent>

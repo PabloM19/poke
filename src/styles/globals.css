@@ -232,6 +232,7 @@ textarea {
     color: var(--primary);
     font-size: 0.875rem;
     font-weight: 600;
+    outline: none;
     transition:
       background-color var(--duration-fast) var(--ease-out),
       transform var(--duration-fast) var(--ease-out);

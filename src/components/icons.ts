@@ -14,6 +14,7 @@ export {
   BookBookmark as BookMarked,
   Calendar as CalendarDays,
   CaretDown as ChevronDownIcon,
+  CaretUp as ChevronUpIcon,
   CaretRight as ChevronRight,
   Check,
   Circle,

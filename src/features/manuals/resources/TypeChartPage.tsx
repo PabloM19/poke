@@ -13,6 +13,7 @@ import { cn } from '@/lib/utils'
 import { PhysicalReference } from '../components/LessonBlocks'
 import { TypeChip } from '@/features/types'
 import { PageHeader } from '@/components/PageHeader'
+import { SelectField } from '@/components/ui/select-field'
 
 function multiplierLabel(multiplier: DamageMultiplier): string {
   if (multiplier === 0.25) return '¼'
@@ -63,14 +64,13 @@ export function TypeChartPage() {
         <h2 id="mobile-chart-title" className="mb-3 text-xl font-semibold">Consulta compacta</h2>
         <label className="block text-sm font-medium" htmlFor="attacking-type">
           Tipo del movimiento atacante
-          <select
+          <SelectField
             id="attacking-type"
             value={attacker}
             onChange={(event) => setSelectedAttacker(event.target.value)}
-            className="mt-2 h-11 w-full rounded-[var(--radius-md)] border border-input bg-card px-3 shadow-[var(--shadow-xs)]"
           >
             {typeNames.map((type) => <option key={type} value={type}>{translatePokemonType(type)}</option>)}
-          </select>
+          </SelectField>
         </label>
         <div className="mt-4 overflow-hidden rounded-[var(--radius-lg)] border border-border bg-card shadow-[var(--shadow-xs)]">
           <table className="w-full text-sm">
@@ -108,8 +108,8 @@ export function TypeChartPage() {
         <span><strong className="text-foreground">×0</strong> sin efecto</span>
       </div>
       <nav className="mt-8 flex flex-wrap gap-3" aria-label="Recursos relacionados">
-        <Link className="inline-flex min-h-11 items-center rounded-[var(--radius-sm)] px-3 text-sm font-semibold text-primary hover:bg-accent" to="/manuales/entrenador/combate">Volver a Comprender el combate</Link>
-        <Link className="inline-flex min-h-11 items-center rounded-[var(--radius-sm)] px-3 text-sm font-semibold text-primary hover:bg-accent" to="/manuales/recursos/r-02">Abrir R-02 · Estados</Link>
+        <Link className="manual-nav-link" to="/manuales/entrenador/combate">Volver a Comprender el combate</Link>
+        <Link className="manual-nav-link" to="/manuales/recursos/r-02">Abrir R-02 · Estados</Link>
       </nav>
     </article>
   )

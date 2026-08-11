@@ -52,7 +52,7 @@ export function ConquestGuidePage() {
 
       <LessonCallout kind="warning" title="No pierdas de vista la misión">El error típico es perseguir daño e ignorar el objetivo del mapa. Comprueba también los turnos que quedan.</LessonCallout>
       <LessonCallout kind="note">La gestión de reinos se amplía gradualmente. Aprende primero objetivo, movimiento y acción.</LessonCallout>
-      <Link to="/manuales/recursos/r-06" className="block rounded-xl border border-border bg-card p-4 outline-none transition-colors hover:bg-accent/50 focus-visible:ring-2 focus-visible:ring-ring"><span className="font-semibold">Abrir R-06 · Recordatorio táctico</span><span className="mt-1 block text-sm leading-6 text-muted-foreground">Checklist de objetivo, turnos, alcance, terreno y orden de activación.</span></Link>
+      <Link to="/manuales/recursos/r-06" className="interactive-clay block rounded-xl border border-border bg-card p-4 outline-none transition-colors hover:bg-accent/50 focus-visible:ring-2 focus-visible:ring-ring"><span className="font-semibold">Abrir R-06 · Recordatorio táctico</span><span className="mt-1 block text-sm leading-6 text-muted-foreground">Checklist de objetivo, turnos, alcance, terreno y orden de activación.</span></Link>
       <PhysicalReference reference={{ edition: 'ds-156-v1', pages: [151, 152] }} />
       <ReadingProgressControls articlePath="/manuales/juegos/conquest" />
     </article>

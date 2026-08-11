@@ -37,7 +37,7 @@ export function ManualJourneyLinks({ family }: { family: ManualContentFamily }) 
       <h2 className="mb-3 text-xl font-semibold">Continúa en una guía</h2>
       <div className="grid gap-3 sm:grid-cols-2">
         {links.map((item) => (
-          <Link key={item.path} to={item.path} className="rounded-[var(--radius-lg)] outline-none focus-visible:ring-2 focus-visible:ring-ring">
+          <Link key={item.path} to={item.path} className="interactive-clay block h-full rounded-[var(--radius-lg)] outline-none focus-visible:ring-2 focus-visible:ring-ring">
             <Card className="h-full gap-2 py-4 transition-colors hover:bg-accent/50">
               <CardHeader className="flex-row items-center justify-between px-4"><CardTitle className="text-base">{item.title}</CardTitle><ArrowRight className="size-4 text-muted-foreground" aria-hidden /></CardHeader>
               <CardContent className="px-4 text-sm leading-5 text-muted-foreground">{item.description}</CardContent>

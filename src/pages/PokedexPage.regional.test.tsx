@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { MemoryRouter } from 'react-router-dom'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { GameProvider, GameSelector } from '@/features/games'
+import { GameProvider } from '@/features/games'
 
 const mocks = vi.hoisted(() => ({ getRegionalPokedex: vi.fn() }))
 
@@ -31,7 +31,6 @@ function renderPage() {
   return render(
     <MemoryRouter initialEntries={['/pokedex']}>
       <GameProvider>
-        <GameSelector />
         <PokedexPage />
       </GameProvider>
     </MemoryRouter>
@@ -56,7 +55,8 @@ describe('PokedexPage con juego activo', () => {
     expect(screen.getByText('Bulbasaur')).toBeInTheDocument()
     expect(screen.getByText('Charmander')).toBeInTheDocument()
 
-    await user.selectOptions(screen.getByLabelText('Juego activo'), 'negro-2')
+    await user.click(screen.getByRole('button', { name: /Cambiar juego activo/ }))
+    await user.click(screen.getByRole('button', { name: 'Pokémon Negro 2' }))
 
     expect(await screen.findByText('3 especies de la Pokédex regional de Teselia para Negro 2. Toca una para ver su ficha completa.')).toBeInTheDocument()
     expect(screen.getByText('Pikachu')).toBeInTheDocument()

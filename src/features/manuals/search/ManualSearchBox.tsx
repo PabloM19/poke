@@ -41,7 +41,7 @@ export function ManualSearchBox() {
                 const Icon = config.icon
                 return (
                   <li key={`${result.kind}-${result.id}`}>
-                    <Link to={result.path} className="flex min-h-14 items-start gap-3 rounded-[var(--radius-sm)] p-3 outline-none transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring">
+                    <Link to={result.path} className="interactive-clay flex min-h-14 items-start gap-3 rounded-[var(--radius-sm)] p-3 outline-none transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring">
                       <Icon className="mt-0.5 size-5 shrink-0 text-muted-foreground" aria-hidden />
                       <span className="min-w-0">
                         <span className="block font-medium">{result.title}</span>

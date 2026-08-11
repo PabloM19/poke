@@ -35,7 +35,7 @@ export function RangerCaptureTechniquePage() {
         <p className="text-sm font-medium text-primary">Recordatorio interactivo</p>
         <h2 id="rhythm-title" className="mt-1 text-xl font-semibold">El ritmo de una captura</h2>
         <div className="mt-4 grid grid-cols-3 gap-2" role="group" aria-label="Fase de captura">
-          {capturePhases.map((item) => <button key={item.id} type="button" aria-pressed={phase === item.id} onClick={() => setPhase(item.id)} className="min-h-12 rounded-lg border border-border bg-secondary px-2 py-2 text-xs font-medium transition-colors aria-pressed:border-primary aria-pressed:bg-primary aria-pressed:text-primary-foreground sm:text-sm">{item.label}</button>)}
+          {capturePhases.map((item) => <button key={item.id} type="button" aria-pressed={phase === item.id} onClick={() => setPhase(item.id)} className="interactive-clay min-h-12 rounded-lg border border-border bg-secondary px-2 py-2 text-xs font-medium transition-colors aria-pressed:border-primary aria-pressed:bg-primary aria-pressed:text-primary-foreground sm:text-sm">{item.label}</button>)}
         </div>
         <p className="mt-4 rounded-lg bg-muted p-4 text-sm leading-6" role="status"><strong>{active.label}:</strong> {active.instruction}</p>
       </section>

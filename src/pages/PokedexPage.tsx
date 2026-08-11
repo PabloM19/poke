@@ -4,6 +4,7 @@ import { LayoutGrid, List, Filter, X } from '@/components/icons'
 import { PageHeader } from '@/components/PageHeader'
 import { getSetting, setSetting } from '@/lib/storage'
 import { Button } from '@/components/ui/button'
+import { SelectField } from '@/components/ui/select-field'
 import {
   Sheet,
   SheetContent,
@@ -29,7 +30,7 @@ import {
 } from '@/features/pokedex/filters/pokedexFilterParams'
 import { translatePokemonType } from '@/features/localization'
 import { TypeChip } from '@/features/types'
-import { useOptionalGameContext } from '@/features/games'
+import { GameSelector, useOptionalGameContext } from '@/features/games'
 import { useRegionalPokedexItems } from '@/features/pokedex/useRegionalPokedexItems'
 import { StatusState } from '@/components/ui/status-state'
 
@@ -176,6 +177,7 @@ export function PokedexPage() {
           eyebrow={pageEyebrow}
           title="Pokédex"
           description={pageDescription}
+          context={gameContext != null ? <GameSelector className="w-full sm:w-auto" /> : undefined}
         />
       <div className="-mt-2 flex flex-wrap justify-end gap-2 sm:absolute sm:right-0 sm:top-0 sm:mt-0">
           <Sheet>
@@ -242,30 +244,28 @@ export function PokedexPage() {
                 <div className="grid grid-cols-2 gap-3">
                   <label className="text-xs font-medium" htmlFor="primary-type">
                     Primer tipo
-                    <select
+                    <SelectField
                       id="primary-type"
                       value={primaryType ?? ''}
                       onChange={(event) => selectPrimaryType(event.target.value)}
-                      className="mt-1 h-11 w-full rounded-[var(--radius-md)] border border-input bg-card px-3 text-sm shadow-[var(--shadow-xs)]"
                     >
                       <option value="">Cualquiera</option>
                       {POKEMON_TYPES.map((type) => <option key={type} value={type}>{translatePokemonType(type)}</option>)}
-                    </select>
+                    </SelectField>
                   </label>
                   <label className="text-xs font-medium" htmlFor="secondary-type">
                     Segundo tipo
-                    <select
+                    <SelectField
                       id="secondary-type"
                       value={secondaryType ?? ''}
                       disabled={primaryType == null}
                       onChange={(event) => selectSecondaryType(event.target.value)}
-                      className="mt-1 h-11 w-full rounded-[var(--radius-md)] border border-input bg-card px-3 text-sm shadow-[var(--shadow-xs)] disabled:opacity-50"
                     >
                       <option value="">Cualquiera</option>
                       {POKEMON_TYPES.filter((type) => type !== primaryType).map((type) => (
                         <option key={type} value={type}>{translatePokemonType(type)}</option>
                       ))}
-                    </select>
+                    </SelectField>
                   </label>
                 </div>
               </section>
@@ -301,19 +301,18 @@ export function PokedexPage() {
               </section>
               <section className="mt-6 border-t border-border px-4 pb-6 pt-5">
                 <label className="text-sm font-semibold" htmlFor="pokedex-sort">Orden</label>
-                <select
+                <SelectField
                   id="pokedex-sort"
                   value={sort}
                   onChange={(event) => {
                     updateFilters({ sort: event.target.value as PokedexSort })
                   }}
-                  className="mt-2 h-11 w-full rounded-[var(--radius-md)] border border-input bg-card px-3 text-sm shadow-[var(--shadow-xs)]"
                 >
                   <option value="number-asc">Número Pokédex</option>
                   <option value="name-asc">Nombre A–Z</option>
                   <option value="total-desc">Mayor total</option>
                   <option value="total-asc">Menor total</option>
-                </select>
+                </SelectField>
                 <Button
                   type="button"
                   variant="outline"

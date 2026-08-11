@@ -65,7 +65,7 @@ export function CompareResults({ ids }: { ids: readonly number[] }) {
       )}
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
         {current.data.map((pokemon) => (
-          <Link key={pokemon.speciesId} to={`/pokemon/${pokemon.speciesId}`} className="rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring">
+          <Link key={pokemon.speciesId} to={`/pokemon/${pokemon.speciesId}`} className="interactive-clay block h-full rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring">
             <Card className="h-full py-4 transition-colors hover:bg-accent/50">
               <CardContent className="flex flex-col items-center px-3 text-center">
                 <div className="flex size-20 items-center justify-center rounded-full bg-secondary">
