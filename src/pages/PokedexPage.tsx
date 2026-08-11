@@ -171,15 +171,13 @@ export function PokedexPage() {
 
   return (
     <div className="page-stack">
-      <div className="relative">
-        <PageHeader
-          className="sm:pr-48"
-          eyebrow={pageEyebrow}
-          title="Pokédex"
-          description={pageDescription}
-          context={gameContext != null ? <GameSelector className="w-full sm:w-auto" /> : undefined}
-        />
-      <div className="-mt-2 flex flex-wrap justify-end gap-2 sm:absolute sm:right-0 sm:top-0 sm:mt-0">
+      <PageHeader
+        eyebrow={pageEyebrow}
+        title="Pokédex"
+        description={pageDescription}
+        context={gameContext != null ? <GameSelector className="w-full sm:w-auto" /> : undefined}
+        actions={
+          <>
           <Sheet>
             <SheetTrigger asChild>
               <Button variant="outline" size="sm" aria-label="Abrir filtros">
@@ -337,8 +335,9 @@ export function PokedexPage() {
               <LayoutGrid className="size-4" />
             )}
           </Button>
-      </div>
-      </div>
+          </>
+        }
+      />
 
       {gameContext != null && !gameContext.isAll && regional.status === 'loading' && (
         <StatusState
