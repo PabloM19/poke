@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { CompareResults } from '@/features/compare/CompareResults'
 import { CompareSelector } from '@/features/compare/CompareSelector'
@@ -13,6 +13,7 @@ export function ComparePage() {
   const [searchParams, setSearchParams] = useSearchParams()
   const ids = parseCompareIds(searchParams)
   const canonical = compareSearchParams(ids)
+  const [replaceIndex, setReplaceIndex] = useState<number | null>(null)
 
   useEffect(() => {
     if (searchParams.toString() !== canonical.toString()) {
@@ -34,6 +35,7 @@ export function ComparePage() {
   }, [canonical, game.generation, game.title, ids, isAll])
 
   const updateIds = (nextIds: readonly number[]) => {
+    setReplaceIndex(null)
     setSearchParams(compareSearchParams(nextIds), { replace: true })
   }
 
@@ -43,12 +45,21 @@ export function ComparePage() {
         <PageHeader
           eyebrow="Herramienta de combate"
           title="Comparar"
-          description="Elige entre dos y cuatro Pokémon. La selección queda guardada en la URL para compartirla."
-          context={<><span className="font-semibold text-foreground">Contexto: {isAll ? 'Todos los juegos principales' : game.title}</span><span> · {isAll ? 'Se usa la referencia histórica común de Nintendo DS.' : `Generación ${game.generation === 4 ? 'IV' : 'V'}. Tipos y stats se comparan tal como funcionan en este juego.`}</span></>}
+          description="Pon frente a frente sus tipos y estadísticas, o compara hasta cuatro especies."
+          context={(
+            <span className="inline-flex min-h-8 items-center rounded-full border border-border bg-card px-3 py-1 font-semibold text-foreground shadow-[var(--shadow-xs)]">
+              {isAll ? 'Todos los juegos · referencia DS' : `${game.title} · Gen ${game.generation === 4 ? 'IV' : 'V'}`}
+            </span>
+          )}
         />
       </div>
-      <CompareSelector ids={ids} onChange={updateIds} />
-      <CompareResults ids={ids} />
+      <CompareSelector
+        ids={ids}
+        onChange={updateIds}
+        replaceIndex={replaceIndex}
+        onReplaceComplete={() => setReplaceIndex(null)}
+      />
+      <CompareResults ids={ids} onReplace={setReplaceIndex} />
     </div>
   )
 }

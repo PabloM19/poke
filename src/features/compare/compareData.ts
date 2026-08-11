@@ -7,6 +7,7 @@ import {
 export interface ComparePokemonData {
   speciesId: number
   name: string
+  artworkUrl: string | null
   spriteUrl: string | null
   types: readonly string[]
   stats: readonly { name: string; value: number }[]
@@ -28,6 +29,7 @@ export async function getComparePokemonData(
   return {
     speciesId,
     name: getSpanishName(species) ?? species.name,
+    artworkUrl: pokemon.sprites.official_artwork ?? null,
     spriteUrl: pokemon.sprites.front_default,
     types: selectPokemonTypesForGeneration(pokemon, generation).map((entry) => entry.type.name),
     stats,

@@ -9,6 +9,7 @@ import {
 } from '@/lib/pokeapi'
 import { parseSpeciesIdParam } from '@/lib/routing/speciesId'
 import { Button } from '@/components/ui/button'
+import { Search } from '@/components/icons'
 import { BentoCard, MiniCard } from '@/components/ui/card'
 import {
   Accordion,
@@ -375,7 +376,7 @@ export function PokemonDetailPage() {
 
       <nav className="flex flex-wrap gap-3 pb-2" aria-label="Volver desde la ficha">
         {manualReturn && <Button asChild variant="outline"><Link to={manualReturn.path}>{manualReturn.label}</Link></Button>}
-        <Button asChild variant="ghost"><Link to="/search">Volver a Buscar</Link></Button>
+        <Button asChild variant="outline"><Link to="/search"><Search className="size-4" aria-hidden />Buscar otro Pokémon</Link></Button>
       </nav>
     </div>
   )

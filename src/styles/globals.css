@@ -223,6 +223,18 @@ textarea {
     box-shadow: var(--shadow-pressed);
   }
 
+  .compare-stat-fill {
+    animation: compare-stat-grow 360ms var(--ease-out) both;
+  }
+
+  .compare-stat-fill-left {
+    transform-origin: right center;
+  }
+
+  .compare-stat-fill-right {
+    transform-origin: left center;
+  }
+
   .manual-nav-link {
     display: inline-flex;
     min-height: 2.75rem;
@@ -244,6 +256,16 @@ textarea {
 
   .manual-nav-link:active {
     transform: translateY(1px);
+  }
+}
+
+@keyframes compare-stat-grow {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
   }
 }
 

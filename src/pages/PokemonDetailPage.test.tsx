@@ -74,6 +74,7 @@ describe('PokemonDetailPage', () => {
     expect(screen.getByText('Pokémon Perla · Generación IV')).toBeInTheDocument()
     expect(screen.getByText('Tierra ×2')).toBeInTheDocument()
     expect(screen.getByText('Eléctrico ×½')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Buscar otro Pokémon' })).toHaveAttribute('href', '/search')
   })
 
   it('ofrece retorno seguro cuando se abre desde una guía', async () => {

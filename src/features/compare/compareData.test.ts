@@ -50,5 +50,6 @@ describe('getComparePokemonData', () => {
       { name: 'defense', value: 45 },
     ])
     expect(result.total).toBe(115)
+    expect(result.artworkUrl).toBeNull()
   })
 })

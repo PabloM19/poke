@@ -43,3 +43,23 @@ export function addCompareId(ids: readonly number[], speciesId: number): AddComp
 export function removeCompareId(ids: readonly number[], speciesId: number): readonly number[] {
   return ids.filter((id) => id !== speciesId)
 }
+
+export type ReplaceCompareResult =
+  | { status: 'replaced'; ids: readonly number[] }
+  | { status: 'duplicate' | 'invalid' | 'missing'; ids: readonly number[] }
+
+export function replaceCompareId(
+  ids: readonly number[],
+  index: number,
+  speciesId: number,
+): ReplaceCompareResult {
+  if (!validId(speciesId)) return { status: 'invalid', ids }
+  if (!Number.isInteger(index) || index < 0 || index >= ids.length) return { status: 'missing', ids }
+  if (ids.some((id, currentIndex) => id === speciesId && currentIndex !== index)) {
+    return { status: 'duplicate', ids }
+  }
+
+  const nextIds = [...ids]
+  nextIds[index] = speciesId
+  return { status: 'replaced', ids: nextIds }
+}
