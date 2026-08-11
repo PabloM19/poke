@@ -1,11 +1,10 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ShieldCheck, Sparkles, Users } from '@/components/icons'
 import { Badge } from '@/components/ui/badge'
-import { TypeChip, pokemonTypeFromLabel } from '@/features/types'
-import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { PokemonReferenceGrid } from '../components/PokemonReferenceCard'
+import { ManualFigureCarousel } from '../components/ManualFigure'
+import { manualVisualCatalog } from '../content/manualVisuals'
 import { LessonCallout, LessonSteps, PhysicalReference } from '../components/LessonBlocks'
 import { ReadingProgressControls } from '../progress/ReadingProgressControls'
 import type { PokemonReference } from '../content/types'
@@ -39,18 +38,12 @@ export function SpeciesChoiceGrid({
   title: string
   entries: readonly (PokemonReference & { type: string })[]
 }) {
-  const [enrich, setEnrich] = useState(false)
   return (
     <section>
-      <div className="mb-4 flex flex-wrap items-end justify-between gap-3">
+      <div className="mb-4">
         <h2 className="text-2xl font-semibold">{title}</h2>
-        {!enrich && <Button type="button" variant="outline" onClick={() => setEnrich(true)}>Cargar imágenes y datos</Button>}
       </div>
-      {enrich ? <PokemonReferenceGrid references={entries} /> : (
-        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-          {entries.map((pokemon) => <Card key={pokemon.speciesId} className="gap-2 py-4"><CardHeader className="px-4"><CardTitle className="text-base">{pokemon.name}</CardTitle></CardHeader><CardContent className="px-4">{pokemonTypeFromLabel(pokemon.type) ? <TypeChip type={pokemonTypeFromLabel(pokemon.type)!} size="compact" /> : <Badge variant="secondary">{pokemon.type}</Badge>}</CardContent></Card>)}
-        </div>
-      )}
+      <PokemonReferenceGrid references={entries} />
     </section>
   )
 }
@@ -72,6 +65,8 @@ export function PmdGuidePage() {
         <p className="mt-4 max-w-3xl leading-7 text-muted-foreground">Abres los ojos y descubres que te has convertido en Pokémon. No recuerdas tu pasado, pero un nuevo compañero confía en ti. Juntos formaréis un equipo de rescate para ayudar a quienes quedan atrapados en territorios peligrosos.</p>
         <div className="mt-5 flex flex-wrap gap-2"><Badge variant="secondary">Sin spoilers de historia</Badge><Badge variant="secondary">Páginas 129–136</Badge><Badge variant="secondary">Mecánicas PMD</Badge></div>
       </header>
+
+      <ManualFigureCarousel id="rescue-team-visual-guide" label="Reconoce la base y la mazmorra" figures={[manualVisualCatalog.pmdBlueBase, manualVisualCatalog.pmdBlueDungeon, manualVisualCatalog.pmdBlueMap]} />
 
       <section>
         <p className="text-sm font-medium text-primary">El test de personalidad</p>

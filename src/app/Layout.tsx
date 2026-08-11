@@ -18,7 +18,7 @@ export function Layout() {
       <main
         id="main-content"
         tabIndex={-1}
-        className="min-h-0 w-full flex-1 px-4 py-5 pb-24 outline-none sm:px-6 sm:py-7 sm:pb-24 md:mx-auto md:max-w-6xl md:px-8 md:py-8 lg:pb-8"
+        className="min-h-0 w-full flex-1 px-4 py-5 pb-[calc(6.5rem+env(safe-area-inset-bottom))] outline-none sm:px-6 sm:py-7 md:mx-auto md:max-w-6xl md:px-8 md:py-8 lg:pb-8"
       >
         <Outlet />
       </main>

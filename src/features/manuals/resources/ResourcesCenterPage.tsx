@@ -8,6 +8,8 @@ import { gameDefinitions, resourceDefinitions } from '../content/definitions'
 import { manualContentRevision, manualEdition, manualSourceSha256 } from '../content/manualSource'
 import { LessonCallout, LessonSteps, PhysicalReference } from '../components/LessonBlocks'
 import { ReadingProgressControls } from '../progress/ReadingProgressControls'
+import { ManualFigure } from '../components/ManualFigure'
+import { manualVisualCatalog } from '../content/manualVisuals'
 
 const resourceDescriptions: Record<(typeof resourceDefinitions)[number]['code'], string> = {
   'R-01': 'Ventajas, resistencias e inmunidades según el juego activo.',
@@ -71,6 +73,7 @@ export function ResourcesCenterPage() {
         '¿Llevo los objetos necesarios?',
         '¿Puedo volver al último pueblo, base o gremio?',
       ]} />
+      <ManualFigure {...manualVisualCatalog.manualQuestions} />
       <LessonCallout kind="tip">No existe una forma perfecta de jugar. Explorar, probar y equivocarse también forman parte de la aventura.</LessonCallout>
       <section className="rounded-xl border border-border bg-card p-5 text-center"><p className="text-lg font-semibold">Once juegos. Dos grandes formas de vivir Pokémon.</p><p className="mt-2 text-sm leading-6 text-muted-foreground">Manual personal · Nintendo DS · Edición 1.0</p></section>
       <PhysicalReference reference={{ edition: 'ds-156-v1', pages: [153, 154, 155, 156] }} />

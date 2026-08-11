@@ -176,7 +176,7 @@ textarea {
 
   .page-stack {
     display: grid;
-    gap: var(--space-5);
+    gap: var(--space-8);
   }
 
   .page-heading {

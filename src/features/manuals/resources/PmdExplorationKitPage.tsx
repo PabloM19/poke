@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { LessonCallout, PhysicalReference } from '../components/LessonBlocks'
+import { ManualFigureCarousel } from '../components/ManualFigure'
+import { manualVisualCatalog } from '../content/manualVisuals'
 
 const kitItems = [
   { id: 'food', label: 'Alimento', example: 'Manzana', reason: 'Recupera Tripa; lleva una segunda en territorios largos.' },
@@ -29,6 +31,8 @@ export function PmdExplorationKitPage() {
         <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">Prepara alimento, PP, semillas, orbes y equipamiento antes de entrar. La mochila también puede ganar combates si cada objeto tiene una función.</p>
         <div className="mt-5 flex flex-wrap gap-2"><Badge variant="secondary">Páginas 70–74 y 153–154</Badge><Badge variant="secondary">Sin red</Badge></div>
       </header>
+
+      <ManualFigureCarousel id="pmd-kit-in-context" label="La mochila dentro de la mazmorra" figures={[manualVisualCatalog.pmdBlueDungeon, manualVisualCatalog.pmdDarknessDungeon]} />
 
       <section className="grid gap-3 sm:grid-cols-3">
         <Card><CardHeader><div className="mb-2 flex size-9 items-center justify-center rounded-lg bg-secondary"><Apple className="size-5" aria-hidden /></div><CardTitle>Tripa y PS</CardTitle></CardHeader><CardContent className="text-sm leading-6 text-muted-foreground">La Tripa baja al caminar; a cero, pierdes PS. Lleva alimento y curación.</CardContent></Card>

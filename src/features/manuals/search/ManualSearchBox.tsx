@@ -1,7 +1,7 @@
 import { useDeferredValue, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { BookOpen, Gamepad2, Search, Shapes } from '@/components/icons'
-import { Input } from '@/components/ui/input'
+import { BookOpen, Gamepad2, Shapes } from '@/components/icons'
+import { SearchField } from '@/components/ui/search-field'
 import { searchManuals, type ManualSearchResultKind } from './searchIndex'
 import { useSpoilerPreference } from '../spoilers/spoilerPreference'
 
@@ -19,19 +19,9 @@ export function ManualSearchBox() {
   const showResults = query.trim().length >= 2
 
   return (
-    <section className="mb-8" aria-labelledby="manual-search-title">
-      <h2 id="manual-search-title" className="mb-3 text-lg font-semibold">Encuentra una respuesta</h2>
-      <div className="relative">
-        <Search className="pointer-events-none absolute left-3 top-1/2 size-5 -translate-y-1/2 text-muted-foreground" aria-hidden />
-        <Input
-          type="search"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder="Ej.: captura, hambre, Perla o R-01"
-          aria-label="Buscar en Manuales"
-          className="h-12 pl-10"
-        />
-      </div>
+    <section aria-labelledby="manual-search-title">
+      <h2 id="manual-search-title" className="mb-4 text-lg font-semibold">Encuentra una respuesta</h2>
+      <SearchField type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Ej.: captura, hambre, Perla o R-01" aria-label="Buscar en Manuales" />
       {showResults && (
         <div className="mt-3 rounded-[var(--radius-lg)] border border-border bg-card p-2 shadow-[var(--shadow-sm)]" role="region" aria-label="Resultados del manual">
           {results.length > 0 ? (

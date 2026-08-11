@@ -15,6 +15,21 @@ export interface PrintReference {
   pages: readonly number[]
 }
 
+export type ManualFigureAspectRatio = '16:9' | '4:3' | '3:2' | 'portrait'
+export type ManualFigureKind = 'screenshot' | 'artwork' | 'diagram'
+
+export interface ManualFigureData {
+  id: string
+  src?: string
+  alt: string
+  caption: string
+  credit?: string
+  aspectRatio?: ManualFigureAspectRatio
+  objectFit?: 'contain' | 'cover'
+  kind?: ManualFigureKind
+  placeholderDescription: string
+}
+
 export type ManualBlock =
   | { type: 'heading'; text: string; level: 2 | 3 }
   | { type: 'paragraph'; text: string }
@@ -24,6 +39,8 @@ export type ManualBlock =
   | { type: 'type-example'; title?: string; matchups: readonly string[] }
   | { type: 'table'; headers: readonly string[]; rows: readonly (readonly string[])[] }
   | { type: 'pokemon-grid'; title?: string; speciesIds: readonly number[] }
+  | ({ type: 'figure' } & ManualFigureData)
+  | { type: 'carousel'; id: string; label: string; figures: readonly ManualFigureData[] }
   | { type: 'print-reference'; reference: PrintReference }
 
 export interface ManualArticle {

@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Compass, Gamepad2, Library, Map, ShieldCheck, Sparkles, TableProperties } from '@/components/icons'
+import { Compass, Gamepad2, Library, Map, ShieldCheck, Sparkles, TableProperties } from '@/components/icons'
+import { NavigationCard } from '@/components/NavigationCard'
 import { PageHeader } from '@/components/PageHeader'
-import { BentoCard, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { BentoCard } from '@/components/ui/card'
 import { MAIN_GAME_CONTEXTS, useGameContext } from '@/features/games'
 import { ManualSearchBox } from '@/features/manuals/search/ManualSearchBox'
 import { ContinueReadingCard } from '@/features/manuals/progress/ContinueReadingCard'
@@ -123,7 +124,7 @@ export function ManualsLandingPage() {
   ] as const
 
   return (
-    <div className="page-stack">
+    <div className="page-stack gap-8">
       <div data-tour="manuals-home">
         <PageHeader
           eyebrow="Manual Nintendo DS · 156 páginas"
@@ -133,27 +134,17 @@ export function ManualsLandingPage() {
             : 'Empieza por las ideas generales y elige después tu recorrido: Entrenador Pokémon, Mundo Misterioso o la guía de tu juego activo.'}
         />
       </div>
-      <div className="space-y-8">
+      <div className="space-y-10">
         {sections.map((section) => (
           <section key={section.id} aria-labelledby={`${section.id}-title`}>
-            <div className="mb-3">
+            <div className="mb-5">
               <h2 id={`${section.id}-title`} className="text-xl font-semibold">{section.title}</h2>
-              <p className="mt-1 text-sm leading-6 text-muted-foreground">{section.description}</p>
+              <p className="mt-2 text-sm leading-6 text-muted-foreground">{section.description}</p>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               {contextualRoutes.filter((route) => route.category === section.category).map(({ path, title, description, pages, icon: Icon, tone }) => (
                 <Link key={path} to={path} className="interactive-clay block h-full rounded-[var(--radius-xl)] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-                  <BentoCard tone={tone} className="h-full p-0 hover:-translate-y-0.5">
-                    <CardHeader>
-                      <div className="mb-3 flex items-center justify-between">
-                        <Icon className="size-5 text-muted-foreground" aria-hidden />
-                        <ArrowRight className="size-5 text-muted-foreground" aria-hidden />
-                      </div>
-                      <CardTitle className="text-lg">{title}</CardTitle>
-                      <CardDescription>Páginas {pages}</CardDescription>
-                    </CardHeader>
-                    <CardContent><p className="text-sm leading-6 text-muted-foreground">{description}</p></CardContent>
-                  </BentoCard>
+                  <NavigationCard icon={Icon} title={title} meta={`Páginas ${pages}`} description={description} tone={tone} />
                 </Link>
               ))}
             </div>
@@ -161,7 +152,7 @@ export function ManualsLandingPage() {
         ))}
       </div>
       <ContinueReadingCard />
-      <BentoCard className="p-4"><SpoilerPreferenceControl /></BentoCard>
+      <BentoCard><SpoilerPreferenceControl /></BentoCard>
       <ManualSearchBox />
     </div>
   )

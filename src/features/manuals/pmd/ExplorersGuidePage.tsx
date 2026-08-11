@@ -6,6 +6,8 @@ import { LessonCallout, LessonSteps, PhysicalReference } from '../components/Les
 import { ReadingProgressControls } from '../progress/ReadingProgressControls'
 import type { PokemonReference } from '../content/types'
 import { SpeciesChoiceGrid } from './PmdGuidePage'
+import { ManualFigureCarousel } from '../components/ManualFigure'
+import { manualVisualCatalog } from '../content/manualVisuals'
 
 const protagonists: readonly (PokemonReference & { type: string })[] = [
   { speciesId: 1, name: 'Bulbasaur', type: 'Planta/Veneno' }, { speciesId: 4, name: 'Charmander', type: 'Fuego' },
@@ -33,6 +35,8 @@ export function ExplorersGuidePage() {
         <p className="mt-4 max-w-3xl leading-7 text-muted-foreground">Despiertas convertido en Pokémon y sin recuerdos junto a una playa. Allí conoces a un Pokémon que sueña con ser explorador, pero aún no se atreve a dar el primer paso. Una piedra con un extraño dibujo será el comienzo de vuestra aventura.</p>
         <div className="mt-5 flex flex-wrap gap-2"><Badge variant="secondary">Sin spoilers de historia</Badge><Badge variant="secondary">Páginas 137–144</Badge><Badge variant="secondary">Mecánicas PMD</Badge></div>
       </header>
+
+      <ManualFigureCarousel id="explorers-visual-guide" label="Reconoce Aldea Tesoro y una expedición" figures={[manualVisualCatalog.pmdDarknessTown, manualVisualCatalog.pmdDarknessDungeon, manualVisualCatalog.pmdDarknessMap]} />
 
       <section><p className="text-sm font-medium text-primary">El test de personalidad</p><h2 className="mt-1 text-2xl font-semibold">¿En qué Pokémon te convertirás?</h2><p className="mt-3 leading-7 text-muted-foreground">El juego propone al protagonista según las respuestas iniciales. Hay dieciséis posibilidades, cada una con un tipo y movimientos distintos.</p></section>
       <SpeciesChoiceGrid title="Los dieciséis protagonistas" entries={protagonists} />

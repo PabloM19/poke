@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { LessonCallout, PhysicalReference } from '../components/LessonBlocks'
+import { ManualFigureCarousel } from '../components/ManualFigure'
+import { manualVisualCatalog } from '../content/manualVisuals'
 
 const tacticalChecks = [
   { id: 'objective', label: 'He leído el objetivo del mapa.', hint: 'Derrotar unidades no siempre es la condición de victoria.' },
@@ -28,6 +30,8 @@ export function ConquestTacticalReminderPage() {
         <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">Una pausa breve antes de mover evita los errores caros: comprueba primero la misión y los turnos; después decide alcance, posición y orden.</p>
         <div className="mt-5 flex flex-wrap gap-2"><Badge variant="secondary">Páginas 151–154</Badge><Badge variant="secondary">Consulta durante la batalla</Badge></div>
       </header>
+
+      <ManualFigureCarousel id="conquest-terrain-examples" label="Compara dos terrenos tácticos" figures={[manualVisualCatalog.conquestGrid, manualVisualCatalog.conquestTraining]} />
 
       <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
         {[

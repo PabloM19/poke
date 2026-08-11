@@ -59,16 +59,16 @@ export function PokemonReferenceCard({ reference }: { reference: PokemonReferenc
 
   return (
       <Card className="relative h-full transition-colors hover:bg-accent/50">
-        <CardContent className="flex h-full flex-col items-center p-4 text-center">
+        <CardContent className="flex h-full flex-col items-center p-5 text-center">
           <CompareLink
             speciesId={reference.speciesId}
             speciesName={displayName}
-            className="absolute left-2 top-2"
+            className="absolute left-3 top-3"
           />
           <Link
             to={`/pokemon/${reference.speciesId}`}
             state={createManualReturnState(location.pathname)}
-            className="interactive-clay flex h-full w-full flex-col items-center rounded-lg pt-3 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className="interactive-clay flex h-full w-full flex-col items-center rounded-lg pt-5 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             aria-label={`Ver ficha de ${displayName}`}
           >
           <div className="mb-2 flex size-24 items-center justify-center rounded-full bg-secondary">

@@ -82,12 +82,12 @@ export function PokedexCard({ item, layout = 'grid', dexNumber, className }: Pok
         <CompareLink
           speciesId={item.id}
           speciesName={item.nameEs}
-          className={layout === 'grid' ? 'absolute left-2 top-2' : undefined}
+          className={layout === 'grid' ? 'absolute left-3 top-3' : undefined}
         />
         <FavoriteButton
           speciesId={item.id}
           speciesName={item.nameEs}
-          className={layout === 'grid' ? 'absolute right-2 top-2' : undefined}
+          className={layout === 'grid' ? 'absolute right-3 top-3' : undefined}
         />
       </CardContent>
     </Card>

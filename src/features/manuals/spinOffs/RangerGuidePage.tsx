@@ -4,6 +4,8 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { LessonCallout, LessonSteps, PhysicalReference } from '../components/LessonBlocks'
 import { ReadingProgressControls } from '../progress/ReadingProgressControls'
+import { ManualFigureCarousel } from '../components/ManualFigure'
+import { manualVisualCatalog } from '../content/manualVisuals'
 
 export function RangerGuidePage() {
   return (
@@ -15,6 +17,8 @@ export function RangerGuidePage() {
         <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">Un Ranger protege la naturaleza y ayuda a personas y Pokémon. En lugar de Poké Balls, utiliza el Capturador para establecer un vínculo temporal.</p>
         <div className="mt-5 flex gap-2"><Badge variant="secondary">Páginas 145–146</Badge><Badge variant="secondary">Sesiones medias</Badge></div>
       </header>
+
+      <ManualFigureCarousel id="ranger-capture-examples" label="El Capturador en movimiento" figures={[manualVisualCatalog.rangerCapture, manualVisualCatalog.rangerCaptureSecond]} />
 
       <section className="grid gap-3 sm:grid-cols-2">
         <Card><CardHeader><div className="mb-2 flex size-9 items-center justify-center rounded-lg bg-secondary"><PenTool className="size-5" aria-hidden /></div><CardTitle>Mecánica principal</CardTitle></CardHeader><CardContent className="leading-7 text-muted-foreground">Dibuja círculos continuos alrededor del objetivo. Si un ataque toca la línea, el trazo se rompe: observa, espera una apertura y prioriza la precisión.</CardContent></Card>

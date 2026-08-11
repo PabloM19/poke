@@ -3,6 +3,8 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { LessonCallout, LessonSteps, PhysicalReference } from '../components/LessonBlocks'
 import { ReadingProgressControls } from '../progress/ReadingProgressControls'
+import { ManualFigureCarousel } from '../components/ManualFigure'
+import { manualVisualCatalog } from '../content/manualVisuals'
 
 export function DashGuidePage() {
   return (
@@ -14,6 +16,8 @@ export function DashGuidePage() {
         <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">Pikachu compite en carreras divididas en puntos de control. Para avanzar, desliza repetidamente el lápiz en la dirección deseada; el terreno cambia la velocidad y algunos tramos usan globos u otros medios.</p>
         <div className="mt-5 flex gap-2"><Badge variant="secondary">Páginas 147–148</Badge><Badge variant="secondary">Sesiones cortas</Badge></div>
       </header>
+
+      <ManualFigureCarousel id="dash-controls-and-race" label="Del gesto táctil a la carrera" figures={[manualVisualCatalog.dashTouchControl, manualVisualCatalog.dashRace, manualVisualCatalog.dashAir]} />
 
       <section className="grid gap-3 sm:grid-cols-2">
         <Card><CardHeader><div className="mb-2 flex size-9 items-center justify-center rounded-lg bg-secondary"><MoveUpRight className="size-5" aria-hidden /></div><CardTitle>Ritmo y dirección</CardTitle></CardHeader><CardContent className="leading-7 text-muted-foreground">Los movimientos pequeños y regulares ofrecen más control que los trazos largos y bruscos. Mantén un ritmo que puedas sostener.</CardContent></Card>
@@ -36,7 +40,7 @@ export function DashGuidePage() {
       ]} />
 
       <LessonCallout kind="warning" title="Cuida la pantalla">El error típico es frotar la pantalla con demasiada fuerza. Usa movimientos controlados y sin presión excesiva.</LessonCallout>
-      <LessonCallout kind="note">Está pensado para sesiones cortas y mejora mediante repetición. La guía visual de superficies y técnicas se incorporará como recurso local.</LessonCallout>
+      <LessonCallout kind="note">Está pensado para sesiones cortas y mejora mediante repetición. Usa el carrusel anterior para reconocer el gesto, la carrera terrestre y los tramos aéreos.</LessonCallout>
       <PhysicalReference reference={{ edition: 'ds-156-v1', pages: [147, 148] }} />
       <ReadingProgressControls articlePath="/manuales/juegos/dash" />
     </article>

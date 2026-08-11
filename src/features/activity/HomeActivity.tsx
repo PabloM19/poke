@@ -1,4 +1,5 @@
 import { ArrowRight, BookOpen, BookMarked, GitCompare, Library, TableProperties } from '@/components/icons'
+import { NavigationCard } from '@/components/NavigationCard'
 import { BentoCard } from '@/components/ui/card'
 import { TypeChip } from '@/features/types'
 import { Link } from 'react-router-dom'
@@ -41,7 +42,9 @@ function LatestActivityCard({ activity }: { activity: RecentActivity }) {
               </span>
             )}
           </span>
-          <ArrowRight className="mt-1 size-5 shrink-0" aria-hidden />
+          <span className="flex size-11 shrink-0 items-start justify-end pt-1" aria-hidden>
+            <ArrowRight className="size-5" />
+          </span>
         </div>
       </BentoCard>
     </Link>
@@ -64,14 +67,16 @@ function RecentPokemonCard({ activity }: { activity: RecentPokemonActivity }) {
 function ReadingCard({ activity }: { activity: RecentManualActivity }) {
   const percentage = Math.round(activity.progress * 100)
   return (
-    <Link to={activity.route} state={{ restoreReading: true }} className="interactive-clay flex min-h-20 min-w-0 items-center gap-3 rounded-[var(--radius-lg)] border border-border bg-card p-4 shadow-[var(--shadow-xs)] outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring">
-      <BookOpen className="size-5 shrink-0 text-ui-lavender-strong" aria-hidden />
+    <Link to={activity.route} state={{ restoreReading: true }} className="interactive-clay flex min-w-0 items-center gap-4 rounded-[var(--radius-lg)] border border-border bg-card p-5 shadow-[var(--shadow-xs)] outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring">
+      <span className="flex size-11 shrink-0 items-center justify-start" aria-hidden>
+        <BookOpen className="size-5 text-ui-lavender-strong" />
+      </span>
       <span className="min-w-0 flex-1">
         <span className="block truncate font-semibold">{activity.title}</span>
         <span className="mt-1 block truncate text-sm text-muted-foreground">{activity.sectionTitle ?? 'Continúa la lectura'}</span>
         <span className="mt-2 block h-1.5 overflow-hidden rounded-full bg-secondary"><span className="block h-full rounded-full bg-ui-lavender-strong" style={{ width: `${percentage}%` }} /></span>
       </span>
-      <span className="text-xs font-semibold tabular-nums text-muted-foreground">{percentage}%</span>
+      <span className="flex min-h-11 min-w-11 shrink-0 items-center justify-end text-xs font-semibold tabular-nums text-muted-foreground">{percentage}%</span>
     </Link>
   )
 }
@@ -91,11 +96,7 @@ function Recommendations() {
       <div className="grid gap-3 sm:grid-cols-2">
         {recommendations.map(({ path, title, description, icon: Icon, tone }) => (
           <Link key={path} to={path} className="interactive-clay block h-full rounded-[var(--radius-xl)] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-            <BentoCard tone={tone} className="interactive-clay h-full p-4 hover:-translate-y-0.5">
-              <div className="flex items-start justify-between gap-3"><Icon className="size-5 text-muted-foreground" aria-hidden /><ArrowRight className="size-4 text-muted-foreground" aria-hidden /></div>
-              <h3 className="mt-4 font-bold">{title}</h3>
-              <p className="mt-1 text-sm leading-6 text-muted-foreground">{description}</p>
-            </BentoCard>
+            <NavigationCard icon={Icon} title={title} description={description} tone={tone} />
           </Link>
         ))}
       </div>

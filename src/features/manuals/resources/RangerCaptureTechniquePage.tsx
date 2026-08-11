@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { LessonCallout, LessonSteps, PhysicalReference } from '../components/LessonBlocks'
+import { ManualFigureCarousel } from '../components/ManualFigure'
+import { manualVisualCatalog } from '../content/manualVisuals'
 
 const capturePhases = [
   { id: 'observe', label: '1 · Observar', instruction: 'No traces todavía. Identifica el recorrido y el ritmo de los ataques.' },
@@ -24,6 +26,8 @@ export function RangerCaptureTechniquePage() {
         <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">La captura no premia dibujar sin pausa: observa el ataque, retira el lápiz a tiempo y aprovecha una apertura con círculos continuos y controlados.</p>
         <div className="mt-5 flex flex-wrap gap-2"><Badge variant="secondary">Páginas 145–146 y 153–154</Badge><Badge variant="secondary">Precisión táctil</Badge></div>
       </header>
+
+      <ManualFigureCarousel id="ranger-technique-examples" label="Observa el trazo real" figures={[manualVisualCatalog.rangerCapture, manualVisualCatalog.rangerCaptureSecond]} />
 
       <section className="grid gap-3 sm:grid-cols-3">
         <Card><CardHeader><div className="mb-2 flex size-9 items-center justify-center rounded-lg bg-secondary"><Eye className="size-5" aria-hidden /></div><CardTitle>Lee el patrón</CardTitle></CardHeader><CardContent className="text-sm leading-6 text-muted-foreground">Mira por dónde se mueve y cuándo ataca antes de iniciar el trazo.</CardContent></Card>

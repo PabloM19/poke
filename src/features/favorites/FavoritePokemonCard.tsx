@@ -61,17 +61,17 @@ export function FavoritePokemonCard({ speciesId }: { speciesId: number }) {
   const name = data?.name ?? formatId(speciesId)
 
   return (
-    <Card className="relative h-full py-4">
-      <CardContent className="flex h-full flex-col items-center px-4 text-center">
+    <Card className="relative h-full py-5">
+      <CardContent className="flex h-full flex-col items-center px-5 text-center">
         <CompareLink
           speciesId={speciesId}
           speciesName={name}
-          className="absolute left-2 top-2"
+          className="absolute left-3 top-3"
         />
         <FavoriteButton
           speciesId={speciesId}
           speciesName={name}
-          className="absolute right-2 top-2"
+          className="absolute right-3 top-3"
         />
         {current?.status === 'error' ? (
           <div className="flex min-h-44 flex-col items-center justify-center px-3" role="alert">
@@ -82,7 +82,7 @@ export function FavoritePokemonCard({ speciesId }: { speciesId: number }) {
             </Button>
           </div>
         ) : (
-          <Link to={`/pokemon/${speciesId}`} className="interactive-clay flex w-full flex-1 flex-col items-center rounded-lg pt-4 outline-none focus-visible:ring-2 focus-visible:ring-ring" aria-label={`Ver ficha de ${name}`}>
+          <Link to={`/pokemon/${speciesId}`} className="interactive-clay flex w-full flex-1 flex-col items-center rounded-lg pt-5 outline-none focus-visible:ring-2 focus-visible:ring-ring" aria-label={`Ver ficha de ${name}`}>
             <div className="flex size-24 items-center justify-center rounded-full bg-secondary">
               {data?.spriteUrl ? (
                 <img src={data.spriteUrl} alt="" className="size-24 object-contain [image-rendering:pixelated]" />

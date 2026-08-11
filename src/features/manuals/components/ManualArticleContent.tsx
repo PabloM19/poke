@@ -9,6 +9,7 @@ import {
 } from './LessonBlocks'
 import { InlineManualText } from './InlineManualText'
 import { BentoCard } from '@/components/ui/card'
+import { ManualFigure, ManualFigureCarousel } from './ManualFigure'
 
 function Block({ block, index }: { block: ManualBlock; index: number }) {
   if (block.type === 'heading') {
@@ -33,6 +34,8 @@ function Block({ block, index }: { block: ManualBlock; index: number }) {
   if (block.type === 'table') {
     return <LessonTable caption={block.headers.join(' · ')} headers={block.headers} rows={block.rows} />
   }
+  if (block.type === 'figure') return <ManualFigure {...block} />
+  if (block.type === 'carousel') return <ManualFigureCarousel id={block.id} label={block.label} figures={block.figures} />
   if (block.type === 'print-reference') return <PhysicalReference reference={block.reference} />
   return null
 }

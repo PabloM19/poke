@@ -5,12 +5,16 @@ import {
   printReferenceFor,
 } from './manualSource'
 import type { ManualArticle, ManualArticleDefinition } from './types'
+import { insertManualVisuals } from './manualVisuals'
 
 export function buildManualArticle(definition: ManualArticleDefinition): ManualArticle {
-  const blocks = getSourcePagesForArticle(definition).flatMap((page) => [
-    { type: 'heading' as const, text: page.title ?? page.heading, level: 2 as const },
-    ...parseManualPage(page),
-  ])
+  const blocks = getSourcePagesForArticle(definition).flatMap((page) => {
+    const pageBlocks = parseManualPage(page)
+    return [
+      { type: 'heading' as const, text: page.title ?? page.heading, level: 2 as const },
+      ...insertManualVisuals(page.page, pageBlocks),
+    ]
+  })
   return {
     ...definition,
     printReference: printReferenceFor(definition),

@@ -1,11 +1,11 @@
-import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { BookOpen, ChevronRight, Gamepad2, Map, Sparkles } from '@/components/icons'
 import { Badge } from '@/components/ui/badge'
-import { TypeChip, pokemonTypeFromLabel } from '@/features/types'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { PokemonReferenceGrid } from '../components/PokemonReferenceCard'
+import { ManualFigureCarousel } from '../components/ManualFigure'
+import { manualVisualCatalog } from '../content/manualVisuals'
 import { LessonCallout, LessonSteps, PhysicalReference } from '../components/LessonBlocks'
 import { ReadingProgressControls } from '../progress/ReadingProgressControls'
 import { ManualNotFoundPage } from '../ManualNotFoundPage'
@@ -15,36 +15,27 @@ import { publishedMainGameGuides, type MainGameGuide } from './gameGuideData'
 import { GameDataExplorer } from './PearlDataExplorer'
 
 function StarterSection({ guide }: { guide: MainGameGuide }) {
-  const [enrich, setEnrich] = useState(false)
-
   return (
     <section className="scroll-mt-20" id="iniciales">
-      <div className="mb-3 flex flex-wrap items-end justify-between gap-3">
+      <div className="mb-3">
         <div>
           <p className="text-sm font-medium text-primary">Tu primera elección</p>
           <h2 className="text-2xl font-semibold">{guide.starterTitle}</h2>
         </div>
-        {!enrich && <Button type="button" variant="outline" onClick={() => setEnrich(true)}>Cargar imágenes y tipos</Button>}
       </div>
-      {enrich ? (
-        <PokemonReferenceGrid references={guide.starters} />
-      ) : (
-        <div className="grid gap-3 sm:grid-cols-3">
-          {guide.starters.map((starter) => (
-            <Card key={starter.speciesId} className="gap-3 py-5">
-              <CardHeader className="gap-2 px-5">
-                {pokemonTypeFromLabel(starter.type) ? <TypeChip type={pokemonTypeFromLabel(starter.type)!} size="compact" /> : <Badge className="w-fit" variant="secondary">{starter.type}</Badge>}
-                <CardTitle>{starter.name}</CardTitle>
-              </CardHeader>
-              <CardContent className="px-5 text-sm leading-6 text-muted-foreground">{starter.description}</CardContent>
-            </Card>
-          ))}
-        </div>
-      )}
+      <PokemonReferenceGrid references={guide.starters} />
       <LessonCallout kind="tip">{guide.starterTip}</LessonCallout>
     </section>
   )
 }
+
+const guideFigures = {
+  perla: [manualVisualCatalog.pearlOverworld, manualVisualCatalog.pearlMenu],
+  platino: [manualVisualCatalog.platinumDistortion, manualVisualCatalog.platinumGiratina],
+  'oro-heartgold': [manualVisualCatalog.heartgoldMenu, manualVisualCatalog.heartgoldPokedex],
+  negro: [manualVisualCatalog.blackFirstBattle, manualVisualCatalog.blackBattle, manualVisualCatalog.blackCapture],
+  'negro-2': [manualVisualCatalog.black2Battle, manualVisualCatalog.black2Menu],
+} as const
 
 export function MainGameGuidePage() {
   const { juego } = useParams()
@@ -73,6 +64,8 @@ export function MainGameGuidePage() {
           <Badge variant="secondary">Contexto: {game.shortTitle}</Badge>
         </div>
       </header>
+
+      <ManualFigureCarousel id={`${guide.slug}-visual-guide`} label={`Reconoce ${game.shortTitle}`} figures={guideFigures[guide.slug]} />
 
       <nav aria-label="En esta guía" className="grid grid-cols-2 gap-2 sm:grid-cols-4">
         {[

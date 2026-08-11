@@ -4,6 +4,8 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { LessonCallout, LessonSteps, PhysicalReference } from '../components/LessonBlocks'
 import { ReadingProgressControls } from '../progress/ReadingProgressControls'
+import { ManualFigureCarousel } from '../components/ManualFigure'
+import { manualVisualCatalog } from '../content/manualVisuals'
 
 const turnStages = [
   { value: '1', label: 'Elige unidad' },
@@ -21,6 +23,8 @@ export function ConquestGuidePage() {
         <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">En Ransei, Guerreros y Pokémon combaten por distintos reinos. Cada batalla combina un objetivo, un límite de turnos y un mapa cuyo terreno modifica tus decisiones.</p>
         <div className="mt-5 flex flex-wrap gap-2"><Badge variant="secondary">Páginas 151–152</Badge><Badge variant="secondary">Táctica local</Badge></div>
       </header>
+
+      <ManualFigureCarousel id="conquest-battlefields" label="Lee el terreno antes de mover" figures={[manualVisualCatalog.conquestGrid, manualVisualCatalog.conquestTraining]} />
 
       <section className="grid gap-3 sm:grid-cols-3">
         <Card><CardHeader><div className="mb-2 flex size-9 items-center justify-center rounded-lg bg-secondary"><Flag className="size-5" aria-hidden /></div><CardTitle>Objetivo</CardTitle></CardHeader><CardContent className="leading-7 text-muted-foreground">Léelo antes de mover: ganar no siempre consiste en perseguir el mayor daño.</CardContent></Card>

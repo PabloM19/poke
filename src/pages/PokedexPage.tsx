@@ -360,7 +360,7 @@ export function PokedexPage() {
       )}
 
       {activeFilterCount > 0 && (
-        <div className="my-3 flex flex-wrap items-center gap-2" aria-label="Filtros activos">
+        <div className="flex flex-wrap items-center gap-2" aria-label="Filtros activos">
           {generation != null && (
             <FilterChip label={`Generación ${['I', 'II', 'III', 'IV', 'V'][generation - 1]}`} onRemove={() => selectGeneration(null)} />
           )}
@@ -387,8 +387,6 @@ export function PokedexPage() {
           </Button>
         </div>
       )}
-
-      {activeFilterCount === 0 && <div className="mb-4" />}
 
       {regional.status === 'success' && filteredItems.length === 0 && (
         <div className="rounded-[var(--radius-xl)] border border-dashed border-border bg-card p-8 text-center shadow-[var(--shadow-xs)]" role="status">

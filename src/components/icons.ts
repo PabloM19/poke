@@ -43,6 +43,7 @@ export {
   Hexagon,
   Heart,
   Info,
+  ImageSquare,
   SquaresFour as LayoutGrid,
   Books as Library,
   Lightbulb,
