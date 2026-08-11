@@ -1,4 +1,4 @@
-import { getStored, removeStored, setStored } from '@/lib/storage'
+import { getSetting, getStored, removeStored, setStored } from '@/lib/storage'
 
 export const RECENT_ACTIVITY_VERSION = 1
 export const RECENT_ACTIVITY_STORAGE_KEY = 'recent-activity:v1'
@@ -113,6 +113,7 @@ export function getRecentActivity(): readonly RecentActivity[] {
 }
 
 export function recordRecentActivity(input: RecentActivityInput): readonly RecentActivity[] {
+  if (getSetting('recentActivity', 'enabled') === 'disabled') return getRecentActivity()
   const timestamp = Date.now()
   const nextItem = { ...input, timestamp } as RecentActivity
   if (!isActivity(nextItem)) return getRecentActivity()

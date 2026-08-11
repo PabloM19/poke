@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { getStored, setStored } from '@/lib/storage'
+import { getStored, setSetting, setStored } from '@/lib/storage'
 import {
   clearRecentActivity,
   getRecentActivity,
@@ -39,6 +39,24 @@ describe('actividad reciente', () => {
 
   it('descarta estructuras corruptas sin romper', () => {
     setStored(RECENT_ACTIVITY_STORAGE_KEY, { version: 9, items: 'mal' })
+    expect(getRecentActivity()).toEqual([])
+    expect(getStored(RECENT_ACTIVITY_STORAGE_KEY)).toBeNull()
+  })
+
+  it('respeta la preferencia de no guardar actividad', () => {
+    setSetting('recentActivity', 'disabled')
+
+    recordRecentActivity({
+      kind: 'pokemon',
+      id: '25',
+      speciesId: 25,
+      route: '/pokemon/25',
+      title: 'Pikachu',
+      subtitle: '#025',
+      spriteUrl: null,
+      types: ['electric'],
+    })
+
     expect(getRecentActivity()).toEqual([])
     expect(getStored(RECENT_ACTIVITY_STORAGE_KEY)).toBeNull()
   })

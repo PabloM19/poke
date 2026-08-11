@@ -13,6 +13,7 @@ const VALID: Record<string, readonly string[]> = {
   theme: ['light', 'dark'] as const,
   defaultView: ['grid', 'list'] as const,
   spoilerLevel: ['none', 'mechanics', 'guide'] as const,
+  recentActivity: ['enabled', 'disabled'] as const,
 }
 
 function isValid(key: string, value: unknown): boolean {
@@ -23,6 +24,7 @@ function isValid(key: string, value: unknown): boolean {
 export function getSetting(key: 'theme', fallback: 'light' | 'dark'): 'light' | 'dark'
 export function getSetting(key: 'defaultView', fallback: 'grid' | 'list'): 'grid' | 'list'
 export function getSetting(key: 'spoilerLevel', fallback: 'none' | 'mechanics' | 'guide'): 'none' | 'mechanics' | 'guide'
+export function getSetting(key: 'recentActivity', fallback: 'enabled' | 'disabled'): 'enabled' | 'disabled'
 export function getSetting(key: string, fallback: string): string {
   try {
     const raw = localStorage.getItem(prefixedKey(key))
@@ -37,6 +39,7 @@ export function getSetting(key: string, fallback: string): string {
 export function setSetting(key: 'theme', value: 'light' | 'dark'): void
 export function setSetting(key: 'defaultView', value: 'grid' | 'list'): void
 export function setSetting(key: 'spoilerLevel', value: 'none' | 'mechanics' | 'guide'): void
+export function setSetting(key: 'recentActivity', value: 'enabled' | 'disabled'): void
 export function setSetting(key: string, value: string): void {
   if (!isValid(key, value)) return
   try {
