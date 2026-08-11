@@ -2,9 +2,10 @@ import { useState, type ReactNode } from 'react'
 import { getStored, setStored } from '@/lib/storage'
 import {
   DEFAULT_MAIN_GAME_SLUG,
+  ALL_GAMES_SLUG,
   getMainGameContext,
-  isMainGameSlug,
-  type MainGameSlug,
+  isGameSelection,
+  type GameSelection,
 } from './gameCatalog'
 import { GameContext } from './useGameContext'
 
@@ -12,26 +13,29 @@ const STORAGE_KEY = 'game-context:v1'
 
 interface StoredGameContext {
   version: 1
-  slug: MainGameSlug
+  slug: GameSelection
 }
 
-function readInitialSlug(): MainGameSlug {
+function readInitialSelection(): GameSelection {
   const stored = getStored<Partial<StoredGameContext>>(STORAGE_KEY)
-  return stored?.version === 1 && isMainGameSlug(stored.slug)
+  return stored?.version === 1 && isGameSelection(stored.slug)
     ? stored.slug
     : DEFAULT_MAIN_GAME_SLUG
 }
 
 export function GameProvider({ children }: { children: ReactNode }) {
-  const [slug, setSlug] = useState<MainGameSlug>(readInitialSlug)
+  const [selection, setSelection] = useState<GameSelection>(readInitialSelection)
 
-  const setGame = (nextSlug: MainGameSlug) => {
-    setSlug(nextSlug)
-    setStored<StoredGameContext>(STORAGE_KEY, { version: 1, slug: nextSlug })
+  const setGame = (nextSelection: GameSelection) => {
+    setSelection(nextSelection)
+    setStored<StoredGameContext>(STORAGE_KEY, { version: 1, slug: nextSelection })
   }
 
+  const isAll = selection === ALL_GAMES_SLUG
+  const game = getMainGameContext(isAll ? DEFAULT_MAIN_GAME_SLUG : selection)
+
   return (
-    <GameContext.Provider value={{ game: getMainGameContext(slug), setGame }}>
+    <GameContext.Provider value={{ game, selection, isAll, setGame }}>
       {children}
     </GameContext.Provider>
   )

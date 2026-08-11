@@ -1,4 +1,5 @@
 import { fireEvent, render, screen, within } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { describe, expect, it, vi } from 'vitest'
 import { GameProvider } from '@/features/games'
@@ -61,6 +62,30 @@ describe('rutas de Manuales', () => {
       .toHaveTextContent('AnteriorExplorar la regiónSiguiente Captura')
     expect(screen.getByText(/Cuando empieza un combate/)).toBeInTheDocument()
     expect(within(screen.getByRole('region', { name: 'Guías relacionadas' })).getByRole('link', { name: /Pokémon Perla/ })).toHaveAttribute('href', '/manuales/juegos/perla')
+  })
+
+  it('muestra todas las guías principales cuando el alcance es Todos', async () => {
+    const user = userEvent.setup()
+    renderManualRoute('/manuales')
+
+    await user.click(screen.getByRole('button', { name: /Cambiar juego activo/ }))
+    await user.click(screen.getByRole('button', { name: 'Todos' }))
+
+    const expected = [
+      ['perla', 'Pokémon Perla'],
+      ['platino', 'Pokémon Platino'],
+      ['oro-heartgold', 'Pokémon Oro HeartGold'],
+      ['negro', 'Pokémon Negro'],
+      ['negro-2', 'Pokémon Negro 2'],
+    ] as const
+    for (const [slug, title] of expected) {
+      const link = screen.getAllByRole('link').find((candidate) => (
+        candidate.getAttribute('href') === `/manuales/juegos/${slug}`
+        && candidate.textContent?.includes('Páginas')
+      ))
+      expect(link).toHaveTextContent(title)
+      expect(link).toHaveTextContent(/Páginas/)
+    }
   })
 
   it('ofrece un 404 propio y una salida segura', () => {

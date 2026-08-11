@@ -1,7 +1,7 @@
 import { ArrowRight } from '@/components/icons'
 import { Link } from 'react-router-dom'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { useGameContext } from '@/features/games'
+import { MAIN_GAME_CONTEXTS, useGameContext } from '@/features/games'
 import type { ManualContentFamily } from './content/types'
 
 interface JourneyLink {
@@ -11,10 +11,16 @@ interface JourneyLink {
 }
 
 export function ManualJourneyLinks({ family }: { family: ManualContentFamily }) {
-  const { game } = useGameContext()
+  const { game, isAll } = useGameContext()
   const mainGame: JourneyLink = { path: `/manuales/juegos/${game.slug}`, title: game.title, description: 'Continúa con la guía del juego seleccionado.' }
+  const mainGames: readonly JourneyLink[] = MAIN_GAME_CONTEXTS.map((entry) => ({
+    path: `/manuales/juegos/${entry.slug}`,
+    title: entry.title,
+    description: 'Continúa con la guía de este juego principal.',
+  }))
+  const contextualMainGames = isAll ? mainGames : [mainGame]
   const links: readonly JourneyLink[] = family === 'trainer'
-    ? [mainGame]
+    ? contextualMainGames
     : family === 'mystery-dungeon'
       ? [
           { path: '/manuales/juegos/equipo-rescate-azul', title: 'Equipo de Rescate Azul', description: 'Aplica la lección al equipo de rescate.' },
@@ -28,7 +34,7 @@ export function ManualJourneyLinks({ family }: { family: ManualContentFamily }) 
             { path: '/manuales/juegos/conquest', title: 'Pokémon Conquest', description: 'Planifica batallas por turnos.' },
           ]
         : family === 'start'
-          ? [mainGame, { path: '/manuales/juegos/equipo-rescate-azul', title: 'Equipo de Rescate Azul', description: 'Prueba el recorrido de Mundo Misterioso.' }]
+          ? [...contextualMainGames, { path: '/manuales/juegos/equipo-rescate-azul', title: 'Equipo de Rescate Azul', description: 'Prueba el recorrido de Mundo Misterioso.' }]
           : []
 
   if (links.length === 0) return null

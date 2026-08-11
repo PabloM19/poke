@@ -21,11 +21,13 @@ const resourceDescriptions: Record<(typeof resourceDefinitions)[number]['code'],
 const spoilerLabels = { none: 'Sin spoilers', mechanics: 'Mecánicas', guide: 'Guía' } as const
 
 export function ResourcesCenterPage() {
-  const { game } = useGameContext()
+  const { game, isAll } = useGameContext()
   const gameTitles = new Map(gameDefinitions.map((game) => [game.slug, game.title]))
-  const orderedResources = [...resourceDefinitions].sort((left, right) => (
-    Number(right.relatedGames.includes(game.slug)) - Number(left.relatedGames.includes(game.slug))
-  ))
+  const orderedResources = isAll
+    ? [...resourceDefinitions]
+    : [...resourceDefinitions].sort((left, right) => (
+        Number(right.relatedGames.includes(game.slug)) - Number(left.relatedGames.includes(game.slug))
+      ))
   const revised = new Intl.DateTimeFormat('es-ES', { dateStyle: 'long', timeZone: 'UTC' })
     .format(new Date(`${manualContentRevision}T12:00:00Z`))
 
@@ -35,7 +37,7 @@ export function ResourcesCenterPage() {
         eyebrow="Consulta rápida · R-01…R-06"
         title="Centro de recursos"
         description="El punto estable para consultar y actualizar los complementos del manual sin depender de la paginación ni reimprimir enlaces."
-        context={<><span className="font-semibold text-foreground">Contexto: {game.title}</span><span> · Los recursos relacionados aparecen primero.</span></>}
+        context={<><span className="font-semibold text-foreground">Contexto: {isAll ? 'Todos los juegos' : game.title}</span><span> · {isAll ? 'Se muestran todos los recursos.' : 'Los recursos relacionados aparecen primero.'}</span></>}
         actions={<div className="flex flex-wrap gap-2"><Badge variant="secondary">Páginas 153–156</Badge><Badge variant="secondary">Edición {manualEdition}</Badge></div>}
       />
 

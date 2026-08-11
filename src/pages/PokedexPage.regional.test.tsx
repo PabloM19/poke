@@ -67,4 +67,17 @@ describe('PokedexPage con juego activo', () => {
       { signal: expect.any(AbortSignal) },
     )
   })
+
+  it('muestra la Pokédex nacional al elegir Todos', async () => {
+    const user = userEvent.setup()
+    renderPage()
+
+    expect(await screen.findByText(/Pokédex regional de Sinnoh para Perla/)).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: /Cambiar juego activo/ }))
+    await user.click(screen.getByRole('button', { name: 'Todos' }))
+
+    expect(screen.getByText('649 especies de las Generaciones I–V. Toca una para ver su ficha completa.')).toBeInTheDocument()
+    expect(screen.getByText('Bulbasaur')).toBeInTheDocument()
+    expect(mocks.getRegionalPokedex).toHaveBeenCalledTimes(1)
+  })
 })

@@ -1,9 +1,12 @@
 import { createContext, useContext } from 'react'
-import type { MainGameContext, MainGameSlug } from './gameCatalog'
+import type { GameSelection, MainGameContext } from './gameCatalog'
 
 export interface GameContextValue {
+  /** The selected game context. When isAll is true this is a safe fallback for legacy tools. */
   game: MainGameContext
-  setGame: (slug: MainGameSlug) => void
+  selection: GameSelection
+  isAll: boolean
+  setGame: (selection: GameSelection) => void
 }
 
 export const GameContext = createContext<GameContextValue | null>(null)

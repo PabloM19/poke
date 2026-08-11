@@ -48,17 +48,17 @@ function StarterSection({ guide }: { guide: MainGameGuide }) {
 
 export function MainGameGuidePage() {
   const { juego } = useParams()
-  const { game: activeGame } = useGameContext()
+  const { game: activeGame, isAll } = useGameContext()
   const guide = isMainGameSlug(juego) ? publishedMainGameGuides.get(juego) : null
   if (!guide) return <ManualNotFoundPage />
   const game = getMainGameContext(guide.slug)
   const gymGroups = guide.gymGroups ?? [{ title: 'Las ocho Medallas', start: 0, end: guide.gyms.length }]
   return (
     <article className="space-y-10">
-      {activeGame.slug !== game.slug && (
+      {(isAll || activeGame.slug !== game.slug) && (
         <aside className="flex flex-col gap-3 rounded-[var(--radius-lg)] border border-ui-yellow-strong/25 bg-ui-yellow/35 p-4 text-sm sm:flex-row sm:items-center sm:justify-between" aria-label="Contexto de juego">
-          <p><strong>Guía de {game.shortTitle}.</strong> El juego activo es {activeGame.shortTitle}; las consultas enlazadas desde aquí mantienen el contexto de esta guía.</p>
-          <Button asChild size="sm" variant="outline" className="shrink-0"><Link to={`/manuales/juegos/${activeGame.slug}`}>Abrir guía activa</Link></Button>
+          <p><strong>Guía de {game.shortTitle}.</strong> El contexto global es {isAll ? 'Todos los juegos' : activeGame.shortTitle}; las consultas enlazadas desde aquí mantienen el contexto de esta guía.</p>
+          <Button asChild size="sm" variant="outline" className="shrink-0"><Link to={isAll ? '/manuales' : `/manuales/juegos/${activeGame.slug}`}>{isAll ? 'Ver todas las guías' : 'Abrir guía activa'}</Link></Button>
         </aside>
       )}
       <header className="overflow-hidden rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-sm)] sm:p-8">

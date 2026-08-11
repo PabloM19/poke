@@ -11,6 +11,11 @@ function Consumer() {
   return <output>{game.title} · {game.versionGroup}</output>
 }
 
+function ScopeConsumer() {
+  const { isAll } = useGameContext()
+  return <output>{isAll ? 'todos' : 'juego'}</output>
+}
+
 describe('GameContext', () => {
   it('usa Perla ante almacenamiento ausente o inválido', () => {
     setStored('game-context:v1', { version: 99, slug: 'inventado' })
@@ -46,5 +51,20 @@ describe('GameContext', () => {
     expect(screen.getByRole('group', { name: 'Generación V' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Pokémon Negro 2' })).toBeInTheDocument()
     expect(screen.queryByRole('button', { name: 'Pokémon Ranger' })).not.toBeInTheDocument()
+  })
+
+  it('persiste el alcance Todos', async () => {
+    window.localStorage.clear()
+    const user = userEvent.setup()
+    const first = render(<GameProvider><GameSelector /><ScopeConsumer /></GameProvider>)
+
+    await user.click(screen.getByRole('button', { name: /Cambiar juego activo/ }))
+    await user.click(screen.getByRole('button', { name: 'Todos' }))
+    expect(screen.getByText('todos')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /Actualmente Todos los juegos/ })).toBeInTheDocument()
+
+    first.unmount()
+    render(<GameProvider><ScopeConsumer /></GameProvider>)
+    expect(screen.getByText('todos')).toBeInTheDocument()
   })
 })

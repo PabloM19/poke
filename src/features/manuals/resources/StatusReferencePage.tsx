@@ -19,14 +19,14 @@ const temporaryEffects = [
 ] as const
 
 export function StatusReferencePage() {
-  const { game } = useGameContext()
+  const { game, isAll } = useGameContext()
   return (
     <article>
       <PageHeader
         eyebrow="R-02 · Referencia de mecánicas"
         title="Estados y efectos"
         description="Un Pokémon solo conserva un estado principal a la vez, pero puede sufrir además efectos temporales y cambios de características."
-        context={<><span className="font-semibold text-foreground">{game.title} · Generación {game.generation === 4 ? 'IV' : 'V'}</span><span> · Referencia pensada para los juegos principales de Nintendo DS.</span></>}
+        context={<><span className="font-semibold text-foreground">{isAll ? 'Todos los juegos principales' : `${game.title} · Generación ${game.generation === 4 ? 'IV' : 'V'}`}</span><span> · Referencia pensada para los juegos principales de Nintendo DS.</span></>}
       />
       <PhysicalReference reference={{ edition: 'ds-156-v1', pages: [49, 50, 51, 52, 53, 54, 153, 154] }} />
 

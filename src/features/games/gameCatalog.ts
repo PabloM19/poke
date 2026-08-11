@@ -10,6 +10,8 @@ export interface MainGameContext {
 }
 
 export type MainGameSlug = 'perla' | 'platino' | 'oro-heartgold' | 'negro' | 'negro-2'
+export const ALL_GAMES_SLUG = 'all' as const
+export type GameSelection = MainGameSlug | typeof ALL_GAMES_SLUG
 
 export const MAIN_GAME_CONTEXTS: readonly MainGameContext[] = [
   { slug: 'perla', title: 'Pokémon Perla', shortTitle: 'Perla', generation: 4, region: 'Sinnoh', version: 'pearl', versionGroup: 'diamond-pearl', pokedex: 'original-sinnoh' },
@@ -20,6 +22,10 @@ export const MAIN_GAME_CONTEXTS: readonly MainGameContext[] = [
 ]
 
 export const DEFAULT_MAIN_GAME_SLUG: MainGameSlug = 'perla'
+
+export function isGameSelection(value: unknown): value is GameSelection {
+  return value === ALL_GAMES_SLUG || isMainGameSlug(value)
+}
 
 export function isMainGameSlug(value: unknown): value is MainGameSlug {
   return typeof value === 'string'

@@ -94,7 +94,7 @@ function MatchupGroup({
 export function PokemonDetailPage() {
   const location = useLocation()
   const manualReturn = readManualReturn(location.state)
-  const { game } = useGameContext()
+  const { game, isAll } = useGameContext()
   const { speciesId: speciesIdParam } = useParams<{ speciesId: string }>()
   const [retry, setRetry] = useState(0)
   const [requestResult, setRequestResult] =
@@ -161,7 +161,7 @@ export function PokemonDetailPage() {
             stats,
             totalBaseStats,
             otherNames,
-            gameTitle: game.title,
+            gameTitle: isAll ? 'Todos los juegos' : game.title,
             generation: game.generation,
             defense,
           },
@@ -184,7 +184,7 @@ export function PokemonDetailPage() {
     return () => {
       controller.abort()
     }
-  }, [game.generation, game.slug, game.title, requestKey, speciesId])
+  }, [game.generation, game.slug, game.title, isAll, requestKey, speciesId])
 
   useEffect(() => {
     if (speciesId == null || requestKey == null || requestResult?.key !== requestKey || requestResult.status !== 'success' || isOnboardingInProgress()) return

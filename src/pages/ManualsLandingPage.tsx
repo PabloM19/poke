@@ -2,12 +2,25 @@ import { Link } from 'react-router-dom'
 import { ArrowRight, Compass, Gamepad2, Library, Map, ShieldCheck, Sparkles, TableProperties } from '@/components/icons'
 import { PageHeader } from '@/components/PageHeader'
 import { BentoCard, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { useGameContext } from '@/features/games'
+import { MAIN_GAME_CONTEXTS, useGameContext } from '@/features/games'
 import { ManualSearchBox } from '@/features/manuals/search/ManualSearchBox'
 import { ContinueReadingCard } from '@/features/manuals/progress/ContinueReadingCard'
 import { SpoilerPreferenceControl } from '@/features/manuals/spoilers/SpoilerPreferenceControl'
 
-const routes = [
+type ManualLandingCategory = 'core' | 'spin-off' | 'resources'
+
+interface ManualLandingRoute {
+  path: string
+  title: string
+  description: string
+  pages: string
+  icon: typeof Gamepad2
+  tone: 'surface' | 'green' | 'lavender' | 'blue' | 'yellow'
+  category: ManualLandingCategory
+  activeGame?: boolean
+}
+
+const routes: readonly ManualLandingRoute[] = [
   {
     path: '/manuales/juegos/perla',
     title: 'Guías por juego',
@@ -72,18 +85,36 @@ const routes = [
     tone: 'blue',
     category: 'resources',
   },
-] as const
+]
+
+const mainGamePages = {
+  perla: '87–94',
+  platino: '95–102',
+  'oro-heartgold': '103–112',
+  negro: '113–120',
+  'negro-2': '121–128',
+}
 
 export function ManualsLandingPage() {
-  const { game } = useGameContext()
-  const contextualRoutes = routes.map((route) => 'activeGame' in route && route.activeGame
-    ? {
-        ...route,
-        path: `/manuales/juegos/${game.slug}`,
-        title: game.title,
-        description: `La guía específica de ${game.title}: recorrido, sistemas y recursos del juego activo.`,
-      }
-    : route)
+  const { game, isAll } = useGameContext()
+  const contextualRoutes = isAll
+    ? routes.flatMap((route) => 'activeGame' in route && route.activeGame
+      ? MAIN_GAME_CONTEXTS.map((entry) => ({
+          ...route,
+          path: `/manuales/juegos/${entry.slug}`,
+          title: entry.title,
+          description: `Guía específica de ${entry.title}: recorrido, sistemas y recursos.`,
+          pages: mainGamePages[entry.slug],
+        }))
+      : [route])
+    : routes.map((route) => 'activeGame' in route && route.activeGame
+      ? {
+          ...route,
+          path: `/manuales/juegos/${game.slug}`,
+          title: game.title,
+          description: `La guía específica de ${game.title}: recorrido, sistemas y recursos del juego activo.`,
+        }
+      : route)
 
   const sections = [
     { id: 'manuales-principales', title: 'Contexto principal', description: 'Bases compartidas y la guía del juego que tienes activo.', category: 'core' },
@@ -97,7 +128,9 @@ export function ManualsLandingPage() {
         <PageHeader
           eyebrow="Manual Nintendo DS · 156 páginas"
           title="Manuales"
-          description="Empieza por las ideas generales y elige después tu recorrido: Entrenador Pokémon, Mundo Misterioso o la guía de tu juego activo."
+          description={isAll
+            ? 'Consulta todos los juegos principales, las ideas generales, Mundo Misterioso y el resto de la biblioteca.'
+            : 'Empieza por las ideas generales y elige después tu recorrido: Entrenador Pokémon, Mundo Misterioso o la guía de tu juego activo.'}
         />
       </div>
       <div className="space-y-8">

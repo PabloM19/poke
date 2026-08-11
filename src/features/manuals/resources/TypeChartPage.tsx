@@ -29,7 +29,7 @@ function multiplierClass(multiplier: DamageMultiplier): string {
 }
 
 export function TypeChartPage() {
-  const { game } = useGameContext()
+  const { game, isAll } = useGameContext()
   const typeNames = getTypeNamesForGeneration(game.generation)
   const [selectedAttacker, setSelectedAttacker] = useState('normal')
   const attacker = typeNames.includes(selectedAttacker) ? selectedAttacker : typeNames[0]
@@ -56,7 +56,7 @@ export function TypeChartPage() {
         eyebrow="R-01 · Referencia sin spoilers"
         title="Tabla de tipos"
         description="Elige el tipo del movimiento atacante y busca el tipo del Pokémon defensor. Si tiene dos tipos, multiplica ambos valores: por ejemplo, 2 × 2 = 4."
-        context={<><span className="font-semibold text-foreground">{game.title} · Generación {game.generation === 4 ? 'IV' : 'V'}</span><span> · Relaciones históricas del juego activo, sin Hada.</span></>}
+        context={<><span className="font-semibold text-foreground">{isAll ? 'Todos los juegos · Generaciones IV–V' : `${game.title} · Generación ${game.generation === 4 ? 'IV' : 'V'}`}</span><span> · Relaciones históricas, sin Hada.</span></>}
       />
       <PhysicalReference reference={{ edition: 'ds-156-v1', pages: [153, 154] }} />
 

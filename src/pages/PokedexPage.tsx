@@ -78,7 +78,7 @@ function TypeFilterChip({ type, onRemove }: { type: PokemonTypeName; onRemove: (
 export function PokedexPage() {
   const [searchParams, setSearchParams] = useSearchParams()
   const gameContext = useOptionalGameContext()
-  const game = gameContext?.game ?? null
+  const game = gameContext == null || gameContext.isAll ? null : gameContext.game
   const regional = useRegionalPokedexItems(game)
   const [viewMode, setViewMode] = useState<ViewMode>(() =>
     getSetting('defaultView', 'grid')
@@ -340,7 +340,7 @@ export function PokedexPage() {
       </div>
       </div>
 
-      {gameContext != null && regional.status === 'loading' && (
+      {gameContext != null && !gameContext.isAll && regional.status === 'loading' && (
         <StatusState
           title={`Cargando la Pokédex de ${gameContext.game.shortTitle}…`}
           description="Estamos recuperando la lista regional de PokeAPI."
@@ -348,7 +348,7 @@ export function PokedexPage() {
           compact
         />
       )}
-      {gameContext != null && regional.status === 'error' && (
+      {gameContext != null && !gameContext.isAll && regional.status === 'error' && (
         <StatusState
           title="No se pudo cargar la Pokédex regional"
           description={`Comprueba la conexión y vuelve a intentarlo para ${gameContext.game.shortTitle}.`}
