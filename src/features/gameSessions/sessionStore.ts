@@ -5,15 +5,17 @@ import { isTypeGuessSession } from '@/features/typeGuess/validation'
 import { isEffectivenessSession } from '@/features/effectivenessQuiz/validation'
 import { isEvolutionChainSession } from '@/features/evolutionChain/validation'
 import { isPokemonIntruderSession } from '@/features/pokemonIntruder/validation'
+import { isTypeMemorySession } from '@/features/typeMemory/validation'
 import type { TypeDuelSession } from '@/features/typeDuel/model'
 import type { PokemonSilhouetteSession } from '@/features/pokemonSilhouette/model'
 import type { TypeGuessSession } from '@/features/typeGuess/model'
 import type { EffectivenessSession } from '@/features/effectivenessQuiz/model'
 import type { EvolutionChainSession } from '@/features/evolutionChain/model'
 import type { PokemonIntruderSession } from '@/features/pokemonIntruder/model'
+import type { TypeMemorySession } from '@/features/typeMemory/model'
 import type { GameType } from './model'
 
-export type StoredGameSession = TypeDuelSession | PokemonSilhouetteSession | TypeGuessSession | EffectivenessSession | EvolutionChainSession | PokemonIntruderSession
+export type StoredGameSession = TypeDuelSession | PokemonSilhouetteSession | TypeGuessSession | EffectivenessSession | EvolutionChainSession | PokemonIntruderSession | TypeMemorySession
 
 export const GAME_SESSIONS_STORE_VERSION = 1
 export const GAME_SESSIONS_STORAGE_KEY = 'games:sessions:v1'
@@ -31,7 +33,7 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 }
 
 function isStoredSession(value: unknown): value is StoredGameSession {
-  return isTypeDuelSession(value) || isPokemonSilhouetteSession(value) || isTypeGuessSession(value) || isEffectivenessSession(value) || isEvolutionChainSession(value) || isPokemonIntruderSession(value)
+  return isTypeDuelSession(value) || isPokemonSilhouetteSession(value) || isTypeGuessSession(value) || isEffectivenessSession(value) || isEvolutionChainSession(value) || isPokemonIntruderSession(value) || isTypeMemorySession(value)
 }
 
 function readPayload(key: string): readonly StoredGameSession[] | null {

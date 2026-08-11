@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ChevronRight, CircleDot, Dna, GitCompare, Library, Question, Shapes, Sword, type PhosphorIcon } from '@/components/icons'
+import { ChevronRight, CircleDot, Dna, GitCompare, Grid3X3, Library, Question, Shapes, Sword, type PhosphorIcon } from '@/components/icons'
 import { PageHeader } from '@/components/PageHeader'
 import { BentoCard, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 
@@ -53,6 +53,13 @@ const gameEntries: readonly ToolEntry[] = [
     description: 'Encuentra el Pokémon que no pertenece al grupo.',
     icon: Question,
     tone: 'yellow',
+  },
+  {
+    to: '/more/juegos/memoria-tipos',
+    title: 'Memoria de tipos',
+    description: 'Empareja cada tipo con su símbolo.',
+    icon: Grid3X3,
+    tone: 'blue',
   },
 ]
 

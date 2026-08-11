@@ -1,6 +1,6 @@
 import type { GameSelection } from '@/features/games'
 
-export type GameType = 'type-duel' | 'pokemon-silhouette' | 'type-guess' | 'type-effectiveness' | 'evolution-chain' | 'pokemon-intruder'
+export type GameType = 'type-duel' | 'pokemon-silhouette' | 'type-guess' | 'type-effectiveness' | 'evolution-chain' | 'pokemon-intruder' | 'type-memory'
 
 export interface GameSession<
   TRound,

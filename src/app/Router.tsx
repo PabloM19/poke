@@ -77,6 +77,15 @@ const PokemonIntruderHistoryPage = lazy(async () => ({
 const PokemonIntruderSessionDetailPage = lazy(async () => ({
   default: (await import('@/pages/PokemonIntruderSessionDetailPage')).PokemonIntruderSessionDetailPage,
 }))
+const TypeMemoryPage = lazy(async () => ({
+  default: (await import('@/pages/TypeMemoryPage')).TypeMemoryPage,
+}))
+const TypeMemoryHistoryPage = lazy(async () => ({
+  default: (await import('@/pages/TypeMemoryHistoryPage')).TypeMemoryHistoryPage,
+}))
+const TypeMemorySessionDetailPage = lazy(async () => ({
+  default: (await import('@/pages/TypeMemorySessionDetailPage')).TypeMemorySessionDetailPage,
+}))
 const NotFoundPage = lazy(async () => ({
   default: (await import('@/pages/NotFoundPage')).NotFoundPage,
 }))
@@ -209,6 +218,9 @@ const router = createBrowserRouter([
       { path: 'more/juegos/pokemon-intruso', element: <DeferredRoute label="Pokémon intruso"><PokemonIntruderPage /></DeferredRoute> },
       { path: 'more/juegos/pokemon-intruso/historial', element: <DeferredRoute label="Historial de Pokémon intruso"><PokemonIntruderHistoryPage /></DeferredRoute> },
       { path: 'more/juegos/pokemon-intruso/historial/:sessionId', element: <DeferredRoute label="Intento de Pokémon intruso"><PokemonIntruderSessionDetailPage /></DeferredRoute> },
+      { path: 'more/juegos/memoria-tipos', element: <DeferredRoute label="Memoria de tipos"><TypeMemoryPage /></DeferredRoute> },
+      { path: 'more/juegos/memoria-tipos/historial', element: <DeferredRoute label="Historial de Memoria de tipos"><TypeMemoryHistoryPage /></DeferredRoute> },
+      { path: 'more/juegos/memoria-tipos/historial/:sessionId', element: <DeferredRoute label="Intento de Memoria de tipos"><TypeMemorySessionDetailPage /></DeferredRoute> },
       { path: '*', element: <DeferredRoute label="Página"><NotFoundPage /></DeferredRoute> },
     ],
   },

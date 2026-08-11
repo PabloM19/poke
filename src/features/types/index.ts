@@ -1,4 +1,5 @@
 export { TypeChip, type TypeChipSize, type TypeChipVariant } from './TypeChip'
+export { TypeSymbol } from './TypeSymbol'
 export {
   POKEMON_TYPE_SLUGS,
   TYPE_STYLES,
