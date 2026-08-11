@@ -47,6 +47,13 @@ const gameEntries: readonly ToolEntry[] = [
     icon: Dna,
     tone: 'lavender',
   },
+  {
+    to: '/more/juegos/pokemon-intruso',
+    title: 'Pokémon intruso',
+    description: 'Encuentra el Pokémon que no pertenece al grupo.',
+    icon: Question,
+    tone: 'yellow',
+  },
 ]
 
 const utilityEntries: readonly ToolEntry[] = [

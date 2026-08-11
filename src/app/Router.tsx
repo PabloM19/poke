@@ -68,6 +68,15 @@ const EvolutionChainHistoryPage = lazy(async () => ({
 const EvolutionChainSessionDetailPage = lazy(async () => ({
   default: (await import('@/pages/EvolutionChainSessionDetailPage')).EvolutionChainSessionDetailPage,
 }))
+const PokemonIntruderPage = lazy(async () => ({
+  default: (await import('@/pages/PokemonIntruderPage')).PokemonIntruderPage,
+}))
+const PokemonIntruderHistoryPage = lazy(async () => ({
+  default: (await import('@/pages/PokemonIntruderHistoryPage')).PokemonIntruderHistoryPage,
+}))
+const PokemonIntruderSessionDetailPage = lazy(async () => ({
+  default: (await import('@/pages/PokemonIntruderSessionDetailPage')).PokemonIntruderSessionDetailPage,
+}))
 const NotFoundPage = lazy(async () => ({
   default: (await import('@/pages/NotFoundPage')).NotFoundPage,
 }))
@@ -197,6 +206,9 @@ const router = createBrowserRouter([
       { path: 'more/juegos/cadena-evolutiva', element: <DeferredRoute label="Cadena evolutiva"><EvolutionChainPage /></DeferredRoute> },
       { path: 'more/juegos/cadena-evolutiva/historial', element: <DeferredRoute label="Historial de Cadena evolutiva"><EvolutionChainHistoryPage /></DeferredRoute> },
       { path: 'more/juegos/cadena-evolutiva/historial/:sessionId', element: <DeferredRoute label="Intento de Cadena evolutiva"><EvolutionChainSessionDetailPage /></DeferredRoute> },
+      { path: 'more/juegos/pokemon-intruso', element: <DeferredRoute label="Pokémon intruso"><PokemonIntruderPage /></DeferredRoute> },
+      { path: 'more/juegos/pokemon-intruso/historial', element: <DeferredRoute label="Historial de Pokémon intruso"><PokemonIntruderHistoryPage /></DeferredRoute> },
+      { path: 'more/juegos/pokemon-intruso/historial/:sessionId', element: <DeferredRoute label="Intento de Pokémon intruso"><PokemonIntruderSessionDetailPage /></DeferredRoute> },
       { path: '*', element: <DeferredRoute label="Página"><NotFoundPage /></DeferredRoute> },
     ],
   },
