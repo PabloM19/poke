@@ -11,7 +11,7 @@ const kindConfig: Record<ManualSearchResultKind, { label: string; icon: typeof B
   resource: { label: 'Recurso', icon: Shapes },
 }
 
-export function ManualSearchBox() {
+export function ManualSearchBox({ embedded = false }: { embedded?: boolean }) {
   const { level } = useSpoilerPreference()
   const [query, setQuery] = useState('')
   const deferredQuery = useDeferredValue(query)
@@ -19,8 +19,8 @@ export function ManualSearchBox() {
   const showResults = query.trim().length >= 2
 
   return (
-    <section aria-labelledby="manual-search-title">
-      <h2 id="manual-search-title" className="mb-4 text-lg font-semibold">Encuentra una respuesta</h2>
+    <section aria-labelledby={embedded ? undefined : 'manual-search-title'} aria-label={embedded ? 'Buscar en Manuales' : undefined}>
+      {!embedded && <h2 id="manual-search-title" className="mb-4 text-lg font-semibold">Encuentra una respuesta</h2>}
       <SearchField type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Ej.: captura, hambre, Perla o R-01" aria-label="Buscar en Manuales" />
       {showResults && (
         <div className="mt-3 rounded-[var(--radius-lg)] border border-border bg-card p-2 shadow-[var(--shadow-sm)]" role="region" aria-label="Resultados del manual">

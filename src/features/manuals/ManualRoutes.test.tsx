@@ -51,6 +51,27 @@ function renderManualRoute(path: string) {
 }
 
 describe('rutas de Manuales', () => {
+  it('presenta la landing como un recorrido claro y deja el índice como consulta secundaria', async () => {
+    const user = userEvent.setup()
+    renderManualRoute('/manuales')
+
+    expect(screen.getAllByRole('heading')[0]).toHaveTextContent('Manuales')
+    expect(screen.getByRole('heading', { name: '¿Qué juego estás jugando?' })).toBeInTheDocument()
+    expect(screen.getByText('Paso 1 · Personaliza la biblioteca')).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Tu mejor punto de partida' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /Guía recomendada para tu juego/ }))
+      .toHaveAttribute('href', '/manuales/juegos/perla')
+
+    const indexTrigger = screen.getByRole('button', { name: /Índice completo/ })
+    expect(indexTrigger).toHaveAttribute('aria-expanded', 'false')
+    await user.click(indexTrigger)
+
+    expect(screen.getByRole('heading', { name: 'Aprender las bases' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Juegos principales' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Spin-offs' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Consulta rápida' })).toBeInTheDocument()
+  })
+
   it('muestra migas, referencia física, índice y avance', () => {
     renderManualRoute('/manuales/entrenador/combate')
 
