@@ -67,9 +67,9 @@ const PHASE_LABELS: Record<BuildPhase, string> = {
 }
 
 const SECTION_TONES = {
-  lavender: 'bg-ui-lavender/45 text-ui-lavender-strong',
-  green: 'bg-ui-green/55 text-ui-green-strong',
-  blue: 'bg-ui-blue/50 text-ui-blue-strong',
+  lavender: 'bg-ui-lavender/60 text-ui-lavender-strong',
+  green: 'bg-ui-green/65 text-ui-green-strong',
+  blue: 'bg-ui-blue/60 text-ui-blue-strong',
 } as const
 
 function SettingsSection({
@@ -88,18 +88,18 @@ function SettingsSection({
   children: ReactNode
 }) {
   return (
-    <section className="overflow-hidden rounded-[var(--radius-xl)] border border-border bg-card shadow-[var(--shadow-sm)]">
-      <header className={cn('flex items-start gap-3 p-4 sm:p-5', SECTION_TONES[tone])}>
-        <span className="flex size-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-current/15 bg-card/55 shadow-[var(--shadow-xs)]">
+    <section aria-labelledby={`${eyebrow}-${title}`.replaceAll(' ', '-').toLowerCase()}>
+      <header className="mb-4 flex items-start gap-3">
+        <span className={cn('flex size-10 shrink-0 items-center justify-center rounded-[var(--radius-md)]', SECTION_TONES[tone])}>
           <Icon className="size-5" aria-hidden />
         </span>
         <div className="min-w-0">
-          <p className="text-[0.6875rem] font-bold uppercase tracking-[0.16em] opacity-80">{eyebrow}</p>
-          <h2 className="mt-1 text-xl font-bold tracking-[-0.02em] text-foreground">{title}</h2>
+          <p className="text-[0.6875rem] font-bold uppercase tracking-[0.16em] text-ui-blue-strong">{eyebrow}</p>
+          <h2 id={`${eyebrow}-${title}`.replaceAll(' ', '-').toLowerCase()} className="mt-1 text-xl font-bold tracking-[-0.02em] text-foreground">{title}</h2>
           <p className="mt-1 text-sm leading-6 text-muted-foreground">{description}</p>
         </div>
       </header>
-      <div className="divide-y divide-border/75">{children}</div>
+      <div className="divide-y divide-border/75 overflow-hidden rounded-[var(--radius-lg)] border border-border bg-card shadow-[var(--shadow-xs)]">{children}</div>
     </section>
   )
 }
@@ -459,7 +459,7 @@ export function SettingsPage() {
           {cacheNotice && <p className="px-4 py-3 text-sm text-ui-blue-strong sm:px-5" role="status">{cacheNotice}</p>}
         </SettingsSection>
 
-        <Accordion type="single" collapsible className="overflow-hidden rounded-[var(--radius-xl)] border border-border bg-card shadow-[var(--shadow-sm)]">
+        <Accordion type="single" collapsible className="overflow-hidden rounded-[var(--radius-lg)] border border-border bg-card shadow-[var(--shadow-xs)]">
           <AccordionItem value="diagnostic" className="border-0">
             <AccordionTrigger className="min-h-16 rounded-none px-4 py-4 sm:px-5">
               <span className="flex items-center gap-3 text-left">

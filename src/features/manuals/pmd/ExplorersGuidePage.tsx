@@ -27,13 +27,13 @@ const ranks = ['Normal', 'Bronce', 'Plata', 'Oro', 'Diamante', 'Super', 'Ultra',
 export function ExplorersGuidePage() {
   return (
     <article className="space-y-10">
-      <header className="overflow-hidden rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-sm)] sm:p-8">
+      <header className="overflow-hidden rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-xs)] sm:p-8">
         <div className="mb-5 flex size-12 items-center justify-center rounded-[var(--radius-md)] bg-ui-blue text-ui-blue-strong shadow-[var(--shadow-xs)]"><Compass className="size-6" aria-hidden /></div>
         <p className="text-sm font-semibold uppercase tracking-widest text-primary">Mundo Misterioso · Equipo de Exploración</p>
         <h1 className="mt-2 page-title">Exploradores de la Oscuridad</h1>
         <p className="mt-3 text-lg font-medium">Misterio, amistad y exploración a través del tiempo.</p>
         <p className="mt-4 max-w-3xl leading-7 text-muted-foreground">Despiertas convertido en Pokémon y sin recuerdos junto a una playa. Allí conoces a un Pokémon que sueña con ser explorador, pero aún no se atreve a dar el primer paso. Una piedra con un extraño dibujo será el comienzo de vuestra aventura.</p>
-        <div className="mt-5 flex flex-wrap gap-2"><Badge variant="secondary">Sin spoilers de historia</Badge><Badge variant="secondary">Páginas 137–144</Badge><Badge variant="secondary">Mecánicas PMD</Badge></div>
+        <div className="mt-5 flex flex-wrap gap-2"><Badge variant="metadata">Sin spoilers de historia</Badge><Badge variant="metadata">· Páginas 137–144</Badge><Badge variant="metadata">· Mecánicas PMD</Badge></div>
       </header>
 
       <ManualFigureCarousel id="explorers-visual-guide" label="Reconoce Aldea Tesoro y una expedición" figures={[manualVisualCatalog.pmdDarknessTown, manualVisualCatalog.pmdDarknessDungeon, manualVisualCatalog.pmdDarknessMap]} />

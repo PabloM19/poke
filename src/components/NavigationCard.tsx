@@ -24,7 +24,11 @@ export function NavigationCard({
   className?: string
 }) {
   return (
-    <BentoCard tone={tone} className={cn('h-full p-5 hover:-translate-y-0.5 sm:p-6', className)}>
+    <BentoCard
+      tone={tone}
+      data-semantic="navigation-card"
+      className={cn('h-full p-5 shadow-[var(--shadow-sm)] hover:-translate-y-0.5 sm:p-6', className)}
+    >
       <div className="flex min-h-11 items-center justify-between gap-4" aria-hidden>
         <span className="flex size-11 shrink-0 items-center justify-start">
           <Icon className="size-5 text-muted-foreground" />

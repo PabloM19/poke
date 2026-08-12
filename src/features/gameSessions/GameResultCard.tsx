@@ -17,7 +17,7 @@ export function GameResultCard({
   metrics: readonly GameResultMetric[]
 }) {
   return (
-    <BentoCard tone="green" className="p-6 text-center">
+    <BentoCard tone="green" data-semantic="result-highlight" className="p-6 text-center">
       <Trophy className="mx-auto size-10 text-ui-green-strong" weight="fill" aria-hidden />
       <p className="mt-3 text-4xl font-bold tabular-nums">{result}</p>
       <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p>
@@ -32,4 +32,3 @@ export function GameResultCard({
     </BentoCard>
   )
 }
-

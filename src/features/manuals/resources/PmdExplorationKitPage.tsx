@@ -24,12 +24,12 @@ export function PmdExplorationKitPage() {
 
   return (
     <article className="space-y-8">
-      <header className="rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-sm)] sm:p-8">
+      <header className="rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-xs)] sm:p-8">
         <div className="mb-5 flex size-12 items-center justify-center rounded-[var(--radius-md)] bg-ui-blue text-ui-blue-strong shadow-[var(--shadow-xs)]"><PackageOpen className="size-6" aria-hidden /></div>
         <p className="text-sm font-semibold uppercase tracking-widest text-primary">R-04 · Mecánicas de Mundo Misterioso</p>
         <h1 className="mt-2 page-title">Kit de exploración PMD</h1>
         <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">Prepara alimento, PP, semillas, orbes y equipamiento antes de entrar. La mochila también puede ganar combates si cada objeto tiene una función.</p>
-        <div className="mt-5 flex flex-wrap gap-2"><Badge variant="secondary">Páginas 70–74 y 153–154</Badge><Badge variant="secondary">Sin red</Badge></div>
+        <div className="mt-5 flex flex-wrap gap-2"><Badge variant="metadata">Páginas 70–74 y 153–154</Badge><Badge variant="metadata">· Sin red</Badge></div>
       </header>
 
       <ManualFigureCarousel id="pmd-kit-in-context" label="La mochila dentro de la mazmorra" figures={[manualVisualCatalog.pmdBlueDungeon, manualVisualCatalog.pmdDarknessDungeon]} />

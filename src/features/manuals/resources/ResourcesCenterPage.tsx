@@ -40,7 +40,7 @@ export function ResourcesCenterPage() {
         title="Centro de recursos"
         description="El punto estable para consultar y actualizar los complementos del manual sin depender de la paginación ni reimprimir enlaces."
         context={<><span className="font-semibold text-foreground">Contexto: {isAll ? 'Todos los juegos' : game.title}</span><span> · {isAll ? 'Se muestran todos los recursos.' : 'Los recursos relacionados aparecen primero.'}</span></>}
-        actions={<div className="flex flex-wrap gap-2"><Badge variant="secondary">Páginas 153–156</Badge><Badge variant="secondary">Edición {manualEdition}</Badge></div>}
+        actions={<div className="flex flex-wrap gap-2"><Badge variant="metadata">Páginas 153–156</Badge><Badge variant="metadata">· Edición {manualEdition}</Badge></div>}
       />
 
       <section aria-label="Estado de revisión" className="grid gap-3 sm:grid-cols-2">

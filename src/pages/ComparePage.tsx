@@ -7,6 +7,7 @@ import { useGameContext } from '@/features/games'
 import { PageHeader } from '@/components/PageHeader'
 import { recordRecentActivity } from '@/features/activity'
 import { isOnboardingInProgress } from '@/features/onboarding'
+import { MetadataList } from '@/components/MetadataList'
 
 export function ComparePage() {
   const { game, isAll } = useGameContext()
@@ -47,9 +48,11 @@ export function ComparePage() {
           title="Comparar"
           description="Pon frente a frente sus tipos y estadísticas, o compara hasta cuatro especies."
           context={(
-            <span className="inline-flex min-h-8 items-center rounded-full border border-border bg-card px-3 py-1 font-semibold text-foreground shadow-[var(--shadow-xs)]">
-              {isAll ? 'Todos los juegos · referencia DS' : `${game.title} · Gen ${game.generation === 4 ? 'IV' : 'V'}`}
-            </span>
+            <MetadataList items={[
+              isAll
+                ? 'Todos los juegos · referencia DS'
+                : `${game.title} · Gen ${game.generation === 4 ? 'IV' : 'V'}`,
+            ]} />
           )}
         />
       </div>

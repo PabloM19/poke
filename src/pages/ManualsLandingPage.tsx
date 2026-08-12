@@ -12,6 +12,9 @@ import {
   TableProperties,
 } from '@/components/icons'
 import { NavigationCard } from '@/components/NavigationCard'
+import { MetadataList } from '@/components/MetadataList'
+import { PageHero } from '@/components/PageHero'
+import { ContentCard } from '@/components/ui/card'
 import { GameSelector, MAIN_GAME_CONTEXTS, useGameContext } from '@/features/games'
 import { ManualIndex } from '@/features/manuals/ManualIndex'
 import { ManualSearchBox } from '@/features/manuals/search/ManualSearchBox'
@@ -134,29 +137,19 @@ export function ManualsLandingPage() {
 
   return (
     <div className="space-y-8 sm:space-y-10" data-tour="manuals-home">
-      <header className="relative overflow-hidden rounded-[var(--radius-xl)] border border-ui-lavender-strong/20 bg-ui-lavender/45 p-5 shadow-[var(--shadow-sm)] sm:p-8">
-        <span className="pointer-events-none absolute -right-14 -top-20 size-52 rounded-full bg-card/35" aria-hidden />
-        <div className="relative max-w-3xl">
-          <span className="flex size-12 items-center justify-center rounded-[var(--radius-md)] bg-card/75 text-ui-lavender-strong shadow-[var(--shadow-xs)]">
-            <BookOpen className="size-6" aria-hidden />
-          </span>
-          <p className="mt-5 text-xs font-bold uppercase tracking-[0.16em] text-ui-lavender-strong">Biblioteca Pokémon para Nintendo DS</p>
-          <h1 className="mt-1 text-4xl font-bold tracking-[-0.04em] sm:text-5xl">Manuales</h1>
-          <p className="mt-3 max-w-2xl text-base leading-7 text-foreground/75 sm:text-lg">
-            Aprende desde cero, sigue la guía de tu juego o consulta una respuesta concreta. Tú eliges por dónde empezar.
-          </p>
-          <div className="mt-5 flex flex-wrap gap-2 text-xs font-semibold text-muted-foreground">
-            <span className="rounded-full border border-current/15 bg-card/65 px-3 py-1.5">156 páginas</span>
-            <span className="rounded-full border border-current/15 bg-card/65 px-3 py-1.5">5 juegos principales</span>
-            <span className="rounded-full border border-current/15 bg-card/65 px-3 py-1.5">Guías para principiantes</span>
-          </div>
-        </div>
-      </header>
+      <PageHero
+        icon={BookOpen}
+        eyebrow="Biblioteca Pokémon para Nintendo DS"
+        title="Manuales"
+        description="Aprende desde cero, sigue la guía de tu juego o consulta una respuesta concreta. Tú eliges por dónde empezar."
+        tone="lavender"
+        metadata={<MetadataList items={['156 páginas', '5 juegos principales', 'Guías para principiantes']} />}
+      />
 
-      <section aria-labelledby="manual-game-context-title" className="overflow-hidden rounded-[var(--radius-xl)] border border-border bg-card shadow-[var(--shadow-sm)]">
-        <div className="bg-ui-blue/40 p-5 sm:p-6">
+      <ContentCard aria-labelledby="manual-game-context-title" className="p-0 sm:p-0">
+        <div className="p-5 pb-4 sm:p-6 sm:pb-4">
           <div className="flex items-start gap-3">
-            <span className="flex size-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-card/70 text-ui-blue-strong shadow-[var(--shadow-xs)]">
+            <span className="flex size-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-ui-blue/60 text-ui-blue-strong">
               <Gamepad2 className="size-5" aria-hidden />
             </span>
             <div>
@@ -168,14 +161,14 @@ export function ManualsLandingPage() {
             </div>
           </div>
         </div>
-        <div className="p-4 sm:flex sm:items-center sm:justify-between sm:gap-5 sm:p-5">
+        <div className="border-t border-border p-4 sm:flex sm:items-center sm:justify-between sm:gap-5 sm:p-5">
           <div className="mb-3 sm:mb-0">
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Juego activo</p>
             <p className="mt-1 font-semibold">{isAll ? 'Todos los juegos principales' : `${game.title} · Generación ${game.generation === 4 ? 'IV' : 'V'}`}</p>
           </div>
           <GameSelector className="w-full sm:w-auto" />
         </div>
-      </section>
+      </ContentCard>
 
       <ContinueReadingCard />
 
@@ -257,7 +250,7 @@ export function ManualsLandingPage() {
         <ManualIndex mode="landing" />
       </section>
 
-      <section className="rounded-[var(--radius-xl)] border border-border bg-card p-5 shadow-[var(--shadow-sm)] sm:p-6" aria-labelledby="manual-search-area-title">
+      <ContentCard aria-labelledby="manual-search-area-title">
         <div className="mb-5 flex items-start gap-3">
           <span className="flex size-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-ui-yellow/55 text-ui-yellow-strong shadow-[var(--shadow-xs)]">
             <Search className="size-5" aria-hidden />
@@ -269,7 +262,7 @@ export function ManualsLandingPage() {
           </div>
         </div>
         <ManualSearchBox embedded />
-      </section>
+      </ContentCard>
 
       <section className="grid gap-4 rounded-[var(--radius-xl)] border border-border bg-card p-5 shadow-[var(--shadow-xs)] sm:grid-cols-[minmax(0,1fr)_minmax(14rem,20rem)] sm:items-end sm:p-6" aria-labelledby="reading-preferences-title">
         <div>

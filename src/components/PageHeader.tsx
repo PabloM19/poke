@@ -25,7 +25,7 @@ export function PageHeader({
   className,
 }: PageHeaderProps) {
   return (
-    <header className={cn('page-heading flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between', className)}>
+    <header data-slot="page-header" className={cn('page-heading flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between', className)}>
       <div className="min-w-0">
         {eyebrow && (
           <p className="text-xs font-semibold uppercase tracking-[0.12em] text-ui-blue-strong">

@@ -245,7 +245,7 @@ function TypeComparison({ pokemon, generation }: { pokemon: readonly ComparePoke
   const leftReading = pair ? bestTypeReading(pair[0], pair[1], generation) : null
   const rightReading = pair ? bestTypeReading(pair[1], pair[0], generation) : null
   return (
-    <section className="rounded-[var(--radius-xl)] border border-border bg-card p-4 shadow-[var(--shadow-sm)] sm:p-5" aria-labelledby="type-comparison-title">
+    <section className="rounded-[var(--radius-lg)] border border-border bg-card p-4 shadow-[var(--shadow-xs)] sm:p-5" aria-labelledby="type-comparison-title">
       <Accordion type="single" collapsible>
         <AccordionItem value="types" className="border-0">
           <AccordionTrigger className="p-0 hover:bg-transparent">

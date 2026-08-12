@@ -2,9 +2,8 @@ import { Link } from 'react-router-dom'
 import { CircleDot, Dna, GitCompare, Grid3X3, Library, Question, Shapes, Sword, Trophy, type PhosphorIcon } from '@/components/icons'
 import { NavigationCard } from '@/components/NavigationCard'
 import { PageHeader } from '@/components/PageHeader'
-import { Badge } from '@/components/ui/badge'
-import { BentoCard, CardDescription } from '@/components/ui/card'
-import { cn } from '@/lib/utils'
+import { SectionHeader } from '@/components/SectionHeader'
+import { ContentCard } from '@/components/ui/card'
 
 interface ToolEntry {
   to: string
@@ -103,7 +102,6 @@ function LevelHeader({
   title,
   description,
   count,
-  tone,
   titleId,
 }: {
   step: 1 | 2 | 3
@@ -114,21 +112,15 @@ function LevelHeader({
   titleId: string
 }) {
   return (
-    <div className={cn(
-      'mb-4 flex items-start gap-3 rounded-[var(--radius-lg)] px-4 py-3.5',
-      tone === 'starter' && 'bg-ui-blue/35',
-      tone === 'challenge' && 'bg-ui-yellow/35',
-      tone === 'master' && 'bg-ui-lavender/35',
-    )}>
-      <span className="flex size-9 shrink-0 items-center justify-center rounded-full border border-border/70 bg-card/75 text-sm font-black shadow-[var(--shadow-xs)]" aria-hidden>{step}</span>
-      <div className="min-w-0 flex-1">
-        <div className="flex flex-wrap items-center gap-2">
-          <h3 id={titleId} className="text-lg font-semibold">{title}</h3>
-          {count != null && <Badge variant="secondary">{count} juegos</Badge>}
-        </div>
-        <p className="mt-1 text-sm text-muted-foreground">{description}</p>
-      </div>
-    </div>
+    <SectionHeader
+      id={titleId}
+      level={3}
+      eyebrow={`Nivel ${step}`}
+      title={title}
+      description={description}
+      metadata={count != null ? `${count} juegos` : 'Próximamente'}
+      className="mb-4"
+    />
   )
 }
 
@@ -140,10 +132,7 @@ export function MorePage() {
         description="Aprende jugando o abre una utilidad para consultar información del juego activo."
       />
       <section id="juegos" aria-labelledby="juegos-title">
-        <div className="mb-5">
-          <h2 id="juegos-title" className="text-xl font-semibold">Juegos</h2>
-          <p className="mt-2 text-sm text-muted-foreground">Aprende, practica y domina a tu ritmo.</p>
-        </div>
+        <SectionHeader id="juegos-title" title="Juegos" description="Aprende, practica y domina a tu ritmo." />
         <div className="grid gap-8">
           <section aria-labelledby="starter-games-title">
             <LevelHeader step={1} titleId="starter-games-title" title="Para empezar" description="Conoce Pokémon, sus tipos y las reglas básicas jugando." count={starterGames.length} tone="starter" />
@@ -155,22 +144,18 @@ export function MorePage() {
           </section>
           <section aria-labelledby="master-games-title">
             <LevelHeader step={3} titleId="master-games-title" title="Maestro Pokémon" description="El siguiente paso para quienes quieren dominar cada detalle." tone="master" />
-            <BentoCard tone="lavender" className="p-6 text-center sm:p-8">
-              <span className="mx-auto flex size-14 items-center justify-center rounded-[var(--radius-md)] border border-border/70 bg-card/75 text-ui-lavender-strong shadow-[var(--shadow-sm)]" aria-hidden>
+            <ContentCard className="border-dashed text-center">
+              <span className="mx-auto flex size-12 items-center justify-center rounded-[var(--radius-md)] bg-ui-lavender/55 text-ui-lavender-strong" aria-hidden>
                 <Trophy className="size-7" weight="fill" />
               </span>
               <h4 className="mt-4 text-lg leading-tight font-semibold tracking-[-0.015em]">¿Preparado para algo más difícil?</h4>
-              <CardDescription className="mx-auto mt-2 max-w-lg">Estamos preparando nuevos desafíos para entrenadores que quieran llevar sus conocimientos al siguiente nivel.</CardDescription>
-              <Badge variant="secondary" className="mt-4">Próximamente</Badge>
-            </BentoCard>
+              <p className="mx-auto mt-2 max-w-lg text-sm leading-6 text-muted-foreground">Estamos preparando nuevos desafíos para entrenadores que quieran llevar sus conocimientos al siguiente nivel.</p>
+            </ContentCard>
           </section>
         </div>
       </section>
       <section aria-labelledby="utilidades-title">
-        <div className="mb-5">
-          <h2 id="utilidades-title" className="text-xl font-semibold">Utilidades</h2>
-          <p className="mt-2 text-sm text-muted-foreground">Consulta, compara y revisa información.</p>
-        </div>
+        <SectionHeader id="utilidades-title" title="Utilidades" description="Consulta, compara y revisa información." />
         <ToolGrid entries={utilityEntries} />
       </section>
     </div>

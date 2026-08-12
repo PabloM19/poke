@@ -32,7 +32,7 @@ export function Disclosure({
   const triggerId = `${contentId}-trigger`
 
   return (
-    <section className={cn('overflow-hidden rounded-[var(--radius-lg)] border border-border bg-card shadow-[var(--shadow-xs)]', className)}>
+    <section data-slot="disclosure" className={cn('overflow-hidden rounded-[var(--radius-lg)] border border-border bg-card shadow-[var(--shadow-xs)]', className)}>
       <button
         type="button"
         id={triggerId}

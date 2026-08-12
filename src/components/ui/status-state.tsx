@@ -22,8 +22,9 @@ export function StatusState({
   const Heading = headingLevel === 1 ? 'h1' : 'h2'
   return (
     <section
+      data-slot="status-state"
       className={cn(
-        'rounded-[var(--radius-xl)] border border-border bg-card text-center shadow-[var(--shadow-sm)]',
+        'rounded-[var(--radius-xl)] border border-border bg-card text-center shadow-[var(--shadow-xs)]',
         compact ? 'p-5' : 'px-5 py-10'
       )}
       role={tone === 'error' ? 'alert' : 'status'}

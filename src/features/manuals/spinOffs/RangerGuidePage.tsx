@@ -10,12 +10,12 @@ import { manualVisualCatalog } from '../content/manualVisuals'
 export function RangerGuidePage() {
   return (
     <article className="space-y-8">
-      <header className="rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-sm)] sm:p-8">
+      <header className="rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-xs)] sm:p-8">
         <div className="mb-5 flex size-12 items-center justify-center rounded-[var(--radius-md)] bg-ui-blue text-ui-blue-strong shadow-[var(--shadow-xs)]"><Shield className="size-6" aria-hidden /></div>
         <p className="text-sm font-semibold uppercase tracking-widest text-primary">Otra forma de jugar · Acción táctil</p>
         <h1 className="mt-2 page-title">Pokémon Ranger</h1>
         <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">Un Ranger protege la naturaleza y ayuda a personas y Pokémon. En lugar de Poké Balls, utiliza el Capturador para establecer un vínculo temporal.</p>
-        <div className="mt-5 flex gap-2"><Badge variant="secondary">Páginas 145–146</Badge><Badge variant="secondary">Sesiones medias</Badge></div>
+        <div className="mt-5 flex gap-2"><Badge variant="metadata">Páginas 145–146</Badge><Badge variant="metadata">· Sesiones medias</Badge></div>
       </header>
 
       <ManualFigureCarousel id="ranger-capture-examples" label="El Capturador en movimiento" figures={[manualVisualCatalog.rangerCapture, manualVisualCatalog.rangerCaptureSecond]} />

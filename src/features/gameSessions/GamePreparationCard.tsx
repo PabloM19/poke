@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react'
 import type { IconProps } from '@phosphor-icons/react'
-import { BentoCard } from '@/components/ui/card'
+import { ContentCard } from '@/components/ui/card'
 import { GameSelector } from '@/features/games'
 
 export function GamePreparationCard({
@@ -17,9 +17,9 @@ export function GamePreparationCard({
   tone?: 'lavender' | 'yellow' | 'blue' | 'green'
 }) {
   return (
-    <BentoCard tone={tone} className="p-5 sm:p-6">
+    <ContentCard data-tone={tone}>
       <div className="flex items-start gap-3">
-        <span className="flex size-12 shrink-0 items-center justify-center rounded-[var(--radius-md)] border border-border/70 bg-card/75 shadow-[var(--shadow-xs)]" aria-hidden>
+        <span className="flex size-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-ui-lavender/60" aria-hidden>
           <Icon className="size-6 text-ui-lavender-strong" />
         </span>
         <div className="min-w-0">
@@ -31,7 +31,6 @@ export function GamePreparationCard({
       <div className="mt-5 flex flex-wrap gap-2">
         <GameSelector triggerLabel="Cambiar juego" className="w-full sm:w-auto" />
       </div>
-    </BentoCard>
+    </ContentCard>
   )
 }
-

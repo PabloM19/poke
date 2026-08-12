@@ -23,12 +23,12 @@ const symbols = [
 export function IconSymbolsPage() {
   return (
     <article className="space-y-8">
-      <header className="rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-sm)] sm:p-8">
+      <header className="rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-xs)] sm:p-8">
         <div className="mb-5 flex size-12 items-center justify-center rounded-[var(--radius-md)] bg-ui-blue text-ui-blue-strong shadow-[var(--shadow-xs)]"><BookOpen className="size-6" aria-hidden /></div>
         <p className="text-sm font-semibold uppercase tracking-widest text-primary">R-03 · Referencia sin spoilers</p>
         <h1 className="mt-2 page-title">Iconos y símbolos</h1>
         <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">Una leyenda compacta para reconocer controles, guardado, avisos y las etiquetas editoriales que aparecen en el manual y en esta app.</p>
-        <div className="mt-5 flex flex-wrap gap-2"><Badge variant="secondary">Páginas 153–154</Badge><Badge variant="secondary">Consulta rápida</Badge></div>
+        <div className="mt-5 flex flex-wrap gap-2"><Badge variant="metadata">Páginas 153–154</Badge><Badge variant="metadata">· Consulta rápida</Badge></div>
       </header>
 
       <section aria-labelledby="symbols-title">

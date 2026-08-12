@@ -115,7 +115,7 @@ export function CompareSelector({
   const isSearchVisible = searchOpen || replaceIndex != null
 
   return (
-    <section className="rounded-[var(--radius-xl)] border border-border bg-card p-4 shadow-[var(--shadow-sm)] sm:p-5" aria-labelledby="compare-selector-title">
+    <section className="rounded-[var(--radius-lg)] border border-border bg-card p-4 shadow-[var(--shadow-xs)] sm:p-5" aria-labelledby="compare-selector-title">
       <div className="flex items-center justify-between gap-3">
         <div>
           <h2 id="compare-selector-title" className="font-semibold">Participantes</h2>

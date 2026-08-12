@@ -7,7 +7,7 @@ function Card({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="card"
       className={cn(
-        "flex flex-col gap-4 rounded-[var(--radius-lg)] border border-border bg-card py-5 text-card-foreground shadow-[var(--shadow-sm)]",
+        "flex flex-col gap-4 rounded-[var(--radius-lg)] border border-border bg-card py-5 text-card-foreground shadow-[var(--shadow-xs)]",
         className
       )}
       {...props}
@@ -83,8 +83,21 @@ function BentoCard({
       data-slot="bento-card"
       data-tone={tone}
       className={cn(
-        "rounded-[var(--radius-xl)] border border-border p-5 shadow-[var(--shadow-sm)]",
+        "rounded-[var(--radius-xl)] border border-border p-5 shadow-[var(--shadow-xs)]",
         "data-[tone=surface]:bg-card data-[tone=green]:bg-ui-green data-[tone=lavender]:bg-ui-lavender data-[tone=blue]:bg-ui-blue data-[tone=yellow]:bg-ui-yellow",
+        className
+      )}
+      {...props}
+    />
+  )
+}
+
+function ContentCard({ className, ...props }: React.ComponentProps<"section">) {
+  return (
+    <section
+      data-slot="content-card"
+      className={cn(
+        "rounded-[var(--radius-lg)] border border-border bg-card p-5 text-card-foreground shadow-[var(--shadow-xs)] sm:p-6",
         className
       )}
       {...props}
@@ -121,5 +134,6 @@ export {
   CardDescription,
   CardContent,
   BentoCard,
+  ContentCard,
   MiniCard,
 }

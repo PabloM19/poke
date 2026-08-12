@@ -23,12 +23,12 @@ export function ConquestTacticalReminderPage() {
 
   return (
     <article className="space-y-8">
-      <header className="rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-sm)] sm:p-8">
+      <header className="rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-xs)] sm:p-8">
         <div className="mb-5 flex size-12 items-center justify-center rounded-[var(--radius-md)] bg-ui-blue text-ui-blue-strong shadow-[var(--shadow-xs)]"><Map className="size-6" aria-hidden /></div>
         <p className="text-sm font-semibold uppercase tracking-widest text-primary">R-06 · Mecánica de Pokémon Conquest</p>
         <h1 className="mt-2 page-title">Recordatorio táctico Conquest</h1>
         <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">Una pausa breve antes de mover evita los errores caros: comprueba primero la misión y los turnos; después decide alcance, posición y orden.</p>
-        <div className="mt-5 flex flex-wrap gap-2"><Badge variant="secondary">Páginas 151–154</Badge><Badge variant="secondary">Consulta durante la batalla</Badge></div>
+        <div className="mt-5 flex flex-wrap gap-2"><Badge variant="metadata">Páginas 151–154</Badge><Badge variant="metadata">· Consulta durante la batalla</Badge></div>
       </header>
 
       <ManualFigureCarousel id="conquest-terrain-examples" label="Compara dos terrenos tácticos" figures={[manualVisualCatalog.conquestGrid, manualVisualCatalog.conquestTraining]} />

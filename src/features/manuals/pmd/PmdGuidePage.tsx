@@ -57,13 +57,13 @@ const ranks = [
 export function PmdGuidePage() {
   return (
     <article className="space-y-10">
-      <header className="overflow-hidden rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-sm)] sm:p-8">
+      <header className="overflow-hidden rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-xs)] sm:p-8">
         <div className="mb-5 flex size-12 items-center justify-center rounded-[var(--radius-md)] bg-ui-blue text-ui-blue-strong shadow-[var(--shadow-xs)]"><ShieldCheck className="size-6" aria-hidden /></div>
         <p className="text-sm font-semibold uppercase tracking-widest text-primary">Mundo Misterioso · Equipo de Rescate</p>
         <h1 className="mt-2 page-title">Equipo de Rescate Azul</h1>
         <p className="mt-3 text-lg font-medium">Encontrar tu identidad mientras haces del mundo un lugar más seguro.</p>
         <p className="mt-4 max-w-3xl leading-7 text-muted-foreground">Abres los ojos y descubres que te has convertido en Pokémon. No recuerdas tu pasado, pero un nuevo compañero confía en ti. Juntos formaréis un equipo de rescate para ayudar a quienes quedan atrapados en territorios peligrosos.</p>
-        <div className="mt-5 flex flex-wrap gap-2"><Badge variant="secondary">Sin spoilers de historia</Badge><Badge variant="secondary">Páginas 129–136</Badge><Badge variant="secondary">Mecánicas PMD</Badge></div>
+        <div className="mt-5 flex flex-wrap gap-2"><Badge variant="metadata">Sin spoilers de historia</Badge><Badge variant="metadata">· Páginas 129–136</Badge><Badge variant="metadata">· Mecánicas PMD</Badge></div>
       </header>
 
       <ManualFigureCarousel id="rescue-team-visual-guide" label="Reconoce la base y la mazmorra" figures={[manualVisualCatalog.pmdBlueBase, manualVisualCatalog.pmdBlueDungeon, manualVisualCatalog.pmdBlueMap]} />

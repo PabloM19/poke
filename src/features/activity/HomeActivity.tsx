@@ -22,7 +22,7 @@ function LatestActivityCard({ activity }: { activity: RecentActivity }) {
       state={isManual ? { restoreReading: true } : undefined}
       className="interactive-clay block rounded-[var(--radius-xl)] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
     >
-      <BentoCard tone="green" className="interactive-clay relative overflow-hidden hover:-translate-y-0.5">
+      <BentoCard tone="green" data-semantic="navigation-card" className="interactive-clay relative overflow-hidden shadow-[var(--shadow-sm)] hover:-translate-y-0.5">
         <span className="pointer-events-none absolute -right-8 -top-12 size-32 rounded-full bg-card/35" aria-hidden />
         <div className="relative flex items-start gap-4">
           <span className="flex size-14 shrink-0 items-center justify-center overflow-hidden rounded-[var(--radius-md)] bg-card/75 text-ui-green-strong shadow-[var(--shadow-xs)]">

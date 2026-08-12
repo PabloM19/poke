@@ -16,12 +16,12 @@ const chainStages = [
 export function LinkGuidePage() {
   return (
     <article className="space-y-8">
-      <header className="rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-sm)] sm:p-8">
+      <header className="rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-xs)] sm:p-8">
         <div className="mb-5 flex size-12 items-center justify-center rounded-[var(--radius-md)] bg-ui-blue text-ui-blue-strong shadow-[var(--shadow-xs)]"><Grid3X3 className="size-6" aria-hidden /></div>
         <p className="text-sm font-semibold uppercase tracking-widest text-primary">Otra forma de jugar · Puzle táctico</p>
         <h1 className="mt-2 page-title">Pokémon Link!</h1>
         <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">Desplaza filas y columnas para reunir fichas Pokémon iguales. Cada hueco cambia el tablero: mira el movimiento inmediato y también qué piezas caerán después.</p>
-        <div className="mt-5 flex flex-wrap gap-2"><Badge variant="secondary">Páginas 149–150</Badge><Badge variant="secondary">Cadenas y puntuación</Badge></div>
+        <div className="mt-5 flex flex-wrap gap-2"><Badge variant="metadata">Páginas 149–150</Badge><Badge variant="metadata">· Cadenas y puntuación</Badge></div>
       </header>
 
       <ManualFigureCarousel id="link-board-examples" label="Del primer enlace a Link Chance" figures={[manualVisualCatalog.linkChain, manualVisualCatalog.linkBoard]} />

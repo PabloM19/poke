@@ -22,7 +22,7 @@ export function GameHistoryList({
     <section aria-label="Intentos guardados" className="grid gap-3">
       {sessions.map((session) => (
         <Link key={session.id} to={`${basePath}/${session.id}`} className="interactive-clay rounded-[var(--radius-xl)] outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-          <BentoCard className="flex items-center gap-4 p-5 hover:bg-accent/35">
+          <BentoCard data-semantic="navigation-card" className="flex items-center gap-4 p-5 shadow-[var(--shadow-sm)] hover:bg-accent/35">
             <span className="flex size-11 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-ui-lavender/60 text-ui-lavender-strong" aria-hidden><Icon className="size-5" /></span>
             <div className="min-w-0 flex-1">
               <h2 className="truncate font-semibold">{session.name}</h2>

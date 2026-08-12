@@ -5,7 +5,8 @@ import { usePokemonSummary } from '@/hooks/usePokemonSummary'
 import type { SpeciesIndexItem } from '@/lib/pokedex'
 import { SearchField } from '@/components/ui/search-field'
 import { Button } from '@/components/ui/button'
-import { BentoCard } from '@/components/ui/card'
+import { ContentCard } from '@/components/ui/card'
+import { PageHero } from '@/components/PageHero'
 import { Search, Sparkles } from '@/components/icons'
 import { HomeActivity } from '@/features/activity'
 
@@ -110,15 +111,14 @@ export function SearchPage() {
   )
 
   const homeHero = (
-    <BentoCard tone="blue" className="relative overflow-hidden" data-tour="home-overview">
-      <span className="pointer-events-none absolute -right-12 -top-20 size-48 rounded-full bg-card/40" aria-hidden />
-      <div className="relative">
-        <span className="flex size-11 items-center justify-center rounded-[var(--radius-md)] bg-card/75 text-ui-blue-strong shadow-[var(--shadow-xs)]"><Sparkles className="size-5" aria-hidden /></span>
-        <p className="mt-5 text-xs font-semibold uppercase tracking-[0.12em] text-ui-blue-strong">Tu centro Pokémon</p>
-        <h1 className="page-title mt-1">Inicio</h1>
-        <p className="mt-3 max-w-2xl text-lg leading-8 text-foreground/75">Retoma tus últimas consultas, continúa una guía o encuentra cualquier Pokémon.</p>
-      </div>
-    </BentoCard>
+    <PageHero
+      icon={Sparkles}
+      eyebrow="Tu centro Pokémon"
+      title="Inicio"
+      description="Retoma tus últimas consultas, continúa una guía o encuentra cualquier Pokémon."
+      tone="blue"
+      data-tour="home-overview"
+    />
   )
 
   if (status === 'missing') {
@@ -126,7 +126,7 @@ export function SearchPage() {
       <div className="page-stack">
         {homeHero}
         <HomeActivity />
-        <BentoCard tone="yellow" role="status" data-tour="search-field">
+        <ContentCard role="status" data-tour="search-field" className="border-ui-yellow-strong/20 bg-ui-yellow/35">
           <Search className="size-8 text-ui-yellow-strong" aria-hidden />
           <h2 className="mt-4 text-lg font-bold">Prepara el buscador sin conexión</h2>
           <p className="mb-3">
@@ -136,7 +136,7 @@ export function SearchPage() {
           <Button asChild variant="outline" size="sm">
             <Link to="/settings">Ir a Ajustes</Link>
           </Button>
-        </BentoCard>
+        </ContentCard>
       </div>
     )
   }
@@ -147,7 +147,7 @@ export function SearchPage() {
 
       <HomeActivity />
 
-      <BentoCard tone="lavender" className="relative z-20" data-tour="search-field">
+      <ContentCard className="relative z-20" data-tour="search-field">
         <div className="mb-4"><p className="text-xs font-semibold uppercase tracking-[0.12em] text-ui-lavender-strong">Consulta rápida</p><h2 className="mt-1 text-xl font-bold">Buscar un Pokémon</h2></div>
         <SearchField
           type="search"
@@ -179,18 +179,12 @@ export function SearchPage() {
             No hay coincidencias. Prueba con otro nombre o con el número de Pokédex.
           </p>
         )}
-      </BentoCard>
+      </ContentCard>
 
-      <div className="grid grid-cols-2 gap-3">
-        <BentoCard tone="green" className="p-4">
-          <p className="text-xs font-semibold text-ui-green-strong">Nombres</p>
-          <p className="mt-1 text-sm font-medium">Busca en español, con o sin tildes.</p>
-        </BentoCard>
-        <BentoCard tone="blue" className="p-4">
-          <p className="text-xs font-semibold text-ui-blue-strong">Números</p>
-          <p className="mt-1 text-sm font-medium">Escribe 25 para llegar a #025.</p>
-        </BentoCard>
-      </div>
+      <dl className="grid grid-cols-2 divide-x divide-border border-y border-border py-4">
+        <div className="pr-4"><dt className="text-xs font-semibold text-ui-green-strong">Nombres</dt><dd className="mt-1 text-sm text-muted-foreground">En español, con o sin tildes.</dd></div>
+        <div className="pl-4"><dt className="text-xs font-semibold text-ui-blue-strong">Números</dt><dd className="mt-1 text-sm text-muted-foreground">Escribe 25 para llegar a #025.</dd></div>
+      </dl>
     </div>
   )
 }

@@ -61,9 +61,9 @@ function IndexContent({ landing = false }: { landing?: boolean }) {
         const entries = manualNavigationEntries.filter((entry) => group.families.includes(entry.family))
         const Icon = group.icon
         return (
-          <section key={group.title} className="overflow-hidden rounded-[var(--radius-md)] border border-border/80 bg-card">
-            <header className={cn('flex items-start gap-3 p-3.5', group.tone)}>
-              <span className="flex size-9 shrink-0 items-center justify-center rounded-full border border-current/15 bg-card/55">
+          <section key={group.title} className="border-b border-border/80 py-4 last:border-b-0 md:px-3">
+            <header className="flex items-start gap-3 px-2 pb-2">
+              <span className={cn('flex size-9 shrink-0 items-center justify-center rounded-[var(--radius-sm)]', group.tone)}>
                 <Icon className="size-[1.125rem]" aria-hidden />
               </span>
               <span className="min-w-0">
@@ -72,7 +72,7 @@ function IndexContent({ landing = false }: { landing?: boolean }) {
                 <span className="mt-1 block text-[0.6875rem] font-semibold uppercase tracking-wide opacity-75">{entries.length} contenidos</span>
               </span>
             </header>
-            <div className="divide-y divide-border/70 px-2 py-1">
+            <div className="divide-y divide-border/70 px-2">
               {group.families.map((family) => {
                 const familyEntries = entries.filter((entry) => entry.family === family)
                 if (familyEntries.length === 0) return null
@@ -125,7 +125,7 @@ export function ManualIndex({ mode = 'layout' }: { mode?: 'layout' | 'landing' }
         )}
         id="manual-landing-index"
         className="rounded-[var(--radius-xl)] shadow-[var(--shadow-sm)]"
-        contentClassName="bg-accent/25 p-3 sm:p-4"
+        contentClassName="px-3 pb-2 sm:px-4"
       >
         <IndexContent landing />
       </Disclosure>
@@ -138,7 +138,7 @@ export function ManualIndex({ mode = 'layout' }: { mode?: 'layout' | 'landing' }
         label="Índice del manual"
         id="manual-index-content"
         className="mb-5 md:hidden"
-        contentClassName="bg-accent/25 p-3"
+        contentClassName="px-3 pb-2"
       >
         <IndexContent />
       </Disclosure>

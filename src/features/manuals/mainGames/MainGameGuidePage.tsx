@@ -52,16 +52,16 @@ export function MainGameGuidePage() {
           <Button asChild size="sm" variant="outline" className="shrink-0"><Link to={isAll ? '/manuales' : `/manuales/juegos/${activeGame.slug}`}>{isAll ? 'Ver todas las guías' : 'Abrir guía activa'}</Link></Button>
         </aside>
       )}
-      <header className="overflow-hidden rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-sm)] sm:p-8">
+      <header className="overflow-hidden rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-xs)] sm:p-8">
         <div className="mb-5 flex size-12 items-center justify-center rounded-[var(--radius-md)] bg-ui-blue text-ui-blue-strong shadow-[var(--shadow-xs)]"><Gamepad2 className="size-6" aria-hidden /></div>
         <p className="text-sm font-semibold uppercase tracking-widest text-primary">{guide.eyebrow}</p>
         <h1 className="mt-2 page-title">{guide.title}</h1>
         <p className="mt-3 text-lg font-medium">{guide.summary}</p>
         <p className="mt-4 max-w-3xl leading-7 text-muted-foreground">{guide.lead}</p>
         <div className="mt-5 flex flex-wrap gap-2">
-          <Badge variant="secondary">Sin spoilers de historia</Badge>
-          <Badge variant="secondary">Páginas {guide.pages[0]}–{guide.pages[1]}</Badge>
-          <Badge variant="secondary">Contexto: {game.shortTitle}</Badge>
+          <Badge variant="metadata">Sin spoilers de historia</Badge>
+          <Badge variant="metadata">· Páginas {guide.pages[0]}–{guide.pages[1]}</Badge>
+          <Badge variant="metadata">· Contexto: {game.shortTitle}</Badge>
         </div>
       </header>
 

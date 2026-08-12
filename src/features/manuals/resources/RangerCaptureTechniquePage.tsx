@@ -19,12 +19,12 @@ export function RangerCaptureTechniquePage() {
 
   return (
     <article className="space-y-8">
-      <header className="rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-sm)] sm:p-8">
+      <header className="rounded-[var(--radius-xl)] border border-border bg-ui-blue/40 p-5 shadow-[var(--shadow-xs)] sm:p-8">
         <div className="mb-5 flex size-12 items-center justify-center rounded-[var(--radius-md)] bg-ui-blue text-ui-blue-strong shadow-[var(--shadow-xs)]"><PenTool className="size-6" aria-hidden /></div>
         <p className="text-sm font-semibold uppercase tracking-widest text-primary">R-05 · Mecánica de Pokémon Ranger</p>
         <h1 className="mt-2 page-title">Técnica de captura Ranger</h1>
         <p className="mt-4 max-w-2xl leading-7 text-muted-foreground">La captura no premia dibujar sin pausa: observa el ataque, retira el lápiz a tiempo y aprovecha una apertura con círculos continuos y controlados.</p>
-        <div className="mt-5 flex flex-wrap gap-2"><Badge variant="secondary">Páginas 145–146 y 153–154</Badge><Badge variant="secondary">Precisión táctil</Badge></div>
+        <div className="mt-5 flex flex-wrap gap-2"><Badge variant="metadata">Páginas 145–146 y 153–154</Badge><Badge variant="metadata">· Precisión táctil</Badge></div>
       </header>
 
       <ManualFigureCarousel id="ranger-technique-examples" label="Observa el trazo real" figures={[manualVisualCatalog.rangerCapture, manualVisualCatalog.rangerCaptureSecond]} />

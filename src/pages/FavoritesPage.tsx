@@ -20,7 +20,7 @@ export function FavoritesPage() {
       />
 
       {speciesIds.length === 0 ? (
-        <BentoCard tone="lavender" className="px-5 py-12 text-center">
+        <BentoCard tone="lavender" data-semantic="empty-state" className="px-5 py-12 text-center">
           <Heart className="mx-auto size-10 text-muted-foreground" aria-hidden />
           <h2 className="mt-4 text-lg font-semibold">Aún no tienes favoritos</h2>
           <p className="mx-auto mt-2 max-w-sm text-sm leading-6 text-muted-foreground">

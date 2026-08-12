@@ -10,7 +10,7 @@ import {
 import { parseSpeciesIdParam } from '@/lib/routing/speciesId'
 import { Button } from '@/components/ui/button'
 import { Search } from '@/components/icons'
-import { BentoCard, MiniCard } from '@/components/ui/card'
+import { BentoCard, ContentCard } from '@/components/ui/card'
 import {
   Accordion,
   AccordionContent,
@@ -286,33 +286,28 @@ export function PokemonDetailPage() {
 
       <section aria-labelledby="quick-data-title">
         <h2 id="quick-data-title" className="sr-only">Datos rápidos</h2>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <MiniCard className="bg-ui-blue/55">
-            <p className="text-xs font-semibold text-ui-blue-strong">Altura</p>
-            <p className="mt-1 text-xl font-bold tabular-nums">{detail.height == null ? '—' : `${detail.height / 10} m`}</p>
-          </MiniCard>
-          <MiniCard className="bg-ui-yellow/55">
-            <p className="text-xs font-semibold text-ui-yellow-strong">Peso</p>
-            <p className="mt-1 text-xl font-bold tabular-nums">{detail.weight == null ? '—' : `${detail.weight / 10} kg`}</p>
-          </MiniCard>
-          <MiniCard className="bg-ui-green/55">
-            <p className="text-xs font-semibold text-ui-green-strong">Total base</p>
-            <p className="mt-1 text-xl font-bold tabular-nums">{detail.totalBaseStats}</p>
-          </MiniCard>
-          <MiniCard className="bg-ui-lavender/55">
-            <p className="text-xs font-semibold text-ui-lavender-strong">Contexto</p>
-            <p className="mt-1 text-xl font-bold">Gen {detail.generation === 4 ? 'IV' : 'V'}</p>
-          </MiniCard>
-        </div>
+        <dl className="grid grid-cols-2 overflow-hidden rounded-[var(--radius-lg)] border border-border bg-card shadow-[var(--shadow-xs)] sm:grid-cols-4">
+          {[
+            ['Altura', detail.height == null ? '—' : `${detail.height / 10} m`],
+            ['Peso', detail.weight == null ? '—' : `${detail.weight / 10} kg`],
+            ['Total base', detail.totalBaseStats],
+            ['Contexto', `Gen ${detail.generation === 4 ? 'IV' : 'V'}`],
+          ].map(([label, value]) => (
+            <div key={label} className="border-b border-r border-border p-4 last:border-r-0 sm:border-b-0">
+              <dt className="text-xs font-semibold text-muted-foreground">{label}</dt>
+              <dd className="mt-1 text-xl font-bold tabular-nums">{value}</dd>
+            </div>
+          ))}
+        </dl>
       </section>
 
-      <BentoCard aria-labelledby="stats-title">
+      <ContentCard aria-labelledby="stats-title">
         <div className="mb-5 flex items-end justify-between gap-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.12em] text-ui-green-strong">Rendimiento</p>
             <h2 id="stats-title" className="mt-1 text-xl font-bold">Estadísticas base</h2>
           </div>
-          <p className="rounded-full bg-ui-green/55 px-3 py-1 text-sm font-bold tabular-nums">Total {detail.totalBaseStats}</p>
+          <p className="text-sm font-bold tabular-nums text-muted-foreground">Total {detail.totalBaseStats}</p>
         </div>
         <ul className="grid gap-3">
           {detail.stats.map((stat) => (
@@ -326,9 +321,9 @@ export function PokemonDetailPage() {
           ))}
         </ul>
         <p className="mt-4 text-xs leading-5 text-muted-foreground">El total es la suma de las estadísticas base; las barras comparten una misma escala visual.</p>
-      </BentoCard>
+      </ContentCard>
 
-      <BentoCard aria-labelledby="defense-title">
+      <ContentCard aria-labelledby="defense-title">
         <Accordion type="single" collapsible defaultValue="defense">
           <AccordionItem value="defense" className="border-0">
             <AccordionTrigger className="p-0 hover:bg-transparent">
@@ -353,10 +348,10 @@ export function PokemonDetailPage() {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
-      </BentoCard>
+      </ContentCard>
 
       {detail.otherNames.length > 0 && (
-        <BentoCard>
+        <ContentCard>
           <Accordion type="single" collapsible>
             <AccordionItem value="names" className="border-0">
               <AccordionTrigger className="p-0 hover:bg-transparent">Nombres en otros idiomas</AccordionTrigger>
@@ -371,7 +366,7 @@ export function PokemonDetailPage() {
               </AccordionContent>
             </AccordionItem>
           </Accordion>
-        </BentoCard>
+        </ContentCard>
       )}
 
       <nav className="flex flex-wrap gap-3 pb-2" aria-label="Volver desde la ficha">

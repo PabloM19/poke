@@ -1,5 +1,5 @@
 import type { ManualArticle, ManualBlock } from '../content/types'
-import { Badge } from '@/components/ui/badge'
+import { MetadataList } from '@/components/MetadataList'
 import {
   LessonCallout,
   LessonSteps,
@@ -8,7 +8,6 @@ import {
   TypeExample,
 } from './LessonBlocks'
 import { InlineManualText } from './InlineManualText'
-import { BentoCard } from '@/components/ui/card'
 import { ManualFigure, ManualFigureCarousel } from './ManualFigure'
 
 function Block({ block, index }: { block: ManualBlock; index: number }) {
@@ -49,14 +48,14 @@ const spoilerLabels = {
 export function ManualArticleContent({ article }: { article: ManualArticle }) {
   return (
     <article>
-      <BentoCard tone="yellow" className="mb-8">
-        <div className="mb-3 flex flex-wrap gap-2">
-          <Badge variant="secondary">{spoilerLabels[article.spoilerLevel]}</Badge>
-          <Badge variant="secondary">Páginas {article.printReference.pages[0]}–{article.printReference.pages.at(-1)}</Badge>
-        </div>
+      <header className="mb-8 border-b border-border pb-6">
+        <MetadataList className="mb-3" items={[
+          spoilerLabels[article.spoilerLevel],
+          `Páginas ${article.printReference.pages[0]}–${article.printReference.pages.at(-1)}`,
+        ]} />
         <h1 className="page-title">{article.title}</h1>
         <p className="mt-3 text-lg leading-8 text-foreground/75">{article.summary}</p>
-      </BentoCard>
+      </header>
       <div>
         {article.blocks.map((block, index) => <Block key={`${index}-${block.type}`} block={block} index={index} />)}
       </div>
